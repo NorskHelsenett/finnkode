@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Prototype Table of Contents
-hide-in-toc: true
 ---
 <style>
 
@@ -24,14 +23,11 @@ hide-in-toc: true
     <h1>{{ page.title }}</h1>
     <ul>
         {% for page in site.pages %}
-        {% if page.hide-in-toc != true and page.layout %}
+        {% if page.toc-title %}
 
         <li>
             <a href="{{ page.url }}">{{ page.toc-title }}</a>
-            {% if page.toc-title %}
             <div class="page-title">{{ page.title }}</div>
-            {% endif %}
-
         </li>
 
         {% endif %}
