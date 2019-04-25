@@ -26,7 +26,6 @@ email: sarah.brodwall@ehelse.no
 
 # Build settings
 markdown: kramdown
-theme: minima
 
 kramdown:
   parse_block_html: true
