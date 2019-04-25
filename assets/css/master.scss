@@ -1,11 +1,13 @@
 ---
 ---
+
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
 @import "base/variables";
 @import "base/svgdata";
 @import "base/mixins-and-extensions";
 @import "base/layout";
 @import "base/base";
-@import "base/typography";
 
 @import "grid/variables";
 @import "grid/mixins/grid-framework";

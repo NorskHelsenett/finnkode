@@ -1,0 +1,51 @@
+footer.framework {
+    color: #fff;
+    padding: 1rem;
+
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .text-size {
+        display: none;
+    }
+
+    .directorate-logo {
+        justify-self: flex-end;
+    }
+
+    a {
+        color: #fff;
+    }
+}
+
+
+@media only screen and (min-width: $one-to-two-col) {
+    footer.framework {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: flex-end;
+        justify-content: flex-start;
+
+        .text-size {
+            display: block;
+            margin: 0 1rem;
+            flex-grow: 1;
+            position: relative;
+
+            .expander {
+                width: 3rem;
+            }
+
+            .expandable {
+                position: absolute;
+                bottom: 0;
+                left: 4rem;
+                background: orange;
+            }
+        }
+    }
+}

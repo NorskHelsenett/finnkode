@@ -1,0 +1,45 @@
+header.framework {
+
+    .directorate-logo, .main-header-content {
+        padding: 1rem;
+    }
+
+    .directorate-logo {
+        a {
+            color: #fff;
+        }
+    }
+
+    .main-header-content {
+        background: #fff;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    li {
+        display: inline-block;
+    }
+
+}
+
+@media only screen and (min-width: $one-to-two-col) {
+    header.framework {
+    }
+}
+
+@media only screen and (min-width: $two-to-three-col) {
+    header.framework {
+    }
+}
+
+@media only screen and (min-width: $three-to-four-col) {
+    header.framework {
+    }
+}

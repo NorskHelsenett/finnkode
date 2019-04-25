@@ -1,180 +1,41 @@
-@keyframes fadein {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
-.clearfix:before, .clearfix:after, .clearfix:before, .container:before, .container-fluid:before, .row:before, .clearfix:after, .container:after, .container-fluid:after, .row:after {
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+.container:before, .container-fluid:before, .row:before, .container:after, .container-fluid:after, .row:after {
   content: " ";
   display: table; }
-.clearfix:after, .clearfix:after, .container:after, .container-fluid:after, .row:after {
+.container:after, .container-fluid:after, .row:after {
   clear: both; }
-
-.visuallyhidden, .visuallyhidden {
-  position: absolute;
-  overflow: hidden;
-  border: 0;
-  height: 1px;
-  width: 1px;
-  margin: -1px;
-  padding: 0;
-  clip: rect(0 0 0 0); }
 
 title {
   position: relative;
   z-index: 1; }
 
-/**********************************************************************/
-/* Landscape-oriented mobiles and portrait-oriented tablets. Two columns. */
 @media only screen and (min-width: 640px) {
   title {
     z-index: 2; } }
-/**********************************************************************/
-/* Three columns */
 @media only screen and (min-width: 944px) {
   title {
     z-index: 3; } }
-/* Typical desktops. Four columns. */
 @media only screen and (min-width: 1264px) {
   title {
     z-index: 4; } }
 *, ::after, ::before {
   box-sizing: border-box; }
 
-section:empty, section.empty, div:empty, div.empty, p:empty, p.empty {
-  margin: 0 !important;
-  padding: 0 !important; }
-
-.overlay-background {
-  position: fixed;
-  overflow: hidden;
-  height: 100%;
-  max-height: 100%;
-  width: 100%;
-  overflow-y: auto; }
-
 body {
   margin: 0;
   padding: 0;
-  background-color: #fff;
-  color: #252525; }
-
-a {
-  transition: .1s color, .1s background-color, .1s border;
-  text-decoration: underline;
-  text-decoration-skip: ink; }
-  a:hover, a:focus, a:active {
-    color: #3871ab; }
+  background-color: #0f2d5e;
+  color: #fff;
+  font-family: "Open Sans", sans-serif; }
 
 main {
-  border-top: 0.25rem solid #f4f4f2;
-  display: block; }
-  main a {
-    color: #034584; }
-    main a:visited {
-      color: #034584; }
-    main a:hover, main a:focus, main a:active {
-      color: #3871ab; }
-    main a:focus {
-      background-color: #3871ab;
-      color: #fff;
-      outline: 0;
-      transition: none; }
-    main a[href*="//"] {
-      position: relative;
-      padding-right: 1.75em; }
-      main a[href*="//"]::after {
-        content: "";
-        position: absolute;
-        transition: .3s;
-        transform: rotate(-45deg);
-        width: 1.25em;
-        height: 1.4em;
-        background: center/contain no-repeat;
-        background-image: url("/Style%20Library/Images/Theme/arrow-blue.svg"), url("/Style%20Library/Images/Theme/arrow-blue-md.svg");
-        right: 0; }
-      main a[href*="//"]:hover::after, main a[href*="//"]:focus::after {
-        background-image: url("/Style%20Library/Images/Theme/arrow-blue-md.svg"); }
-      main a[href*="//"]:focus {
-        position: relative;
-        padding-right: 1.75em; }
-        main a[href*="//"]:focus::after {
-          content: "";
-          position: absolute;
-          transition: .3s;
-          transform: rotate(-45deg);
-          width: 1.25em;
-          height: 1.4em;
-          background: center/contain no-repeat;
-          background-image: url("/Style%20Library/Images/Theme/arrow-blue.svg"), url("/Style%20Library/Images/Theme/arrow-blue-md.svg");
-          right: 0; }
-        main a[href*="//"]:focus:hover::after, main a[href*="//"]:focus:focus::after {
-          background-image: url("/Style%20Library/Images/Theme/arrow-blue-md.svg"); }
-        main a[href*="//"]:focus::after {
-          background-image: url("/Style%20Library/Images/Theme/arrow-white.svg"); }
+  background-color: #fff;
+  color: #000; }
 
-figure {
-  margin: 0 0 1.5rem; }
-  figure figcaption {
-    margin-top: .25rem;
-    font-size: 0.75rem;
-    color: #515151; }
-  figure img {
-    width: 100%;
-    display: block; }
-  figure .attribution {
-    display: block; }
-
-li, dt, dd {
-  margin: .25em 0; }
-
-p, ul, ol, dl,
-li, dt, dd {
-  margin-top: 0; }
-
-input {
-  font-family: "Open Sans", Helvetica, sans-serif !important; }
-  input[type="button"] {
-    border: 0;
-    cursor: pointer; }
-
-iframe {
-  border: 0; }
-
-.tab-focus:focus {
-  box-shadow: none; }
-
-*:focus:not(a) {
-  outline: 0; }
-
-.expanderlink {
-  cursor: pointer; }
-
-.pseudo-link {
-  cursor: pointer; }
-
-.button-style-reset {
-  display: inline;
-  border: none;
-  padding: 0;
-  margin: 0;
-  text-decoration: none;
-  background: transparent;
-  color: inherit;
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  cursor: pointer;
-  text-align: left;
-  transition: none;
-  appearance: none; }
-  .button-style-reset button:hover,
-  .button-style-reset button:focus {
-    background: transparent; }
-  .button-style-reset button:focus {
-    outline: none;
-    outline-offset: 0; }
-  .button-style-reset button:active {
-    transform: scale(0.99); }
+a {
+  transition: .1s color, .1s background-color;
+  text-decoration: underline;
+  text-decoration-skip: ink; }
 
 .expand {
   transition-property: background-color, border-color;
@@ -199,88 +60,6 @@ iframe {
     transition-duration: .3s, .9s, 0s, .3s, .3s;
     transition-delay: 0s, 0s, .3s, .3s, 0s; }
 
-.highlighted, .grey {
-  background-color: #f4f4f2; }
-
-.white {
-  background-color: #fff; }
-
-body {
-  font-family: "Open Sans", Helvetica, sans-serif;
-  line-height: 1.4; }
-
-h1 {
-  letter-spacing: -1px;
-  margin-top: 0;
-  margin-bottom: .5em;
-  font-size: 2rem;
-  line-height: 1.25;
-  font-weight: 600; }
-
-h2 {
-  letter-spacing: -1px;
-  margin-top: 1.125em;
-  margin-bottom: .5em;
-  font-size: 1.5rem;
-  line-height: 1.3;
-  font-weight: 600; }
-
-h3 {
-  letter-spacing: -1px;
-  margin-top: 1em;
-  margin-bottom: .33em;
-  font-size: 1.25rem;
-  line-height: 1.4;
-  font-weight: 600; }
-
-h4 {
-  margin-top: .75em;
-  margin-bottom: .33em;
-  font-size: 1.125rem;
-  line-height: 1.3;
-  font-weight: 600; }
-
-h5 {
-  text-transform: uppercase;
-  margin-top: 1em;
-  margin-bottom: .33em;
-  font-size: 1rem;
-  line-height: 1.4;
-  font-weight: 600; }
-
-h6 {
-  font-style: italic;
-  margin-top: 1em;
-  margin-bottom: 0;
-  margin-bottom: .33em;
-  font-size: 1rem;
-  line-height: 1.4;
-  font-weight: 600; }
-
-@media only screen and (min-width: 640px) {
-  h1 {
-    font-size: 3rem;
-    line-height: 1.2;
-    font-weight: 600; }
-
-  h2 {
-    letter-spacing: -1px;
-    font-size: 2rem;
-    line-height: 1.2;
-    font-weight: 600; }
-
-  h3 {
-    font-size: 1.5rem;
-    line-height: 1.3;
-    font-weight: 600; } }
-input[type="button"], button {
-  font-family: "Open Sans", Helvetica, sans-serif !important;
-  font-size: 1rem; }
-
-/* Hack to fix issue with iPhone auto-zoom on input fields. Mobile. */
-@media only screen and (max-width: 944px) and (-webkit-min-device-pixel-ratio: 0) {
-  main input[type="search"], main input[type="search"]:focus, header input[type="search"], header input[type="search"]:focus {
-    font-size: 1rem !important; } }
 .pull-right {
   float: right !important; }
 
@@ -1105,3 +884,51 @@ input[type="button"], button {
 @media print {
   .hidden-print {
     display: none !important; } }
+header.framework .directorate-logo, header.framework .main-header-content {
+  padding: 1rem; }
+header.framework .directorate-logo a {
+  color: #fff; }
+header.framework .main-header-content {
+  background: #fff;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between; }
+header.framework ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+header.framework li {
+  display: inline-block; }
+
+footer.framework {
+  color: #fff;
+  padding: 1rem; }
+  footer.framework ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+  footer.framework .text-size {
+    display: none; }
+  footer.framework .directorate-logo {
+    justify-self: flex-end; }
+  footer.framework a {
+    color: #fff; }
+
+@media only screen and (min-width: 640px) {
+  footer.framework {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-end;
+    justify-content: flex-start; }
+    footer.framework .text-size {
+      display: block;
+      margin: 0 1rem;
+      flex-grow: 1;
+      position: relative; }
+      footer.framework .text-size .expander {
+        width: 3rem; }
+      footer.framework .text-size .expandable {
+        position: absolute;
+        bottom: 0;
+        left: 4rem;
+        background: orange; } }

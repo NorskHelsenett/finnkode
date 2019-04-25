@@ -2,174 +2,23 @@
     box-sizing: border-box;
 }
 
-section, div, p {
-    &:empty, &.empty {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-}
-
-.clearfix {
-    @extend %clearfix;
-}
-
-.visuallyhidden {
-    @extend %visuallyhidden;
-}
-
-
-.overlay-background {
-    position: fixed;
-    overflow: hidden;
-    height: 100%;
-    max-height: 100%;
-    width: 100%;
-    overflow-y: auto;
-}
-
 body {
     margin: 0;
     padding: 0;
-    background-color: #fff;
-    color: $grey-dk;
-}
-
-a {
-    transition: .1s color, .1s background-color, .1s border;
-    text-decoration: underline;
-    text-decoration-skip: ink;
-
-    &:hover, &:focus, &:active {
-        color: $blue-md;
-    }
+    background-color: $blue;
+    color: #fff;
+    font-family: "Open Sans", sans-serif;
 }
 
 main {
-    border-top: .25rem solid $grey-lt;
-    display: block;
-
-    a {
-        color: $blue;
-
-        &:visited {
-            color: $blue;
-        }
-
-        &:hover, &:focus, &:active {
-            color: $blue-md;
-        }
-
-        &:focus {
-            background-color: $blue-md;
-            color: #fff;
-            outline: 0;
-            transition: none;
-        }
-
-        &[href*="//"] {
-            @include simple-arrow(diagonal, small, after);
-
-            &:focus {
-                @include simple-arrow(diagonal, small, after);
-
-                &::after {
-                    background-image: url($arrow-white);
-                }
-            }
-        }
-    }
+    background-color: #fff;
+    color: #000;
 }
 
-figure {
-    margin: 0 0 1.5rem;
-
-    figcaption {
-        margin-top: .25rem;
-        font-size: $font-s;
-        color: $grey-md-dk-dk;
-    }
-
-    img {
-        width: 100%;
-        display: block;
-    }
-
-    .attribution {
-        display: block;
-    }
-
-}
-
-li, dt, dd {
-    margin: .25em 0;
-}
-
-p, ul, ol, dl,
-li, dt, dd {
-    margin-top: 0;
-}
-
-input {
-    font-family: "Open Sans", Helvetica, sans-serif !important;
-
-    &[type="button"] {
-        border: 0;
-        cursor: pointer;
-    }
-}
-
-iframe {
-    border: 0;
-}
-
-.tab-focus:focus {
-    box-shadow: none;
-}
-
-*:focus:not(a) {
-    outline: 0;
-}
-
-.expanderlink {
-    cursor: pointer;
-}
-
-.pseudo-link {
-    cursor: pointer;
-}
-
-.button-style-reset {
-    display: inline;
-    border: none;
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
-    background: transparent;
-    color: inherit;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    cursor: pointer;
-    text-align: left;
-    transition: none;
-    appearance: none;
-
-    button:hover,
-    button:focus {
-        background: transparent;
-    }
-
-    button:focus {
-        //outline: 1px solid #fff;
-        //outline-offset: -4px;
-        outline: none;
-        outline-offset: 0;
-    }
-
-    button:active {
-        transform: scale(0.99);
-    }
-
+a {
+    transition: .1s color, .1s background-color;
+    text-decoration: underline;
+    text-decoration-skip: ink;
 }
 
 // Expandable Block with transitions ==================================================
@@ -211,14 +60,3 @@ iframe {
         }
     }
 }
-
-// TODO: Correct markup for these!
-
-.highlighted, .grey {
-    background-color: $grey-lt;
-}
-
-.white {
-    background-color: #fff;
-}
-

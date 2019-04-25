@@ -99,37 +99,6 @@
                     // Collapse the block
                     expander.attr("aria-expanded", "false");
                     expand.addClass("collapsed").removeClass("expanded");
-
-                    //Hash expand functionality, not for menu button or pulldowns
-                    if (
-                        !(
-                            expander.is("button") ||
-                            expander.hasClass("search-expander")
-                        ) &&
-                        (expander.hasClass("js-expander") ||
-                            expander.hasClass("js-responsive-expander"))
-                    ) {
-                        if (historyApi)
-                            history.replaceState(
-                                {},
-                                document.title,
-                                window.location.href.split("#")[0]
-                            );
-                        else window.location.hash = "";
-                    }
-                    //Scroll back up again.
-                    var scrollTarget =
-                        expandable.siblings(".js-pulldown-top").length > 0
-                            ? expandable.siblings(".js-pulldown-top").first()
-                            : expandable;
-                    if (!isScrolledIntoView(scrollTarget)) {
-                        $("html, body").animate(
-                            {
-                                scrollTop: scrollTarget.offset().top - 80
-                            },
-                            100
-                        );
-                    }
                 }
 
                 expand.removeClass("initial");

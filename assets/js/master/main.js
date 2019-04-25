@@ -15,7 +15,7 @@ $(window).on("load", function () {
     //console.log('load - master/master.js');
 
     //responsiveExpandableBlocks();
-    //expandableBlocks();
+    expandableBlocks();
     //textSizeExpander();
 
 });
