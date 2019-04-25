@@ -3,9 +3,13 @@
 <head>
     <meta charset="utf-8">
     <title>{{ page.title }}</title>
-    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/master.css">
 </head>
 <body>
+
+{% include header.html %}
 {{ content }}
+{% include footer.html %}
+
 </body>
 </html>
