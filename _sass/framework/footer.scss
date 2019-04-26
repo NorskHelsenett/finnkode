@@ -2,11 +2,23 @@ footer.framework {
     color: #fff;
     padding: 1rem;
 
-
     ul {
-        margin: 0;
+        margin: 0 0 1.5rem;
         padding: 0;
         list-style: none;
+        line-height: 1.5;
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            margin-bottom: .25rem;
+            transition: border-bottom-color .15s;
+
+            &:hover {
+                border-bottom-color: #fff;
+            }
+        }
     }
 
     .text-size {
@@ -15,6 +27,12 @@ footer.framework {
 
     .directorate-logo {
         justify-self: flex-end;
+        background: url("/assets/images/directorate-logo.svg") center/contain no-repeat;
+        height: 0;
+        overflow: hidden;
+        width: 13rem;
+        padding-top: 2rem;
+        display: inline-block;
     }
 
     a {
@@ -23,29 +41,53 @@ footer.framework {
 }
 
 
-@media only screen and (min-width: $one-to-two-col) {
+@media only screen and (min-width: $two-to-three-col) {
     footer.framework {
+        padding: 2.75rem 1rem;
         display: flex;
         flex-flow: row nowrap;
         align-items: flex-end;
         justify-content: flex-start;
 
+        ul {
+            margin-bottom: 0;
+            line-height: 1.5;
+            font-size: $font-xl;
+        }
+
         .text-size {
             display: block;
-            margin: 0 1rem;
+            margin: 0 1rem 0 7rem;
             flex-grow: 1;
             position: relative;
 
             .expander {
+                @include button-reset();
+                display: block;
                 width: 3rem;
+                height: 0;
+                padding: 3rem 0 0 0;
+                overflow: hidden;
+                background: transparent url("/assets/images/text-size.svg") no-repeat center / 3rem;
             }
 
             .expandable {
                 position: absolute;
                 bottom: 0;
                 left: 4rem;
-                background: orange;
+                width: 600px;
+                padding: 1rem;
+                color: #000;
+                background: #fff;
+                outline: .5rem solid black;
+                font-size:3rem;
+
             }
+        }
+
+        .directorate-logo {
+            padding-top: 44px;
+            width: 273px;
         }
     }
 }
