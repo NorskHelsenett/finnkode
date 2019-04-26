@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600&subset=latin-ext");
 .container:before, .container-fluid:before, .row:before, .container:after, .container-fluid:after, .row:after {
   content: " ";
   display: table; }
@@ -920,7 +920,8 @@ header.framework li {
   header.framework li a {
     display: block;
     position: relative;
-    text-decoration: none; }
+    text-decoration: none;
+    color: #642461; }
     header.framework li a::after {
       content: "";
       border-bottom: 1px solid transparent;
