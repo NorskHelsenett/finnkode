@@ -1,0 +1,62 @@
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: $blue;
+    color: #fff;
+    font-family: "Open Sans", sans-serif;
+}
+
+main {
+    background-color: #fff;
+    color: #000;
+}
+
+a {
+    transition: .1s color, .1s background-color;
+    text-decoration: underline;
+    text-decoration-skip: ink;
+}
+
+// Expandable Block with transitions ==================================================
+.expand {
+    transition-property: background-color, border-color;
+    transition-duration: .5s, .1s;
+
+    &.initial.collapsed {
+        transition: none;
+        .expandable {
+            transition: none;
+        }
+    }
+
+    // Expander links =================
+
+    .expander {
+        cursor: pointer;
+    }
+
+    // Expandable Content =================
+    .expandable {
+        max-height: 20000px;
+        overflow: hidden;
+        transition-property: max-height, opacity, padding, margin;
+        transition-duration: .3s, .3s, .1s, .1s;
+        opacity: 1;
+    }
+
+    // Collapsed Expandable Block ==================================================
+    &.collapsed {
+        .expandable {
+            max-height: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition-property: max-height, opacity, visibility, padding, margin;
+            transition-duration: .3s, .9s, 0s, .3s, .3s;
+            transition-delay: 0s, 0s, .3s, .3s, 0s;
+        }
+    }
+}
