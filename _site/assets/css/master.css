@@ -903,7 +903,7 @@ header.framework .main-header-content {
   justify-content: space-between;
   line-height: 3rem; }
 header.framework .finnkode-logo {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   color: #0f2d5e;
   text-decoration: none;
   font-weight: 600; }
@@ -949,31 +949,70 @@ footer.framework {
   color: #fff;
   padding: 1rem; }
   footer.framework ul {
-    margin: 0;
+    margin: 0 0 1.5rem;
     padding: 0;
-    list-style: none; }
+    list-style: none;
+    line-height: 1.5; }
+    footer.framework ul a {
+      display: inline-block;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      margin-bottom: .25rem;
+      transition: border-bottom-color .15s; }
+      footer.framework ul a:hover {
+        border-bottom-color: #fff; }
   footer.framework .text-size {
     display: none; }
   footer.framework .directorate-logo {
-    justify-self: flex-end; }
+    justify-self: flex-end;
+    background: url("/assets/images/directorate-logo.svg") center/contain no-repeat;
+    height: 0;
+    overflow: hidden;
+    width: 13rem;
+    padding-top: 2rem;
+    display: inline-block; }
   footer.framework a {
     color: #fff; }
 
-@media only screen and (min-width: 640px) {
+@media only screen and (min-width: 944px) {
   footer.framework {
+    padding: 2.75rem 1rem;
     display: flex;
     flex-flow: row nowrap;
     align-items: flex-end;
     justify-content: flex-start; }
+    footer.framework ul {
+      margin-bottom: 0;
+      line-height: 1.5;
+      font-size: 1.25rem; }
     footer.framework .text-size {
       display: block;
-      margin: 0 1rem;
+      margin: 0 1rem 0 7rem;
       flex-grow: 1;
       position: relative; }
       footer.framework .text-size .expander {
-        width: 3rem; }
+        padding: 0;
+        border: none;
+        font: inherit;
+        color: inherit;
+        background-color: transparent;
+        cursor: pointer;
+        display: block;
+        width: 3rem;
+        height: 0;
+        padding: 3rem 0 0 0;
+        overflow: hidden;
+        background: transparent url("/assets/images/text-size.svg") no-repeat center/3rem; }
       footer.framework .text-size .expandable {
         position: absolute;
         bottom: 0;
         left: 4rem;
-        background: orange; } }
+        width: 600px;
+        padding: 1rem;
+        color: #000;
+        background: #fff;
+        outline: .5rem solid black;
+        font-size: 3rem; }
+    footer.framework .directorate-logo {
+      padding-top: 44px;
+      width: 273px; } }
