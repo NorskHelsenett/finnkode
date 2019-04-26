@@ -1,32 +1,96 @@
 header.framework {
 
-    .directorate-logo, .main-header-content {
-        padding: 1rem;
-    }
-
     .directorate-logo {
+        padding: .75rem 1rem;
+
         a {
+            background: url("/assets/images/directorate-logo.svg") no-repeat;
+            background-size: contain;
             color: #fff;
+            height: 11px;
+            padding-top: 11px;
+            width: 150px;
+            overflow: hidden;
+            display: block;
         }
     }
 
     .main-header-content {
+        padding: .75rem 1rem;
         background: #fff;
         display: flex;
         flex-flow: row nowrap;
         justify-content: space-between;
+        line-height: 3rem;
+    }
+
+    .finnkode-logo {
+        font-size: $font-l;
+        color: $blue;
+        text-decoration: none;
+        font-weight: 600;
     }
 
     ul {
         margin: 0;
         padding: 0;
         list-style: none;
+        font-size: $font-s;
+        font-weight: 600;
     }
 
     li {
         display: inline-block;
-    }
 
+        &:first-child {
+            margin-right: 3rem;
+        }
+
+        a {
+            display: block;
+            position: relative;
+            text-decoration: none;
+
+            &::after {
+                content: "";
+                border-bottom: 1px solid transparent;
+                position: absolute;
+                bottom: 13px;
+                right: 0;
+                left: 0;
+                transition: border-color .2s;
+            }
+
+
+            &::before {
+                content: "";
+                display: block;
+                position: absolute;
+                height: 3rem;
+                width: 1.25rem;
+                left: -1.5rem;
+                background: left center/1rem no-repeat;
+            }
+
+            &:hover, &:focus {
+                &::after {
+                    border-bottom: 1px solid $purple;
+                }
+            }
+
+            &.home {
+                &::before {
+                    background-image: url("/assets/images/home.svg");
+                }
+            }
+
+            &.coding-systems {
+                &::before {
+                    background-image: url("/assets/images/coding-systems.svg");
+                }
+            }
+        }
+    }
 }
 
 @media only screen and (min-width: $one-to-two-col) {

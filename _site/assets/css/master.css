@@ -884,21 +884,65 @@ a {
 @media print {
   .hidden-print {
     display: none !important; } }
-header.framework .directorate-logo, header.framework .main-header-content {
-  padding: 1rem; }
-header.framework .directorate-logo a {
-  color: #fff; }
+header.framework .directorate-logo {
+  padding: .75rem 1rem; }
+  header.framework .directorate-logo a {
+    background: url("/assets/images/directorate-logo.svg") no-repeat;
+    background-size: contain;
+    color: #fff;
+    height: 11px;
+    padding-top: 11px;
+    width: 150px;
+    overflow: hidden;
+    display: block; }
 header.framework .main-header-content {
+  padding: .75rem 1rem;
   background: #fff;
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-between; }
+  justify-content: space-between;
+  line-height: 3rem; }
+header.framework .finnkode-logo {
+  font-size: 1.125rem;
+  color: #0f2d5e;
+  text-decoration: none;
+  font-weight: 600; }
 header.framework ul {
   margin: 0;
   padding: 0;
-  list-style: none; }
+  list-style: none;
+  font-size: 0.75rem;
+  font-weight: 600; }
 header.framework li {
   display: inline-block; }
+  header.framework li:first-child {
+    margin-right: 3rem; }
+  header.framework li a {
+    display: block;
+    position: relative;
+    text-decoration: none; }
+    header.framework li a::after {
+      content: "";
+      border-bottom: 1px solid transparent;
+      position: absolute;
+      bottom: 13px;
+      right: 0;
+      left: 0;
+      transition: border-color .2s; }
+    header.framework li a::before {
+      content: "";
+      display: block;
+      position: absolute;
+      height: 3rem;
+      width: 1.25rem;
+      left: -1.5rem;
+      background: left center/1rem no-repeat; }
+    header.framework li a:hover::after, header.framework li a:focus::after {
+      border-bottom: 1px solid #642461; }
+    header.framework li a.home::before {
+      background-image: url("/assets/images/home.svg"); }
+    header.framework li a.coding-systems::before {
+      background-image: url("/assets/images/coding-systems.svg"); }
 
 footer.framework {
   color: #fff;
