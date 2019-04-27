@@ -906,7 +906,8 @@ header.framework .finnkode-logo {
   font-size: 1.25rem;
   color: #0f2d5e;
   text-decoration: none;
-  font-weight: 600; }
+  font-weight: 600;
+  letter-spacing: -1px; }
 header.framework ul {
   margin: 0;
   padding: 0;
@@ -939,12 +940,29 @@ header.framework li {
       left: -1.5rem;
       background: left center/1rem no-repeat; }
     header.framework li a:hover::after, header.framework li a:focus::after {
-      border-bottom: 1px solid #642461; }
+      border-bottom-color: #642461; }
     header.framework li a.home::before {
       background-image: url("/assets/images/home.svg"); }
     header.framework li a.coding-systems::before {
       background-image: url("/assets/images/coding-systems.svg"); }
 
+@media only screen and (min-width: 944px) {
+  header.framework .main-header-content {
+    padding: 1.625rem 1rem;
+    line-height: 3rem; }
+  header.framework .finnkode-logo {
+    font-size: 1.75rem; }
+  header.framework ul {
+    font-size: 1.25rem; }
+  header.framework li:first-child {
+    margin-right: 6rem; }
+  header.framework li a::after {
+    bottom: 7px;
+    border-width: 2px; }
+  header.framework li a::before {
+    width: 1.5rem;
+    left: -2.5rem;
+    background-size: 1.5rem; } }
 footer.framework {
   color: #fff;
   padding: 1rem; }

@@ -29,6 +29,7 @@ header.framework {
         color: $blue;
         text-decoration: none;
         font-weight: 600;
+        letter-spacing: -1px;
     }
 
     ul {
@@ -75,7 +76,7 @@ header.framework {
 
             &:hover, &:focus {
                 &::after {
-                    border-bottom: 1px solid $purple;
+                    border-bottom-color: $purple;
                 }
             }
 
@@ -101,6 +102,38 @@ header.framework {
 
 @media only screen and (min-width: $two-to-three-col) {
     header.framework {
+        .main-header-content {
+            padding: 1.625rem 1rem;
+            line-height: 3rem;
+        }
+
+        .finnkode-logo {
+            font-size: $font-3xl;
+        }
+
+        ul {
+            font-size: $font-xl;
+        }
+
+        li {
+            &:first-child {
+                margin-right: 6rem;
+            }
+
+            a {
+                &::after {
+                    bottom: 7px;
+                    border-width: 2px;
+                }
+
+                &::before {
+                    width: 1.5rem;
+                    left: -2.5rem;
+                    background-size: 1.5rem;
+                }
+
+            }
+        }
     }
 }
 
