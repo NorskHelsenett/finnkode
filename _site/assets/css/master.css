@@ -264,15 +264,28 @@ footer.framework {
     line-height: 2.25rem;
     height: 2.25rem;
     width: 100%;
-    padding: 0 3.125rem 0 1rem; }
+    padding: 0 3.125rem 0 1rem;
+    transition: border-color .15s; }
+    #global-search-banner .search-input:focus, #global-search-banner .search-input:hover {
+      border-color: #99eeb2;
+      outline: 0; }
   #global-search-banner .search-button {
-    background: #0f2d5e url("/assets/images/search.svg") 0.85rem center/1rem no-repeat;
-    border: 0;
+    background: #0f2d5e url("/assets/images/search-green.svg") 0.85rem center/1rem no-repeat;
     height: 0;
-    padding: 2.25rem 0 0 0;
+    padding: 2rem 0 0 0;
     border-radius: 0 2.25rem 2.25rem 0;
     position: absolute;
     top: 0;
     right: 0;
     width: 3rem;
-    overflow: hidden; }
+    overflow: hidden;
+    border-color: #0f2d5e;
+    border-style: solid;
+    border-width: 2px 2px 2px 0;
+    transition: border-color .15s, background .15s; }
+    #global-search-banner .search-button:focus, #global-search-banner .search-button:hover {
+      background: #99eeb2 url("/assets/images/search-blue.svg") 0.85rem center/1rem no-repeat;
+      border-color: #0f2d5e;
+      border-style: solid;
+      border-width: 2px 2px 2px 0;
+      outline: 0; }

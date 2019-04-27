@@ -30,19 +30,39 @@
         height: 2.25rem;
         width: 100%;
         padding: 0 3.125rem 0 1rem;
+        transition: border-color .15s;
+
+        &:focus, &:hover {
+            border-color: $green;
+            outline: 0;
+        }
     }
 
     .search-button {
-        background: $blue url("/assets/images/search.svg") .85rem center / 1rem no-repeat;
-        border: 0;
+        background: $blue url("/assets/images/search-green.svg") .85rem center / 1rem no-repeat;
         height: 0;
-        padding: 2.25rem 0 0 0;
+        padding: 2rem 0 0 0;
         border-radius: 0 2.25rem 2.25rem 0;
         position: absolute;
         top: 0;
         right: 0;
         width: 3rem;
         overflow: hidden;
+        border-color: $blue;
+        border-style: solid;
+        border-width: 2px 2px 2px 0;
+        transition: border-color .15s, background .15s;
+
+
+        &:focus, &:hover {
+            background: $green url("/assets/images/search-blue.svg") .85rem center / 1rem no-repeat;
+            border-color: $blue;
+            border-style: solid;
+            border-width: 2px 2px 2px 0;
+
+            outline: 0;
+        }
+
     }
 
 
