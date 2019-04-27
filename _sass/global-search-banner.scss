@@ -9,6 +9,7 @@
     .layout-container {
         padding: 0 1rem;
         width: 100%;
+        max-width: $one-point-five-col;
     }
 
     label {
@@ -23,13 +24,18 @@
         position: relative;
     }
 
+    .search-input, .search-button {
+        font-size: $font-m;
+    }
+
     .search-input {
+        font-style: italic;
         border: 2px solid $blue;
-        border-radius: 2.25rem;
-        line-height: 2.25rem;
-        height: 2.25rem;
+        border-radius: 2.25em;
+        line-height: 2.25em;
+        height: 2.25em;
         width: 100%;
-        padding: 0 3.125rem 0 1rem;
+        padding: 0 3.125em 0 1em;
         transition: border-color .15s;
 
         &:focus, &:hover {
@@ -39,14 +45,14 @@
     }
 
     .search-button {
-        background: $blue url("/assets/images/search-green.svg") .85rem center / 1rem no-repeat;
+        background: $blue url("/assets/images/search-green.svg") .85em center / 1.1em no-repeat;
         height: 0;
-        padding: 2rem 0 0 0;
-        border-radius: 0 2.25rem 2.25rem 0;
+        padding: 2em 0 0 0;
+        border-radius: 0 2.25em 2.25em 0;
         position: absolute;
         top: 0;
         right: 0;
-        width: 3rem;
+        width: 3em;
         overflow: hidden;
         border-color: $blue;
         border-style: solid;
@@ -55,30 +61,52 @@
 
 
         &:focus, &:hover {
-            background: $green url("/assets/images/search-blue.svg") .85rem center / 1rem no-repeat;
-            border-color: $blue;
-            border-style: solid;
-            border-width: 2px 2px 2px 0;
-
+            background-color: $green;
+            background-image: url("/assets/images/search-blue.svg");
             outline: 0;
         }
 
     }
-
-
 }
 
 @media only screen and (min-width: $one-to-two-col) {
     #global-search-banner {
+        height: 13rem;
+        background-size: auto 13rem;
+
+        .layout-container {
+            max-width: $one-point-five-col;
+        }
     }
 }
 
 @media only screen and (min-width: $two-to-three-col) {
     #global-search-banner {
-    }
-}
+        height: 18rem;
+        background-size: auto 18rem;
 
-@media only screen and (min-width: $three-to-four-col) {
-    #global-search-banner {
+        .layout-container {
+            max-width: $two-col;
+        }
+
+        label {
+            font-size: $font-2xl;
+            margin-left: 1.25rem;
+        }
+
+        .search-input {
+            border-radius: 1.5rem;
+            line-height: 3.25rem;
+            height: 3.25rem;
+            padding: 0 4rem 0 1.25rem;
+        }
+
+        .search-button {
+            background-size: 1.625rem;
+            background-position: 1rem center;
+            padding: 3rem 0 0 0;
+            border-radius: 0 1.5rem 1.5rem 0;
+            width: 3.875rem;
+        }
     }
 }
