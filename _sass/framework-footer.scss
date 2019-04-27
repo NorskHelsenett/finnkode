@@ -1,9 +1,9 @@
 footer.framework {
     color: #fff;
-    padding: 1rem;
+    padding: 1.5rem 0;
 
     ul {
-        margin: 0 0 1.5rem;
+        margin: 0 1rem 1.5rem;
         padding: 0;
         list-style: none;
         line-height: 1.5;
@@ -33,13 +33,13 @@ footer.framework {
         width: 13rem;
         padding-top: 2rem;
         display: inline-block;
+        margin: 0 1rem;
     }
 
     a {
         color: #fff;
     }
 }
-
 
 @media only screen and (min-width: $two-to-three-col) {
     footer.framework {

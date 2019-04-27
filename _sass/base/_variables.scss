@@ -4,26 +4,6 @@ $light-green: #f4fdf7;
 $green: #99eeb2;
 
 
-$default-spacing-amount: 1rem;
-$default-spacing-grid: 16px;
-
-$one-col: 304px;
-$one-point-five-col: $one-col * 1.5;
-$two-col: $one-col * 2;
-$three-col: $one-col * 3;
-$four-col: $one-col * 4;
-
-// The width of the content inside the columns (without the padding.)
-$one-col-content: $one-col - 2*$default-spacing-grid;
-$one-point-five-col-content: $three-col/2 - 2*$default-spacing-grid;
-$two-col-content: $two-col - 2*$default-spacing-grid;
-$three-col-content: $three-col - 2*$default-spacing-grid;
-
-// Breakpoints
-$one-to-two-col: $two-col + 2*$default-spacing-grid;
-$two-to-three-col: $three-col + 2*$default-spacing-grid;
-$three-to-four-col: $four-col + 3*$default-spacing-grid;
-
 // Font stack
 $font-s: .75rem;    //  12px
 $font-m: 1rem;      //  16px
@@ -32,3 +12,17 @@ $font-xl: 1.25rem;  //  20px
 $font-2xl: 1.5rem;  //  24px
 $font-3xl: 1.75rem; //  28px
 $font-4xl: 2rem;    //  32px
+
+// Layout
+
+$one-col: 19rem;
+$one-point-five-col: $one-col * 1.5;
+$two-col: $one-col * 2;
+$three-col: $one-col * 3;
+$four-col: $one-col * 4;
+
+
+// Breakpoints
+$one-to-two-col: $two-col + 1rem;
+$two-to-three-col: $three-col + 3rem;
+$three-to-four-col: $four-col + 3rem;

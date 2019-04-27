@@ -1,27 +1,28 @@
 header.framework {
 
     .directorate-logo {
-        padding: .75rem 1rem;
+        margin: .75rem 1rem;
+        background: url("/assets/images/directorate-logo.svg") no-repeat;
+        background-size: contain;
+        color: #fff;
+        height: 11px;
+        padding-top: 11px;
+        width: 150px;
+        overflow: hidden;
+        display: block;
 
-        a {
-            background: url("/assets/images/directorate-logo.svg") no-repeat;
-            background-size: contain;
-            color: #fff;
-            height: 11px;
-            padding-top: 11px;
-            width: 150px;
-            overflow: hidden;
-            display: block;
-        }
     }
 
     .main-header-content {
-        padding: .75rem 1rem;
-        background: #fff;
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
         line-height: 3rem;
+        background-color: #fff;
+
+        .layout-container {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            padding: .75rem 1rem;
+        }
     }
 
     .finnkode-logo {
@@ -95,16 +96,13 @@ header.framework {
     }
 }
 
-@media only screen and (min-width: $one-to-two-col) {
-    header.framework {
-    }
-}
-
 @media only screen and (min-width: $two-to-three-col) {
     header.framework {
         .main-header-content {
-            padding: 1.625rem 1rem;
-            line-height: 3rem;
+            .layout-container {
+                padding: 1.625rem 1rem;
+                line-height: 3rem;
+            }
         }
 
         .finnkode-logo {
@@ -134,10 +132,5 @@ header.framework {
 
             }
         }
-    }
-}
-
-@media only screen and (min-width: $three-to-four-col) {
-    header.framework {
     }
 }
