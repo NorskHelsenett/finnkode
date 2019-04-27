@@ -21,6 +21,18 @@ a {
     text-decoration-skip: ink;
 }
 
+input {
+    font-family: "Open Sans";
+}
+
+::placeholder {
+    color: $light-blue;
+    font-style: italic;
+}
+
+
+
+
 // Expandable Block with transitions ==================================================
 .expand {
     transition-property: background-color, border-color;

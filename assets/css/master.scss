@@ -9,14 +9,9 @@
 @import "base/layout";
 @import "base/base";
 
-@import "grid/variables";
-@import "grid/mixins/grid-framework";
-@import "grid/mixins/grid";
-@import "grid/grid";
-@import "grid/responsive-visibility";
-@import "grid/responsive-utilities";
-
-@import "framework/header";
-@import "framework/footer";
+@import "framework-header";
+@import "framework-footer";
+@import "code-system-menu";
+@import "global-search-banner";
 
 // @import "print";
