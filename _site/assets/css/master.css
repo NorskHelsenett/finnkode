@@ -240,3 +240,39 @@ footer.framework {
 @media only screen and (min-width: 60rem) {
   .code-system-menu .category {
     width: 19rem; } }
+#global-search-banner {
+  background: url("/assets/images/background-green.jpg") center/auto 9rem no-repeat;
+  height: 9rem;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center; }
+  #global-search-banner .layout-container {
+    padding: 0 1rem;
+    width: 100%; }
+  #global-search-banner label {
+    font-weight: 600;
+    color: #0f2d5e;
+    display: block;
+    margin-bottom: 1rem;
+    margin-left: .75rem; }
+  #global-search-banner .search {
+    position: relative; }
+  #global-search-banner .search-input {
+    border: 2px solid #0f2d5e;
+    border-radius: 2.25rem;
+    line-height: 2.25rem;
+    height: 2.25rem;
+    width: 100%;
+    padding: 0 3.125rem 0 1rem; }
+  #global-search-banner .search-button {
+    background: #0f2d5e url("/assets/images/search.svg") 0.85rem center/1rem no-repeat;
+    border: 0;
+    height: 0;
+    padding: 2.25rem 0 0 0;
+    border-radius: 0 2.25rem 2.25rem 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3rem;
+    overflow: hidden; }

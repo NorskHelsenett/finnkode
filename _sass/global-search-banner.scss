@@ -1,0 +1,64 @@
+#global-search-banner {
+    background: url("/assets/images/background-green.jpg") center / auto 9rem no-repeat;
+    height: 9rem;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+
+    .layout-container {
+        padding: 0 1rem;
+        width: 100%;
+    }
+
+    label {
+        font-weight: 600;
+        color: $blue;
+        display: block;
+        margin-bottom: 1rem;
+        margin-left: .75rem;
+    }
+
+    .search {
+        position: relative;
+    }
+
+    .search-input {
+        border: 2px solid $blue;
+        border-radius: 2.25rem;
+        line-height: 2.25rem;
+        height: 2.25rem;
+        width: 100%;
+        padding: 0 3.125rem 0 1rem;
+    }
+
+    .search-button {
+        background: $blue url("/assets/images/search.svg") .85rem center / 1rem no-repeat;
+        border: 0;
+        height: 0;
+        padding: 2.25rem 0 0 0;
+        border-radius: 0 2.25rem 2.25rem 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 3rem;
+        overflow: hidden;
+    }
+
+
+}
+
+@media only screen and (min-width: $one-to-two-col) {
+    #global-search-banner {
+    }
+}
+
+@media only screen and (min-width: $two-to-three-col) {
+    #global-search-banner {
+    }
+}
+
+@media only screen and (min-width: $three-to-four-col) {
+    #global-search-banner {
+    }
+}

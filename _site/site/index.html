@@ -34,13 +34,18 @@
 </header>
 
 <main>
-    <div class="layout-container">
         <div id="global-search-banner">
-    <form role="search" method="" action="">
-        <label for="global-search">Søk i alle kodeverk</label>
-        <input name="global-search" type="search" id="global-search" placeholder="f.eks. kreft, bevissthetssilstand, fødsel...">
-        <button type="submit">Søk i alle kodeverk</button>
-    </form>
+    <div class="layout-container">
+        <form action="" method="" role="search">
+            <label for="global-search">Søk i alle kodeverk</label>
+
+            <div class="search">
+                <input name="global-search" id="global-search" type="search" class="search-input" placeholder="f.eks. kreft, bevissthetssilstand, fødsel...">
+                <button class="search-button" type="submit">Søk i alle kodeverk</button>
+            </div>
+
+        </form>
+    </div>
 </div>
 
 <!--<p>FinnKode er et søkeverktøy som inneholder oppdaterte kodeverk og synonymordlister/søkeforslagslister for lettere søk. <a href="https://ehelse.no/standarder-kodeverk-og-referansekatalog/helsefaglige-kodeverk/finnkode-online-sokeverktoy">Les mer om FinnKode hos direktoratet for e-helse.</a></p>-->
@@ -83,7 +88,6 @@
         </ul>
     </div>
 </nav>
-    </div>
 </main>
 
 <footer class="framework">
