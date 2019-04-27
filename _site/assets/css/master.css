@@ -147,8 +147,8 @@ footer.framework {
   color: #fff;
   padding: 1.5rem 0; }
   footer.framework ul {
-    margin: 0 1rem 1.5rem;
-    padding: 0;
+    padding: 0 1rem 1.5rem;
+    margin: 0;
     list-style: none;
     line-height: 1.5; }
     footer.framework ul a {
@@ -175,20 +175,22 @@ footer.framework {
 
 @media only screen and (min-width: 60rem) {
   footer.framework {
-    padding: 2.75rem 1rem;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: flex-end;
-    justify-content: flex-start; }
+    padding: 2.75rem 0; }
+    footer.framework .layout-container {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: flex-end;
+      justify-content: flex-start;
+      position: relative; }
     footer.framework ul {
-      margin-bottom: 0;
+      padding-bottom: 0;
       line-height: 1.5;
-      font-size: 1.25rem; }
+      font-size: 1.25rem;
+      width: 19rem; }
     footer.framework .text-size {
       display: block;
-      margin: 0 1rem 0 7rem;
-      flex-grow: 1;
-      position: relative; }
+      margin: 0 1rem;
+      flex-grow: 1; }
       footer.framework .text-size .expander {
         padding: 0;
         border: none;
@@ -204,13 +206,12 @@ footer.framework {
         background: transparent url("/assets/images/text-size.svg") no-repeat center/3rem; }
       footer.framework .text-size .expandable {
         position: absolute;
-        bottom: 0;
-        left: 4rem;
-        width: 600px;
+        bottom: 3.25rem;
+        left: 0;
         padding: 1rem;
         color: #000;
         background: #fff;
-        outline: .5rem solid black;
+        outline: .5rem solid #070;
         font-size: 3rem; }
     footer.framework .directorate-logo {
       padding-top: 44px;
