@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600&subset=latin-ext");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin-ext");
 title {
   position: relative;
   z-index: 1; }
@@ -93,7 +93,7 @@ header.framework .finnkode-logo {
   font-size: 1.25rem;
   color: #0f2d5e;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -1px; }
 header.framework ul {
   margin: 0;
@@ -224,27 +224,37 @@ footer.framework {
       padding-top: 44px;
       width: 273px; } }
 .code-system-menu {
-  outline: 1px solid fuchsia; }
-  .code-system-menu .category {
-    background-color: #642461; }
+  padding-top: 3rem; }
+  .code-system-menu h2 {
+    font-size: 1rem;
+    margin: 0 1rem;
+    color: #642461;
+    font-weight: 700; }
   .code-system-menu ul {
     list-style: none;
     margin: 0;
-    padding: 0 1rem;
-    outline: 1px solid lime;
-    background-color: #0f2d5e; }
+    padding: 0 1rem; }
   .code-system-menu li {
-    background: 1px pink;
     margin: 0;
     padding: 0; }
+  .code-system-menu a {
+    color: #0f2d5e; }
 
 @media only screen and (min-width: 39rem) {
   .code-system-menu {
     display: flex;
     flex-flow: row wrap; }
     .code-system-menu .category {
-      width: 19rem; } }
+      width: 19rem;
+      padding-bottom: 3rem; } }
 @media only screen and (min-width: 60rem) {
+  .code-system-menu .category {
+    width: 28.5rem; }
+  .code-system-menu h2 {
+    font-size: 1.5rem; }
+  .code-system-menu ul {
+    font-size: 1.125rem; } }
+@media only screen and (min-width: 79rem) {
   .code-system-menu .category {
     width: 19rem; } }
 #global-search-banner {
@@ -258,12 +268,12 @@ footer.framework {
     padding: 0 1rem;
     width: 100%;
     max-width: 28.5rem; }
-  #global-search-banner label {
+  #global-search-banner #global-search-label {
     font-weight: 600;
     color: #0f2d5e;
     display: block;
-    margin-bottom: 1rem;
-    margin-left: .75rem; }
+    margin: 0 0 1rem;
+    font-size: 1rem; }
   #global-search-banner .search {
     position: relative; }
   #global-search-banner .search-input, #global-search-banner .search-button {
@@ -278,7 +288,6 @@ footer.framework {
     padding: 0 3.125em 0 1em;
     transition: border-color .15s; }
     #global-search-banner .search-input:focus, #global-search-banner .search-input:hover {
-      border-color: #99eeb2;
       outline: 0; }
   #global-search-banner .search-button {
     background: #0f2d5e url("/assets/images/search-green.svg") 0.85em center/1.1em no-repeat;
@@ -311,9 +320,8 @@ footer.framework {
     background-size: auto 18rem; }
     #global-search-banner .layout-container {
       max-width: 38rem; }
-    #global-search-banner label {
-      font-size: 1.5rem;
-      margin-left: 1.25rem; }
+    #global-search-banner #global-search-label {
+      font-size: 1.5rem; }
     #global-search-banner .search-input {
       border-radius: 1.5rem;
       line-height: 3.25rem;
@@ -325,3 +333,22 @@ footer.framework {
       padding: 3rem 0 0 0;
       border-radius: 0 1.5rem 1.5rem 0;
       width: 3.875rem; } }
+.front-page .intro, .front-page .directorate-link {
+  margin: 1.5em 1rem 0; }
+.front-page .intro {
+  color: #0f2d5e;
+  font-size: 1rem;
+  line-height: 1.5; }
+.front-page .directorate-link {
+  font-size: 0.75rem; }
+  .front-page .directorate-link a {
+    text-decoration: none;
+    color: #0f2d5e;
+    border-bottom: 1px solid #0f2d5e; }
+
+@media only screen and (min-width: 60rem) {
+  .front-page .intro {
+    font-size: 1.5rem;
+    max-width: 57rem; }
+  .front-page .directorate-link {
+    font-size: 1.125rem; } }

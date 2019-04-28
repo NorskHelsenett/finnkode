@@ -1,7 +1,7 @@
 ---
 ---
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin-ext');
 
 @import "base/variables";
 @import "base/svgdata";
@@ -13,5 +13,10 @@
 @import "framework-footer";
 @import "code-system-menu";
 @import "global-search-banner";
+
+@import "templates/full-width";
+
+@import "pages/front-page";
+
 
 // @import "print";
