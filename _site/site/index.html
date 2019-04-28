@@ -10,12 +10,12 @@
     <script src="/assets/js/master.js"></script>
 
 </head>
-<body>
+<body class="full-width front-page">
 
-<header class="framework">
+<header id="framework-header">
 
     <div class="layout-container">
-        <a class="directorate-logo" href="http://ehelse.no">Direktoratet for e-helse</a>
+        <a class="directorate-logo" href="/">Direktoratet for e-helse</a>
     </div>
 
     <div class="main-header-content">
@@ -26,7 +26,7 @@
             <nav>
                 <ul>
                     <li><a class="home" href="/site/index.html">Hjem</a></li>
-                    <li><a class="coding-systems" href="/site/index.html">Kodeverk</a></li>
+                    <li><a class="code-systems" href="/site/index.html">Kodeverk</a></li>
                 </ul>
             </nav>
         </div>
@@ -36,11 +36,11 @@
 <main>
         <div id="global-search-banner">
     <div class="layout-container">
-        <form action="" method="" role="search">
-            <label for="global-search">Søk i alle kodeverk</label>
+        <h1 id="global-search-label">Søk i alle kodeverk</h1>
 
+        <form action="" method="" role="search">
             <div class="search">
-                <input name="global-search" id="global-search" type="search" class="search-input" placeholder="f.eks. kreft, bevissthetssilstand, fødsel...">
+                <input name="global-search" id="global-search" aria-labelledby="global-search-label" type="search" class="search-input" placeholder="f.eks. kreft, bevissthetssilstand, fødsel...">
                 <button class="search-button" type="submit">Søk i alle kodeverk</button>
             </div>
 
@@ -49,18 +49,25 @@
 </div>
 
 <div class="layout-container">
-    <p>FinnKode er et søkeverktøy som inneholder oppdaterte kodeverk og synonymordlister/søkeforslagslister for lettere søk. <a href="https://ehelse.no/standarder-kodeverk-og-referansekatalog/helsefaglige-kodeverk/finnkode-online-sokeverktoy">Les mer om FinnKode hos direktoratet for e-helse.</a></p>
+
+    <!-- #8203 is the unicode character for breaking space, make sure to include this in the final product. -->
+
+    <p class="intro">FinnKode er et søkeverktøy som inneholder oppdaterte kodeverk og synonymordlister/&#8203;søkeforslagslister for lettere søk.</p>
+
+    <p class="directorate-link">
+        <a href="https://ehelse.no/standarder-kodeverk-og-referansekatalog/helsefaglige-kodeverk/finnkode-online-sokeverktoy">Les mer om FinnKode hos direktoratet for e-helse.</a>
+    </p>
 
     <nav class="code-system-menu">
 
     <div class="category">
-        <h2>Category 1</h2>
+        <h2>Velg kodeverk</h2>
         <ul>
             <li>one</li>
         </ul>
     </div>
-    <div class="category 2">
-        <h2>Category</h2>
+    <div class="category">
+        <h2>Kliniske kodeverk</h2>
         <ul>
             <li>one</li>
             <li>two</li>
@@ -73,14 +80,14 @@
         </ul>
     </div>
     <div class="category">
-        <h2>Category 3</h2>
+        <h2>Lab kodeverk</h2>
         <ul>
             <li>one</li>
             <li>two</li>
         </ul>
     </div>
     <div class="category">
-        <h2>Category 4</h2>
+        <h2>Andre kodeverk</h2>
         <ul>
             <li>one</li>
             <li>two</li>
@@ -92,7 +99,7 @@
 </div>
 </main>
 
-<footer class="framework">
+<footer id="framework-footer">
     <div class="layout-container">
         <nav>
             <ul>

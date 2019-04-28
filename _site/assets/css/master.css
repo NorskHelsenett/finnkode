@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600&subset=latin-ext");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin-ext");
 title {
   position: relative;
   z-index: 1; }
@@ -48,6 +48,11 @@ input {
   color: #8796ae;
   font-style: italic; }
 
+h1 {
+  font-size: 4xl;
+  font-weight: normal;
+  margin: 1rem 0; }
+
 .expand {
   transition-property: background-color, border-color;
   transition-duration: .5s, .1s; }
@@ -71,7 +76,7 @@ input {
     transition-duration: .3s, .9s, 0s, .3s, .3s;
     transition-delay: 0s, 0s, .3s, .3s, 0s; }
 
-header.framework .directorate-logo {
+#framework-header .directorate-logo {
   margin: .75rem 1rem;
   background: url("/assets/images/directorate-logo.svg") no-repeat;
   background-size: contain;
@@ -81,36 +86,36 @@ header.framework .directorate-logo {
   width: 150px;
   overflow: hidden;
   display: block; }
-header.framework .main-header-content {
+#framework-header .main-header-content {
   line-height: 3rem;
   background-color: #fff; }
-  header.framework .main-header-content .layout-container {
+  #framework-header .main-header-content .layout-container {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
     padding: .75rem 1rem; }
-header.framework .finnkode-logo {
+#framework-header .finnkode-logo {
   font-size: 1.25rem;
   color: #0f2d5e;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -1px; }
-header.framework ul {
+#framework-header ul {
   margin: 0;
   padding: 0;
   list-style: none;
   font-size: 0.75rem;
   font-weight: 600; }
-header.framework li {
+#framework-header li {
   display: inline-block; }
-  header.framework li:first-child {
+  #framework-header li:first-child {
     margin-right: 3rem; }
-  header.framework li a {
+  #framework-header li a {
     display: block;
     position: relative;
     text-decoration: none;
     color: #642461; }
-    header.framework li a::after {
+    #framework-header li a::after {
       content: "";
       border-bottom: 1px solid transparent;
       position: absolute;
@@ -118,7 +123,7 @@ header.framework li {
       right: 0;
       left: 0;
       transition: border-color .2s; }
-    header.framework li a::before {
+    #framework-header li a::before {
       content: "";
       display: block;
       position: absolute;
@@ -126,49 +131,49 @@ header.framework li {
       width: 1.25rem;
       left: -1.5rem;
       background: left center/1rem no-repeat; }
-    header.framework li a:hover::after, header.framework li a:focus::after {
+    #framework-header li a:hover::after, #framework-header li a:focus::after {
       border-bottom-color: #642461; }
-    header.framework li a.home::before {
+    #framework-header li a.home::before {
       background-image: url("/assets/images/home.svg"); }
-    header.framework li a.coding-systems::before {
-      background-image: url("/assets/images/coding-systems.svg"); }
+    #framework-header li a.code-systems::before {
+      background-image: url("/assets/images/code-systems.svg"); }
 
 @media only screen and (min-width: 60rem) {
-  header.framework .main-header-content .layout-container {
+  #framework-header .main-header-content .layout-container {
     padding: 1.625rem 1rem;
     line-height: 3rem; }
-  header.framework .finnkode-logo {
+  #framework-header .finnkode-logo {
     font-size: 1.75rem; }
-  header.framework ul {
+  #framework-header ul {
     font-size: 1.25rem; }
-  header.framework li:first-child {
+  #framework-header li:first-child {
     margin-right: 6rem; }
-  header.framework li a::after {
+  #framework-header li a::after {
     bottom: 7px;
     border-width: 2px; }
-  header.framework li a::before {
+  #framework-header li a::before {
     width: 1.5rem;
     left: -2.5rem;
     background-size: 1.5rem; } }
-footer.framework {
+#framework-footer {
   color: #fff;
   padding: 1.5rem 0; }
-  footer.framework ul {
+  #framework-footer ul {
     padding: 0 1rem 1.5rem;
     margin: 0;
     list-style: none;
     line-height: 1.5; }
-    footer.framework ul a {
+    #framework-footer ul a {
       display: inline-block;
       text-decoration: none;
       border-bottom: 1px solid transparent;
       margin-bottom: .25rem;
       transition: border-bottom-color .15s; }
-      footer.framework ul a:hover {
+      #framework-footer ul a:hover {
         border-bottom-color: #fff; }
-  footer.framework .text-size {
+  #framework-footer .text-size {
     display: none; }
-  footer.framework .directorate-logo {
+  #framework-footer .directorate-logo {
     justify-self: flex-end;
     background: url("/assets/images/directorate-logo.svg") center/contain no-repeat;
     height: 0;
@@ -177,28 +182,28 @@ footer.framework {
     padding-top: 2rem;
     display: inline-block;
     margin: 0 1rem; }
-  footer.framework a {
+  #framework-footer a {
     color: #fff; }
 
 @media only screen and (min-width: 60rem) {
-  footer.framework {
+  #framework-footer {
     padding: 2.75rem 0; }
-    footer.framework .layout-container {
+    #framework-footer .layout-container {
       display: flex;
       flex-flow: row nowrap;
       align-items: flex-end;
       justify-content: flex-start;
       position: relative; }
-    footer.framework ul {
+    #framework-footer ul {
       padding-bottom: 0;
       line-height: 1.5;
       font-size: 1.25rem;
       width: 19rem; }
-    footer.framework .text-size {
+    #framework-footer .text-size {
       display: block;
       margin: 0 1rem;
       flex-grow: 1; }
-      footer.framework .text-size .expander {
+      #framework-footer .text-size .expander {
         padding: 0;
         border: none;
         font: inherit;
@@ -211,7 +216,7 @@ footer.framework {
         padding: 3rem 0 0 0;
         overflow: hidden;
         background: transparent url("/assets/images/text-size.svg") no-repeat center/3rem; }
-      footer.framework .text-size .expandable {
+      #framework-footer .text-size .expandable {
         position: absolute;
         bottom: 3.25rem;
         left: 0;
@@ -220,23 +225,27 @@ footer.framework {
         background: #fff;
         outline: .5rem solid #070;
         font-size: 3rem; }
-    footer.framework .directorate-logo {
+    #framework-footer .directorate-logo {
       padding-top: 44px;
       width: 273px; } }
 .code-system-menu {
-  outline: 1px solid fuchsia; }
+  padding: 3rem 0; }
   .code-system-menu .category {
-    background-color: #642461; }
+    outline: 1px solid black; }
+  .code-system-menu h2 {
+    font-size: 1rem;
+    margin: 0 1rem;
+    color: #642461;
+    font-weight: 700; }
   .code-system-menu ul {
     list-style: none;
     margin: 0;
-    padding: 0 1rem;
-    outline: 1px solid lime;
-    background-color: #0f2d5e; }
+    padding: 0 1rem; }
   .code-system-menu li {
-    background: 1px pink;
     margin: 0;
     padding: 0; }
+  .code-system-menu a {
+    color: #0f2d5e; }
 
 @media only screen and (min-width: 39rem) {
   .code-system-menu {
@@ -245,6 +254,13 @@ footer.framework {
     .code-system-menu .category {
       width: 19rem; } }
 @media only screen and (min-width: 60rem) {
+  .code-system-menu .category {
+    width: 28.5rem; }
+  .code-system-menu h2 {
+    font-size: 1.5rem; }
+  .code-system-menu ul {
+    font-size: 1.125rem; } }
+@media only screen and (min-width: 79rem) {
   .code-system-menu .category {
     width: 19rem; } }
 #global-search-banner {
@@ -258,12 +274,12 @@ footer.framework {
     padding: 0 1rem;
     width: 100%;
     max-width: 28.5rem; }
-  #global-search-banner label {
+  #global-search-banner #global-search-label {
     font-weight: 600;
     color: #0f2d5e;
     display: block;
-    margin-bottom: 1rem;
-    margin-left: .75rem; }
+    margin: 0 0 1rem;
+    font-size: 1rem; }
   #global-search-banner .search {
     position: relative; }
   #global-search-banner .search-input, #global-search-banner .search-button {
@@ -278,7 +294,6 @@ footer.framework {
     padding: 0 3.125em 0 1em;
     transition: border-color .15s; }
     #global-search-banner .search-input:focus, #global-search-banner .search-input:hover {
-      border-color: #99eeb2;
       outline: 0; }
   #global-search-banner .search-button {
     background: #0f2d5e url("/assets/images/search-green.svg") 0.85em center/1.1em no-repeat;
@@ -311,9 +326,8 @@ footer.framework {
     background-size: auto 18rem; }
     #global-search-banner .layout-container {
       max-width: 38rem; }
-    #global-search-banner label {
-      font-size: 1.5rem;
-      margin-left: 1.25rem; }
+    #global-search-banner #global-search-label {
+      font-size: 1.5rem; }
     #global-search-banner .search-input {
       border-radius: 1.5rem;
       line-height: 3.25rem;
@@ -325,3 +339,172 @@ footer.framework {
       padding: 3rem 0 0 0;
       border-radius: 0 1.5rem 1.5rem 0;
       width: 3.875rem; } }
+#global-search-banner {
+  background: url("/assets/images/background-green.jpg") center/auto 9rem no-repeat;
+  height: 9rem;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center; }
+  #global-search-banner .layout-container {
+    padding: 0 1rem;
+    width: 100%;
+    max-width: 28.5rem; }
+  #global-search-banner #global-search-label {
+    font-weight: 600;
+    color: #0f2d5e;
+    display: block;
+    margin: 0 0 1rem;
+    font-size: 1rem; }
+  #global-search-banner .search {
+    position: relative; }
+  #global-search-banner .search-input, #global-search-banner .search-button {
+    font-size: 1rem; }
+  #global-search-banner .search-input {
+    font-style: italic;
+    border: 2px solid #0f2d5e;
+    border-radius: 2.25em;
+    line-height: 2.25em;
+    height: 2.25em;
+    width: 100%;
+    padding: 0 3.125em 0 1em;
+    transition: border-color .15s; }
+    #global-search-banner .search-input:focus, #global-search-banner .search-input:hover {
+      outline: 0; }
+  #global-search-banner .search-button {
+    background: #0f2d5e url("/assets/images/search-green.svg") 0.85em center/1.1em no-repeat;
+    height: 0;
+    padding: 2em 0 0 0;
+    border-radius: 0 2.25em 2.25em 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3em;
+    overflow: hidden;
+    border-color: #0f2d5e;
+    border-style: solid;
+    border-width: 2px 2px 2px 0;
+    transition: border-color .15s, background .15s; }
+    #global-search-banner .search-button:focus, #global-search-banner .search-button:hover {
+      background-color: #99eeb2;
+      background-image: url("/assets/images/search-blue.svg");
+      outline: 0; }
+
+@media only screen and (min-width: 39rem) {
+  #global-search-banner {
+    height: 13rem;
+    background-size: auto 13rem; }
+    #global-search-banner .layout-container {
+      max-width: 28.5rem; } }
+@media only screen and (min-width: 60rem) {
+  #global-search-banner {
+    height: 18rem;
+    background-size: auto 18rem; }
+    #global-search-banner .layout-container {
+      max-width: 38rem; }
+    #global-search-banner #global-search-label {
+      font-size: 1.5rem; }
+    #global-search-banner .search-input {
+      border-radius: 1.5rem;
+      line-height: 3.25rem;
+      height: 3.25rem;
+      padding: 0 4rem 0 1.25rem; }
+    #global-search-banner .search-button {
+      background-size: 1.625rem;
+      background-position: 1rem center;
+      padding: 3rem 0 0 0;
+      border-radius: 0 1.5rem 1.5rem 0;
+      width: 3.875rem; } }
+.simple main {
+  border-top: 1px solid #767676; }
+  .simple main .layout-container {
+    padding: .5rem 1rem 1.5rem; }
+.simple h1 {
+  margin: 1rem 0; }
+
+@media only screen and (min-width: 60rem) {
+  .simple main .layout-container {
+    padding-right: 20rem; } }
+@media only screen and (min-width: 79rem) {
+  .simple main .layout-container {
+    padding-right: 39rem; } }
+.search .search-refiners, .search .results {
+  outline: 1px solid black;
+  padding: 1rem; }
+.search h2 {
+  font-size: 1rem; }
+
+@media only screen and (min-width: 60rem) {
+  .search main .layout-container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-content: stretch; }
+  .search main #global-search-banner .layout-container {
+    display: block; }
+  .search .search-refiners {
+    width: 19rem; }
+  .search .results {
+    flex-grow: 1; } }
+.code-system #code-system-tree, .code-system #code-system-content {
+  outline: 1px solid black;
+  padding: 1rem; }
+.code-system main .layout-container {
+  display: flex;
+  flex-flow: column nowrap; }
+.code-system #code-system-header {
+  border: 0 solid #767676;
+  border-width: 1px 0; }
+  .code-system #code-system-header .layout-container {
+    padding: .5rem 1rem;
+    display: block; }
+.code-system #code-system-tree {
+  order: 2;
+  position: sticky;
+  bottom: 0;
+  background-color: #fff; }
+.code-system #code-system-content {
+  order: 1; }
+
+@media only screen and (min-width: 60rem) {
+  .code-system main .layout-container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-content: stretch; }
+  .code-system #code-system-tree, .code-system #code-system-content {
+    outline: 0; }
+  .code-system #code-system-header .layout-container {
+    padding: .5rem 1rem;
+    display: block; }
+  .code-system #code-system-tree {
+    width: 19rem;
+    order: initial;
+    position: relative;
+    bottom: auto; }
+  .code-system #code-system-content {
+    width: 38rem;
+    order: initial;
+    border-left: 1px solid black; } }
+@media only screen and (min-width: 79rem) {
+  .code-system #code-system-tree {
+    width: 25.3333333333rem; }
+  .code-system #code-system-content {
+    width: 50.6666666667rem; } }
+.front-page .intro, .front-page .directorate-link {
+  margin: 1.5em 1rem 0; }
+.front-page .intro {
+  color: #0f2d5e;
+  font-size: 1rem;
+  line-height: 1.5; }
+.front-page .directorate-link {
+  font-size: 0.75rem; }
+  .front-page .directorate-link a {
+    text-decoration: none;
+    color: #0f2d5e;
+    border-bottom: 1px solid #0f2d5e; }
+
+@media only screen and (min-width: 60rem) {
+  .front-page .intro {
+    font-size: 1.5rem;
+    max-width: 57rem; }
+  .front-page .directorate-link {
+    font-size: 1.125rem; } }

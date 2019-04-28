@@ -1,0 +1,90 @@
+.code-system {
+    #code-system-tree, #code-system-content {
+        outline: 1px solid black;
+        padding: 1rem;
+    }
+
+    main {
+
+        .layout-container {
+            display: flex;
+            flex-flow: column nowrap;
+        }
+    }
+
+    #code-system-header {
+        border: 0 solid $grey;
+        border-width: 1px 0;
+
+        .layout-container {
+            padding: .5rem 1rem;
+            display: block;
+        }
+    }
+
+    #code-system-tree {
+        order: 2;
+        position: sticky;
+        bottom: 0;
+        background-color: #fff;
+    }
+
+    #code-system-content {
+        order: 1;
+    }
+
+
+}
+
+
+@media only screen and (min-width: $two-to-three-col) {
+    .code-system {
+        main {
+            .layout-container {
+                display: flex;
+                flex-flow: row nowrap;
+                align-content: stretch;
+            }
+        }
+
+        #code-system-tree, #code-system-content {
+            outline: 0;
+        }
+
+        #code-system-header {
+            .layout-container {
+                padding: .5rem 1rem;
+                display: block;
+            }
+        }
+
+        #code-system-tree {
+            width: $one-col;
+            order: initial;
+            position: relative;
+            bottom: auto;
+
+        }
+
+        #code-system-content {
+            width: $two-col;
+            order: initial;
+            border-left: 1px solid black;
+        }
+
+    }
+}
+
+@media only screen and (min-width: $three-to-four-col) {
+    .code-system {
+
+        #code-system-tree {
+            width: $one-third-full-width;
+        }
+
+        #code-system-content {
+            width: $two-thirds-full-width;
+        }
+
+    }
+}

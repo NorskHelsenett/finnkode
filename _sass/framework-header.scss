@@ -1,4 +1,4 @@
-header.framework {
+#framework-header {
 
     .directorate-logo {
         margin: .75rem 1rem;
@@ -29,7 +29,7 @@ header.framework {
         font-size: $font-xl;
         color: $blue;
         text-decoration: none;
-        font-weight: 600;
+        font-weight: 700;
         letter-spacing: -1px;
     }
 
@@ -87,9 +87,9 @@ header.framework {
                 }
             }
 
-            &.coding-systems {
+            &.code-systems {
                 &::before {
-                    background-image: url("/assets/images/coding-systems.svg");
+                    background-image: url("/assets/images/code-systems.svg");
                 }
             }
         }
@@ -97,7 +97,7 @@ header.framework {
 }
 
 @media only screen and (min-width: $two-to-three-col) {
-    header.framework {
+    #framework-header {
         .main-header-content {
             .layout-container {
                 padding: 1.625rem 1rem;

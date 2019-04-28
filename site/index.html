@@ -1,5 +1,7 @@
 ---
+page-resource: true
 layout: full-width
+page-name: front-page
 title: FinnKode
 toc-title: Front page
 ---
@@ -7,7 +9,14 @@ toc-title: Front page
 {% include global-search-banner.html %}
 
 <div class="layout-container">
-    <p>FinnKode er et søkeverktøy som inneholder oppdaterte kodeverk og synonymordlister/søkeforslagslister for lettere søk. <a href="https://ehelse.no/standarder-kodeverk-og-referansekatalog/helsefaglige-kodeverk/finnkode-online-sokeverktoy">Les mer om FinnKode hos direktoratet for e-helse.</a></p>
+
+    <!-- #8203 is the unicode character for breaking space, make sure to include this in the final product. -->
+
+    <p class="intro">FinnKode er et søkeverktøy som inneholder oppdaterte kodeverk og synonymordlister/&#8203;søkeforslagslister for lettere søk.</p>
+
+    <p class="directorate-link">
+        <a href="https://ehelse.no/standarder-kodeverk-og-referansekatalog/helsefaglige-kodeverk/finnkode-online-sokeverktoy">Les mer om FinnKode hos direktoratet for e-helse.</a>
+    </p>
 
     {% include code-system-menu.html %}
 </div>

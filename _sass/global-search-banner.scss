@@ -12,12 +12,12 @@
         max-width: $one-point-five-col;
     }
 
-    label {
+    #global-search-label {
         font-weight: 600;
         color: $blue;
         display: block;
-        margin-bottom: 1rem;
-        margin-left: .75rem;
+        margin: 0 0 1rem;
+        font-size: $font-m;
     }
 
     .search {
@@ -39,7 +39,6 @@
         transition: border-color .15s;
 
         &:focus, &:hover {
-            border-color: $green;
             outline: 0;
         }
     }
@@ -65,7 +64,6 @@
             background-image: url("/assets/images/search-blue.svg");
             outline: 0;
         }
-
     }
 }
 
@@ -89,9 +87,8 @@
             max-width: $two-col;
         }
 
-        label {
+        #global-search-label {
             font-size: $font-2xl;
-            margin-left: 1.25rem;
         }
 
         .search-input {
