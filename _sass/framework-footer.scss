@@ -1,4 +1,4 @@
-footer.framework {
+#framework-footer {
     color: #fff;
     padding: 1.5rem 0;
 
@@ -42,7 +42,7 @@ footer.framework {
 }
 
 @media only screen and (min-width: $two-to-three-col) {
-    footer.framework {
+    #framework-footer {
         padding: 2.75rem 0;
 
         .layout-container {

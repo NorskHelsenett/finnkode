@@ -1,4 +1,4 @@
-header.framework {
+#framework-header {
 
     .directorate-logo {
         margin: .75rem 1rem;
@@ -97,7 +97,7 @@ header.framework {
 }
 
 @media only screen and (min-width: $two-to-three-col) {
-    header.framework {
+    #framework-header {
         .main-header-content {
             .layout-container {
                 padding: 1.625rem 1rem;
