@@ -1,0 +1,47 @@
+.search {
+    .search-refiners, .results {
+        outline: 1px solid black;
+        padding: 1rem;
+    }
+
+    h2 {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (min-width: $two-to-three-col) {
+    .search {
+
+        main {
+            .layout-container {
+                display: flex;
+                flex-flow: row nowrap;
+                align-content: stretch;
+            }
+
+            #global-search-banner {
+                .layout-container {
+                    display: block;
+                }
+            }
+        }
+
+        .search-refiners {
+            width: $one-col;
+        }
+
+        .results {
+            flex-grow: 1;
+        }
+
+    }
+}
+
+@media only screen and (min-width: $three-to-four-col) {
+    .search {
+
+        .search-refiners {
+            //width: $one-third-full-width;
+        }
+    }
+}

@@ -1,6 +1,14 @@
 ---
+page-resource: true
 layout: search
-title: 'Alle kodeverk: "kreft" søkeresultater - FinnKode'
+page-name: global-search
+title: 'Alle kodeverk: "kreft" søkeresultater'
 toc-title: Global search (results)
 ---
-Global search results
+
+{% include global-search-banner.html %}
+
+<div class="layout-container">
+    {% include search-refiners.html %}
+    {% include search-results.html %}
+</div>

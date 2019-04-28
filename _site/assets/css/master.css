@@ -135,8 +135,8 @@ header.framework li {
       border-bottom-color: #642461; }
     header.framework li a.home::before {
       background-image: url("/assets/images/home.svg"); }
-    header.framework li a.coding-systems::before {
-      background-image: url("/assets/images/coding-systems.svg"); }
+    header.framework li a.code-systems::before {
+      background-image: url("/assets/images/code-systems.svg"); }
 
 @media only screen and (min-width: 60rem) {
   header.framework .main-header-content .layout-container {
@@ -229,7 +229,9 @@ footer.framework {
       padding-top: 44px;
       width: 273px; } }
 .code-system-menu {
-  padding-top: 3rem; }
+  padding: 3rem 0; }
+  .code-system-menu .category {
+    outline: 1px solid black; }
   .code-system-menu h2 {
     font-size: 1rem;
     margin: 0 1rem;
@@ -250,8 +252,7 @@ footer.framework {
     display: flex;
     flex-flow: row wrap; }
     .code-system-menu .category {
-      width: 19rem;
-      padding-bottom: 3rem; } }
+      width: 19rem; } }
 @media only screen and (min-width: 60rem) {
   .code-system-menu .category {
     width: 28.5rem; }
@@ -350,6 +351,36 @@ footer.framework {
     padding-right: 20rem; } }
 @media only screen and (min-width: 79rem) {
   .simple main .layout-container {
+    padding-right: 39rem; } }
+.search .search-refiners, .search .results {
+  outline: 1px solid black;
+  padding: 1rem; }
+.search h2 {
+  font-size: 1rem; }
+
+@media only screen and (min-width: 60rem) {
+  .search main .layout-container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-content: stretch; }
+  .search main #global-search-banner .layout-container {
+    display: block; }
+  .search .search-refiners {
+    width: 19rem; }
+  .search .results {
+    flex-grow: 1; } }
+.code-system-search main {
+  border-top: 1px solid #767676; }
+  .code-system-search main .layout-container {
+    padding: .5rem 1rem 1.5rem; }
+.code-system-search h1 {
+  margin: 1rem 0; }
+
+@media only screen and (min-width: 60rem) {
+  .code-system-search main .layout-container {
+    padding-right: 20rem; } }
+@media only screen and (min-width: 79rem) {
+  .code-system-search main .layout-container {
     padding-right: 39rem; } }
 .front-page .intro, .front-page .directorate-link {
   margin: 1.5em 1rem 0; }

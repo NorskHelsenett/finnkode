@@ -19,10 +19,12 @@ $font-4xl: 2rem;    //  32px
 
 $one-col: 19rem;
 $one-point-five-col: $one-col * 1.5;
-$two-col: $one-col * 2;
-$three-col: $one-col * 3;
-$four-col: $one-col * 4;
+$two-col: $one-col * 2;  // 38rem, 608px
+$three-col: $one-col * 3; // 57rem, 912px
+$four-col: $one-col * 4; // 76rem, 1216px
 
+$one-third-full-width: $four-col / 3;
+$two-thirds-full-width: $four-col / 3 * 2;
 
 // Breakpoints
 $one-to-two-col: $two-col + 1rem;
