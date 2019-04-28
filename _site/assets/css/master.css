@@ -48,6 +48,11 @@ input {
   color: #8796ae;
   font-style: italic; }
 
+h1 {
+  font-size: 4xl;
+  font-weight: normal;
+  margin: 1rem 0; }
+
 .expand {
   transition-property: background-color, border-color;
   transition-duration: .5s, .1s; }
@@ -333,6 +338,19 @@ footer.framework {
       padding: 3rem 0 0 0;
       border-radius: 0 1.5rem 1.5rem 0;
       width: 3.875rem; } }
+.simple main {
+  border-top: 1px solid #767676; }
+  .simple main .layout-container {
+    padding: .5rem 1rem 1.5rem; }
+.simple h1 {
+  margin: 1rem 0; }
+
+@media only screen and (min-width: 60rem) {
+  .simple main .layout-container {
+    padding-right: 20rem; } }
+@media only screen and (min-width: 79rem) {
+  .simple main .layout-container {
+    padding-right: 39rem; } }
 .front-page .intro, .front-page .directorate-link {
   margin: 1.5em 1rem 0; }
 .front-page .intro {

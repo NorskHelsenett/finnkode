@@ -15,6 +15,7 @@ main {
     color: #000;
 }
 
+
 a {
     transition: .1s color, .1s background-color;
     text-decoration: underline;
@@ -29,6 +30,18 @@ input {
     color: $light-blue;
     font-style: italic;
 }
+
+
+// Typography
+
+
+h1 {
+    font-size: 4xl;
+    font-weight: normal;
+    margin: 1rem 0;
+}
+
+
 
 // Expandable Block with transitions ==================================================
 .expand {
