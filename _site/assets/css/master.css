@@ -231,26 +231,58 @@ h1 {
 .code-system-menu {
   padding: 3rem 0; }
   .code-system-menu .category {
-    border-bottom: 1px solid #0f2d5e; }
+    position: relative; }
+    .code-system-menu .category.all h2 {
+      background-image: none; }
+    .code-system-menu .category::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      height: 1px;
+      left: 0;
+      right: 0;
+      background-color: #0f2d5e; }
+  .code-system-menu .expander {
+    padding: .25rem 1rem;
+    background: url("/assets/images/chevron-blue.svg") right 1rem center/1.25rem no-repeat; }
+  .code-system-menu .expander, .code-system-menu a {
+    position: relative; }
+    .code-system-menu .expander:hover, .code-system-menu .expander:focus, .code-system-menu a:hover, .code-system-menu a:focus {
+      background-color: #99eeb2; }
+    .code-system-menu .expander:focus, .code-system-menu a:focus {
+      outline: 0; }
+      .code-system-menu .expander:focus::before, .code-system-menu .expander:focus::after, .code-system-menu a:focus::before, .code-system-menu a:focus::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        height: 2px;
+        left: 0;
+        right: 0;
+        background-color: #767676; }
+      .code-system-menu .expander:focus::before, .code-system-menu a:focus::before {
+        top: -1px; }
+      .code-system-menu .expander:focus::after, .code-system-menu a:focus::after {
+        bottom: -1px; }
+  .code-system-menu a {
+    z-index: 2; }
   .code-system-menu h2 {
     font-size: 1rem;
-    margin: .25em 1rem;
-    height: 2em;
+    margin: 0;
+    height: 2.5em;
     line-height: 2em;
     color: #642461;
-    font-weight: 700;
-    background: red url("/assets/images/chevron-blue.svg") right center/1.25rem no-repeat; }
-  .code-system-menu .category.all h2 {
-    background-image: none; }
+    font-weight: 700; }
   .code-system-menu ul {
     list-style: none;
     margin: 0;
-    padding: 0 1rem; }
+    padding: 1px 0; }
   .code-system-menu li {
     margin: 0;
     padding: 0; }
   .code-system-menu a {
     color: #0f2d5e;
+    display: block;
+    padding: .5rem 1rem;
     text-decoration: none; }
 
 @media only screen and (min-width: 39rem) {

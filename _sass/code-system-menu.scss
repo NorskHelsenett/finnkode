@@ -2,31 +2,81 @@
     padding: 3rem 0;
 
     .category {
-        border-bottom: 1px solid $blue;
+        position: relative;
+        &.all {
+            h2 {
+                background-image: none;
+            }
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            height: 1px;
+            left: 0;
+            right: 0;
+            background-color: $blue;
+        }
+    }
+
+    .expander {
+        padding: .25rem 1rem;
+        background: url("/assets/images/chevron-blue.svg") right 1rem center / 1.25rem no-repeat;
+    }
+
+    .expander, a {
+        position: relative;
+
+
+        &:hover, &:focus {
+            background-color: $green;
+        }
+
+        &:focus {
+            outline: 0;
+
+            &::before, &::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                height: 2px;
+                left: 0;
+                right: 0;
+                background-color: $grey;
+            }
+
+            &::before {
+                top: -1px;
+            }
+
+            &::after {
+                bottom: -1px;
+            }
+
+
+
+        }
+    }
+
+    a {
+        z-index: 2;
     }
 
     h2 {
         font-size: $font-m;
-        margin: .25em 1rem;
-        height: 2em;
+        margin: 0;
+        height: 2.5em;
         line-height: 2em;
         color: $purple;
         font-weight: 700;
-        background: red url("/assets/images/chevron-blue.svg") right center / 1.25rem no-repeat;
     }
-
-    .category.all {
-        h2 {
-            background-image: none;
-        }
-    }
-
 
 
     ul {
         list-style: none;
         margin: 0;
-        padding: 0 1rem;
+        padding: 1px 0;
     }
 
     li {
@@ -36,8 +86,11 @@
 
     a {
         color: $blue;
+        display: block;
+        padding: .5rem 1rem;
         text-decoration: none;
     }
+
 
 }
 
