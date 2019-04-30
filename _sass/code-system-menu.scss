@@ -3,12 +3,8 @@
 
     .category {
         position: relative;
-        &.all {
-            h2 {
-                background-image: none;
-            }
-        }
 
+        // The blue lines between the categories
         &::after {
             content: "";
             position: absolute;
@@ -18,21 +14,61 @@
             right: 0;
             background-color: $blue;
         }
+
+        // Category titles
+        h2 {
+            font-size: $font-m;
+            margin: 0;
+            color: $purple;
+            font-weight: 700;
+            position: relative;
+            height: auto;
+            padding: .5rem 1rem;
+        }
+
+        &.expand {
+            h2 {
+                padding: 0;
+
+                // The chevron
+                &::after {
+                    content: "";
+                    position: absolute;
+                    width: 1.25rem;
+                    top: 0;
+                    bottom: 0;
+                    right: 1rem;
+                    background: url("/assets/images/chevron-blue.svg") right center / 1.25rem no-repeat;
+                    transform: scaleY(1);
+                    transition: transform .2s;
+                    z-index: 1;
+                }
+            }
+
+            // Expanded categories have flipped chevrons
+            &.expanded {
+                h2 {
+                    &::after {
+                        transform: scaleY(-1);
+                    }
+                }
+            }
+        }
     }
 
     .expander {
-        padding: .25rem 1rem;
-        background: url("/assets/images/chevron-blue.svg") right 1rem center / 1.25rem no-repeat;
+        padding: .75rem 1rem;
     }
 
     .expander, a {
         position: relative;
-
+        z-index: 2;
 
         &:hover, &:focus {
-            background-color: $green;
+            background-color: $light-green;
         }
 
+        // The wider lines above and below the focused element
         &:focus {
             outline: 0;
 
@@ -53,25 +89,8 @@
             &::after {
                 bottom: -1px;
             }
-
-
-
         }
     }
-
-    a {
-        z-index: 2;
-    }
-
-    h2 {
-        font-size: $font-m;
-        margin: 0;
-        height: 2.5em;
-        line-height: 2em;
-        color: $purple;
-        font-weight: 700;
-    }
-
 
     ul {
         list-style: none;
@@ -87,11 +106,9 @@
     a {
         color: $blue;
         display: block;
-        padding: .5rem 1rem;
         text-decoration: none;
+        padding: .5rem 1rem;
     }
-
-
 }
 
 @media only screen and (min-width: $one-to-two-col) {

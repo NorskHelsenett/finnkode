@@ -232,8 +232,6 @@ h1 {
   padding: 3rem 0; }
   .code-system-menu .category {
     position: relative; }
-    .code-system-menu .category.all h2 {
-      background-image: none; }
     .code-system-menu .category::after {
       content: "";
       position: absolute;
@@ -242,13 +240,36 @@ h1 {
       left: 0;
       right: 0;
       background-color: #0f2d5e; }
+    .code-system-menu .category h2 {
+      font-size: 1rem;
+      margin: 0;
+      color: #642461;
+      font-weight: 700;
+      position: relative;
+      height: auto;
+      padding: .5rem 1rem; }
+    .code-system-menu .category.expand h2 {
+      padding: 0; }
+      .code-system-menu .category.expand h2::after {
+        content: "";
+        position: absolute;
+        width: 1.25rem;
+        top: 0;
+        bottom: 0;
+        right: 1rem;
+        background: url("/assets/images/chevron-blue.svg") right center/1.25rem no-repeat;
+        transform: scaleY(1);
+        transition: transform .2s;
+        z-index: 1; }
+    .code-system-menu .category.expand.expanded h2::after {
+      transform: scaleY(-1); }
   .code-system-menu .expander {
-    padding: .25rem 1rem;
-    background: url("/assets/images/chevron-blue.svg") right 1rem center/1.25rem no-repeat; }
+    padding: .75rem 1rem; }
   .code-system-menu .expander, .code-system-menu a {
-    position: relative; }
+    position: relative;
+    z-index: 2; }
     .code-system-menu .expander:hover, .code-system-menu .expander:focus, .code-system-menu a:hover, .code-system-menu a:focus {
-      background-color: #99eeb2; }
+      background-color: rgba(153, 238, 178, 0.1); }
     .code-system-menu .expander:focus, .code-system-menu a:focus {
       outline: 0; }
       .code-system-menu .expander:focus::before, .code-system-menu .expander:focus::after, .code-system-menu a:focus::before, .code-system-menu a:focus::after {
@@ -263,15 +284,6 @@ h1 {
         top: -1px; }
       .code-system-menu .expander:focus::after, .code-system-menu a:focus::after {
         bottom: -1px; }
-  .code-system-menu a {
-    z-index: 2; }
-  .code-system-menu h2 {
-    font-size: 1rem;
-    margin: 0;
-    height: 2.5em;
-    line-height: 2em;
-    color: #642461;
-    font-weight: 700; }
   .code-system-menu ul {
     list-style: none;
     margin: 0;
@@ -282,8 +294,8 @@ h1 {
   .code-system-menu a {
     color: #0f2d5e;
     display: block;
-    padding: .5rem 1rem;
-    text-decoration: none; }
+    text-decoration: none;
+    padding: .5rem 1rem; }
 
 @media only screen and (min-width: 39rem) {
   .code-system-menu {
