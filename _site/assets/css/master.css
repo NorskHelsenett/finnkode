@@ -87,35 +87,36 @@ h1 {
   overflow: hidden;
   display: block; }
 #framework-header .main-header-content {
-  line-height: 3rem;
   background-color: #fff; }
-  #framework-header .main-header-content .layout-container {
+  #framework-header .main-header-content .main-choices {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
     padding: .75rem 1rem; }
 #framework-header .finnkode-logo {
-  font-size: 1.25rem;
-  color: #0f2d5e;
-  text-decoration: none;
-  font-weight: 700;
-  letter-spacing: -1px; }
-#framework-header ul {
+  height: 0;
+  padding-top: 3rem;
+  overflow: hidden;
+  background: url("/assets/images/finnkode-logo.svg") center left/contain no-repeat;
+  width: 9rem; }
+#framework-header .main-menu {
   margin: 0;
   padding: 0;
   list-style: none;
   font-size: 0.75rem;
-  font-weight: 600; }
-#framework-header li {
-  display: inline-block; }
-  #framework-header li:first-child {
-    margin-right: 3rem; }
-  #framework-header li a {
+  font-weight: 600;
+  line-height: 3rem; }
+  #framework-header .main-menu li {
+    display: inline-block; }
+    #framework-header .main-menu li:first-child {
+      margin-right: 3rem; }
+  #framework-header .main-menu a {
     display: block;
     position: relative;
     text-decoration: none;
-    color: #642461; }
-    #framework-header li a::after {
+    color: #642461;
+    outline: 0; }
+    #framework-header .main-menu a::after {
       content: "";
       border-bottom: 1px solid transparent;
       position: absolute;
@@ -123,7 +124,7 @@ h1 {
       right: 0;
       left: 0;
       transition: border-color .2s; }
-    #framework-header li a::before {
+    #framework-header .main-menu a::before {
       content: "";
       display: block;
       position: absolute;
@@ -131,30 +132,31 @@ h1 {
       width: 1.25rem;
       left: -1.5rem;
       background: left center/1rem no-repeat; }
-    #framework-header li a:hover::after, #framework-header li a:focus::after {
+    #framework-header .main-menu a:hover::after, #framework-header .main-menu a:focus::after {
       border-bottom-color: #642461; }
-    #framework-header li a.home::before {
+    #framework-header .main-menu a.home::before {
       background-image: url("/assets/images/home.svg"); }
-    #framework-header li a.code-systems::before {
+    #framework-header .main-menu a.code-systems::before {
       background-image: url("/assets/images/code-systems.svg"); }
+#framework-header .code-system-menu {
+  padding-top: 0; }
 
 @media only screen and (min-width: 60rem) {
-  #framework-header .main-header-content .layout-container {
-    padding: 1.625rem 1rem;
-    line-height: 3rem; }
+  #framework-header .main-header-content .main-choices {
+    padding: 1.625rem 1rem; }
   #framework-header .finnkode-logo {
-    font-size: 1.75rem; }
-  #framework-header ul {
+    width: 13rem; }
+  #framework-header .main-menu {
     font-size: 1.25rem; }
-  #framework-header li:first-child {
-    margin-right: 6rem; }
-  #framework-header li a::after {
-    bottom: 7px;
-    border-width: 2px; }
-  #framework-header li a::before {
-    width: 1.5rem;
-    left: -2.5rem;
-    background-size: 1.5rem; } }
+    #framework-header .main-menu li:first-child {
+      margin-right: 6rem; }
+    #framework-header .main-menu a::after {
+      bottom: 7px;
+      border-width: 2px; }
+    #framework-header .main-menu a::before {
+      width: 1.5rem;
+      left: -2.5rem;
+      background-size: 1.5rem; } }
 #framework-footer {
   color: #fff;
   padding: 1.5rem 0; }
@@ -229,80 +231,78 @@ h1 {
     #framework-footer .directorate-logo {
       padding-top: 44px;
       width: 273px; } }
-.code-system-menu {
-  padding: 3rem 0 0; }
-  .code-system-menu .category {
-    position: relative; }
-    .code-system-menu .category::after {
+.code-system-menu .category {
+  position: relative; }
+  .code-system-menu .category::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: 1px;
+    left: 0;
+    right: 0;
+    background-color: #0f2d5e; }
+  .code-system-menu .category h2 {
+    font-size: 1rem;
+    margin: 0;
+    color: #642461;
+    font-weight: 700;
+    position: relative;
+    height: auto;
+    padding: .5rem 1rem; }
+  .code-system-menu .category.expand h2 {
+    padding: 0; }
+    .code-system-menu .category.expand h2::after {
+      content: "";
+      position: absolute;
+      width: 1.25rem;
+      top: 0;
+      bottom: 0;
+      right: 1rem;
+      background: url("/assets/images/chevron-blue-down.svg") right center/1.25rem no-repeat;
+      transform: scaleY(1);
+      transition: transform .2s;
+      z-index: 1; }
+  .code-system-menu .category.expand.expanded h2::after {
+    transform: scaleY(-1); }
+.code-system-menu .expander {
+  padding: .75rem 1rem; }
+.code-system-menu .expander, .code-system-menu a {
+  position: relative;
+  z-index: 2;
+  transition: background-color .2s; }
+  .code-system-menu .expander:hover, .code-system-menu .expander:focus, .code-system-menu a:hover, .code-system-menu a:focus {
+    background-color: rgba(153, 238, 178, 0.1); }
+  .code-system-menu .expander:focus, .code-system-menu a:focus {
+    outline: 0; }
+    .code-system-menu .expander:focus::before, .code-system-menu .expander:focus::after, .code-system-menu a:focus::before, .code-system-menu a:focus::after {
       content: "";
       position: absolute;
       bottom: 0;
-      height: 1px;
+      height: 2px;
       left: 0;
       right: 0;
-      background-color: #0f2d5e; }
-    .code-system-menu .category h2 {
-      font-size: 1rem;
-      margin: 0;
-      color: #642461;
-      font-weight: 700;
-      position: relative;
-      height: auto;
-      padding: .5rem 1rem; }
-    .code-system-menu .category.expand h2 {
-      padding: 0; }
-      .code-system-menu .category.expand h2::after {
-        content: "";
-        position: absolute;
-        width: 1.25rem;
-        top: 0;
-        bottom: 0;
-        right: 1rem;
-        background: url("/assets/images/chevron-blue-down.svg") right center/1.25rem no-repeat;
-        transform: scaleY(1);
-        transition: transform .2s;
-        z-index: 1; }
-    .code-system-menu .category.expand.expanded h2::after {
-      transform: scaleY(-1); }
-  .code-system-menu .expander {
-    padding: .75rem 1rem; }
-  .code-system-menu .expander, .code-system-menu a {
-    position: relative;
-    z-index: 2; }
-    .code-system-menu .expander:hover, .code-system-menu .expander:focus, .code-system-menu a:hover, .code-system-menu a:focus {
-      background-color: rgba(153, 238, 178, 0.1); }
-    .code-system-menu .expander:focus, .code-system-menu a:focus {
-      outline: 0; }
-      .code-system-menu .expander:focus::before, .code-system-menu .expander:focus::after, .code-system-menu a:focus::before, .code-system-menu a:focus::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        height: 2px;
-        left: 0;
-        right: 0;
-        background-color: #767676; }
-      .code-system-menu .expander:focus::before, .code-system-menu a:focus::before {
-        top: -1px; }
-      .code-system-menu .expander:focus::after, .code-system-menu a:focus::after {
-        bottom: -1px; }
-  .code-system-menu ul {
-    list-style: none;
-    margin: 0;
-    padding: 1px 0; }
-  .code-system-menu li {
-    margin: 0;
-    padding: 0; }
-  .code-system-menu a {
-    color: #0f2d5e;
-    display: block;
-    text-decoration: none;
-    padding: .5rem 1rem; }
+      background-color: #767676; }
+    .code-system-menu .expander:focus::before, .code-system-menu a:focus::before {
+      top: -1px; }
+    .code-system-menu .expander:focus::after, .code-system-menu a:focus::after {
+      bottom: -1px; }
+.code-system-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 1px 0; }
+.code-system-menu li {
+  margin: 0;
+  padding: 0; }
+.code-system-menu a {
+  color: #0f2d5e;
+  display: block;
+  text-decoration: none;
+  padding: .5rem 1rem; }
 
 @media only screen and (min-width: 39rem) {
   .code-system-menu {
     display: flex;
-    flex-flow: row wrap;
-    padding-bottom: 1.5rem; }
+    flex-flow: row wrap; }
     .code-system-menu .category {
       width: 19rem;
       padding: 0 1rem 2.5rem; }
@@ -358,7 +358,8 @@ h1 {
     #global-search-banner .search-input:focus, #global-search-banner .search-input:hover {
       outline: 0; }
   #global-search-banner .search-button {
-    background: #0f2d5e url("/assets/images/search-green.svg") 0.85em center/1.1rem no-repeat;
+    background: #0f2d5e 0.85em center/1.1rem no-repeat;
+    background-image: url("/assets/images/search-green.svg"), url("/assets/images/search-blue.svg");
     height: 0;
     padding: 2rem 0 0 0;
     border-radius: 0 2.25rem 2.25rem 0;
@@ -436,7 +437,8 @@ h1 {
     #global-search-banner .search-input:focus, #global-search-banner .search-input:hover {
       outline: 0; }
   #global-search-banner .search-button {
-    background: #0f2d5e url("/assets/images/search-green.svg") 0.85em center/1.1rem no-repeat;
+    background: #0f2d5e 0.85em center/1.1rem no-repeat;
+    background-image: url("/assets/images/search-green.svg"), url("/assets/images/search-blue.svg");
     height: 0;
     padding: 2rem 0 0 0;
     border-radius: 0 2.25rem 2.25rem 0;
@@ -566,7 +568,12 @@ h1 {
     text-decoration: none;
     color: #0f2d5e;
     border-bottom: 1px solid #0f2d5e; }
+.front-page main .code-system-menu {
+  margin-top: 3rem; }
 
+@media only screen and (min-width: 39rem) {
+  .front-page main .code-system-menu {
+    padding-bottom: 1.5rem; } }
 @media only screen and (min-width: 60rem) {
   .front-page .intro {
     font-size: 1.5rem;

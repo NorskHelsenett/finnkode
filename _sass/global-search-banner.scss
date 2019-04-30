@@ -45,7 +45,8 @@
     }
 
     .search-button {
-        background: $blue url("/assets/images/search-green.svg") .85em center / 1.1rem no-repeat;
+        background: $blue .85em center / 1.1rem no-repeat;
+        background-image: url("/assets/images/search-green.svg"), url("/assets/images/search-blue.svg");
         height: 0;
         padding: 2rem 0 0 0;
         border-radius: 0 2.25rem 2.25rem 0;

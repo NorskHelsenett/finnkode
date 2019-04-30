@@ -1,5 +1,4 @@
 .code-system-menu {
-    padding: 3rem 0 0;
 
     .category {
         position: relative;
@@ -63,6 +62,7 @@
     .expander, a {
         position: relative;
         z-index: 2;
+        transition: background-color .2s;
 
         &:hover, &:focus {
             background-color: $light-green;
@@ -115,7 +115,6 @@
     .code-system-menu {
         display: flex;
         flex-flow: row wrap;
-        padding-bottom: 1.5rem;
 
         .category {
             width: $one-col;

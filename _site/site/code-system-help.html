@@ -19,17 +19,80 @@
         <a class="directorate-logo" href="/">Direktoratet for e-helse</a>
     </div>
 
-    <div class="main-header-content">
+    <div class="main-header-content js-expand">
         <div class="layout-container">
 
-            <a class="finnkode-logo" href="/site/index.html">FinnKode</a>
+            <div class="main-choices">
+                <a class="finnkode-logo" href="/site/index.html">FinnKode</a>
+                <nav>
+                    <ul class="main-menu">
+                        <li><a class="home" href="/site/index.html">Hjem</a></li>
+                        <li>
+                            <a role="button" href="#" class="code-systems js-expander">Kodeverk</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
 
-            <nav>
-                <ul>
-                    <li><a class="home" href="/site/index.html">Hjem</a></li>
-                    <li><a class="code-systems" href="/site/index.html">Kodeverk</a></li>
-                </ul>
-            </nav>
+            <nav class="code-system-menu js-expandable">
+
+    <div class="category all">
+        <h2>Velg kodeverk</h2>
+        <ul>
+            <li><a href="global-search-initial.html">Alle kodeverk</a></li>
+        </ul>
+    </div>
+
+    <div class="category js-responsive-expand">
+        <h2>
+            <div class="js-responsive-expander">
+                Kliniske kodeverk
+            </div>
+        </h2>
+        <div class="js-responsive-expandable">
+            <ul>
+                <li><a href="">ICPC-2</a></li>
+                <li><a href="">ICD-10</a></li>
+                <li><a href="">BUP</a></li>
+                <li><a href="">Prosedyre</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="category js-responsive-expand">
+        <h2>
+            <div class="js-responsive-expander">
+                Lab kodeverk
+            </div>
+        </h2>
+        <div class="js-responsive-expandable">
+            <ul>
+                <li><a href="">Labotatorie</a></li>
+                <li><a href="">NORPAT</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="category js-responsive-expand">
+        <h2>
+            <div class="js-responsive-expander">
+                Andre kodeverk
+            </div>
+        </h2>
+        <div class="js-responsive-expandable">
+            <ul>
+                <li><a href="">SNOMED CT</a></li>
+                <li><a href="">Administrative kodeverk</a></li>
+                <li><a href="">ATC</a></li>
+                <li><a href="">Begrepskatalog</a></li>
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
         </div>
     </div>
 </header>

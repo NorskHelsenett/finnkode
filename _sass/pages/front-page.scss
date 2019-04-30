@@ -18,7 +18,26 @@
             border-bottom: 1px solid $blue;
         }
     }
+
+    main {
+        .code-system-menu {
+            margin-top: 3rem;
+        }
+    }
 }
+
+@media only screen and (min-width: $one-to-two-col) {
+    .front-page {
+
+        main {
+            .code-system-menu {
+                padding-bottom: 1.5rem;
+            }
+        }
+    }
+
+}
+
 
 @media only screen and (min-width: $two-to-three-col) {
     .front-page {

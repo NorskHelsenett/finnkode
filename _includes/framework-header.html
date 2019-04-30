@@ -4,17 +4,23 @@
         <a class="directorate-logo" href="/">Direktoratet for e-helse</a>
     </div>
 
-    <div class="main-header-content">
+    <div class="main-header-content js-expand">
         <div class="layout-container">
 
-            <a class="finnkode-logo" href="/site/index.html">FinnKode</a>
+            <div class="main-choices">
+                <a class="finnkode-logo" href="/site/index.html">FinnKode</a>
+                <nav>
+                    <ul class="main-menu">
+                        <li><a class="home" href="/site/index.html">Hjem</a></li>
+                        <li>
+                            <a role="button" href="#" class="code-systems js-expander">Kodeverk</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
 
-            <nav>
-                <ul>
-                    <li><a class="home" href="/site/index.html">Hjem</a></li>
-                    <li><a class="code-systems" href="/site/index.html">Kodeverk</a></li>
-                </ul>
-            </nav>
+            {% include code-system-menu.html class="js-expandable" %}
+
         </div>
     </div>
 </header>

@@ -18,47 +18,22 @@
         <a class="directorate-logo" href="/">Direktoratet for e-helse</a>
     </div>
 
-    <div class="main-header-content">
+    <div class="main-header-content js-expand">
         <div class="layout-container">
 
-            <a class="finnkode-logo" href="/site/index.html">FinnKode</a>
-
-            <nav>
-                <ul>
-                    <li><a class="home" href="/site/index.html">Hjem</a></li>
-                    <li><a class="code-systems" href="/site/index.html">Kodeverk</a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-</header>
-
-<main>
-        <div id="global-search-banner">
-    <div class="layout-container">
-        <h1 id="global-search-label">Søk i alle kodeverk</h1>
-
-        <form action="" method="" role="search">
-            <div class="search">
-                <input name="global-search" id="global-search" aria-labelledby="global-search-label" type="search" class="search-input" placeholder="f.eks. kreft, bevissthetssilstand, fødsel...">
-                <button class="search-button" type="submit">Søk i alle kodeverk</button>
+            <div class="main-choices">
+                <a class="finnkode-logo" href="/site/index.html">FinnKode</a>
+                <nav>
+                    <ul class="main-menu">
+                        <li><a class="home" href="/site/index.html">Hjem</a></li>
+                        <li>
+                            <a role="button" href="#" class="code-systems js-expander">Kodeverk</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
 
-        </form>
-    </div>
-</div>
-
-<div class="layout-container">
-
-    <!-- #8203 is the unicode character for breaking space, make sure to include this in the final product. -->
-
-    <p class="intro">FinnKode er et søkeverktøy som inneholder oppdaterte kodeverk og synonymordlister/&#8203;søkeforslagslister for lettere søk.</p>
-
-    <p class="directorate-link">
-        <a href="https://ehelse.no/standarder-kodeverk-og-referansekatalog/helsefaglige-kodeverk/finnkode-online-sokeverktoy">Les mer om FinnKode hos direktoratet for e-helse.</a>
-    </p>
-
-    <nav class="code-system-menu">
+            <nav class="code-system-menu js-expandable">
 
     <div class="category all">
         <h2>Velg kodeverk</h2>
@@ -115,8 +90,96 @@
         </div>
     </div>
 
+</nav>
+
+        </div>
+    </div>
+</header>
+
+<main>
+        <div id="global-search-banner">
+    <div class="layout-container">
+        <h1 id="global-search-label">Søk i alle kodeverk</h1>
+
+        <form action="" method="" role="search">
+            <div class="search">
+                <input name="global-search" id="global-search" aria-labelledby="global-search-label" type="search" class="search-input" placeholder="f.eks. kreft, bevissthetssilstand, fødsel...">
+                <button class="search-button" type="submit">Søk i alle kodeverk</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="layout-container">
+
+    <!-- #8203 is the unicode character for breaking space, make sure to include this in the final product. -->
+
+    <p class="intro">FinnKode er et søkeverktøy som inneholder oppdaterte kodeverk og synonymordlister/&#8203;søkeforslagslister for lettere søk.</p>
+
+    <p class="directorate-link">
+        <a href="https://ehelse.no/standarder-kodeverk-og-referansekatalog/helsefaglige-kodeverk/finnkode-online-sokeverktoy">Les mer om FinnKode hos direktoratet for e-helse.</a>
+    </p>
+
+    <nav class="code-system-menu ">
+
+    <div class="category all">
+        <h2>Velg kodeverk</h2>
+        <ul>
+            <li><a href="global-search-initial.html">Alle kodeverk</a></li>
+        </ul>
+    </div>
+
+    <div class="category js-responsive-expand">
+        <h2>
+            <div class="js-responsive-expander">
+                Kliniske kodeverk
+            </div>
+        </h2>
+        <div class="js-responsive-expandable">
+            <ul>
+                <li><a href="">ICPC-2</a></li>
+                <li><a href="">ICD-10</a></li>
+                <li><a href="">BUP</a></li>
+                <li><a href="">Prosedyre</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="category js-responsive-expand">
+        <h2>
+            <div class="js-responsive-expander">
+                Lab kodeverk
+            </div>
+        </h2>
+        <div class="js-responsive-expandable">
+            <ul>
+                <li><a href="">Labotatorie</a></li>
+                <li><a href="">NORPAT</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="category js-responsive-expand">
+        <h2>
+            <div class="js-responsive-expander">
+                Andre kodeverk
+            </div>
+        </h2>
+        <div class="js-responsive-expandable">
+            <ul>
+                <li><a href="">SNOMED CT</a></li>
+                <li><a href="">Administrative kodeverk</a></li>
+                <li><a href="">ATC</a></li>
+                <li><a href="">Begrepskatalog</a></li>
+            </ul>
+        </div>
+    </div>
 
 </nav>
+
 </div>
 </main>
 
