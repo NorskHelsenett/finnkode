@@ -77,24 +77,6 @@
                     expander.attr("aria-expanded", "true");
                     expand.addClass("expanded").removeClass("collapsed");
 
-                    if (
-                        !(
-                            expander.is("button") ||
-                            expander.hasClass("search-expander")
-                        ) &&
-                        (expander.hasClass("js-expander") ||
-                            expander.hasClass("js-responsive-expander"))
-                    ) {
-                        if (historyApi)
-                            history.replaceState(
-                                "",
-                                document.title,
-                                "#" + expander.attr("data-title")
-                            );
-                        else
-                            window.location.hash =
-                                "#" + expander.attr("data-title");
-                    }
                 } else if (expander.attr("aria-expanded") === "true") {
                     // Collapse the block
                     expander.attr("aria-expanded", "false");

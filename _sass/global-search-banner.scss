@@ -31,11 +31,11 @@
     .search-input {
         font-style: italic;
         border: 2px solid $blue;
-        border-radius: 2.25em;
-        line-height: 2.25em;
-        height: 2.25em;
+        border-radius: 2.25rem;
+        line-height: 2.25rem;
+        height: 2.25rem;
         width: 100%;
-        padding: 0 3.125em 0 1em;
+        padding: 0 3.125rem 0 1rem;
         transition: border-color .15s;
         font-size: $font-s;
 
@@ -45,14 +45,14 @@
     }
 
     .search-button {
-        background: $blue url("/assets/images/search-green.svg") .85em center / 1.1em no-repeat;
+        background: $blue url("/assets/images/search-green.svg") .85em center / 1.1rem no-repeat;
         height: 0;
-        padding: 2em 0 0 0;
-        border-radius: 0 2.25em 2.25em 0;
+        padding: 2rem 0 0 0;
+        border-radius: 0 2.25rem 2.25rem 0;
         position: absolute;
         top: 0;
         right: 0;
-        width: 3em;
+        width: 3rem;
         overflow: hidden;
         border-color: $blue;
         border-style: solid;

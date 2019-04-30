@@ -2,15 +2,26 @@
     padding: 3rem 0;
 
     .category {
-        outline: 1px solid black;
+        border-bottom: 1px solid $blue;
     }
 
     h2 {
         font-size: $font-m;
-        margin: 0 1rem;
+        margin: .25em 1rem;
+        height: 2em;
+        line-height: 2em;
         color: $purple;
         font-weight: 700;
+        background: red url("/assets/images/chevron-blue.svg") right center / 1.25rem no-repeat;
     }
+
+    .category.all {
+        h2 {
+            background-image: none;
+        }
+    }
+
+
 
     ul {
         list-style: none;
@@ -25,6 +36,7 @@
 
     a {
         color: $blue;
+        text-decoration: none;
     }
 
 }

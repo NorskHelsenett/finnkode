@@ -231,12 +231,17 @@ h1 {
 .code-system-menu {
   padding: 3rem 0; }
   .code-system-menu .category {
-    outline: 1px solid black; }
+    border-bottom: 1px solid #0f2d5e; }
   .code-system-menu h2 {
     font-size: 1rem;
-    margin: 0 1rem;
+    margin: .25em 1rem;
+    height: 2em;
+    line-height: 2em;
     color: #642461;
-    font-weight: 700; }
+    font-weight: 700;
+    background: red url("/assets/images/chevron-blue.svg") right center/1.25rem no-repeat; }
+  .code-system-menu .category.all h2 {
+    background-image: none; }
   .code-system-menu ul {
     list-style: none;
     margin: 0;
@@ -245,7 +250,8 @@ h1 {
     margin: 0;
     padding: 0; }
   .code-system-menu a {
-    color: #0f2d5e; }
+    color: #0f2d5e;
+    text-decoration: none; }
 
 @media only screen and (min-width: 39rem) {
   .code-system-menu {
@@ -287,24 +293,24 @@ h1 {
   #global-search-banner .search-input {
     font-style: italic;
     border: 2px solid #0f2d5e;
-    border-radius: 2.25em;
-    line-height: 2.25em;
-    height: 2.25em;
+    border-radius: 2.25rem;
+    line-height: 2.25rem;
+    height: 2.25rem;
     width: 100%;
-    padding: 0 3.125em 0 1em;
+    padding: 0 3.125rem 0 1rem;
     transition: border-color .15s;
     font-size: 0.75rem; }
     #global-search-banner .search-input:focus, #global-search-banner .search-input:hover {
       outline: 0; }
   #global-search-banner .search-button {
-    background: #0f2d5e url("/assets/images/search-green.svg") 0.85em center/1.1em no-repeat;
+    background: #0f2d5e url("/assets/images/search-green.svg") 0.85em center/1.1rem no-repeat;
     height: 0;
-    padding: 2em 0 0 0;
-    border-radius: 0 2.25em 2.25em 0;
+    padding: 2rem 0 0 0;
+    border-radius: 0 2.25rem 2.25rem 0;
     position: absolute;
     top: 0;
     right: 0;
-    width: 3em;
+    width: 3rem;
     overflow: hidden;
     border-color: #0f2d5e;
     border-style: solid;
@@ -364,24 +370,24 @@ h1 {
   #global-search-banner .search-input {
     font-style: italic;
     border: 2px solid #0f2d5e;
-    border-radius: 2.25em;
-    line-height: 2.25em;
-    height: 2.25em;
+    border-radius: 2.25rem;
+    line-height: 2.25rem;
+    height: 2.25rem;
     width: 100%;
-    padding: 0 3.125em 0 1em;
+    padding: 0 3.125rem 0 1rem;
     transition: border-color .15s;
     font-size: 0.75rem; }
     #global-search-banner .search-input:focus, #global-search-banner .search-input:hover {
       outline: 0; }
   #global-search-banner .search-button {
-    background: #0f2d5e url("/assets/images/search-green.svg") 0.85em center/1.1em no-repeat;
+    background: #0f2d5e url("/assets/images/search-green.svg") 0.85em center/1.1rem no-repeat;
     height: 0;
-    padding: 2em 0 0 0;
-    border-radius: 0 2.25em 2.25em 0;
+    padding: 2rem 0 0 0;
+    border-radius: 0 2.25rem 2.25rem 0;
     position: absolute;
     top: 0;
     right: 0;
-    width: 3em;
+    width: 3rem;
     overflow: hidden;
     border-color: #0f2d5e;
     border-style: solid;
