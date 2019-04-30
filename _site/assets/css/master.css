@@ -257,7 +257,7 @@ h1 {
         top: 0;
         bottom: 0;
         right: 1rem;
-        background: url("/assets/images/chevron-blue.svg") right center/1.25rem no-repeat;
+        background: url("/assets/images/chevron-blue-down.svg") right center/1.25rem no-repeat;
         transform: scaleY(1);
         transition: transform .2s;
         z-index: 1; }
@@ -269,7 +269,7 @@ h1 {
     position: relative;
     z-index: 2; }
     .code-system-menu .expander:hover, .code-system-menu .expander:focus, .code-system-menu a:hover, .code-system-menu a:focus {
-      background-color: rgba(153, 238, 178, 0.1); }
+      background-color: #f4fdf7; }
     .code-system-menu .expander:focus, .code-system-menu a:focus {
       outline: 0; }
       .code-system-menu .expander:focus::before, .code-system-menu .expander:focus::after, .code-system-menu a:focus::before, .code-system-menu a:focus::after {
@@ -302,14 +302,23 @@ h1 {
     display: flex;
     flex-flow: row wrap; }
     .code-system-menu .category {
-      width: 19rem; } }
+      width: 19rem;
+      padding: 0 1rem 2.5rem; }
+      .code-system-menu .category::after {
+        display: none; }
+    .code-system-menu li {
+      border-bottom: 1px solid #0f2d5e; }
+    .code-system-menu a {
+      padding: .75rem 1rem;
+      background: url("/assets/images/chevron-blue-right.svg") right 1rem center/0.75rem no-repeat; } }
 @media only screen and (min-width: 60rem) {
   .code-system-menu .category {
     width: 28.5rem; }
-  .code-system-menu h2 {
-    font-size: 1.5rem; }
+    .code-system-menu .category h2 {
+      font-size: 1.5rem; }
   .code-system-menu ul {
-    font-size: 1.125rem; } }
+    font-size: 1.125rem;
+    font-weight: 600; } }
 @media only screen and (min-width: 79rem) {
   .code-system-menu .category {
     width: 19rem; } }
