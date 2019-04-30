@@ -215,6 +215,7 @@ h1 {
         height: 0;
         padding: 3rem 0 0 0;
         overflow: hidden;
+        outline: 0;
         background: transparent url("/assets/images/text-size.svg") no-repeat center/3rem; }
       #framework-footer .text-size .expandable {
         position: absolute;
@@ -383,7 +384,7 @@ h1 {
 @media only screen and (min-width: 60rem) {
   #global-search-banner {
     height: 18rem;
-    background-size: auto 18rem; }
+    background-size: cover; }
     #global-search-banner .layout-container {
       max-width: 38rem; }
     #global-search-banner #global-search-label {
@@ -460,7 +461,7 @@ h1 {
 @media only screen and (min-width: 60rem) {
   #global-search-banner {
     height: 18rem;
-    background-size: auto 18rem; }
+    background-size: cover; }
     #global-search-banner .layout-container {
       max-width: 38rem; }
     #global-search-banner #global-search-label {

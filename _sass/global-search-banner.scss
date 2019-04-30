@@ -82,7 +82,7 @@
 @media only screen and (min-width: $two-to-three-col) {
     #global-search-banner {
         height: 18rem;
-        background-size: auto 18rem;
+        background-size: cover;
 
         .layout-container {
             max-width: $two-col;
