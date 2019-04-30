@@ -230,7 +230,7 @@ h1 {
       padding-top: 44px;
       width: 273px; } }
 .code-system-menu {
-  padding: 3rem 0; }
+  padding: 3rem 0 0; }
   .code-system-menu .category {
     position: relative; }
     .code-system-menu .category::after {
@@ -270,7 +270,7 @@ h1 {
     position: relative;
     z-index: 2; }
     .code-system-menu .expander:hover, .code-system-menu .expander:focus, .code-system-menu a:hover, .code-system-menu a:focus {
-      background-color: #f4fdf7; }
+      background-color: rgba(153, 238, 178, 0.1); }
     .code-system-menu .expander:focus, .code-system-menu a:focus {
       outline: 0; }
       .code-system-menu .expander:focus::before, .code-system-menu .expander:focus::after, .code-system-menu a:focus::before, .code-system-menu a:focus::after {
@@ -301,7 +301,8 @@ h1 {
 @media only screen and (min-width: 39rem) {
   .code-system-menu {
     display: flex;
-    flex-flow: row wrap; }
+    flex-flow: row wrap;
+    padding-bottom: 1.5rem; }
     .code-system-menu .category {
       width: 19rem;
       padding: 0 1rem 2.5rem; }
@@ -393,7 +394,8 @@ h1 {
       border-radius: 1.5rem;
       line-height: 3.25rem;
       height: 3.25rem;
-      padding: 0 4rem 0 1.25rem; }
+      padding: 0 4rem 0 1.25rem;
+      font-size: 1rem; }
     #global-search-banner .search-button {
       background-size: 1.625rem;
       background-position: 1rem center;
@@ -470,7 +472,8 @@ h1 {
       border-radius: 1.5rem;
       line-height: 3.25rem;
       height: 3.25rem;
-      padding: 0 4rem 0 1.25rem; }
+      padding: 0 4rem 0 1.25rem;
+      font-size: 1rem; }
     #global-search-banner .search-button {
       background-size: 1.625rem;
       background-position: 1rem center;

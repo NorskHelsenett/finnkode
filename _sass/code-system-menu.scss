@@ -1,5 +1,5 @@
 .code-system-menu {
-    padding: 3rem 0;
+    padding: 3rem 0 0;
 
     .category {
         position: relative;
@@ -115,6 +115,7 @@
     .code-system-menu {
         display: flex;
         flex-flow: row wrap;
+        padding-bottom: 1.5rem;
 
         .category {
             width: $one-col;
