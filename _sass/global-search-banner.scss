@@ -37,6 +37,7 @@
         width: 100%;
         padding: 0 3.125em 0 1em;
         transition: border-color .15s;
+        font-size: $font-s;
 
         &:focus, &:hover {
             outline: 0;

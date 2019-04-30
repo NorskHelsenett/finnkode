@@ -14,7 +14,7 @@ $(window).on("ready", function () {
 $(window).on("load", function () {
     //console.log('load - master/master.js');
 
-    //responsiveExpandableBlocks();
+    responsiveExpandableBlocks();
     expandableBlocks();
     //textSizeExpander();
 
@@ -27,7 +27,7 @@ $(window).on("load", function () {
 $(window).on("layoutchange", function () {
     //console.log("layoutchange - master/master.js");
 
-    //responsiveExpandableBlocks();
+    responsiveExpandableBlocks();
 
 });
 

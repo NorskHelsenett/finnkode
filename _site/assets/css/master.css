@@ -292,7 +292,8 @@ h1 {
     height: 2.25em;
     width: 100%;
     padding: 0 3.125em 0 1em;
-    transition: border-color .15s; }
+    transition: border-color .15s;
+    font-size: 0.75rem; }
     #global-search-banner .search-input:focus, #global-search-banner .search-input:hover {
       outline: 0; }
   #global-search-banner .search-button {
@@ -368,7 +369,8 @@ h1 {
     height: 2.25em;
     width: 100%;
     padding: 0 3.125em 0 1em;
-    transition: border-color .15s; }
+    transition: border-color .15s;
+    font-size: 0.75rem; }
     #global-search-banner .search-input:focus, #global-search-banner .search-input:hover {
       outline: 0; }
   #global-search-banner .search-button {
