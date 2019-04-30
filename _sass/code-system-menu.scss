@@ -118,13 +118,13 @@
 
         .category {
             width: $one-col;
-            padding: 0 1rem 2.5rem;
+            padding: 0 1rem;
+            margin-bottom: 2.5rem;
 
             &::after {
                 display: none;
             }
         }
-
 
         li {
             border-bottom: 1px solid $blue;

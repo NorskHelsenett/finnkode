@@ -15,6 +15,16 @@
 
     .main-header-content {
         background-color: #fff;
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            @extend %box-shadow;
+            left: 0;
+            right: 0;
+            height: 1px;
+        }
 
         .main-choices {
             display: flex;
@@ -98,10 +108,37 @@
     }
 
     .code-system-menu {
-        padding-top: 0;
+        .category.all {
+            margin-top: .5rem;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            @extend %box-shadow;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: $grey;
+        }
     }
 }
 
+@media only screen and (min-width: $one-to-two-col) {
+    #framework-header {
+
+        .code-system-menu {
+            .category, .category.all {
+                margin-bottom: 1.5rem;
+                margin-top: 1.5rem;
+            }
+
+            .category:last-child {
+                margin-bottom: 3rem;
+            }
+        }
+    }
+}
 
 @media only screen and (min-width: $two-to-three-col) {
     #framework-header {
