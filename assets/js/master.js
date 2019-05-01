@@ -5,5 +5,6 @@
     $.getScript("/assets/js/master/layoutQ.js");
     $.getScript("/assets/js/master/responsiveExpandableBlocks.js");
     $.getScript("/assets/js/master/textSizeExpander.js");
+    $.getScript("/assets/js/master/resizableSplitter.js");
     $.getScript("/assets/js/master/main.js");
 })(jQuery);

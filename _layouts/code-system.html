@@ -13,7 +13,21 @@
     {% include code-system-header.html %}
 
     <div class="layout-container">
-        {{ content }}
+
+        <div class="panel-container">
+
+            <div class="panel-left js-resizable-splitter">
+                {% include code-system-tree.html %}
+            </div>
+
+            <div class="splitter">splitter
+            </div>
+
+            <div class="panel-right">
+                {% include code-system-content.html %}
+            </div>
+        </div>
+
     </div>
 </main>
 

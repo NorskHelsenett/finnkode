@@ -16,6 +16,7 @@ $(window).on("load", function () {
 
     responsiveExpandableBlocks();
     expandableBlocks();
+    resizableSplitter();
     //textSizeExpander();
 
 });
@@ -28,6 +29,7 @@ $(window).on("layoutchange", function () {
     //console.log("layoutchange - master/master.js");
 
     responsiveExpandableBlocks();
+    resizableSplitter();
 
 });
 

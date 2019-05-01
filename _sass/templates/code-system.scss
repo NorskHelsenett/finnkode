@@ -39,52 +39,112 @@
 
 @media only screen and (min-width: $two-to-three-col) {
     .code-system {
-        main {
-            .layout-container {
-                display: flex;
-                flex-flow: row nowrap;
-                align-content: stretch;
-            }
+
+
+        /* horizontal panel*/
+
+        .panel-container {
+            display: flex;
+            flex-direction: row;
+            border: 1px solid silver;
+            overflow: hidden;
+            /* avoid browser level touch actions */
+            xtouch-action: none;
         }
 
-        #code-system-tree, #code-system-content {
-            outline: 0;
+        .panel-left {
+            flex: 0 0 auto;
+            /* only manually resize */
+            padding: 10px;
+            width: 300px;
+            min-height: 200px;
+            min-width: 150px;
+            white-space: nowrap;
+            background: #838383;
+            color: white;
         }
 
-        #code-system-header {
-            .layout-container {
-                padding: .5rem 1rem;
-                display: block;
-            }
+        .splitter {
+            flex: 0 0 auto;
+            width: 18px;
+            background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/vsizegrip.png) center center no-repeat #535353;
+            min-height: 200px;
+            cursor: col-resize;
         }
 
-        #code-system-tree {
-            width: $one-col;
-            order: initial;
-            position: relative;
-            bottom: auto;
-
+        .panel-right {
+            flex: 1 1 auto;
+            /* resizable */
+            padding: 10px;
+            width: 100%;
+            min-height: 200px;
+            background: #eee;
         }
 
-        #code-system-content {
-            width: $two-col;
-            order: initial;
-            border-left: 1px solid black;
-        }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //    main {
+    //        .layout-container {
+    //            display: flex;
+    //            flex-flow: row nowrap;
+    //            align-content: stretch;
+    //        }
+    //    }
+    //
+    //    #code-system-tree, #code-system-content {
+    //        outline: 0;
+    //    }
+    //
+    //    #code-system-header {
+    //        .layout-container {
+    //            padding: .5rem 1rem;
+    //            display: block;
+    //        }
+    //    }
+    //
+    //    #code-system-tree {
+    //        width: $one-col;
+    //        order: initial;
+    //        position: relative;
+    //        bottom: auto;
+    //
+    //    }
+    //
+    //    #code-system-content {
+    //        width: $two-col;
+    //        order: initial;
+    //        border-left: 1px solid black;
+    //    }
+    //
     }
 }
 
 @media only screen and (min-width: $three-to-four-col) {
-    .code-system {
-
-        #code-system-tree {
-            width: $one-third-full-width;
-        }
-
-        #code-system-content {
-            width: $two-thirds-full-width;
-        }
-
-    }
+    //.code-system {
+    //
+    //    #code-system-tree {
+    //        width: $one-third-full-width;
+    //    }
+    //
+    //    #code-system-content {
+    //        width: $two-thirds-full-width;
+    //    }
+    //
+    //}
 }

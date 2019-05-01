@@ -37,7 +37,8 @@ body {
 
 main {
   background-color: #fff;
-  color: #000; }
+  color: #000;
+  display: block; }
 
 a {
   transition: .1s color, .1s background-color;
@@ -348,85 +349,63 @@ h1 {
 @media only screen and (min-width: 79rem) {
   .code-system-menu .category {
     width: 19rem; } }
-#global-search-banner {
-  background: url("/assets/images/background-green.jpg") center/auto 9rem no-repeat;
-  height: 9rem;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  justify-content: center; }
-  #global-search-banner .layout-container {
-    padding: 0 1rem;
-    width: 100%;
-    max-width: 28.5rem; }
-  #global-search-banner #global-search-label {
-    font-weight: 600;
-    color: #0f2d5e;
-    display: block;
-    margin: 0 0 1rem;
-    font-size: 1rem; }
-  #global-search-banner .search {
-    position: relative; }
-  #global-search-banner .search-input, #global-search-banner .search-button {
-    font-size: 1rem; }
-  #global-search-banner .search-input {
-    font-style: italic;
-    border: 2px solid #0f2d5e;
-    border-radius: 2.25rem;
-    line-height: 2.25rem;
-    height: 2.25rem;
-    width: 100%;
-    padding: 0 3.125rem 0 1rem;
-    transition: border-color .15s;
-    font-size: 0.75rem; }
-    #global-search-banner .search-input:focus, #global-search-banner .search-input:hover {
-      outline: 0; }
-  #global-search-banner .search-button {
-    background: #0f2d5e 0.85em center/1.1rem no-repeat;
-    background-image: url("/assets/images/search-green.svg"), url("/assets/images/search-blue.svg");
-    height: 0;
-    padding: 2rem 0 0 0;
-    border-radius: 0 2.25rem 2.25rem 0;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 3rem;
-    overflow: hidden;
-    border-color: #0f2d5e;
-    border-style: solid;
-    border-width: 2px 2px 2px 0;
-    transition: border-color .15s, background .15s; }
-    #global-search-banner .search-button:focus, #global-search-banner .search-button:hover {
-      background-color: #99eeb2;
-      background-image: url("/assets/images/search-blue.svg");
-      outline: 0; }
+ul[role="tree"] {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
 
-@media only screen and (min-width: 39rem) {
-  #global-search-banner {
-    height: 13rem;
-    background-size: auto 13rem; }
-    #global-search-banner .layout-container {
-      max-width: 28.5rem; } }
-@media only screen and (min-width: 60rem) {
-  #global-search-banner {
-    height: 18rem;
-    background-size: cover; }
-    #global-search-banner .layout-container {
-      max-width: 38rem; }
-    #global-search-banner #global-search-label {
-      font-size: 1.5rem; }
-    #global-search-banner .search-input {
-      border-radius: 1.5rem;
-      line-height: 3.25rem;
-      height: 3.25rem;
-      padding: 0 4rem 0 1.25rem;
-      font-size: 1rem; }
-    #global-search-banner .search-button {
-      background-size: 1.625rem;
-      background-position: 1rem center;
-      padding: 3rem 0 0 0;
-      border-radius: 0 1.5rem 1.5rem 0;
-      width: 3.875rem; } }
+ul[role="tree"] li {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+ul[role="tree"] a {
+  text-decoration: underline;
+  border-color: transparent; }
+
+[role="treeitem"] ul {
+  margin: 0;
+  padding: 0;
+  margin-left: 0.9em; }
+
+[role="treeitem"][aria-expanded="false"] > ul {
+  display: none; }
+
+[role="treeitem"][aria-expanded="true"] > ul {
+  display: block; }
+
+[role="treeitem"][aria-expanded="false"] > span::before {
+  content: url(../images/right-arrow-brown.png);
+  position: relative;
+  left: -0.25em; }
+
+[role="treeitem"][aria-expanded="true"] > span::before {
+  content: url(../images/down-arrow-brown.png);
+  position: relative;
+  left: -0.25em; }
+
+[role="treeitem"],
+[role="treeitem"] span {
+  width: 16em;
+  margin: 0;
+  padding: 0.125em;
+  border: 2px transparent solid;
+  display: block; }
+
+/* disable default keyboard focus styling for treeitems
+   Keyboard focus is styled with the following CSS */
+[role="treeitem"]:focus {
+  outline: 0; }
+
+[role="treeitem"].focus,
+[role="treeitem"] span.focus {
+  border-color: black;
+  background-color: #eee; }
+
+[role="treeitem"].hover,
+[role="treeitem"] span.hover {
+  background-color: #ddd; }
+
 #global-search-banner {
   background: url("/assets/images/background-green.jpg") center/auto 9rem no-repeat;
   height: 9rem;
@@ -557,29 +536,38 @@ h1 {
   order: 1; }
 
 @media only screen and (min-width: 60rem) {
-  .code-system main .layout-container {
-    display: flex;
-    flex-flow: row nowrap;
-    align-content: stretch; }
-  .code-system #code-system-tree, .code-system #code-system-content {
-    outline: 0; }
-  .code-system #code-system-header .layout-container {
-    padding: .5rem 1rem;
-    display: block; }
-  .code-system #code-system-tree {
-    width: 19rem;
-    order: initial;
-    position: relative;
-    bottom: auto; }
-  .code-system #code-system-content {
-    width: 38rem;
-    order: initial;
-    border-left: 1px solid black; } }
-@media only screen and (min-width: 79rem) {
-  .code-system #code-system-tree {
-    width: 25.3333333333rem; }
-  .code-system #code-system-content {
-    width: 50.6666666667rem; } }
+  .code-system {
+    /* horizontal panel*/ }
+    .code-system .panel-container {
+      display: flex;
+      flex-direction: row;
+      border: 1px solid silver;
+      overflow: hidden;
+      /* avoid browser level touch actions */
+      xtouch-action: none; }
+    .code-system .panel-left {
+      flex: 0 0 auto;
+      /* only manually resize */
+      padding: 10px;
+      width: 300px;
+      min-height: 200px;
+      min-width: 150px;
+      white-space: nowrap;
+      background: #838383;
+      color: white; }
+    .code-system .splitter {
+      flex: 0 0 auto;
+      width: 18px;
+      background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/vsizegrip.png) center center no-repeat #535353;
+      min-height: 200px;
+      cursor: col-resize; }
+    .code-system .panel-right {
+      flex: 1 1 auto;
+      /* resizable */
+      padding: 10px;
+      width: 100%;
+      min-height: 200px;
+      background: #eee; } }
 .front-page .intro, .front-page .directorate-link {
   margin: 1.5em 1rem 0; }
 .front-page .intro {
