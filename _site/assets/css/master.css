@@ -28,6 +28,9 @@ title {
 *, ::after, ::before {
   box-sizing: border-box; }
 
+html {
+  height: 100%; }
+
 body {
   margin: 0;
   padding: 0;
@@ -515,59 +518,43 @@ ul[role="tree"] a {
     width: 19rem; }
   .search .results {
     flex-grow: 1; } }
-.code-system #code-system-tree, .code-system #code-system-content {
-  outline: 1px solid black;
-  padding: 1rem; }
-.code-system main .layout-container {
+.code-system {
+  position: absolute;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-flow: column nowrap; }
-.code-system #code-system-header {
-  border: 0 solid #767676;
-  border-width: 1px 0; }
-  .code-system #code-system-header .layout-container {
-    padding: .5rem 1rem;
-    display: block; }
-.code-system #code-system-tree {
-  order: 2;
-  position: sticky;
-  bottom: 0;
-  background-color: #fff; }
-.code-system #code-system-content {
-  order: 1; }
+  .code-system #code-system-header {
+    background-color: #fff;
+    color: #000;
+    border: 0 solid #767676;
+    border-width: 1px 0; }
+    .code-system #code-system-header .layout-container {
+      padding: .5rem 1rem;
+      display: block; }
+  .code-system .panel-container {
+    display: flex;
+    overflow: hidden;
+    min-height: 0;
+    xtouch-action: none;
+    /* avoid browser level touch actions */ }
+  .code-system .panel-left, .code-system .panel-right {
+    overflow: auto; }
+  .code-system .panel-left {
+    flex: 0 0 auto;
+    width: 300px;
+    min-height: 200px;
+    min-width: 150px; }
+  .code-system .splitter {
+    flex: 0 0 auto;
+    width: 18px;
+    background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/vsizegrip.png) center center no-repeat #535353;
+    min-height: 200px;
+    cursor: col-resize; }
+  .code-system .panel-right {
+    flex: 1 1 auto;
+    min-height: 200px; }
 
-@media only screen and (min-width: 60rem) {
-  .code-system {
-    /* horizontal panel*/ }
-    .code-system .panel-container {
-      display: flex;
-      flex-direction: row;
-      border: 1px solid silver;
-      overflow: hidden;
-      /* avoid browser level touch actions */
-      xtouch-action: none; }
-    .code-system .panel-left {
-      flex: 0 0 auto;
-      /* only manually resize */
-      padding: 10px;
-      width: 300px;
-      min-height: 200px;
-      min-width: 150px;
-      white-space: nowrap;
-      background: #838383;
-      color: white; }
-    .code-system .splitter {
-      flex: 0 0 auto;
-      width: 18px;
-      background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/vsizegrip.png) center center no-repeat #535353;
-      min-height: 200px;
-      cursor: col-resize; }
-    .code-system .panel-right {
-      flex: 1 1 auto;
-      /* resizable */
-      padding: 10px;
-      width: 100%;
-      min-height: 200px;
-      background: #eee; } }
 .front-page .intro, .front-page .directorate-link {
   margin: 1.5em 1rem 0; }
 .front-page .intro {
