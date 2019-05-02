@@ -1,6 +1,11 @@
 .search-refiners {
-    padding-bottom: 1.5rem;
     color: $blue;
+    text-align: center;
+    margin: 1.5rem 1rem;
+
+    .filters {
+        text-align: left;
+    }
 
     .expander {
         padding-right: 1.5em;
@@ -43,68 +48,70 @@
 
     .date {
         margin: 1rem 0 1.5rem;
+    }
 
-        .offscreen {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            clip: rect(1px 1px 1px 1px);
-            clip: rect(1px, 1px, 1px, 1px);
-            overflow: hidden;
-            margin: 0;
-            padding: 0;
+    .offscreen {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        clip: rect(1px 1px 1px 1px);
+        clip: rect(1px, 1px, 1px, 1px);
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+
+    #datepickerLabel {
+        font-weight: 600;
+        color: $blue;
+        display: block;
+        margin: .25rem 0 .5rem 1rem;
+        font-size: $font-m;
+    }
+
+    #datepicker {
+        border: 2px solid $blue;
+        border-radius: 2.25rem;
+        line-height: 2.25rem;
+        height: 2.25rem;
+        width: 100%;
+        padding: 0 1.5rem 0 1rem;
+        transition: border-color .15s;
+        font-size: $font-s;
+
+        &:focus, &:hover {
+            outline: 0;
+            border-color: $green;
         }
+    }
 
-        #datepickerLabel {
-            font-weight: 600;
-            color: $blue;
-            display: block;
-            margin: .25rem 0 .5rem 1rem;
-            font-size: $font-m;
-        }
+    ::placeholder {
+        color: $blue;
+        font-style: normal;
+    }
 
-        #datepicker {
-            border: 2px solid $blue;
-            border-radius: 2.25rem;
-            line-height: 2.25rem;
-            height: 2.25rem;
-            width: 100%;
-            padding: 0 1.5rem 0 1rem;
-            transition: border-color .15s;
-            font-size: $font-s;
+    .date-field {
+        position: relative;
+        width: 10rem;
+    }
 
-            &:focus, &:hover {
-                outline: 0;
-            }
-        }
+    .ui-datepicker-trigger {
+        @include button-reset;
+        height: 2.25rem;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 2.5rem;
+        padding: 0 .75rem 0 .5rem;
+        background: url("/assets/images/calendar-blue.svg") right 1rem center / 1.125rem no-repeat;
 
-        ::placeholder {
-            color: $blue;
-            font-style: normal;
-        }
-
-        .date-field {
-            position: relative;
-            width: 10rem;
-        }
-
-        .ui-datepicker-trigger {
-            @include button-reset;
-            height: 2.25rem;
-            position: absolute;
-            top: 0;
-            right: 0;
-            padding: 0 .75rem 0 .5rem;
-
-            &:focus, &:hover {
-                outline: 0;
-            }
+        &:focus, &:hover {
+            outline: 0;
+            background-image: url("/assets/images/calendar-green.svg");
         }
 
         img {
-            display: block;
-            width: 1.25rem;
-            height: 1.25rem;
+            display: none;
         }
 
     }
@@ -114,17 +121,37 @@
         div {
             margin: 1.5rem 0 1.5rem .5rem;
             padding-left: 1.75rem;
-            background: url("/assets/images/checkbox-unchecked.svg") left center / .9rem no-repeat;
+            background: url("/assets/images/checkbox-unchecked-blue.svg") left center / .9rem no-repeat;
+
         }
 
         input {
             @extend .visuallyhidden;
 
-            &:checked + div {
-                background-image: url("/assets/images/checkbox-checked.svg");
+            & + div {
+                background-image: url("/assets/images/checkbox-unchecked-blue.svg");
+            }
+
+            &:hover, &:focus {
+                & + div {
+                    background-image: url("/assets/images/checkbox-unchecked-green.svg");
+                }
+            }
+
+            &:checked {
+                & + div {
+                    background-image: url("/assets/images/checkbox-checked-blue.svg");
+                }
+
+                &:hover, &:focus {
+                    & + div {
+                        background-image: url("/assets/images/checkbox-checked-green.svg");
+                    }
+                }
+
+
             }
         }
-
 
     }
 
@@ -152,9 +179,12 @@
 
 @media only screen and (min-width: $one-to-two-col) {
     .search-refiners {
+        white-space: nowrap;
 
-        .refiners-expander {
-            display: none;
+        .expander {
+            margin-top: .5rem;
+            padding-right: 1.5em;
+            margin-left: 0;
         }
 
         .filters {
@@ -162,19 +192,19 @@
             flex-flow: row nowrap;
         }
 
+        .date {
+            padding: 0 1rem 0 0;
+            margin-top: 0;
+        }
+
         .date, .code-system-list {
             width: $one-col;
         }
 
-        .date {
-            padding: 0 1rem 0 0;
-            margin-top: 0;
-
-            #datepickerLabel {
-                padding: .75rem 1rem;
-                margin: .5rem 0 1.5rem;
-                border-bottom: 1px solid $blue;
-            }
+        #datepickerLabel {
+            padding: .75rem 1rem;
+            margin: .5rem 0 1.5rem;
+            border-bottom: 1px solid $blue;
         }
 
         .expired-codes {
@@ -241,17 +271,61 @@
 
 @media only screen and (min-width: $two-to-three-col) {
     .search-refiners {
+        padding-bottom: 3rem;
+        margin-bottom: 0;
+
+        .refiners-expander {
+            display: none;
+        }
+
+        &.expand.collapsed .expandable {
+            max-height: unset;
+            opacity: 1;
+            visibility: visible;
+        }
 
         .filters {
             display: block;
+        }
+
+        .date, .code-system-list {
             padding: 0;
+            width: auto;
+        }
+
+        .date {
+            padding-left: 0;
+
+        }
+
+
+        #datepickerLabel {
+            margin-top: 0;
+        }
+
+        .date-field {
             width: auto;
         }
 
         .code-system-list {
             padding-left: 0;
-            margin-top: 1.5rem;
+            margin-top: 2.5rem;
         }
 
     }
 }
+
+@media only screen and (min-width: $three-to-four-col) {
+    .search-refiners {
+        .date, .code-system-list {
+            width: $one-col;
+        }
+
+        .date-field {
+            width: 12rem;
+        }
+
+    }
+}
+
+

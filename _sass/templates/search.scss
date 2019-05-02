@@ -1,7 +1,4 @@
 .search {
-    .search-refiners, .results {
-        margin: 1rem;
-    }
 
     h2 {
         font-size: 1rem;
@@ -26,7 +23,7 @@
         }
 
         .search-refiners {
-            width: $one-col;
+            //width: $one-col;
         }
 
         .results {
@@ -39,8 +36,5 @@
 @media only screen and (min-width: $three-to-four-col) {
     .search {
 
-        .search-refiners {
-            //width: $one-third-full-width;
-        }
     }
 }

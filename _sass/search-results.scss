@@ -1,6 +1,75 @@
 .search-results {
+    margin: 1.5rem 1rem 0;
+    padding-bottom: 3rem;
+
     a {
-        color: $blue
+        color: $blue;
+    }
+
+    .hits {
+        color: $blue;
+        padding: .75rem 1rem;
+        margin: .5rem 0 0;
+        border-bottom: 1px solid $blue;
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        margin: 0;
+        padding: 0;
+        border-bottom: 1px solid $blue;
+        background: url("/assets/images/chevron-blue-right.svg") right 1rem center / .6rem no-repeat;
+    }
+
+    a {
+        color: $blue;
+        display: block;
+        text-decoration: none;
+        padding: .75rem 2.5rem .75rem 1rem;
+        position: relative;
+        z-index: 2;
+        transition: background-color .2s;
+
+        &:hover, &:focus {
+            background-color: $light-green;
+        }
+
+        // The wider lines above and below the focused element
+        &:focus {
+            outline: 0;
+
+            &::before, &::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                height: 2px;
+                left: 0;
+                right: 0;
+                background-color: $grey;
+            }
+
+            &::before {
+                top: -1px;
+            }
+
+            &::after {
+                bottom: -1px;
+            }
+        }
+
+    }
+
+    .code-system-name {
+        font-size: .85rem;
+    }
+
+    .code-name {
+        font-weight: 600;
     }
 }
 
@@ -12,6 +81,35 @@
 
 @media only screen and (min-width: $two-to-three-col) {
     .search-results {
+
+        .hits {
+            padding: .75rem 1rem;
+            margin-top: 0;
+        }
+
+        a {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            align-items: center;
+            font-size: $font-l;
+
+
+            .code-system-name {
+                order: 2;
+                white-space: nowrap;
+                font-size: $font-l;
+                width: 10rem;
+                flex-shrink: 0;
+                text-align: right;
+            }
+
+            .code-name {
+                order: 1;
+                padding-right: 2rem;
+            }
+
+        }
 
     }
 }
