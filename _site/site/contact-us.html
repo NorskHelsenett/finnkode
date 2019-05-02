@@ -15,6 +15,22 @@
 
     <script src="/assets/js/master.js"></script>
 
+    <style id="remove-menu-jump">
+        .code-system-menu {
+            display: none;
+        }
+
+        .code-system-menu.expandable {
+            display: block;
+        }
+
+        @media only screen and (min-width: 39rem) {
+            .code-system-menu.expandable {
+                display: flex;
+            }
+        }
+    </style>
+
 </head>
 
 <body class="simple contact-us">
