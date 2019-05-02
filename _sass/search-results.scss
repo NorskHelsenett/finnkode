@@ -1,0 +1,17 @@
+.search-results {
+    a {
+        color: $blue
+    }
+}
+
+@media only screen and (min-width: $one-to-two-col) {
+    .search-results {
+
+    }
+}
+
+@media only screen and (min-width: $two-to-three-col) {
+    .search-results {
+
+    }
+}

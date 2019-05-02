@@ -5,6 +5,7 @@
 $(window).on("ready", function () {
     //console.log('ready - master/master.js');
     layoutQ();
+    datepicker();
 });
 
 

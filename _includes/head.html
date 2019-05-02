@@ -2,13 +2,21 @@
     <meta charset="utf-8">
     <title>{{ page.title }} - FinnKode</title>
     <link rel="stylesheet" href="/assets/css/master.css">
-    <script src="/assets/js/jquery-3.4.0.min.js"></script>
-    <script src="/assets/js/master.js"></script>
+    <script src="/assets/js/jquery/jquery-3.4.0.min.js"></script>
 
     {% if page.layout == "code-system" %}
-        <script src="/assets/js/tree-view/jquery-resizable.js"></script>
-        <script src="/assets/js/tree-view/treeitemLinks.js"></script>
-        <script src="/assets/js/tree-view/treeLinks.js"></script>
+        <script src="/assets/js/code-system/jquery-resizable.js"></script>
+        <script src="/assets/js/code-system/treeitemLinks.js"></script>
+        <script src="/assets/js/code-system/treeLinks.js"></script>
+        <script src="/assets/js/code-system/resizableSplitter.js"></script>
     {% endif %}
+
+    {% if page.layout == "search" %}
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script src="/assets/js/search/datepicker.js"></script>
+    {% endif %}
+
+    <script src="/assets/js/master.js"></script>
 
 </head>

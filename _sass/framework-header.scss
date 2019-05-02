@@ -40,11 +40,12 @@
         overflow: hidden;
         background: url("/assets/images/finnkode-logo.svg") center left / contain no-repeat;
         width: 9rem;
+        margin-right: 1.5rem;
     }
 
     .main-menu {
         margin: 0;
-        padding: 0;
+        padding: 0 0 0 1.5rem;
         list-style: none;
         font-size: $font-s;
         font-weight: 600;
@@ -55,7 +56,7 @@
             display: inline-block;
 
             &:first-child {
-                margin-right: 3rem;
+                margin-right: 2.5rem;
             }
         }
 

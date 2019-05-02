@@ -1,3 +1,9 @@
+#code-system-tree {
+
+}
+
+
+
 ul[role="tree"] {
     margin: 0;
     padding: 0;
@@ -30,13 +36,13 @@ ul[role="tree"] a {
 }
 
 [role="treeitem"][aria-expanded="false"] > span::before {
-    content: url(../images/right-arrow-brown.png);
+    content: url("/assets/images/tree-plus.svg");
     position: relative;
     left: -0.25em;
 }
 
 [role="treeitem"][aria-expanded="true"] > span::before {
-    content: url(../images/down-arrow-brown.png);
+    content: url("/assets/images/tree-minus.svg");
     position: relative;
     left: -0.25em;
 }

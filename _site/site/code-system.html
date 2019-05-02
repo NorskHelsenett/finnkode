@@ -7,14 +7,18 @@
     <meta charset="utf-8">
     <title>ICD-10 - FinnKode</title>
     <link rel="stylesheet" href="/assets/css/master.css">
-    <script src="/assets/js/jquery-3.4.0.min.js"></script>
-    <script src="/assets/js/master.js"></script>
+    <script src="/assets/js/jquery/jquery-3.4.0.min.js"></script>
 
     
-        <script src="/assets/js/tree-view/jquery-resizable.js"></script>
-        <script src="/assets/js/tree-view/treeitemLinks.js"></script>
-        <script src="/assets/js/tree-view/treeLinks.js"></script>
+        <script src="/assets/js/code-system/jquery-resizable.js"></script>
+        <script src="/assets/js/code-system/treeitemLinks.js"></script>
+        <script src="/assets/js/code-system/treeLinks.js"></script>
+        <script src="/assets/js/code-system/resizableSplitter.js"></script>
     
+
+    
+
+    <script src="/assets/js/master.js"></script>
 
 </head>
 
@@ -112,295 +116,11 @@
 </header>
 </div>
 
-<!--<div class="content-wrapper panel-container">-->
-<!--    <div class="overflow-container panel-left">-->
 
-<!--        <nav id="code-system-tree">
+<div class="panel-container">
 
-    <ul role="tree" aria-labelledby="tree1">
-        <li role="treeitem" aria-expanded="false">
-    <span>
-      Fruits
-    </span>
-            <ul>
-                <li role="none">
-                    <a role="treeitem" href="https://en.wikipedia.org/wiki/Orange_%28fruit%29">
-                        Oranges
-                    </a>
-                </li>
-                <li role="none">
-                    <a role="treeitem" href="https://en.wikipedia.org/wiki/Pineapple">
-                        Pineapple
-                    </a>
-                </li>
-                <li role="treeitem" aria-expanded="false">
-        <span>
-          Apples
-        </span>
-                    <ul role="group">
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/McIntosh_%28apple%29">
-                                Macintosh
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Granny_Smith">
-                                Granny Smith
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Fuji_(apple)">
-                                Fuji
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li role="none">
-                    <a role="treeitem" href="https://en.wikipedia.org/wiki/Banana">
-                        Bananas
-                    </a>
-                </li>
-                <li role="treeitem" aria-expanded="false">
-        <span>
-          Pears
-        </span>
-                    <ul role="group">
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/D%27Anjou">
-                                Anjou
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Williams_pear">
-                                Bartlett
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Bosc_pear">
-                                Bosc
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Pyrus_communis">
-                                Concorde
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Pyrus_communis">
-                                Seckel
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Pyrus_communis">
-                                Starkrimson
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li role="treeitem" aria-expanded="false">
-    <span>
-      Vegetables
-    </span>
-            <ul role="group">
-                <li role="treeitem" aria-expanded="false">
-        <span>
-          Podded Vegetables
-        </span>
-                    <ul role="group">
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Lentil">
-                                Lentil
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Pea">
-                                Pea
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Peanut">
-                                Peanut
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li role="treeitem" aria-expanded="false">
-        <span>
-          Bulb and Stem Vegetables
-        </span>
-                    <ul role="group">
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Asparagus">
-                                Asparagus
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Celery">
-                                Celery
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Leek">
-                                Leek
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Onion">
-                                Onion
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li role="treeitem" aria-expanded="false">
-        <span>
-          Root and Tuberous Vegetables
-        </span>
-                    <ul role="group">
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Carrot">
-                                Carrot
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Ginger">
-                                Ginger
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Parsnip">
-                                Parsnip
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Potato">
-                                Potato
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li role="treeitem" aria-expanded="false">
-    <span>
-      Grains
-    </span>
-            <ul role="group">
-                <li role="treeitem" aria-expanded="false">
-        <span>
-          Cereal Grains
-        </span>
-                    <ul role="group">
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Barley">
-                                Barley
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Oats">
-                                Oats
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Rice">
-                                Rice
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li role="treeitem" aria-expanded="false">
-        <span>
-          Pseudocereal Grains
-        </span>
-                    <ul role="group">
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Amaranth">
-                                Amaranth
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Buckwheat">
-                                Bucketwheat
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Salvia_hispanica">
-                                Chia
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Quinoa">
-                                Quinoa
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li role="treeitem" aria-expanded="false">
-        <span>
-          Oilseeds
-        </span>
-                    <ul role="group">
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Brassica_juncea">
-                                India Mustard
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Safflower">
-                                Safflower
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Flax_seed">
-                                Flax Seed
-                            </a>
-                        </li>
-                        <li role="none">
-                            <a role="treeitem" href="https://en.wikipedia.org/wiki/Poppy_seed">
-                                Poppy Seed
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
-
-</nav>-->
-
-<!--    </div>-->
-
-<!--    <div class="splitter">splitter</div>-->
-
-<!--    <div class="overflow-container panel-right">-->
-
-<!--        TWO 
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien ut ligula consectetur molestie vel non nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus arcu sapien, pharetra quis consequat vitae, lacinia sit amet tortor. Maecenas in nunc in elit finibus varius. Ut nec pellentesque purus, sit amet volutpat urna. Morbi vulputate felis at arcu commodo interdum. Ut ullamcorper faucibus placerat. Mauris sapien quam, feugiat sit amet euismod eu, posuere mattis risus. Sed a pretium leo, in suscipit orci. Morbi vitae ex eu nisl feugiat aliquet vitae sit amet enim. Morbi in diam lacus.
-</p>
-<p>
-    Pellentesque laoreet ligula quis ultricies viverra. Donec id augue ut massa scelerisque sagittis et at dolor. Aliquam eget mauris ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum ac ante erat. Proin placerat non tellus vitae tempor. Pellentesque cursus nisl sit amet enim imperdiet, accumsan pellentesque lacus sollicitudin. Integer ut luctus ipsum. Pellentesque id molestie arcu. Donec quis euismod justo. Curabitur augue nulla, rutrum commodo fermentum commodo, sollicitudin in augue. Ut quam nisl, tempus et ligula quis, tincidunt ultrices lectus. In viverra molestie nibh nec imperdiet. Nam egestas libero in rutrum ornare. Suspendisse facilisis ex ac lacinia pellentesque. Ut nec est non quam tristique fermentum a at arcu.
-</p>
-<p>
-    Donec vehicula vel tortor quis euismod. Vivamus sagittis lacinia massa, at tempus ipsum aliquam quis. Suspendisse eu laoreet risus. Etiam auctor ut ante nec viverra. Cras diam urna, dapibus at dictum lacinia, dictum at nisi. Sed interdum, nisl tincidunt cursus sollicitudin, lacus est facilisis lectus, in ultrices lacus risus vitae massa. Aliquam fermentum ipsum nec eros pretium vehicula. Nunc laoreet lacinia euismod. Vestibulum lacus justo, sollicitudin id pellentesque nec, pharetra mattis augue. Sed quis mi tincidunt, facilisis erat at, tristique sem. Duis vel magna quis metus sagittis pretium eget sed nibh. Nullam finibus vulputate efficitur.
-</p>
-<p>
-    Nulla condimentum blandit vulputate. Mauris fermentum dapibus turpis sit amet pellentesque. Ut fringilla ex ipsum, at pretium turpis aliquam in. Ut id nulla finibus, fringilla odio eget, tincidunt purus. Nunc sagittis elementum urna ac pulvinar. Aliquam vulputate semper nulla ac pretium. Duis orci lectus, suscipit id posuere sed, hendrerit quis diam.
-</p>
-<p>
-    Morbi sed auctor purus, a euismod velit. Praesent in tellus commodo, pharetra augue non, cursus ipsum. Aliquam eu cursus diam. Morbi maximus, orci faucibus porta semper, ipsum sem semper tellus, sit amet pretium purus ipsum vel neque. Praesent sed nunc sem. Nunc non erat pellentesque, rhoncus magna sed, semper augue. Cras sed neque justo. Cras blandit nec eros nec sagittis. Suspendisse pharetra nisl posuere molestie dignissim.
-</p>-->
-<!--    </div>-->
-
-<!--</div>-->
-
-
-
-        <div class="panel-container">
-
-            <div class="panel-left js-resizable-splitter">
-                <nav id="code-system-tree">
+    <div class="panel-left js-resizable-splitter">
+        <nav id="code-system-tree">
 
     <ul role="tree" aria-labelledby="tree1">
         <li role="treeitem" aria-expanded="false">
@@ -653,28 +373,12 @@
     </ul>
 
 </nav>
-                
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien ut ligula consectetur molestie vel non nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus arcu sapien, pharetra quis consequat vitae, lacinia sit amet tortor. Maecenas in nunc in elit finibus varius. Ut nec pellentesque purus, sit amet volutpat urna. Morbi vulputate felis at arcu commodo interdum. Ut ullamcorper faucibus placerat. Mauris sapien quam, feugiat sit amet euismod eu, posuere mattis risus. Sed a pretium leo, in suscipit orci. Morbi vitae ex eu nisl feugiat aliquet vitae sit amet enim. Morbi in diam lacus.
-</p>
-<p>
-    Pellentesque laoreet ligula quis ultricies viverra. Donec id augue ut massa scelerisque sagittis et at dolor. Aliquam eget mauris ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum ac ante erat. Proin placerat non tellus vitae tempor. Pellentesque cursus nisl sit amet enim imperdiet, accumsan pellentesque lacus sollicitudin. Integer ut luctus ipsum. Pellentesque id molestie arcu. Donec quis euismod justo. Curabitur augue nulla, rutrum commodo fermentum commodo, sollicitudin in augue. Ut quam nisl, tempus et ligula quis, tincidunt ultrices lectus. In viverra molestie nibh nec imperdiet. Nam egestas libero in rutrum ornare. Suspendisse facilisis ex ac lacinia pellentesque. Ut nec est non quam tristique fermentum a at arcu.
-</p>
-<p>
-    Donec vehicula vel tortor quis euismod. Vivamus sagittis lacinia massa, at tempus ipsum aliquam quis. Suspendisse eu laoreet risus. Etiam auctor ut ante nec viverra. Cras diam urna, dapibus at dictum lacinia, dictum at nisi. Sed interdum, nisl tincidunt cursus sollicitudin, lacus est facilisis lectus, in ultrices lacus risus vitae massa. Aliquam fermentum ipsum nec eros pretium vehicula. Nunc laoreet lacinia euismod. Vestibulum lacus justo, sollicitudin id pellentesque nec, pharetra mattis augue. Sed quis mi tincidunt, facilisis erat at, tristique sem. Duis vel magna quis metus sagittis pretium eget sed nibh. Nullam finibus vulputate efficitur.
-</p>
-<p>
-    Nulla condimentum blandit vulputate. Mauris fermentum dapibus turpis sit amet pellentesque. Ut fringilla ex ipsum, at pretium turpis aliquam in. Ut id nulla finibus, fringilla odio eget, tincidunt purus. Nunc sagittis elementum urna ac pulvinar. Aliquam vulputate semper nulla ac pretium. Duis orci lectus, suscipit id posuere sed, hendrerit quis diam.
-</p>
-<p>
-    Morbi sed auctor purus, a euismod velit. Praesent in tellus commodo, pharetra augue non, cursus ipsum. Aliquam eu cursus diam. Morbi maximus, orci faucibus porta semper, ipsum sem semper tellus, sit amet pretium purus ipsum vel neque. Praesent sed nunc sem. Nunc non erat pellentesque, rhoncus magna sed, semper augue. Cras sed neque justo. Cras blandit nec eros nec sagittis. Suspendisse pharetra nisl posuere molestie dignissim.
-</p>
-            </div>
+    </div>
 
-            <div class="splitter"></div>
+    <div class="splitter"></div>
 
-            <div class="panel-right">
-                <article id="code-system-content">
+    <div class="panel-right">
+        <article id="code-system-content">
     <h2>Code system content</h2>
 
 
@@ -899,9 +603,8 @@
 
 
 </article>
-            </div>
-        </div>
-
+    </div>
+</div>
 
 
 </body>

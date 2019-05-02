@@ -25,10 +25,11 @@ a {
     transition: .1s color, .1s background-color;
     text-decoration: underline;
     text-decoration-skip: ink;
+    color: $purple;
 }
 
 input {
-    font-family: "Open Sans";
+    font-family: "Open Sans", sans-serif;
 }
 
 ::placeholder {

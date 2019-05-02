@@ -1,4 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin-ext");
+.visuallyhidden, .search-refiners .expired-codes input {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0; }
+
 #framework-header .main-header-content::after, #framework-header .code-system-menu::before {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1); }
 
@@ -46,10 +56,11 @@ main {
 a {
   transition: .1s color, .1s background-color;
   text-decoration: underline;
-  text-decoration-skip: ink; }
+  text-decoration-skip: ink;
+  color: #642461; }
 
 input {
-  font-family: "Open Sans"; }
+  font-family: "Open Sans", sans-serif; }
 
 ::placeholder {
   color: #8796ae;
@@ -112,10 +123,11 @@ h1 {
   padding-top: 3rem;
   overflow: hidden;
   background: url("/assets/images/finnkode-logo.svg") center left/contain no-repeat;
-  width: 9rem; }
+  width: 9rem;
+  margin-right: 1.5rem; }
 #framework-header .main-menu {
   margin: 0;
-  padding: 0;
+  padding: 0 0 0 1.5rem;
   list-style: none;
   font-size: 0.75rem;
   font-weight: 600;
@@ -123,7 +135,7 @@ h1 {
   #framework-header .main-menu li {
     display: inline-block; }
     #framework-header .main-menu li:first-child {
-      margin-right: 3rem; }
+      margin-right: 2.5rem; }
   #framework-header .main-menu a {
     display: block;
     position: relative;
@@ -378,12 +390,12 @@ ul[role="tree"] a {
   display: block; }
 
 [role="treeitem"][aria-expanded="false"] > span::before {
-  content: url(../images/right-arrow-brown.png);
+  content: url("/assets/images/tree-plus.svg");
   position: relative;
   left: -0.25em; }
 
 [role="treeitem"][aria-expanded="true"] > span::before {
-  content: url(../images/down-arrow-brown.png);
+  content: url("/assets/images/tree-minus.svg");
   position: relative;
   left: -0.25em; }
 
@@ -424,7 +436,7 @@ ul[role="tree"] a {
     font-weight: 600;
     color: #0f2d5e;
     display: block;
-    margin: 0 0 1rem;
+    margin: 0 0 .75rem 1rem;
     font-size: 1rem; }
   #global-search-banner .search {
     position: relative; }
@@ -488,6 +500,165 @@ ul[role="tree"] a {
       padding: 3rem 0 0 0;
       border-radius: 0 1.5rem 1.5rem 0;
       width: 3.875rem; } }
+.search-refiners {
+  padding-bottom: 1.5rem;
+  color: #0f2d5e; }
+  .search-refiners .expander {
+    padding-right: 1.5em;
+    margin-left: 1rem;
+    display: inline-block;
+    position: relative;
+    font-weight: 600; }
+    .search-refiners .expander::before {
+      content: "Vis filtre"; }
+    .search-refiners .expander::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      height: 100%;
+      width: 1em;
+      background: url("/assets/images/chevron-blue-down.svg") right center/contain no-repeat;
+      transform: scaleY(1);
+      transition: transform .2s; }
+    .search-refiners .expander:focus {
+      outline: 0; }
+  .search-refiners.expanded .expander::before {
+    content: "Skjul filtre"; }
+  .search-refiners.expanded .expander::after {
+    transform: scaleY(-1); }
+  .search-refiners .date {
+    margin: 1rem 0 1.5rem; }
+    .search-refiners .date .offscreen {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      clip: rect(1px 1px 1px 1px);
+      clip: rect(1px, 1px, 1px, 1px);
+      overflow: hidden;
+      margin: 0;
+      padding: 0; }
+    .search-refiners .date #datepickerLabel {
+      font-weight: 600;
+      color: #0f2d5e;
+      display: block;
+      margin: .25rem 0 .5rem 1rem;
+      font-size: 1rem; }
+    .search-refiners .date #datepicker {
+      border: 2px solid #0f2d5e;
+      border-radius: 2.25rem;
+      line-height: 2.25rem;
+      height: 2.25rem;
+      width: 100%;
+      padding: 0 1.5rem 0 1rem;
+      transition: border-color .15s;
+      font-size: 0.75rem; }
+      .search-refiners .date #datepicker:focus, .search-refiners .date #datepicker:hover {
+        outline: 0; }
+    .search-refiners .date ::placeholder {
+      color: #0f2d5e;
+      font-style: normal; }
+    .search-refiners .date .date-field {
+      position: relative;
+      width: 10rem; }
+    .search-refiners .date .ui-datepicker-trigger {
+      padding: 0;
+      border: none;
+      font: inherit;
+      color: inherit;
+      background-color: transparent;
+      cursor: pointer;
+      height: 2.25rem;
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0 .75rem 0 .5rem; }
+      .search-refiners .date .ui-datepicker-trigger:focus, .search-refiners .date .ui-datepicker-trigger:hover {
+        outline: 0; }
+    .search-refiners .date img {
+      display: block;
+      width: 1.25rem;
+      height: 1.25rem; }
+  .search-refiners .expired-codes div {
+    margin: 1.5rem 0 1.5rem .5rem;
+    padding-left: 1.75rem;
+    background: url("/assets/images/checkbox-unchecked.svg") left center/0.9rem no-repeat; }
+  .search-refiners .expired-codes input:checked + div {
+    background-image: url("/assets/images/checkbox-checked.svg"); }
+  .search-refiners .code-system-list {
+    background: #99eeb2;
+    padding: .5rem 1rem;
+    margin: .5rem 0 0;
+    list-style: none; }
+  .search-refiners li {
+    margin: .5rem 0; }
+  .search-refiners a {
+    text-decoration: none;
+    color: #0f2d5e; }
+    .search-refiners a.current {
+      font-weight: 600;
+      border-bottom: 1px solid #0f2d5e; }
+
+@media only screen and (min-width: 39rem) {
+  .search-refiners .refiners-expander {
+    display: none; }
+  .search-refiners .filters {
+    display: flex;
+    flex-flow: row nowrap; }
+  .search-refiners .date, .search-refiners .code-system-list {
+    width: 19rem; }
+  .search-refiners .date {
+    padding: 0 1rem 0 0;
+    margin-top: 0; }
+    .search-refiners .date #datepickerLabel {
+      padding: .75rem 1rem;
+      margin: .5rem 0 1.5rem;
+      border-bottom: 1px solid #0f2d5e; }
+  .search-refiners .expired-codes div {
+    margin: 1.5rem 0 1.5rem .5rem; }
+  .search-refiners .code-system-list {
+    background: transparent;
+    padding: 0 0 0 1rem; }
+  .search-refiners li {
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #0f2d5e; }
+  .search-refiners a {
+    color: #0f2d5e;
+    display: block;
+    text-decoration: none;
+    padding: .75rem 1rem;
+    position: relative;
+    z-index: 2;
+    transition: background-color .2s; }
+    .search-refiners a:hover, .search-refiners a:focus {
+      background-color: rgba(153, 238, 178, 0.1); }
+    .search-refiners a:focus {
+      outline: 0; }
+      .search-refiners a:focus::before, .search-refiners a:focus::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        height: 2px;
+        left: 0;
+        right: 0;
+        background-color: #767676; }
+      .search-refiners a:focus::before {
+        top: -1px; }
+      .search-refiners a:focus::after {
+        bottom: -1px; }
+    .search-refiners a.current {
+      border-bottom: 0; } }
+@media only screen and (min-width: 60rem) {
+  .search-refiners .filters {
+    display: block;
+    padding: 0;
+    width: auto; }
+  .search-refiners .code-system-list {
+    padding-left: 0;
+    margin-top: 1.5rem; } }
+.search-results a {
+  color: #0f2d5e; }
+
 .simple main {
   border-top: 1px solid #767676; }
   .simple main .layout-container {
@@ -502,8 +673,7 @@ ul[role="tree"] a {
   .simple main .layout-container {
     padding-right: 39rem; } }
 .search .search-refiners, .search .results {
-  outline: 1px solid black;
-  padding: 1rem; }
+  margin: 1rem; }
 .search h2 {
   font-size: 1rem; }
 

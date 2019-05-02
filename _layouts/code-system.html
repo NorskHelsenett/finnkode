@@ -13,38 +13,19 @@
     {% include code-system-header.html %}
 </div>
 
-<!--<div class="content-wrapper panel-container">-->
-<!--    <div class="overflow-container panel-left">-->
 
-<!--        {% include code-system-tree.html %}-->
+<div class="panel-container">
 
-<!--    </div>-->
+    <div class="panel-left js-resizable-splitter">
+        {% include code-system-tree.html %}
+    </div>
 
-<!--    <div class="splitter">splitter</div>-->
+    <div class="splitter"></div>
 
-<!--    <div class="overflow-container panel-right">-->
-
-<!--        TWO {% include lipsum.html %}-->
-<!--    </div>-->
-
-<!--</div>-->
-
-
-
-        <div class="panel-container">
-
-            <div class="panel-left js-resizable-splitter">
-                {% include code-system-tree.html %}
-                {% include lipsum.html %}
-            </div>
-
-            <div class="splitter"></div>
-
-            <div class="panel-right">
-                {% include code-system-content.html %}
-            </div>
-        </div>
-
+    <div class="panel-right">
+        {% include code-system-content.html %}
+    </div>
+</div>
 
 
 </body>
