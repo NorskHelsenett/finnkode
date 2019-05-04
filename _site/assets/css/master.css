@@ -402,7 +402,6 @@ ul[role="tree"] a {
 
 [role="treeitem"],
 [role="treeitem"] span {
-  width: 16em;
   margin: 0;
   padding: 0.125em;
   border: 2px transparent solid;
@@ -797,13 +796,14 @@ ul[role="tree"] a {
   flex-flow: column nowrap; }
   .code-system #code-system-header {
     background-color: #fff;
-    color: #000;
     border: 0 solid #767676;
     border-width: 1px 0; }
     .code-system #code-system-header .layout-container {
       padding: .5rem 1rem;
       display: block; }
   .code-system .panel-container {
+    background-color: #fff;
+    color: #000;
     display: flex;
     overflow: hidden;
     min-height: 0;

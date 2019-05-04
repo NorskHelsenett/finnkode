@@ -14,21 +14,24 @@
 </div>
 
 
-<div class="panel-container">
 
-    <div class="panel-left js-resizable-splitter">
-        {% include code-system-tree.html %}
-    </div>
+    <div class="panel-container">
 
-    <div class="splitter">
-        <div class="splitter-name">{{page.code-system}}</div>
-        <div class="splitter-instructions">Trekk for å utvide</div>
-    </div>
+        <div class="panel-left js-resizable-splitter">
 
-    <div class="panel-right">
-        {% include code-system-content.html %}
+
+            {% include code-system-tree.html %}
+        </div>
+
+        <div class="splitter">
+            <div class="splitter-name">{{page.code-system}}</div>
+            <div class="splitter-instructions">Trekk for å utvide</div>
+        </div>
+
+        <div class="panel-right">
+            {% include code-system-content.html %}
+        </div>
     </div>
-</div>
 
 
 </body>

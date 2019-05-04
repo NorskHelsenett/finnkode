@@ -5,9 +5,9 @@
     display: flex;
     flex-flow: column nowrap;
 
+
     #code-system-header {
         background-color: #fff;
-        color: #000;
         border: 0 solid $grey;
         border-width: 1px 0;
 
@@ -18,6 +18,8 @@
     }
 
     .panel-container {
+        background-color: #fff;
+        color: #000;
         display: flex;
         overflow: hidden;
         min-height: 0;
