@@ -46,7 +46,8 @@ body {
   padding: 0;
   background-color: #0f2d5e;
   color: #fff;
-  font-family: "Open Sans", sans-serif; }
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.4; }
 
 main {
   background-color: #fff;
@@ -766,6 +767,8 @@ ul[role="tree"] a {
     padding: .5rem 1rem 1.5rem; }
 .simple h1 {
   margin: 1rem 0; }
+.simple .ingress {
+  font-size: 1.125rem; }
 
 @media only screen and (min-width: 60rem) {
   .simple main .layout-container {

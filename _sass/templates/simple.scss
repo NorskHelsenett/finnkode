@@ -11,6 +11,10 @@
     h1 {
         margin: 1rem 0;
     }
+
+    .ingress {
+        font-size: $font-l;
+    }
 }
 
 @media only screen and (min-width: $two-to-three-col) {
