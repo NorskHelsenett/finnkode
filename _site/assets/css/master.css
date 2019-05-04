@@ -768,7 +768,8 @@ ul[role="tree"] a {
 .simple h1 {
   margin: 1rem 0; }
 .simple .ingress {
-  font-size: 1.125rem; }
+  font-size: 1.125rem;
+  font-weight: 600; }
 
 @media only screen and (min-width: 60rem) {
   .simple main .layout-container {
@@ -806,6 +807,7 @@ ul[role="tree"] a {
     display: flex;
     overflow: hidden;
     min-height: 0;
+    height: 100%;
     xtouch-action: none;
     /* avoid browser level touch actions */ }
   .code-system .panel-left, .code-system .panel-right {
@@ -816,11 +818,26 @@ ul[role="tree"] a {
     min-height: 200px;
     min-width: 150px; }
   .code-system .splitter {
+    color: #0f2d5e;
     flex: 0 0 auto;
-    width: 18px;
-    background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/vsizegrip.png) center center no-repeat #535353;
+    width: 2.125rem;
+    background: #99eeb2 url("/assets/images/splitter.svg") center/0.75rem no-repeat;
     min-height: 200px;
-    cursor: col-resize; }
+    cursor: col-resize;
+    padding-top: 3rem;
+    position: relative;
+    font-size: 1.25rem; }
+    .code-system .splitter .splitter-name, .code-system .splitter .splitter-instructions {
+      transform: rotate(90deg);
+      text-transform: uppercase;
+      white-space: nowrap;
+      line-height: 2.125rem;
+      width: 2.125rem; }
+    .code-system .splitter .splitter-instructions {
+      position: absolute;
+      font-size: 0.75rem;
+      top: 50%;
+      padding-left: 2.125rem; }
   .code-system .panel-right {
     flex: 1 1 auto;
     min-height: 200px; }

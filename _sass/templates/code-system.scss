@@ -21,6 +21,7 @@
         display: flex;
         overflow: hidden;
         min-height: 0;
+        height: 100%;
         xtouch-action: none; /* avoid browser level touch actions */
     }
 
@@ -36,11 +37,31 @@
     }
 
     .splitter {
+        color: $blue;
         flex: 0 0 auto;
-        width: 18px;
-        background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/vsizegrip.png) center center no-repeat #535353;
+        width: 2.125rem;
+        background: $green url("/assets/images/splitter.svg") center / .75rem no-repeat;
         min-height: 200px;
         cursor: col-resize;
+        padding-top: 3rem;
+        position: relative;
+        font-size: $font-xl;
+
+        .splitter-name, .splitter-instructions {
+            transform: rotate(90deg);
+            text-transform: uppercase;
+            white-space: nowrap;
+            line-height: 2.125rem;
+            width: 2.125rem;
+        }
+
+        .splitter-instructions {
+            position: absolute;
+            font-size: $font-s;
+            top: 50%;
+            padding-left: 2.125rem;
+        }
+
     }
 
     .panel-right {
