@@ -807,6 +807,8 @@ ul[role="tree"] a {
       flex-flow: row wrap;
       justify-content: space-between;
       align-items: center; }
+      .code-system .code-system-header .layout-container > * {
+        outline: 1px solid red; }
     .code-system .code-system-header h1 {
       font-size: 2rem;
       margin: 0;
@@ -891,20 +893,27 @@ ul[role="tree"] a {
     align-self: flex-end; } }
 @media only screen and (min-width: 60rem) {
   .code-system .code-system-header .layout-container {
-    padding: 1.5rem 1rem;
     flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-    height: auto; }
+    height: auto;
+    justify-content: flex-start;
+    background-color: lime; }
   .code-system .code-system-header h1 {
-    font-size: 3.125rem; }
-  .code-system .code-system-header ul {
-    flex: 1 0 auto; }
-  .code-system .code-system-header .search-field {
-    flex: 0 1 28.5rem;
-    width: auto;
+    flex: unset;
     padding-bottom: 0;
-    align-self: auto; } }
+    width: unset; }
+    .code-system .code-system-header h1 span {
+      display: table-caption;
+      background-color: orange; }
+  .code-system .code-system-header ul {
+    width: unset;
+    flex: unset;
+    flex-grow: 1; }
+  .code-system .code-system-header .search-field {
+    width: 25rem;
+    margin-bottom: 0;
+    align-self: unset;
+    flex: unset;
+    background-color: red; } }
 .front-page .intro, .front-page .directorate-link {
   margin: 1.5em 1rem 0; }
 .front-page .intro {
