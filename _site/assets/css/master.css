@@ -364,61 +364,67 @@ h1 {
 @media only screen and (min-width: 79rem) {
   .code-system-menu .category {
     width: 19rem; } }
-ul[role="tree"] {
-  margin: 0;
-  padding: 0;
-  list-style: none; }
-
-ul[role="tree"] li {
-  margin: 0;
-  padding: 0;
-  list-style: none; }
-
-ul[role="tree"] a {
-  text-decoration: underline;
-  border-color: transparent; }
-
-[role="treeitem"] ul {
-  margin: 0;
-  padding: 0;
-  margin-left: 0.9em; }
-
-[role="treeitem"][aria-expanded="false"] > ul {
-  display: none; }
-
-[role="treeitem"][aria-expanded="true"] > ul {
-  display: block; }
-
-[role="treeitem"][aria-expanded="false"] > span::before {
-  content: url("/assets/images/tree-plus.svg");
-  position: relative;
-  left: -0.25em; }
-
-[role="treeitem"][aria-expanded="true"] > span::before {
-  content: url("/assets/images/tree-minus.svg");
-  position: relative;
-  left: -0.25em; }
-
-[role="treeitem"],
-[role="treeitem"] span {
-  margin: 0;
-  padding: 0.125em;
-  border: 2px transparent solid;
-  display: block; }
-
-/* disable default keyboard focus styling for treeitems
-   Keyboard focus is styled with the following CSS */
-[role="treeitem"]:focus {
-  outline: 0; }
-
-[role="treeitem"].focus,
-[role="treeitem"] span.focus {
-  border-color: black;
-  background-color: #eee; }
-
-[role="treeitem"].hover,
-[role="treeitem"] span.hover {
-  background-color: #ddd; }
+.code-system-tree {
+  padding: 1rem; }
+  .code-system-tree > ul[role="tree"] > li > span > a[role="treeitem"] {
+    font-weight: 600; }
+  .code-system-tree ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative; }
+  .code-system-tree a {
+    text-decoration: none;
+    color: #0f2d5e;
+    padding: .25em 1em .25em 0; }
+  .code-system-tree li {
+    padding: .25em 0 .25em .75em;
+    position: relative; }
+    .code-system-tree li:last-child {
+      padding-bottom: 0; }
+    .code-system-tree li:first-child {
+      padding-top: .5em; }
+    .code-system-tree li[role="none"] {
+      padding-left: 1.75em; }
+      .code-system-tree li[role="none"] a {
+        margin-left: 0; }
+    .code-system-tree li:not(:last-child)::before, .code-system-tree li[role="none"]:last-child::before {
+      content: "";
+      position: absolute;
+      left: .5em;
+      top: 1em;
+      width: 0;
+      bottom: -1em;
+      border-left: 1px dashed #767676; }
+    .code-system-tree li[role="none"]:last-child::before {
+      bottom: .5em; }
+  .code-system-tree ul[role="group"] {
+    margin-left: 1em; }
+  .code-system-tree [role="treeitem"] {
+    position: relative; }
+    .code-system-tree [role="treeitem"] > span {
+      position: relative; }
+      .code-system-tree [role="treeitem"] > span::before {
+        content: "";
+        position: absolute;
+        background: url("/assets/images/tree-minus.svg") center/1em no-repeat;
+        width: 1em;
+        height: 1em;
+        top: .45em;
+        left: -.75em; }
+    .code-system-tree [role="treeitem"] a {
+      margin-left: 1em; }
+    .code-system-tree [role="treeitem"][aria-expanded="false"] > ul {
+      display: none; }
+    .code-system-tree [role="treeitem"][aria-expanded="false"] > span::before {
+      background-image: url("/assets/images/tree-plus.svg"); }
+    .code-system-tree [role="treeitem"][aria-expanded="true"] > ul {
+      display: block; }
+    .code-system-tree [role="treeitem"]:focus {
+      outline: 0; }
+  .code-system-tree [role="treeitem"],
+  .code-system-tree [role="treeitem"] span {
+    display: block; }
 
 #global-search-banner {
   background: url("/assets/images/background-green.jpg") center/auto 9rem no-repeat;
