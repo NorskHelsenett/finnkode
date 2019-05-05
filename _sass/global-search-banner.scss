@@ -20,53 +20,6 @@
         font-size: $font-m;
     }
 
-    .search {
-        position: relative;
-    }
-
-    .search-input, .search-button {
-        font-size: $font-m;
-    }
-
-    .search-input {
-        font-style: italic;
-        border: 2px solid $blue;
-        border-radius: 2.25rem;
-        line-height: 2.25rem;
-        height: 2.25rem;
-        width: 100%;
-        padding: 0 3.125rem 0 1rem;
-        transition: border-color .15s;
-        font-size: $font-s;
-
-        &:focus, &:hover {
-            outline: 0;
-        }
-    }
-
-    .search-button {
-        background: $blue .85em center / 1.1rem no-repeat;
-        background-image: url("/assets/images/search-green.svg"), url("/assets/images/search-blue.svg");
-        height: 0;
-        padding: 2rem 0 0 0;
-        border-radius: 0 2.25rem 2.25rem 0;
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 3rem;
-        overflow: hidden;
-        border-color: $blue;
-        border-style: solid;
-        border-width: 2px 2px 2px 0;
-        transition: border-color .15s, background .15s;
-
-
-        &:focus, &:hover {
-            background-color: $green;
-            background-image: url("/assets/images/search-blue.svg");
-            outline: 0;
-        }
-    }
 }
 
 @media only screen and (min-width: $one-to-two-col) {
@@ -91,22 +44,6 @@
 
         #global-search-label {
             font-size: $font-2xl;
-        }
-
-        .search-input {
-            border-radius: 1.5rem;
-            line-height: 3.25rem;
-            height: 3.25rem;
-            padding: 0 4rem 0 1.25rem;
-            font-size: $font-m;
-        }
-
-        .search-button {
-            background-size: 1.625rem;
-            background-position: 1rem center;
-            padding: 3rem 0 0 0;
-            border-radius: 0 1.5rem 1.5rem 0;
-            width: 3.875rem;
         }
     }
 }

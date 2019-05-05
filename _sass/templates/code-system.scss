@@ -5,21 +5,65 @@
     display: flex;
     flex-flow: column nowrap;
 
-
-    #code-system-header {
+    .code-system-header, .panel-container {
         background-color: #fff;
+    }
+
+    .code-system-header {
         border: 0 solid $grey;
         border-width: 1px 0;
+        color: $blue;
 
         .layout-container {
-            padding: .5rem 1rem;
-            display: block;
+            padding: 1rem 1rem 1.5rem;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-items: center;
+
+            & > * {
+                //outline: 1px solid red;
+            }
         }
+
+        h1 {
+            font-size: $font-4xl;
+            margin: 0;
+            padding: 0 2rem .25rem 0;
+            line-height: 1.1;
+            overflow: hidden;
+
+        }
+
+        ul {
+            margin: 0;
+            padding: 0 2rem 0 0;
+            list-style: none;
+        }
+
+        li {
+            display: inline-block;
+
+            &:first-child {
+                margin-right: 1rem;
+            }
+        }
+
+        a {
+            white-space: nowrap;
+            height: 2rem;
+            line-height: 2rem;
+            color: $blue;
+        }
+
+        .search-field {
+            flex: 1 0 100%;
+            margin-top: 1rem;
+        }
+
     }
 
     .panel-container {
-        background-color: #fff;
-        color: #000;
         display: flex;
         overflow: hidden;
         min-height: 0;
@@ -27,11 +71,11 @@
         xtouch-action: none; /* avoid browser level touch actions */
     }
 
-    .panel-left, .panel-right {
+    .code-system-tree, .code-system-content {
         overflow: auto;
     }
 
-    .panel-left {
+    .code-system-tree {
         flex: 0 0 auto;
         width: 300px;
         min-height: 200px;
@@ -48,27 +92,93 @@
         padding-top: 3rem;
         position: relative;
         font-size: $font-xl;
-
-        .splitter-name, .splitter-instructions {
-            transform: rotate(90deg);
-            text-transform: uppercase;
-            white-space: nowrap;
-            line-height: 2.125rem;
-            width: 2.125rem;
-        }
-
-        .splitter-instructions {
-            position: absolute;
-            font-size: $font-s;
-            top: 50%;
-            padding-left: 2.125rem;
-        }
-
     }
 
-    .panel-right {
+    .splitter-name, .splitter-instructions {
+        transform: rotate(90deg);
+        text-transform: uppercase;
+        white-space: nowrap;
+        line-height: 2.125rem;
+        width: 2.125rem;
+    }
+
+    .splitter-instructions {
+        position: absolute;
+        font-size: $font-xs;
+        top: 50%;
+        padding-left: 2.125rem;
+    }
+
+    .code-system-content {
         flex: 1 1 auto;
         min-height: 200px;
     }
+}
 
+@media only screen and (min-width: $one-to-two-col) {
+
+    .code-system {
+        .code-system-header {
+
+            .layout-container {
+                padding: 1rem;
+                flex-flow: column wrap;
+                align-content: space-between;
+                justify-content: flex-end;
+                height: 6.875rem;
+            }
+
+            h1 {
+                flex: 0 0 auto;
+                padding-bottom: .5rem;
+            }
+
+            ul {
+                flex: 1 1 auto;
+                padding-bottom: 0;
+            }
+
+            h1, ul {
+                width: $one-col-content;
+            }
+
+            .search-field {
+                width: $one-col;
+                flex: 0 0 auto;
+                margin-bottom: .5rem;
+                margin-top: 0;
+                align-self: flex-end;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: $two-to-three-col) {
+
+    .code-system {
+        .code-system-header {
+            .layout-container {
+                padding: 1.5rem 1rem;
+                flex-flow: row nowrap;
+                justify-content: space-between;
+                align-items: center;
+                height: auto;
+            }
+
+            h1 {
+                font-size: $font-5xl;
+            }
+
+            ul {
+                flex: 1 0 auto;
+            }
+
+            .search-field {
+                flex: 0 1 $one-point-five-col;
+                width: auto;
+                padding-bottom: 0;
+                align-self: auto;
+            }
+        }
+    }
 }

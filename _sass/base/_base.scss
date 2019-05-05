@@ -10,14 +10,13 @@ body {
     margin: 0;
     padding: 0;
     background-color: $blue;
-    color: #fff;
+    color: #000;
     font-family: "Open Sans", sans-serif;
     line-height: 1.4;
 }
 
 main {
     background-color: #fff;
-    color: #000;
     display: block; // IE
 }
 
@@ -43,7 +42,7 @@ input {
 
 
 h1 {
-    font-size: 4xl;
+    font-size: $font-4xl;
     font-weight: normal;
     margin: 1rem 0;
 }

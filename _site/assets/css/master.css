@@ -45,13 +45,12 @@ body {
   margin: 0;
   padding: 0;
   background-color: #0f2d5e;
-  color: #fff;
+  color: #000;
   font-family: "Open Sans", sans-serif;
   line-height: 1.4; }
 
 main {
   background-color: #fff;
-  color: #000;
   display: block; }
 
 a {
@@ -68,7 +67,7 @@ input {
   font-style: italic; }
 
 h1 {
-  font-size: 4xl;
+  font-size: 2rem;
   font-weight: normal;
   margin: 1rem 0; }
 
@@ -438,41 +437,6 @@ ul[role="tree"] a {
     display: block;
     margin: 0 0 .75rem 1rem;
     font-size: 1rem; }
-  #global-search-banner .search {
-    position: relative; }
-  #global-search-banner .search-input, #global-search-banner .search-button {
-    font-size: 1rem; }
-  #global-search-banner .search-input {
-    font-style: italic;
-    border: 2px solid #0f2d5e;
-    border-radius: 2.25rem;
-    line-height: 2.25rem;
-    height: 2.25rem;
-    width: 100%;
-    padding: 0 3.125rem 0 1rem;
-    transition: border-color .15s;
-    font-size: 0.75rem; }
-    #global-search-banner .search-input:focus, #global-search-banner .search-input:hover {
-      outline: 0; }
-  #global-search-banner .search-button {
-    background: #0f2d5e 0.85em center/1.1rem no-repeat;
-    background-image: url("/assets/images/search-green.svg"), url("/assets/images/search-blue.svg");
-    height: 0;
-    padding: 2rem 0 0 0;
-    border-radius: 0 2.25rem 2.25rem 0;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 3rem;
-    overflow: hidden;
-    border-color: #0f2d5e;
-    border-style: solid;
-    border-width: 2px 2px 2px 0;
-    transition: border-color .15s, background .15s; }
-    #global-search-banner .search-button:focus, #global-search-banner .search-button:hover {
-      background-color: #99eeb2;
-      background-image: url("/assets/images/search-blue.svg");
-      outline: 0; }
 
 @media only screen and (min-width: 39rem) {
   #global-search-banner {
@@ -487,19 +451,7 @@ ul[role="tree"] a {
     #global-search-banner .layout-container {
       max-width: 38rem; }
     #global-search-banner #global-search-label {
-      font-size: 1.5rem; }
-    #global-search-banner .search-input {
-      border-radius: 1.5rem;
-      line-height: 3.25rem;
-      height: 3.25rem;
-      padding: 0 4rem 0 1.25rem;
-      font-size: 1rem; }
-    #global-search-banner .search-button {
-      background-size: 1.625rem;
-      background-position: 1rem center;
-      padding: 3rem 0 0 0;
-      border-radius: 0 1.5rem 1.5rem 0;
-      width: 3.875rem; } }
+      font-size: 1.5rem; } }
 .search-refiners {
   color: #0f2d5e;
   text-align: center;
@@ -760,6 +712,55 @@ ul[role="tree"] a {
     .search-results a .code-name {
       order: 1;
       padding-right: 2rem; } }
+.search-field {
+  position: relative; }
+  .search-field .search-input, .search-field .search-button {
+    font-size: 1rem; }
+  .search-field .search-input {
+    font-style: italic;
+    border: 2px solid #0f2d5e;
+    border-radius: 2.25rem;
+    line-height: 2.25rem;
+    height: 2.25rem;
+    width: 100%;
+    padding: 0 3.125rem 0 1rem;
+    transition: border-color .15s;
+    font-size: 0.75rem; }
+    .search-field .search-input:focus, .search-field .search-input:hover {
+      outline: 0; }
+  .search-field .search-button {
+    background: #0f2d5e 0.85em center/1.1rem no-repeat;
+    background-image: url("/assets/images/search-green.svg"), url("/assets/images/search-blue.svg");
+    height: 0;
+    padding: 2rem 0 0 0;
+    border-radius: 0 2.25rem 2.25rem 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3rem;
+    overflow: hidden;
+    border-color: #0f2d5e;
+    border-style: solid;
+    border-width: 2px 2px 2px 0;
+    transition: border-color .15s, background .15s; }
+    .search-field .search-button:focus, .search-field .search-button:hover {
+      background-color: #99eeb2;
+      background-image: url("/assets/images/search-blue.svg");
+      outline: 0; }
+
+@media only screen and (min-width: 60rem) {
+  .search-field .search-input {
+    border-radius: 1.5rem;
+    line-height: 3.25rem;
+    height: 3.25rem;
+    padding: 0 4rem 0 1.25rem;
+    font-size: 1rem; }
+  .search-field .search-button {
+    background-size: 1.5rem;
+    background-position: 1rem center;
+    padding: 3rem 0 0 0;
+    border-radius: 0 1.5rem 1.5rem 0;
+    width: 3.875rem; } }
 .simple main {
   border-top: 1px solid #767676; }
   .simple main .layout-container {
@@ -794,25 +795,50 @@ ul[role="tree"] a {
   width: 100%;
   display: flex;
   flex-flow: column nowrap; }
-  .code-system #code-system-header {
-    background-color: #fff;
+  .code-system .code-system-header, .code-system .panel-container {
+    background-color: #fff; }
+  .code-system .code-system-header {
     border: 0 solid #767676;
-    border-width: 1px 0; }
-    .code-system #code-system-header .layout-container {
-      padding: .5rem 1rem;
-      display: block; }
+    border-width: 1px 0;
+    color: #0f2d5e; }
+    .code-system .code-system-header .layout-container {
+      padding: 1rem 1rem 1.5rem;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+      align-items: center; }
+    .code-system .code-system-header h1 {
+      font-size: 2rem;
+      margin: 0;
+      padding: 0 2rem .25rem 0;
+      line-height: 1.1;
+      overflow: hidden; }
+    .code-system .code-system-header ul {
+      margin: 0;
+      padding: 0 2rem 0 0;
+      list-style: none; }
+    .code-system .code-system-header li {
+      display: inline-block; }
+      .code-system .code-system-header li:first-child {
+        margin-right: 1rem; }
+    .code-system .code-system-header a {
+      white-space: nowrap;
+      height: 2rem;
+      line-height: 2rem;
+      color: #0f2d5e; }
+    .code-system .code-system-header .search-field {
+      flex: 1 0 100%;
+      margin-top: 1rem; }
   .code-system .panel-container {
-    background-color: #fff;
-    color: #000;
     display: flex;
     overflow: hidden;
     min-height: 0;
     height: 100%;
     xtouch-action: none;
     /* avoid browser level touch actions */ }
-  .code-system .panel-left, .code-system .panel-right {
+  .code-system .code-system-tree, .code-system .code-system-content {
     overflow: auto; }
-  .code-system .panel-left {
+  .code-system .code-system-tree {
     flex: 0 0 auto;
     width: 300px;
     min-height: 200px;
@@ -827,21 +853,58 @@ ul[role="tree"] a {
     padding-top: 3rem;
     position: relative;
     font-size: 1.25rem; }
-    .code-system .splitter .splitter-name, .code-system .splitter .splitter-instructions {
-      transform: rotate(90deg);
-      text-transform: uppercase;
-      white-space: nowrap;
-      line-height: 2.125rem;
-      width: 2.125rem; }
-    .code-system .splitter .splitter-instructions {
-      position: absolute;
-      font-size: 0.75rem;
-      top: 50%;
-      padding-left: 2.125rem; }
-  .code-system .panel-right {
+  .code-system .splitter-name, .code-system .splitter-instructions {
+    transform: rotate(90deg);
+    text-transform: uppercase;
+    white-space: nowrap;
+    line-height: 2.125rem;
+    width: 2.125rem; }
+  .code-system .splitter-instructions {
+    position: absolute;
+    font-size: 0.75rem;
+    top: 50%;
+    padding-left: 2.125rem; }
+  .code-system .code-system-content {
     flex: 1 1 auto;
     min-height: 200px; }
 
+@media only screen and (min-width: 39rem) {
+  .code-system .code-system-header .layout-container {
+    padding: 1rem;
+    flex-flow: column wrap;
+    align-content: space-between;
+    justify-content: flex-end;
+    height: 6.875rem; }
+  .code-system .code-system-header h1 {
+    flex: 0 0 auto;
+    padding-bottom: .5rem; }
+  .code-system .code-system-header ul {
+    flex: 1 1 auto;
+    padding-bottom: 0; }
+  .code-system .code-system-header h1, .code-system .code-system-header ul {
+    width: 17rem; }
+  .code-system .code-system-header .search-field {
+    width: 19rem;
+    flex: 0 0 auto;
+    margin-bottom: .5rem;
+    margin-top: 0;
+    align-self: flex-end; } }
+@media only screen and (min-width: 60rem) {
+  .code-system .code-system-header .layout-container {
+    padding: 1.5rem 1rem;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    height: auto; }
+  .code-system .code-system-header h1 {
+    font-size: 3.125rem; }
+  .code-system .code-system-header ul {
+    flex: 1 0 auto; }
+  .code-system .code-system-header .search-field {
+    flex: 0 1 28.5rem;
+    width: auto;
+    padding-bottom: 0;
+    align-self: auto; } }
 .front-page .intro, .front-page .directorate-link {
   margin: 1.5em 1rem 0; }
 .front-page .intro {
