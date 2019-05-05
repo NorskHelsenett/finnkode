@@ -1,5 +1,5 @@
 .code-system-tree {
-    padding: 1rem;
+    padding: 1rem 0 1rem 1rem;
 
     & > ul[role="tree"] { // Chapter titles
 
@@ -18,19 +18,46 @@
     a {
         text-decoration: none;
         color: $blue;
-        padding: .25em 1em .25em 0;
+        padding: .25em 1.5em .25em .25em;
+        margin-left: 1.75em;
+
+        &:hover {
+            background-color: $green;
+        }
+
+        &:focus {
+            background-color: $blue;
+            color: $green;
+        }
+    }
+
+    :focus {
+        outline: 0;
+    }
+
+    .focus {
+        background-color: $blue;
+        color: $green;
+
+        a {
+            color: $green;
+
+            &:hover {
+                background-color: $blue;
+            }
+        }
     }
 
     li {
-        padding: .25em 0 .25em .75em;
+        padding: .25em 0;
         position: relative;
+
+        &:first-child {
+            margin-top: .25em;
+        }
 
         &:last-child {
             padding-bottom: 0;
-        }
-
-        &:first-child {
-            padding-top: .5em;
         }
 
         &[role="none"] {
@@ -45,15 +72,15 @@
             &::before {
                 content: "";
                 position: absolute;
-                left: .5em;
-                top: 1em;
+                left: .75em;
+                top: .75em;
                 width: 0;
                 bottom: -1em;
-                border-left: 1px dashed $grey;
+                border-left: 1px dashed $light-grey;
             }
         }
 
-       &[role="none"]:last-child {
+        &[role="none"]:last-child {
             &::before {
                 bottom: .5em;
             }
@@ -61,7 +88,12 @@
     }
 
     ul[role="group"] {
-        margin-left: 1em;
+        margin-left: 2em;
+    }
+
+    [role="treeitem"],
+    [role="treeitem"] span {
+        display: block;
     }
 
     [role="treeitem"] {
@@ -77,15 +109,27 @@
                 width: 1em;
                 height: 1em;
                 top: .45em;
-                left: -.75em;
+                left: .25em;
             }
         }
 
-        a {
-            margin-left: 1em;
+        &.focus {
+            & > span {
+                &::before {
+                    background-image: url("/assets/images/tree-minus-green.svg");
+                }
+            }
         }
 
         &[aria-expanded="false"] {
+
+            &.focus {
+                & > span {
+                    &::before {
+                        background-image: url("/assets/images/tree-plus-green.svg");
+                    }
+                }
+            }
 
             & > ul {
                 display: none;
@@ -94,10 +138,6 @@
             & > span {
                 &::before {
                     background-image: url("/assets/images/tree-plus.svg");
-                }
-
-                &::after {
-
                 }
             }
         }
@@ -108,27 +148,5 @@
             }
         }
 
-        &:focus {
-            outline: 0;
-        }
-
-        &.focus,
-        & span.focus {
-            //outline: 2px fuchsia solid;
-            //background-color: $blue;
-            //color: $green;
-        }
-
-        &.hover,
-        & span.hover {
-            //background-color: $green;
-        }
-    }
-
-
-    [role="treeitem"],
-    [role="treeitem"] span {
-        //outline: 2px transparent solid;
-        display: block;
     }
 }
