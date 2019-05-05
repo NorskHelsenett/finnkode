@@ -807,14 +807,11 @@ ul[role="tree"] a {
       flex-flow: row wrap;
       justify-content: space-between;
       align-items: center; }
-      .code-system .code-system-header .layout-container > * {
-        outline: 1px solid red; }
     .code-system .code-system-header h1 {
       font-size: 2rem;
       margin: 0;
       padding: 0 2rem .25rem 0;
-      line-height: 1.1;
-      overflow: hidden; }
+      line-height: 1; }
     .code-system .code-system-header ul {
       margin: 0;
       padding: 0 2rem 0 0;
@@ -827,7 +824,9 @@ ul[role="tree"] a {
       white-space: nowrap;
       height: 2rem;
       line-height: 2rem;
-      color: #0f2d5e; }
+      color: #0f2d5e;
+      display: block;
+      padding-top: .125rem; }
     .code-system .code-system-header .search-field {
       flex: 1 0 100%;
       margin-top: 1rem; }
@@ -896,14 +895,14 @@ ul[role="tree"] a {
     flex-flow: row nowrap;
     height: auto;
     justify-content: flex-start;
-    background-color: lime; }
+    padding: 1.5rem 1rem; }
   .code-system .code-system-header h1 {
     flex: unset;
     padding-bottom: 0;
-    width: unset; }
+    width: unset;
+    font-size: 3.125rem; }
     .code-system .code-system-header h1 span {
-      display: table-caption;
-      background-color: orange; }
+      display: table-caption; }
   .code-system .code-system-header ul {
     width: unset;
     flex: unset;
@@ -912,8 +911,7 @@ ul[role="tree"] a {
     width: 25rem;
     margin-bottom: 0;
     align-self: unset;
-    flex: unset;
-    background-color: red; } }
+    flex: unset; } }
 .front-page .intro, .front-page .directorate-link {
   margin: 1.5em 1rem 0; }
 .front-page .intro {

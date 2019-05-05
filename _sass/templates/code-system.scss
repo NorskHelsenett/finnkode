@@ -21,17 +21,13 @@
             justify-content: space-between;
             align-items: center;
 
-            & > * {
-                outline: 1px solid red;
-            }
         }
 
         h1 {
             font-size: $font-4xl;
             margin: 0;
             padding: 0 2rem .25rem 0;
-            line-height: 1.1;
-            overflow: hidden;
+            line-height: 1;
         }
 
         ul {
@@ -53,6 +49,8 @@
             height: 2rem;
             line-height: 2rem;
             color: $blue;
+            display: block;
+            padding-top: .125rem;
         }
 
         .search-field {
@@ -160,17 +158,17 @@
                 flex-flow: row nowrap;
                 height: auto;
                 justify-content: flex-start;
-                background-color: lime;
+                padding: 1.5rem 1rem;
             }
 
             h1 {
                 flex: unset;
                 padding-bottom: 0;
                 width: unset;
+                font-size: $font-5xl;
 
                 span {
                     display: table-caption;
-                    background-color: orange;
                 }
             }
 
@@ -185,9 +183,9 @@
                 margin-bottom: 0;
                 align-self: unset;
                 flex: unset;
-                background-color: red;
             }
         }
     }
 
 }
+
