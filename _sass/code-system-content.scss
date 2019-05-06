@@ -1,12 +1,21 @@
+.code-system-tree {
+    display: none;
+}
+
 .code-system-content {
-    padding: 3rem 2rem;
+    padding: 1.5rem 1rem;
 
     h2 {
-        font-size: $font-5xl;
+        font-size: $font-2xl;
         color: $blue;
         line-height: 1.2;
         margin-top: 0;
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    h3 {
+        font-size: $font-l;
+        font-weight: 600;
     }
 
     .chapter-number {
@@ -45,10 +54,30 @@
             margin: 0;
             padding: 0;
             list-style: none;
+        }
 
-            li {
-                margin-bottom: 1.5rem;
-            }
+        .code {
+            margin: 1rem 0;
+            outline: 1px solid $blue;
+        }
+
+        .subcodes {
+            padding-left: 1rem;
+        }
+
+        .code-title {
+            font-size: $font-l;
+            background-color: $blue;
+            padding: .5rem;
+            color: #fff;
+        }
+
+        .code-number {
+            font-weight: 600;
+        }
+
+        .code-details {
+            padding: .5rem;
         }
     }
 }

@@ -519,14 +519,20 @@ h1 {
     margin-bottom: 0;
     align-self: unset;
     flex: unset; } }
+.code-system-tree {
+  display: none; }
+
 .code-system-content {
-  padding: 3rem 2rem; }
+  padding: 1.5rem 1rem; }
   .code-system-content h2 {
-    font-size: 3.125rem;
+    font-size: 1.5rem;
     color: #0f2d5e;
     line-height: 1.2;
     margin-top: 0;
-    margin-bottom: 2rem; }
+    margin-bottom: 1.5rem; }
+  .code-system-content h3 {
+    font-size: 1.125rem;
+    font-weight: 600; }
   .code-system-content .chapter-number {
     font-weight: normal; }
   .code-system-content .chapter-title {
@@ -549,8 +555,20 @@ h1 {
       margin: 0;
       padding: 0;
       list-style: none; }
-      .code-system-content .codes ul li {
-        margin-bottom: 1.5rem; }
+    .code-system-content .codes .code {
+      margin: 1rem 0;
+      outline: 1px solid #0f2d5e; }
+    .code-system-content .codes .subcodes {
+      padding-left: 1rem; }
+    .code-system-content .codes .code-title {
+      font-size: 1.125rem;
+      background-color: #0f2d5e;
+      padding: .5rem;
+      color: #fff; }
+    .code-system-content .codes .code-number {
+      font-weight: 600; }
+    .code-system-content .codes .code-details {
+      padding: .5rem; }
 
 #global-search-banner {
   background: url("/assets/images/background-green.jpg") center/auto 9rem no-repeat;
