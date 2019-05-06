@@ -22,7 +22,7 @@
         }
     }
 
-    .layout-container {
+    #framework-header  .layout-container, .panel-container.layout-container, .code-system-header .layout-container {
         width: auto!important;
     }
 
