@@ -551,7 +551,7 @@ h1 {
       margin: .25rem 0; }
   .code-system-content .codes {
     max-width: 57rem; }
-    .code-system-content .codes ul {
+    .code-system-content .codes .code-list {
       margin: 0;
       padding: 0;
       list-style: none; }
@@ -559,9 +559,6 @@ h1 {
       margin: 1rem 0 0;
       position: relative;
       z-index: 2; }
-      .code-system-content .codes .code .leaf .code-details {
-        border: 1px solid silver;
-        border-width: 0 1px 1px; }
       .code-system-content .codes .code.node::before {
         content: "";
         position: absolute;
@@ -571,9 +568,15 @@ h1 {
         left: 0;
         border-left: 1px dashed silver;
         z-index: -1; }
-    .code-system-content .codes .subcodes {
-      padding-left: 1rem;
-      margin-bottom: 2rem; }
+    .code-system-content .codes .code-details {
+      padding: .5rem .5rem 1rem;
+      border: 1px solid silver;
+      border-width: 0 1px 1px; }
+      .code-system-content .codes .code-details ul {
+        list-style-type: disc;
+        margin: 0; }
+      .code-system-content .codes .code-details p + ul {
+        margin-top: -.75rem; }
     .code-system-content .codes .code-title {
       font-size: 1.125rem;
       background-color: #0f2d5e;
@@ -581,8 +584,23 @@ h1 {
       color: #fff; }
     .code-system-content .codes .code-number {
       font-weight: 600; }
-    .code-system-content .codes .code-details {
-      padding: .5rem 1rem; }
+    .code-system-content .codes .subcodes {
+      padding-left: 1rem;
+      margin-bottom: 2rem;
+      list-style: none; }
+    .code-system-content .codes .validity {
+      margin: 0 0 .5rem;
+      font-size: 0.875rem;
+      display: flex;
+      flex-flow: row nowrap;
+      color: #767676; }
+      .code-system-content .codes .validity p {
+        margin: 0 1.5rem 0 0;
+        line-height: 1.2; }
+        .code-system-content .codes .validity p:last-child {
+          margin-right: 0; }
+      .code-system-content .codes .validity a {
+        color: #767676; }
 
 #global-search-banner {
   background: url("/assets/images/background-green.jpg") center/auto 9rem no-repeat;
