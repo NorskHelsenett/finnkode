@@ -519,7 +519,7 @@ h1 {
     margin-bottom: 0;
     align-self: unset;
     flex: unset; } }
-.code-system-tree {
+.code-system-tree, .splitter {
   display: none; }
 
 .code-system-content {
@@ -556,10 +556,24 @@ h1 {
       padding: 0;
       list-style: none; }
     .code-system-content .codes .code {
-      margin: 1rem 0;
-      outline: 1px solid #0f2d5e; }
+      margin: 1rem 0 0;
+      position: relative;
+      z-index: 2; }
+      .code-system-content .codes .code .leaf .code-details {
+        border: 1px solid silver;
+        border-width: 0 1px 1px; }
+      .code-system-content .codes .code.node::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 0;
+        left: 0;
+        border-left: 1px dashed silver;
+        z-index: -1; }
     .code-system-content .codes .subcodes {
-      padding-left: 1rem; }
+      padding-left: 1rem;
+      margin-bottom: 2rem; }
     .code-system-content .codes .code-title {
       font-size: 1.125rem;
       background-color: #0f2d5e;
@@ -568,7 +582,7 @@ h1 {
     .code-system-content .codes .code-number {
       font-weight: 600; }
     .code-system-content .codes .code-details {
-      padding: .5rem; }
+      padding: .5rem 1rem; }
 
 #global-search-banner {
   background: url("/assets/images/background-green.jpg") center/auto 9rem no-repeat;
