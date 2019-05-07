@@ -1,6 +1,6 @@
-.code-system-tree, .splitter {
-    display: none;
-}
+//.code-system-tree, .splitter {
+//    display: none;
+//}
 
 .code-system-content {
     padding: 1.5rem 1rem;
@@ -69,7 +69,7 @@
                     bottom: 0;
                     width: 0;
                     left: 0;
-                    border-left: 1px dashed silver;
+                    border-left: 1px dashed $light-grey;
                     z-index: -1;
                 }
             }
@@ -77,8 +77,8 @@
 
         .code-details {
             padding: .5rem .5rem 1rem;
-            border: 1px solid silver;
-            border-width: 0 1px 1px;
+            border: 1px solid $light-grey;
+            border-width: 0 1px 1px 1px;
 
             ul {
                 list-style-type: disc;
@@ -127,6 +127,68 @@
                 color: $grey;
             }
 
+        }
+
+        .notes {
+            border: 1px solid $light-grey;
+            border-width: 0 1px;
+        }
+
+        .note {
+            border-bottom: 1px solid $light-grey;
+
+            &.expanded {
+                .note-content {
+                    background-color: $lightest-grey;
+                    transition: background-color .15s;
+                }
+            }
+
+            .expander {
+                background-color: #fff;
+                padding: .5rem;
+                color: $blue;
+                position: relative;
+                transition: color .15s, background-color .15s;
+                outline: 0;
+                font-weight: 600;
+
+                &:hover, &:focus {
+                    background-color: $light-green;
+                }
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    height: 100%;
+                    right: 0;
+                    top: 0;
+                    width: 2.5rem;
+                    background: url("/assets/images/chevron-down-blue.svg") right .5rem center / 1rem no-repeat;
+                    transform: scaleY(1);
+                    transition: transform .15s;
+                }
+
+                &[aria-expanded="true"] {
+                    background-color: $blue;
+                    color: #fff;
+
+                    &::after {
+                        transform: scaleY(- 1);
+                        background: url("/assets/images/chevron-down-white.svg") center / 1rem no-repeat;
+                    }
+                }
+
+            }
+        }
+
+        .note-content {
+            background-color: #fff;
+            padding: .5rem;
+
+            p {
+                margin: .5rem 0;
+            }
         }
 
     }
