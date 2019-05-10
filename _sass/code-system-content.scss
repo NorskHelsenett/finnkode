@@ -1,6 +1,6 @@
-//.code-system-tree, .splitter {
-//    display: none;
-//}
+.code-system-tree, .splitter {
+    display: none;
+}
 
 .code-system-content {
     padding: 1.5rem 1rem;
@@ -56,6 +56,19 @@
             list-style: none;
         }
 
+        .code-details {
+            padding: 1rem;
+
+            ul {
+                list-style-type: disc;
+                margin: 0;
+            }
+
+            p + ul {
+                margin-top: -.75rem;
+            }
+        }
+
         .code {
             margin: 1rem 0 0;
             position: relative;
@@ -73,27 +86,20 @@
                     z-index: -1;
                 }
             }
-        }
 
-        .code-details {
-            padding: .5rem .5rem 1rem;
-            border: 1px solid $light-grey;
-            border-width: 0 1px 1px 1px;
-
-            ul {
-                list-style-type: disc;
-                margin: 0;
-            }
-
-            p + ul {
-                margin-top: -.75rem;
+            &.leaf {
+                .code-details {
+                    border: 1px solid $light-grey;
+                    border-width: 0 1px 1px 1px;
+                }
             }
         }
+
 
         .code-title {
             font-size: $font-l;
             background-color: $blue;
-            padding: .5rem;
+            padding: .75rem 1rem;
             color: #fff;
         }
 
@@ -146,7 +152,7 @@
 
             .expander {
                 background-color: #fff;
-                padding: .5rem;
+                padding: .5rem 1rem;
                 color: $blue;
                 position: relative;
                 transition: color .15s, background-color .15s;
@@ -164,7 +170,7 @@
                     right: 0;
                     top: 0;
                     width: 2.5rem;
-                    background: url("/assets/images/chevron-down-blue.svg") right .5rem center / 1rem no-repeat;
+                    background: url("/assets/images/chevron-down-blue.svg") right 1rem center / 1rem no-repeat;
                     transform: scaleY(1);
                     transition: transform .15s;
                 }
