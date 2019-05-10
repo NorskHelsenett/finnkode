@@ -39,7 +39,8 @@ title {
   box-sizing: border-box; }
 
 html {
-  height: 100%; }
+  height: 100%;
+  font-size: calc(1em + 1vw); }
 
 body {
   margin: 0;
