@@ -27,7 +27,6 @@
     }
 
     .inclusions-exclusions {
-        max-width: $two-col;
         margin-bottom: 2rem;
 
         h3 {
@@ -115,7 +114,6 @@
 
         .validity {
             margin: 0 0 .5rem;
-            font-size: $font-s;
             display: flex;
             flex-flow: row nowrap;
             color: $grey;

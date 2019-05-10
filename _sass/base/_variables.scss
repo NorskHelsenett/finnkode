@@ -24,20 +24,22 @@ $font-5xl: 3.125rem;//  50px
 
 // Layout
 
-$one-col: 19rem;
+
+$default-grid-spacing: 16px;
+$one-col: 304px;
 $one-point-five-col: $one-col * 1.5;
 $two-col: $one-col * 2;  // 38rem, 608px
 $three-col: $one-col * 3; // 57rem, 912px
 $four-col: $one-col * 4; // 76rem, 1216px
 
 
-$one-col-content: $one-col - 2rem;
+$one-col-content: $one-col - $default-grid-spacing;
 
 
 $one-third-full-width: $four-col / 3;
 $two-thirds-full-width: $four-col / 3 * 2;
 
 // Breakpoints
-$one-to-two-col: $two-col + 1rem;
-$two-to-three-col: $three-col + 3rem;
-$three-to-four-col: $four-col + 3rem;
+$one-to-two-col: $two-col + $default-grid-spacing;
+$two-to-three-col: $three-col + 3 * $default-grid-spacing;
+$three-to-four-col: $four-col + 3 * $default-grid-spacing;

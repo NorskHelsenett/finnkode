@@ -22,7 +22,7 @@
     .simple {
         main {
             .layout-container {
-                padding-right: $one-col + 1rem;
+                padding-right: $one-col + $default-grid-spacing;
             }
         }
     }
@@ -32,7 +32,7 @@
     .simple {
         main {
             .layout-container {
-                padding-right: $two-col + 1rem;
+                padding-right: $two-col + $default-grid-spacing;
             }
         }
     }

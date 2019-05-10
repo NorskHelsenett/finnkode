@@ -16,25 +16,25 @@ title {
   position: relative;
   z-index: 1; }
 
-@media only screen and (min-width: 39rem) {
+@media only screen and (min-width: 624px) {
   title {
     z-index: 2; }
 
   .layout-container {
-    width: 38rem;
+    width: 608px;
     margin: 0 auto; } }
-@media only screen and (min-width: 60rem) {
+@media only screen and (min-width: 960px) {
   title {
     z-index: 3; }
 
   .layout-container {
-    width: 57rem; } }
-@media only screen and (min-width: 79rem) {
+    width: 912px; } }
+@media only screen and (min-width: 1264px) {
   title {
     z-index: 4; }
 
   .layout-container {
-    width: 76rem; } }
+    width: 1216px; } }
 *, ::after, ::before {
   box-sizing: border-box; }
 
@@ -174,13 +174,13 @@ h1 {
   height: 1px;
   background-color: #767676; }
 
-@media only screen and (min-width: 39rem) {
+@media only screen and (min-width: 624px) {
   #framework-header .code-system-menu .category, #framework-header .code-system-menu .category.all {
     margin-bottom: 1.5rem;
     margin-top: 1.5rem; }
   #framework-header .code-system-menu .category:last-child {
     margin-bottom: 3rem; } }
-@media only screen and (min-width: 60rem) {
+@media only screen and (min-width: 960px) {
   #framework-header .main-header-content .main-choices {
     padding: 1.625rem 1rem; }
   #framework-header .finnkode-logo {
@@ -226,7 +226,7 @@ h1 {
   #framework-footer a {
     color: #fff; }
 
-@media only screen and (min-width: 60rem) {
+@media only screen and (min-width: 960px) {
   #framework-footer {
     padding: 2.75rem 0; }
     #framework-footer .layout-container {
@@ -239,7 +239,7 @@ h1 {
       padding-bottom: 0;
       line-height: 1.5;
       font-size: 1.25rem;
-      width: 19rem; }
+      width: 304px; }
     #framework-footer .text-size {
       display: block;
       margin: 0 1rem;
@@ -338,12 +338,12 @@ h1 {
   text-decoration: none;
   padding: .5rem 1rem; }
 
-@media only screen and (min-width: 39rem) {
+@media only screen and (min-width: 624px) {
   .code-system-menu {
     display: flex;
     flex-flow: row wrap; }
     .code-system-menu .category {
-      width: 19rem;
+      width: 304px;
       padding: 0 1rem;
       margin-bottom: 2.5rem; }
       .code-system-menu .category::after {
@@ -353,17 +353,17 @@ h1 {
     .code-system-menu a {
       padding: .75rem 1rem;
       background: url("/assets/images/chevron-right-blue.svg") right 1rem center/0.75rem no-repeat; } }
-@media only screen and (min-width: 60rem) {
+@media only screen and (min-width: 960px) {
   .code-system-menu .category {
-    width: 28.5rem; }
+    width: 456px; }
     .code-system-menu .category h2 {
       font-size: 1.5rem; }
   .code-system-menu ul {
     font-size: 1.125rem;
     font-weight: 600; } }
-@media only screen and (min-width: 79rem) {
+@media only screen and (min-width: 1264px) {
   .code-system-menu .category {
-    width: 19rem; } }
+    width: 304px; } }
 .code-system-tree {
   padding: 1rem 0 1rem 1rem; }
   .code-system-tree > ul[role="tree"] > li > span > a[role="treeitem"] {
@@ -476,7 +476,7 @@ h1 {
     flex: 1 0 100%;
     margin-top: 1rem; }
 
-@media only screen and (min-width: 39rem) {
+@media only screen and (min-width: 624px) {
   .code-system-header .layout-container {
     padding: 1rem;
     flex-flow: column wrap;
@@ -490,14 +490,14 @@ h1 {
     flex: 1 1 auto;
     padding-bottom: 0; }
   .code-system-header h1, .code-system-header ul {
-    width: 17rem; }
+    width: 288px; }
   .code-system-header .search-field {
-    width: 19rem;
+    width: 304px;
     flex: 0 0 auto;
     margin-bottom: .5rem;
     margin-top: 0;
     align-self: flex-end; } }
-@media only screen and (min-width: 60rem) {
+@media only screen and (min-width: 960px) {
   .code-system-header .layout-container {
     flex-flow: row nowrap;
     height: auto;
@@ -538,7 +538,6 @@ h1 {
   .code-system-content .chapter-title {
     font-weight: 600; }
   .code-system-content .inclusions-exclusions {
-    max-width: 38rem;
     margin-bottom: 2rem; }
     .code-system-content .inclusions-exclusions h3 {
       font-size: 1.125rem;
@@ -550,7 +549,7 @@ h1 {
     .code-system-content .inclusions-exclusions li {
       margin: .25rem 0; }
   .code-system-content .codes {
-    max-width: 57rem; }
+    max-width: 912px; }
     .code-system-content .codes .code-list {
       margin: 0;
       padding: 0;
@@ -591,7 +590,6 @@ h1 {
       list-style: none; }
     .code-system-content .codes .validity {
       margin: 0 0 .5rem;
-      font-size: 0.875rem;
       display: flex;
       flex-flow: row nowrap;
       color: #767676; }
@@ -652,7 +650,7 @@ h1 {
   #global-search-banner .layout-container {
     padding: 0 1rem;
     width: 100%;
-    max-width: 28.5rem; }
+    max-width: 456px; }
   #global-search-banner #global-search-label {
     font-weight: 600;
     color: #0f2d5e;
@@ -660,18 +658,18 @@ h1 {
     margin: 0 0 .75rem 1rem;
     font-size: 1rem; }
 
-@media only screen and (min-width: 39rem) {
+@media only screen and (min-width: 624px) {
   #global-search-banner {
     height: 13rem;
     background-size: auto 13rem; }
     #global-search-banner .layout-container {
-      max-width: 28.5rem; } }
-@media only screen and (min-width: 60rem) {
+      max-width: 456px; } }
+@media only screen and (min-width: 960px) {
   #global-search-banner {
     height: 18rem;
     background-size: cover; }
     #global-search-banner .layout-container {
-      max-width: 38rem; }
+      max-width: 608px; }
     #global-search-banner #global-search-label {
       font-size: 1.5rem; } }
 .search-refiners {
@@ -783,7 +781,7 @@ h1 {
       font-weight: 600;
       border-bottom: 1px solid #0f2d5e; }
 
-@media only screen and (min-width: 39rem) {
+@media only screen and (min-width: 624px) {
   .search-refiners {
     white-space: nowrap; }
     .search-refiners .expander {
@@ -797,7 +795,7 @@ h1 {
       padding: 0 1rem 0 0;
       margin-top: 0; }
     .search-refiners .date, .search-refiners .code-system-list {
-      width: 19rem; }
+      width: 304px; }
     .search-refiners #datepickerLabel {
       padding: .75rem 1rem;
       margin: .5rem 0 1.5rem;
@@ -837,7 +835,7 @@ h1 {
           bottom: -1px; }
       .search-refiners a.current {
         border-bottom: 0; } }
-@media only screen and (min-width: 60rem) {
+@media only screen and (min-width: 960px) {
   .search-refiners {
     padding-bottom: 3rem;
     margin-bottom: 0; }
@@ -861,9 +859,9 @@ h1 {
     .search-refiners .code-system-list {
       padding-left: 0;
       margin-top: 2.5rem; } }
-@media only screen and (min-width: 79rem) {
+@media only screen and (min-width: 1264px) {
   .search-refiners .date, .search-refiners .code-system-list {
-    width: 19rem; }
+    width: 304px; }
   .search-refiners .date-field {
     width: 12rem; } }
 .search-results {
@@ -914,7 +912,7 @@ h1 {
   .search-results .code-name {
     font-weight: 600; }
 
-@media only screen and (min-width: 60rem) {
+@media only screen and (min-width: 960px) {
   .search-results .hits {
     padding: .75rem 1rem;
     margin-top: 0; }
@@ -970,7 +968,7 @@ h1 {
       background-image: url("/assets/images/search-blue.svg");
       outline: 0; }
 
-@media only screen and (min-width: 60rem) {
+@media only screen and (min-width: 960px) {
   .search-field .search-input {
     border-radius: 1.5rem;
     line-height: 3.25rem;
@@ -993,16 +991,16 @@ h1 {
   font-size: 1.125rem;
   font-weight: 600; }
 
-@media only screen and (min-width: 60rem) {
+@media only screen and (min-width: 960px) {
   .simple main .layout-container {
-    padding-right: 20rem; } }
-@media only screen and (min-width: 79rem) {
+    padding-right: 320px; } }
+@media only screen and (min-width: 1264px) {
   .simple main .layout-container {
-    padding-right: 39rem; } }
+    padding-right: 624px; } }
 .search h2 {
   font-size: 1rem; }
 
-@media only screen and (min-width: 60rem) {
+@media only screen and (min-width: 960px) {
   .search main .layout-container {
     display: flex;
     flex-flow: row nowrap;
@@ -1084,12 +1082,12 @@ h1 {
 .front-page main .code-system-menu {
   margin-top: 3rem; }
 
-@media only screen and (min-width: 39rem) {
+@media only screen and (min-width: 624px) {
   .front-page main .code-system-menu {
     padding-bottom: 1.5rem; } }
-@media only screen and (min-width: 60rem) {
+@media only screen and (min-width: 960px) {
   .front-page .intro {
     font-size: 1.5rem;
-    max-width: 57rem; }
+    max-width: 912px; }
   .front-page .directorate-link {
     font-size: 1.125rem; } }

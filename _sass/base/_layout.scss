@@ -4,8 +4,8 @@
 title {
     position: relative;
     z-index: 1;
-}
 
+}
 // Landscape-oriented mobiles and portrait-oriented tablets. Two columns.
 @media only screen and (min-width: $one-to-two-col) {
     title {
@@ -16,6 +16,7 @@ title {
         width: $two-col;
         margin: 0 auto;
     }
+
 
 }
 
@@ -39,5 +40,6 @@ title {
     .layout-container {
         width: $four-col;
     }
+
 
 }
