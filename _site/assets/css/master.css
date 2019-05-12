@@ -1044,10 +1044,30 @@ h1 {
       order: 1; }
   .code-system .splitter {
     color: #0f2d5e;
-    background: #99eeb2 url("/assets/images/chevron-down-blue.svg") center/0.75rem no-repeat; }
+    background-color: #99eeb2;
+    position: relative;
+    padding: .5rem 1rem; }
+    .code-system .splitter:focus {
+      outline: none; }
+    .code-system .splitter::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 2em;
+      height: 100%;
+      background: #99eeb2 url("/assets/images/chevron-down-blue.svg") right 1rem center/1rem no-repeat;
+      transition: .15s transform; }
+    .code-system .splitter[aria-expanded="true"]::after {
+      transform: scaleY(-1); }
+    .code-system .splitter[aria-expanded="false"]::after {
+      transform: scaleY(1); }
   .code-system .splitter-instructions {
     display: none; }
 
+@media only screen and (min-width: 624px) {
+  .code-system #framework-header .code-system-menu.expandable {
+    justify-content: center; } }
 @media only screen and (min-width: 960px) {
   .code-system .headers {
     flex: unset; }
@@ -1069,9 +1089,11 @@ h1 {
     background: #99eeb2 url("/assets/images/splitter.svg") center/0.75rem no-repeat;
     min-height: 200px;
     cursor: col-resize;
-    padding-top: 3rem;
+    padding: 2rem 0 0;
     position: relative;
     font-size: 1.25rem; }
+    .code-system .splitter::after {
+      display: none; }
   .code-system .splitter-name, .code-system .splitter-instructions {
     transform: rotate(90deg);
     text-transform: uppercase;

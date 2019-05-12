@@ -72,19 +72,54 @@
 
     .splitter {
         color: $blue;
-        background: $green url("/assets/images/chevron-down-blue.svg") center / .75rem no-repeat;
+        background-color: $green;
+        position: relative;
+        padding: .5rem 1rem;
+
+        &:focus {
+            outline: none;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 2em;
+            height: 100%;
+            background: $green url("/assets/images/chevron-down-blue.svg") right 1rem center / 1rem no-repeat;
+            transition: .15s transform;
+        }
+
+        &[aria-expanded="true"] {
+            &::after {
+                transform: scaleY(-1);
+            }
+        }
+
+
+        &[aria-expanded="false"] {
+            &::after {
+                transform: scaleY(1);
+            }
+        }
     }
 
     .splitter-instructions {
         display: none;
     }
 
+}
 
-    // Sticky header stuff
-    //.headers {
-    //    &.sticky {
-    //    }
-    //}
+@media only screen and (min-width: $one-to-two-col) {
+    .code-system {
+
+        // Override from head.html
+        #framework-header .code-system-menu.expandable {
+            justify-content: center;
+        }
+
+    }
 }
 
 @media only screen and (min-width: $two-to-three-col) {
@@ -117,9 +152,14 @@
             background: $green url("/assets/images/splitter.svg") center / .75rem no-repeat;
             min-height: 200px;
             cursor: col-resize;
-            padding-top: 3rem;
+            padding: 2rem 0 0;
             position: relative;
             font-size: $font-xl;
+
+            &::after {
+                display: none;
+            }
+
         }
 
         .splitter-name, .splitter-instructions {
