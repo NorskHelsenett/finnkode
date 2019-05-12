@@ -43,7 +43,6 @@
 
         &.expanded {
             .code-system-tree {
-                //flex: 1 0 auto;
                 order: 2;
             }
 
@@ -52,7 +51,6 @@
             }
 
             .code-system-content {
-                //flex: 1 1 auto;
                 display: none;
             }
         }
@@ -64,7 +62,6 @@
 
             .splitter {
                 order: 2;
-                //flex: 0 0 auto;
             }
 
             .code-system-content {
@@ -102,44 +99,15 @@
 @media only screen and (min-width: $two-to-three-col) {
 
     .code-system {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        display: flex;
-        flex-flow: column nowrap;
 
-        .code-system-header, .panel-container {
-            background-color: #fff;
-        }
-
-        .panel-container {
-            &::before {
-                content: "";
-                position: absolute;
-                top: 3rem;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: #fff;
-                z-index: -200;
-            }
-        }
-
-        #framework-header .layout-container, .panel-container.layout-container, .code-system-header .layout-container {
-            width: auto !important;
-        }
+        //.headers {
+        //    flex: 0 0 auto;
+        //}
 
 
         .panel-container {
-            display: flex;
-            overflow: hidden;
-            min-height: 0;
-            height: 100%;
+            flex-flow: row nowrap;
             xtouch-action: none; /* avoid browser level touch actions */
-        }
-
-        .code-system-tree, .code-system-content {
-            overflow: auto;
         }
 
         .code-system-tree {
@@ -149,11 +117,14 @@
             min-width: 24rem;
         }
 
+        .code-system-content {
+            flex: 1 1 auto;
+            min-height: 200px;
+        }
+
         .splitter {
-            color: $blue;
             flex: 0 0 auto;
             width: 2.125rem;
-            background: $green url("/assets/images/splitter.svg") center / .75rem no-repeat;
             min-height: 200px;
             cursor: col-resize;
             padding-top: 3rem;
@@ -170,16 +141,13 @@
         }
 
         .splitter-instructions {
+            display: block;
             position: absolute;
             font-size: $font-xs;
             top: 50%;
             padding-left: 2.125rem;
         }
 
-        .code-system-content {
-            flex: 1 1 auto;
-            min-height: 200px;
-        }
     }
 
 }

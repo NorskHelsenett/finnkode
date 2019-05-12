@@ -9,6 +9,8 @@
 
     $.getScript("/assets/js/code-system/stickyHeader.js");
     $.getScript("/assets/js/code-system/resizableSplitter.js");
+    $.getScript("/assets/js/code-system/treeSlider.js");
 
     $.getScript("/assets/js/master/main.js");
+
 })(jQuery);

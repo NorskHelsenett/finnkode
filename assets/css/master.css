@@ -1050,63 +1050,38 @@ h1 {
     display: none; }
 
 @media only screen and (min-width: 960px) {
-  .code-system {
+  .code-system .panel-container {
+    flex-flow: row nowrap;
+    xtouch-action: none;
+    /* avoid browser level touch actions */ }
+  .code-system .code-system-tree {
+    flex: 0 0 auto;
+    width: 300px;
+    min-height: 200px;
+    min-width: 24rem; }
+  .code-system .code-system-content {
+    flex: 1 1 auto;
+    min-height: 200px; }
+  .code-system .splitter {
+    flex: 0 0 auto;
+    width: 2.125rem;
+    min-height: 200px;
+    cursor: col-resize;
+    padding-top: 3rem;
+    position: relative;
+    font-size: 1.25rem; }
+  .code-system .splitter-name, .code-system .splitter-instructions {
+    transform: rotate(90deg);
+    text-transform: uppercase;
+    white-space: nowrap;
+    line-height: 2.125rem;
+    width: 2.125rem; }
+  .code-system .splitter-instructions {
+    display: block;
     position: absolute;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-flow: column nowrap; }
-    .code-system .code-system-header, .code-system .panel-container {
-      background-color: #fff; }
-    .code-system .panel-container::before {
-      content: "";
-      position: absolute;
-      top: 3rem;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #fff;
-      z-index: -200; }
-    .code-system #framework-header .layout-container, .code-system .panel-container.layout-container, .code-system .code-system-header .layout-container {
-      width: auto !important; }
-    .code-system .panel-container {
-      display: flex;
-      overflow: hidden;
-      min-height: 0;
-      height: 100%;
-      xtouch-action: none;
-      /* avoid browser level touch actions */ }
-    .code-system .code-system-tree, .code-system .code-system-content {
-      overflow: auto; }
-    .code-system .code-system-tree {
-      flex: 0 0 auto;
-      width: 300px;
-      min-height: 200px;
-      min-width: 24rem; }
-    .code-system .splitter {
-      color: #0f2d5e;
-      flex: 0 0 auto;
-      width: 2.125rem;
-      background: #99eeb2 url("/assets/images/splitter.svg") center/0.75rem no-repeat;
-      min-height: 200px;
-      cursor: col-resize;
-      padding-top: 3rem;
-      position: relative;
-      font-size: 1.25rem; }
-    .code-system .splitter-name, .code-system .splitter-instructions {
-      transform: rotate(90deg);
-      text-transform: uppercase;
-      white-space: nowrap;
-      line-height: 2.125rem;
-      width: 2.125rem; }
-    .code-system .splitter-instructions {
-      position: absolute;
-      font-size: 0.75rem;
-      top: 50%;
-      padding-left: 2.125rem; }
-    .code-system .code-system-content {
-      flex: 1 1 auto;
-      min-height: 200px; } }
+    font-size: 0.75rem;
+    top: 50%;
+    padding-left: 2.125rem; } }
 .front-page .intro, .front-page .directorate-link {
   margin: 1.5em 1rem 0; }
 .front-page .intro {
