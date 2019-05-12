@@ -1,7 +1,3 @@
-.code-system-tree, .splitter {
-    display: none;
-}
-
 .code-system-content {
     padding: 1.5rem 1rem;
 
@@ -144,7 +140,6 @@
             &.expanded {
                 .note-content {
                     background-color: $lightest-grey;
-                    transition: background-color .15s;
                 }
             }
 
@@ -188,7 +183,7 @@
 
         .note-content {
             background-color: #fff;
-            padding: .5rem;
+            padding: .5rem 1rem;
 
             p {
                 margin: .5rem 0;
@@ -197,17 +192,3 @@
 
     }
 }
-
-@media only screen and (min-width: $one-to-two-col) {
-    .code-system-content {
-
-    }
-}
-
-@media only screen and (min-width: $two-to-three-col) {
-    .code-system-header {
-
-    }
-}
-
-
