@@ -60,7 +60,6 @@ Licensed under MIT License
             var $handle;
 
             if (options === "destroy") {
-                console.log("destroy");
                 opt = $el.data("resizable");
                 if (!opt)
                     return;

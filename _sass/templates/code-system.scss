@@ -57,7 +57,7 @@
 
         &.collapsed {
             .code-system-tree {
-                padding: 0;
+                display: none;
             }
 
             .splitter {
@@ -72,7 +72,7 @@
 
     .splitter {
         color: $blue;
-        background: $green url("/assets/images/splitter.svg") center / .75rem no-repeat;
+        background: $green url("/assets/images/chevron-down-blue.svg") center / .75rem no-repeat;
     }
 
     .splitter-instructions {
@@ -81,32 +81,21 @@
 
 
     // Sticky header stuff
-    .headers {
-        &.sticky {
-        }
-    }
-
-
-}
-
-
-@media only screen and (min-width: $one-to-two-col) {
-    .code-system {
-
-    }
+    //.headers {
+    //    &.sticky {
+    //    }
+    //}
 }
 
 @media only screen and (min-width: $two-to-three-col) {
-
     .code-system {
 
-        //.headers {
-        //    flex: 0 0 auto;
-        //}
-
+        .headers {
+            flex: unset;
+        }
 
         .panel-container {
-            flex-flow: row nowrap;
+            flex-flow: unset;
             xtouch-action: none; /* avoid browser level touch actions */
         }
 
@@ -125,6 +114,7 @@
         .splitter {
             flex: 0 0 auto;
             width: 2.125rem;
+            background: $green url("/assets/images/splitter.svg") center / .75rem no-repeat;
             min-height: 200px;
             cursor: col-resize;
             padding-top: 3rem;
@@ -149,6 +139,5 @@
         }
 
     }
-
 }
 

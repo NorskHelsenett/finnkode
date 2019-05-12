@@ -16,6 +16,9 @@
             } else if (expand.hasClass("js-expand")) {
                 expander = expand.find($(".js-expander")).first();
                 expandable = expand.find($(".js-expandable")).first();
+            } else if (expand.hasClass("js-tree-expand")) {
+                expander = expand.find($(".js-tree-expander")).first();
+                expandable = expand.find($(".js-tree-expandable")).first();
             }
 
             function ExpandBlock(expand, expander, expandable) {

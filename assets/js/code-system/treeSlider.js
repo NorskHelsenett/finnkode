@@ -1,16 +1,15 @@
-function treeSlider() {
-    var sliderContainer = $(".js-tree-slider");
+function treeExpand () {
+    var treeContainer = $(".js-tree-expand");
 
-    if (sliderContainer.length > 0) {
-
-        var sliderBlocks = $(".js-tree-slider").getExpandableBlocks();
+    if (treeContainer.length > 0) {
+        var treeExpandBlocks = $(".js-tree-expand").getExpandableBlocks();
 
         if (layoutQ().number[0] > 2) {
-            sliderBlocks.removeExpandability();
+            treeExpandBlocks.removeExpandability();
         } else {
-            sliderBlocks.addExpandability();
+            treeExpandBlocks.addExpandability();
         }
     }
 }
 
-window.treeSlider = treeSlider;
+window.treeExpand = treeExpand;

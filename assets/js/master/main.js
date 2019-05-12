@@ -31,7 +31,7 @@ $(window).on("layoutchange", function () {
 
     responsiveExpandableBlocks();
     resizableSplitter();
-    treeSlider();
+    treeExpand();
     //stickyHeader();
 });
 
