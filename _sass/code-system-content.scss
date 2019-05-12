@@ -192,3 +192,50 @@
 
     }
 }
+
+//
+//.splitter {
+//    color: $blue;
+//    background-color: $green;
+//    width: 100%;
+//    z-index: 100;
+//    padding: .5rem 1rem;
+//    color: $blue;
+//    transition: color .15s, background-color .15s;
+//    outline: 0;
+//    font-weight: 600;
+//    position: fixed;
+//    flex: 0 0 auto;
+//
+//    &::after {
+//        content: "";
+//        position: absolute;
+//        height: 100%;
+//        right: 0;
+//        top: 0;
+//        width: 2.5rem;
+//        background: url("/assets/images/chevron-down-blue.svg") right 1rem center / 1rem no-repeat;
+//        transition: transform .15s;
+//    }
+//
+//    &[aria-expanded="false"] {
+//        position: fixed;
+//        bottom: 0;
+//
+//        &::after {
+//            transform: scaleY(- 1);
+//        }
+//    }
+//
+//    &[aria-expanded="true"] {
+//        position: relative;
+//
+//        &::after {
+//            transform: scaleY(1);
+//        }
+//    }
+//}
+//
+//.splitter-instructions {
+//    display: none;
+//}

@@ -12,12 +12,13 @@
     {% include code-system-header.html %}
 </div>
 
-<div class="panel-container layout-container">
-    <nav class="code-system-tree js-resizable-splitter">
+<div class="panel-container layout-container js-expand">
+
+    <nav class="code-system-tree js-resizable-splitter js-expandable">
         {% include code-system-tree.html %}
     </nav>
 
-    <div class="splitter">
+    <div class="splitter js-expander">
         <div class="splitter-name">{{page.code-system}}</div>
         <div class="splitter-instructions">Trekk for å utvide</div>
     </div>
