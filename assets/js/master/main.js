@@ -31,7 +31,7 @@ $(window).on("layoutchange", function () {
 
     responsiveExpandableBlocks();
     resizableSplitter();
-
+    stickyHeader();
 });
 
 // "conditionalresize" does stuff does stuff on debounced resize when the layout is 1-col.

@@ -6,6 +6,8 @@
     $.getScript("/assets/js/master/responsiveExpandableBlocks.js");
     $.getScript("/assets/js/master/textSizeExpander.js");
 
+
+    $.getScript("/assets/js/code-system/stickyHeader.js");
     $.getScript("/assets/js/code-system/resizableSplitter.js");
 
     $.getScript("/assets/js/master/main.js");

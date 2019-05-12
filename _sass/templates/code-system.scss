@@ -26,8 +26,8 @@
         }
     }
 
-    #framework-header  .layout-container, .panel-container.layout-container, .code-system-header .layout-container {
-        width: auto!important;
+    #framework-header .layout-container, .panel-container.layout-container, .code-system-header .layout-container {
+        width: auto !important;
     }
 
     .code-system-tree, .code-system-content {
@@ -82,6 +82,14 @@
         display: none;
     }
 
+
+    // Sticky header stuff
+    .headers {
+        &.sticky {
+        }
+    }
+
+
 }
 
 
@@ -117,8 +125,8 @@
             }
         }
 
-        #framework-header  .layout-container, .panel-container.layout-container, .code-system-header .layout-container {
-            width: auto!important;
+        #framework-header .layout-container, .panel-container.layout-container, .code-system-header .layout-container {
+            width: auto !important;
         }
 
 
