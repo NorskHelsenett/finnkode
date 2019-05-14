@@ -122,7 +122,7 @@ h1 {
   height: 0;
   padding-top: 3rem;
   overflow: hidden;
-  background: url("/assets/images/finnkode-logo.svg") center left/contain no-repeat;
+  background: url("/assets/images/new-logo.svg") center left/contain no-repeat;
   width: 9rem;
   margin-right: 1.5rem; }
 #framework-header .main-menu {
@@ -184,7 +184,7 @@ h1 {
   #framework-header .main-header-content .main-choices {
     padding: 1.625rem 1rem; }
   #framework-header .finnkode-logo {
-    width: 13rem; }
+    width: 15rem; }
   #framework-header .main-menu {
     font-size: 1.25rem; }
     #framework-header .main-menu li:first-child {
