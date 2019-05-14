@@ -1,10 +1,3 @@
-.active {
-    outline: 3px solid red!important;
-}
-
-.sticky {
-    outline: 3px solid green;
-}
 
 .code-system {
     position: absolute;
@@ -34,7 +27,7 @@
         }
     }
 
-    #framework-header,.code-system-header, .panel-container {
+    #framework-header, .code-system-header, .panel-container {
         .layout-container, &.layout-container {
             width: auto !important;
         }
@@ -135,19 +128,21 @@
 @media only screen and (min-width: $two-to-three-col) {
     .code-system {
 
-        #framework-header,.code-system-header {
-            .layout-container {
-                margin: 0 2vw;
-            }
+        #framework-header > .layout-container,
+        .main-choices,
+        .code-system-header .layout-container {
+            margin-left: 5vw;
+            margin-right: 5vw;
         }
+
+        .code-system-content {
+            padding-right: 5vw;
+        }
+
 
         .panel-container.layout-container {
-            margin-left: 2vw;
-            outline: 1px solid red;
+            margin-left: 5vw;
         }
-
-
-
 
         .headers {
             flex: unset;

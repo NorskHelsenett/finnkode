@@ -19,13 +19,14 @@
         color: $blue;
         padding: .25em 1.5em .25em .25em;
         margin-left: 2.5em;
+
     }
 
     :focus {
-        // outline: 0;
+        outline: 0;
     }
 
-    .focus, a:hover, a:focus, span:hover, span:focus {
+    .focus, a:hover, a:focus, span:hover, span:focus, a.active {
         background-color: $blue;
         color: $green;
 

@@ -2,7 +2,6 @@
     padding: 1.5rem 1rem;
 
 
-
     h2 {
         font-size: $font-2xl;
         color: $blue;
@@ -25,7 +24,7 @@
     }
 
     .inclusions-exclusions {
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
 
         h3 {
             font-size: $font-l;
@@ -45,8 +44,6 @@
     }
 
     .codes {
-        max-width: $three-col;
-
         .code-list {
             margin: 0;
             padding: 0;
@@ -67,7 +64,7 @@
         }
 
         .code {
-            margin: 1rem 0 0;
+            padding-top: 1rem;
             position: relative;
             z-index: 2;
 
@@ -75,7 +72,7 @@
                 &::before {
                     content: "";
                     position: absolute;
-                    top: 0;
+                    top: 1rem;
                     bottom: 0;
                     width: 0;
                     left: 0;
@@ -104,9 +101,13 @@
             font-weight: 600;
         }
 
+        .code-details + .subcodes {
+            margin-top: -1rem;
+        }
+
         .subcodes {
             padding-left: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             list-style: none;
         }
 
