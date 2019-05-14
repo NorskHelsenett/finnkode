@@ -122,7 +122,7 @@ h1 {
   height: 0;
   padding-top: 3rem;
   overflow: hidden;
-  background: url("/assets/images/new-logo.svg") center left/contain no-repeat;
+  background: url("/assets/images/logo.svg") center left/contain no-repeat;
   width: 9rem;
   margin-right: 1.5rem; }
 #framework-header .main-menu {
@@ -376,8 +376,6 @@ h1 {
   color: #0f2d5e;
   padding: .25em 1.5em .25em .25em;
   margin-left: 2.5em; }
-.code-system-tree :focus {
-  outline: 0; }
 .code-system-tree .focus, .code-system-tree a:hover, .code-system-tree a:focus, .code-system-tree span:hover, .code-system-tree span:focus {
   background-color: #0f2d5e;
   color: #99eeb2; }
@@ -632,6 +630,9 @@ h1 {
       .code-system-content .codes .note-content p {
         margin: .5rem 0; }
 
+@media only screen and (min-width: 960px) {
+  .code-system-content article {
+    padding-top: 1.5rem; } }
 #global-search-banner {
   background: url("/assets/images/background-green.jpg") center/auto 9rem no-repeat;
   height: 9rem;
@@ -1001,6 +1002,12 @@ h1 {
     display: block; }
   .search .results {
     flex-grow: 1; } }
+.active {
+  outline: 3px solid red !important; }
+
+.sticky {
+  outline: 3px solid green; }
+
 .code-system {
   position: absolute;
   height: 100%;
@@ -1020,7 +1027,7 @@ h1 {
     bottom: 0;
     background-color: #fff;
     z-index: -200; }
-  .code-system #framework-header .layout-container, .code-system .panel-container.layout-container, .code-system .code-system-header .layout-container {
+  .code-system #framework-header .layout-container, .code-system #framework-header.layout-container, .code-system .code-system-header .layout-container, .code-system .code-system-header.layout-container, .code-system .panel-container .layout-container, .code-system .panel-container.layout-container {
     width: auto !important; }
   .code-system .code-system-tree, .code-system .code-system-content {
     overflow: auto; }
@@ -1069,6 +1076,11 @@ h1 {
   .code-system #framework-header .code-system-menu.expandable {
     justify-content: center; } }
 @media only screen and (min-width: 960px) {
+  .code-system #framework-header .layout-container, .code-system .code-system-header .layout-container {
+    margin: 0 2vw; }
+  .code-system .panel-container.layout-container {
+    margin-left: 2vw;
+    outline: 1px solid red; }
   .code-system .headers {
     flex: unset; }
   .code-system .panel-container {

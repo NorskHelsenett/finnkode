@@ -19,7 +19,6 @@ $(window).on("load", function () {
     expandableBlocks();
     resizableSplitter();
     //textSizeExpander();
-
 });
 
 // "layoutchange" triggers only when the layout changes, as opposed to
