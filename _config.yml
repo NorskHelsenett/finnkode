@@ -43,4 +43,4 @@ kramdown:
 #   - vendor/ruby/
 
 
-# sass --watch _sass/master.scss:assets/css/master.css
+# sass --watch _sass/master.scss:_site/assets/css/master.css

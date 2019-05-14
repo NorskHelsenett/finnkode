@@ -1,4 +1,5 @@
 .sass-cache/
 .jekyll-cache/
-.jekyll-metadata
-.idea
+.jekyll-metadata/
+.idea/
+node_modules/
