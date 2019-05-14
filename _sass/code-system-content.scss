@@ -89,7 +89,6 @@
             }
         }
 
-
         .code-title {
             font-size: $font-l;
             background-color: $blue;
@@ -201,7 +200,38 @@
         article {
             padding-top: 1.5rem;
         }
+
+        .codes {
+            .notes {
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: stretch;
+
+
+                .note {
+                    position: relative;
+                }
+
+                .expander {
+                    outline: 1px solid $blue;
+                    white-space: nowrap;
+
+                    &[aria-expanded="false"] {
+
+                    }
+
+                    &[aria-expanded="true"] {
+
+                    }
+
+                }
+
+                .expandable {
+
+
+                }
+
+            }
+        }
     }
 }
-
-
