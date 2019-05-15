@@ -179,6 +179,10 @@
                         background: url("/assets/images/chevron-down-white.svg") center / 1rem no-repeat;
                     }
                 }
+                //
+                //.expandable {
+                //    display: none;
+                //}
 
             }
         }
@@ -207,7 +211,6 @@
                 flex-flow: row nowrap;
                 align-items: stretch;
 
-
                 .note {
                     position: relative;
                 }
@@ -215,6 +218,8 @@
                 .expander {
                     outline: 1px solid $blue;
                     white-space: nowrap;
+                    padding: .5rem 2rem .5rem .75rem;
+
 
                     &[aria-expanded="false"] {
 
@@ -227,8 +232,7 @@
                 }
 
                 .expandable {
-
-
+                    display: none;
                 }
 
             }

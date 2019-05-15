@@ -643,7 +643,10 @@ h1 {
       position: relative; }
     .code-system-content .codes .notes .expander {
       outline: 1px solid #0f2d5e;
-      white-space: nowrap; } }
+      white-space: nowrap;
+      padding: .5rem 2rem .5rem .75rem; }
+    .code-system-content .codes .notes .expandable {
+      display: none; } }
 #global-search-banner {
   background: url("/assets/images/background-green.jpg") center/auto 9rem no-repeat;
   height: 9rem;
