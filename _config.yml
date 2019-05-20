@@ -48,4 +48,4 @@ destination: dist/
 #   - vendor/ruby/
 
 
-sass -I _sass --watch src/_sass/master.scss:dist/assets/css/master.css
+#sass -I _sass --watch src/_sass/master.scss:dist/assets/css/master.css

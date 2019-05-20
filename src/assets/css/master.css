@@ -1,4 +1,7 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin-ext");
+
+@import "master";
+
+/* @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin-ext");
 .visuallyhidden, .search-refiners .expired-codes input {
   position: absolute;
   overflow: hidden;
@@ -1073,9 +1076,10 @@ h1 {
     flex: unset; }
   .code-system .panel-container {
     flex-flow: unset;
-    xtouch-action: none;
-    /* avoid browser level touch actions */ }
-  .code-system .code-system-tree {
+    xtouch-action: none; } */
+
+
+  /* .code-system .code-system-tree {
     flex: 0 0 auto;
     width: 300px;
     min-height: 200px;
@@ -1131,4 +1135,4 @@ h1 {
   .front-page .directorate-link {
     font-size: 1.125rem; } }
 
-/*# sourceMappingURL=master.css.map */
+# sourceMappingURL=master.css.map */
