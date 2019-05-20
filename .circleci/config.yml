@@ -56,6 +56,10 @@ jobs:
           name: Authenticate with Azure
           command:
             az login --service-principal -u http://ServicePrincipleUser -p $AZ_PASS --tenant 6ba1bd5c-750f-4ad6-aba3-0f95585bc21f
+      - run:
+          name: Deploy files to Azure
+          command:
+            az storage blob upload-batch -s ./dist/ -d \$web --account-name finnkodesa
 workflows:
   version: 2
   build-deploy-finnkode:
