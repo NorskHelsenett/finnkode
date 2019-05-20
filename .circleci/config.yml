@@ -66,7 +66,7 @@ jobs:
       - run:
         name: Authenticate with Azure
         command:
-          read -sp "Azure password: " AZ_PASS && echo && az login --service-principal -u http://ServicePrincipleUser -p $AZ_PASS --tenant 6ba1bd5c-750f-4ad6-aba3-0f95585bc21f
+          read -sp \"Azure password: \" AZ_PASS && echo && az login --service-principal -u http://ServicePrincipleUser -p $AZ_PASS --tenant 6ba1bd5c-750f-4ad6-aba3-0f95585bc21f
       # - run:
       #     name: Upload to s3
       #     command: ~/.local/bin/aws s3 sync ./_site s3://$S3_BUCKET_NAME/ --delete --acl public-read
