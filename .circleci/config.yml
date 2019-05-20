@@ -44,21 +44,35 @@ jobs:
   deploy:
     <<: *defaults
     docker:
-      - image: circleci/python:3.6.3
-    environment:
-      S3_BUCKET_NAME: <<YOUR BUCKET NAME HERE>>
+      - image: circleci/node:lts
+    #environment:
+    #  S3_BUCKET_NAME: <<YOUR BUCKET NAME HERE>>
     steps:
       - attach_workspace:
           at: ./
       - run:
-          name: Install AWS CLI
-          command: pip install awscli --upgrade --user
+          name: Install Azure CLI
+          command: |
+            sudo apt-get update
+            sudo apt-get install curl apt-transport-https lsb-release gnupg
+            curl -sL https://packages.microsoft.com/keys/microsoft.asc | \
+              gpg --dearmor | \
+              sudo tee /etc/apt/trusted.gpg.d/microsoft.asc.gpg > /dev/null
+            AZ_REPO=$(lsb_release -cs)
+              echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
+              sudo tee /etc/apt/sources.list.d/azure-cli.list
+            sudo apt-get update
+            sudo apt-get install azure-cli
       - run:
-          name: Upload to s3
-          command: ~/.local/bin/aws s3 sync ./_site s3://$S3_BUCKET_NAME/ --delete --acl public-read
+        name: Authenticate with Azure
+        command:
+          read -sp "Azure password: " AZ_PASS && echo && az login --service-principal -u http://ServicePrincipleUser -p $AZ_PASS --tenant 6ba1bd5c-750f-4ad6-aba3-0f95585bc21f
+      # - run:
+      #     name: Upload to s3
+      #     command: ~/.local/bin/aws s3 sync ./_site s3://$S3_BUCKET_NAME/ --delete --acl public-read
 workflows:
   version: 2
-  test-deploy:
+  build-deploy-finnkode:
     jobs:
       - build
       - deploy:
