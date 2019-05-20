@@ -1,5 +1,10 @@
+# Bundle and build files
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata/
+dist/
+
+# Editor
 .idea/
-node_modules/
+
+
