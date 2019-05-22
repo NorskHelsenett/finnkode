@@ -1,0 +1,73 @@
+defaults: &defaults
+  working_directory: ~/finnkode
+version: 2
+jobs:
+  build:
+    <<: *defaults
+    docker:
+      - image: circleci/ruby:2.5
+    environment:
+      BUNDLE_PATH: ~/finnkode/vendor/bundle
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - rubygems-v1-{{ checksum "Gemfile.lock" }}
+            - rubygems-v1-fallback
+      - run:
+          name: Bundle Install
+          command: |
+            gem update --system
+            gem install bundler
+            bundler update --bundler
+            bundle install
+      - save_cache:
+          key: rubygems-v1-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - run:
+          name: Jekyll build
+          command: bundle exec jekyll build
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - dist
+  deploy:
+    <<: *defaults
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Install Azure CLI
+          command: |
+            sudo apt-get update
+            sudo apt-get install curl apt-transport-https lsb-release gnupg
+            curl -sL https://packages.microsoft.com/keys/microsoft.asc | \
+              gpg --dearmor | \
+              sudo tee /etc/apt/trusted.gpg.d/microsoft.asc.gpg > /dev/null
+            AZ_REPO=$(lsb_release -cs)
+              echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
+              sudo tee /etc/apt/sources.list.d/azure-cli.list
+            sudo apt-get update
+            sudo apt-get install azure-cli
+      - run:
+          name: Authenticate with Azure
+          command:
+            az login --service-principal -u http://ServicePrincipleUser -p $AZ_PASS --tenant 6ba1bd5c-750f-4ad6-aba3-0f95585bc21f
+      - run:
+          name: Deploy files to Azure
+          command:
+            az storage blob upload-batch -s ./dist/ -d \$web --account-name finnkodesa
+workflows:
+  version: 2
+  build-deploy-finnkode:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: dev
