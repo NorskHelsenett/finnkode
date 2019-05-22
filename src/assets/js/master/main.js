@@ -14,12 +14,12 @@ $(window).on("ready", function () {
 // order to work correctly, e.g. stuff affected by height.
 $(window).on("load", function () {
     //console.log('load - master/master.js');
-
     responsiveExpandableBlocks();
     expandableBlocks();
     resizableSplitter();
-    //textSizeExpander();
+    textSizeExpander();
 });
+
 
 // "layoutchange" triggers only when the layout changes, as opposed to
 // triggering on every resize.  Since the layout also changes on document
