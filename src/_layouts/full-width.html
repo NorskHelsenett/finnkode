@@ -6,11 +6,12 @@
 {% include head.html %}
 
 <body class="{{page.layout}} {{page.page-name}}">
+<a class="skip-link" href="#page-content">Hopp til innholdet</a>
 
 {% include framework-header.html %}
 
-<main>
-        {{ content }}
+<main id="page-content">
+    {{ content }}
 </main>
 
 {% include framework-footer.html %}

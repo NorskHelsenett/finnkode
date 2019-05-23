@@ -15,6 +15,20 @@ body {
     line-height: 1.4;
 }
 
+.skip-link {
+    @extend .visuallyhidden;
+
+    &:focus {
+        @extend .visuallypresent;
+        background-color: #fff;
+        font-size: $font-l;
+        font-weight: 600;
+        display: table-caption;
+        padding: 1rem;
+        white-space: nowrap;
+    }
+}
+
 main {
     background-color: #fff;
     display: block; // IE
