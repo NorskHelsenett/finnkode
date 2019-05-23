@@ -8,7 +8,6 @@ $(window).on("ready", function () {
     datepicker();
 });
 
-
 // // "load" triggers when all the content on the page has finished loading.
 // Use this for things that need to have their content fully loaded in
 // order to work correctly, e.g. stuff affected by height.

@@ -35,11 +35,10 @@ source: src/
 # Bundle/build folder
 destination: dist/
 
-baseurl: /
-
-# Assets specific options
 assets:
   source_maps: true # false on JEKYLL_ENV=production
+  sources:
+    - _sass
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

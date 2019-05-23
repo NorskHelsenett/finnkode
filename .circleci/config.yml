@@ -8,6 +8,7 @@ jobs:
       - image: circleci/ruby:2.5
     environment:
       BUNDLE_PATH: ~/finnkode/vendor/bundle
+      JEKYLL_ENV: production
     steps:
       - checkout
       - restore_cache:
