@@ -2,9 +2,24 @@
     position: absolute;
     overflow: hidden;
     clip: rect(0 0 0 0);
-    height: 1px; width: 1px;
-    margin: -1px; padding: 0; border: 0;
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
 }
+
+.visuallypresent {
+    position: unset;
+    overflow: unset;
+    clip: unset;
+    height: unset;
+    width: unset;
+    margin: unset;
+    padding: unset;
+    border: unset;
+}
+
 
 @mixin button-reset {
     padding: 0;
@@ -16,5 +31,5 @@
 }
 
 %box-shadow {
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
 }
