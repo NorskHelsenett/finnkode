@@ -25,8 +25,8 @@ jobs:
             bundler update --bundler
             bundle install
       - run:
-          name: Yarn Install
-          command: yarn install
+          name: Install node modules
+          command: npm install
       - save_cache:
           key: rubygems-v2-{{ checksum "Gemfile.lock" }}
           paths:
