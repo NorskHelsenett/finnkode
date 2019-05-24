@@ -3,7 +3,7 @@
 $(function () {
     $('#datepicker').datepicker({
         showOn: 'button',
-        buttonImage: '/assets/images/calendar-blue.svg', // File (and file path) for the calendar image
+        buttonImage: '/images/calendar-blue.svg', // File (and file path) for the calendar image
         buttonImageOnly: false,
         buttonText: 'Vis kalender',
         dayNamesShort: [ "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag" ],

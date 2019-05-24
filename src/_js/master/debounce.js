@@ -1,6 +1,6 @@
 // Handles variation in browser resize behavior
 
-function debounce(fn, interval) {
+export default function debounce(fn, interval) {
     var timeout = null;
     return function () {
         var args = arguments,

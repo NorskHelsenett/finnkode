@@ -23,7 +23,7 @@
 
     .search-button {
         background: $blue .85em center / 1.1rem no-repeat;
-        background-image: url("/assets/images/search-green.svg"), url("/assets/images/search-blue.svg");
+        background-image: url("/images/search-green.svg"), url("/images/search-blue.svg");
         height: 0;
         padding: 2rem 0 0 0;
         border-radius: 0 2.25rem 2.25rem 0;
@@ -40,7 +40,7 @@
 
         &:focus, &:hover {
             background-color: $green;
-            background-image: url("/assets/images/search-blue.svg");
+            background-image: url("/images/search-blue.svg");
             outline: 0;
         }
     }

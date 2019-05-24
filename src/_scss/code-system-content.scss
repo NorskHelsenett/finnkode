@@ -165,7 +165,7 @@
                     right: 0;
                     top: 0;
                     width: 2.5rem;
-                    background: url("/assets/images/chevron-down-blue.svg") right 1rem center / 1rem no-repeat;
+                    background: url("/images/chevron-down-blue.svg") right 1rem center / 1rem no-repeat;
                     transform: scaleY(1);
                     transition: transform .15s;
                 }
@@ -176,7 +176,7 @@
 
                     &::after {
                         transform: scaleY(- 1);
-                        background: url("/assets/images/chevron-down-white.svg") center / 1rem no-repeat;
+                        background: url("/images/chevron-down-white.svg") center / 1rem no-repeat;
                     }
                 }
                 //

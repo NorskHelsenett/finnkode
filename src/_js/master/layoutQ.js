@@ -50,3 +50,5 @@ function makeLayoutQ() {
 
 window.layoutQ = layoutQ;
 window.makeLayoutQ = makeLayoutQ;
+
+export default layoutQ;

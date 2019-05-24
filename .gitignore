@@ -3,9 +3,13 @@
 .jekyll-cache/
 .jekyll-metadata/
 dist/
+node_modules/
 
 # Editor
 .vscode/
 .idea/
+
+# Misc
+*.log
 
 

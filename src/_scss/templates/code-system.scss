@@ -89,7 +89,7 @@
             top: 0;
             width: 2em;
             height: 100%;
-            background: $green url("/assets/images/chevron-down-blue.svg") right 1rem center / 1rem no-repeat;
+            background: $green url("/images/chevron-down-blue.svg") right 1rem center / 1rem no-repeat;
             transition: .15s transform;
         }
 
@@ -166,7 +166,7 @@
         .splitter {
             flex: 0 0 auto;
             width: 2.125rem;
-            background: $green url("/assets/images/splitter.svg") center / .75rem no-repeat;
+            background: $green url("/images/splitter.svg") center / .75rem no-repeat;
             min-height: 200px;
             cursor: col-resize;
             padding: 2rem 0 0;

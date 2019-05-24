@@ -101,7 +101,7 @@
             &::before {
                 content: "";
                 position: absolute;
-                background: url("/assets/images/tree-minus-blue.svg") center / 1em no-repeat;
+                background: url("/images/tree-minus-blue.svg") center / 1em no-repeat;
                 width: 1em;
                 height: 1em;
                 top: .45em;
@@ -112,7 +112,7 @@
         &.focus {
             & > span {
                 &::before {
-                    background-image: url("/assets/images/tree-minus-green.svg");
+                    background-image: url("/images/tree-minus-green.svg");
                 }
             }
         }
@@ -121,7 +121,7 @@
             &.focus {
                 & > span {
                     &::before {
-                        background-image: url("/assets/images/tree-plus-green.svg");
+                        background-image: url("/images/tree-plus-green.svg");
                     }
                 }
             }
@@ -132,7 +132,7 @@
 
             & > span {
                 &::before {
-                    background-image: url("/assets/images/tree-plus-blue.svg");
+                    background-image: url("/images/tree-plus-blue.svg");
                 }
             }
         }
