@@ -8,8 +8,8 @@
   "scripts": {
     "start": "npm-run-all clean webpack:watch jekyll:serve",
     "clean": "rimraf dist",
-    "jekyll:serve": "jekyll serve --watch",
-    "build": "rimraf dist && webpack && jekyll build",
+    "jekyll:serve": "bundle exec jekyll serve --watch",
+    "build": "rimraf dist && webpack && bundle exec jekyll build",
     "webpack:watch": "webpack"
   },
   "devDependencies": {
