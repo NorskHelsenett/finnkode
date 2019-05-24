@@ -13,8 +13,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - rubygems-v2-{{ checksum "Gemfile.lock" }}
-            - rubygems-v2-fallback
+            - rubygems-v1-{{ checksum "Gemfile.lock" }}
+            - rubygems-v1-fallback
             - node_modules-v1-{{ checksum "yarn.lock" }}
             - node_modules-v1-fallback
       - run:
@@ -29,7 +29,7 @@ jobs:
           command: yarn install
       - save_cache:
           keys:
-            - rubygems-v2-{{ checksum "Gemfile.lock" }}
+            - rubygems-v1-{{ checksum "Gemfile.lock" }}
             - node_modules-v1-{{ checksum "yarn.lock" }}
           paths:
             - vendor/bundle
