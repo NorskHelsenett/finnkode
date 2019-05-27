@@ -5,18 +5,9 @@ Version 0.32 - 5/5/2018
 www.west-wind.com
 Licensed under MIT License
 */
-(function (factory, undefined) {
-    if (typeof define === "function" && define.amd) {
-        // AMD
-        define(["jquery"], factory);
-    } else if (typeof module === "object" && typeof module.exports === "object") {
-        // CommonJS
-        module.exports = factory(require("jquery"));
-    } else {
-        // Global jQuery
-        factory(jQuery);
-    }
-}(function ($, undefined) {
+(function ($, undefined) {
+
+    console.log("jquery-resizable");
 
     if ($.fn.resizable)
         return;
@@ -191,4 +182,4 @@ Licensed under MIT License
             }
         });
     };
-}));
+});
