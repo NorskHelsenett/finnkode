@@ -1,15 +1,18 @@
+
 import $ from 'jquery';
 window.jQuery = $;
 window.$ = $;
-require('../_scss/master.scss');
+import 'jquery-ui';
+import '../_scss/master.scss';
 
-require('./master/plugins');
-require('./master/debounce');
-require('./master/expandableBlocks');
-require('./master/layoutQ');
-require('./master/responsiveExpandableBlocks');
-require('./master/textSizeExpander');
-require('./code-system/stickyHeader');
-require('./code-system/resizableSplitter');
-require('./code-system/treeSlider');
-require('./master/main');
+import './master/plugins';
+import './master/debounce';
+import './master/expandableBlocks';
+import './master/layoutQ';
+import './master/responsiveExpandableBlocks';
+import './master/textSizeExpander';
+import './code-system/stickyHeader';
+import './code-system/resizableSplitter';
+import './code-system/treeSlider';
+import './master/main';
+import './search/datepicker';
