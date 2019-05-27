@@ -31,14 +31,11 @@ kramdown:
   parse_block_html: true
 
 # Site source folder
-source: src/
+source: src/jekyll/
 # Bundle/build folder
 destination: dist/
 
-keep_files:
-  - main.js
-  - vendor.js
-  - style.css
+keep_files: [js, css]
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

@@ -1,0 +1,46 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ page.title }} - FinnKode</title>
+
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+        crossorigin="anonymous"></script>
+    <script src="/js/main.js"></script>
+    <link rel="stylesheet" href="/css/main.css">
+
+        {% if page.layout == "search" %}
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script
+            src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"
+            integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="
+            crossorigin="anonymous"></script>
+        <script src="/js/search.js"></script>
+    {% endif %}
+
+
+
+
+    {% if page.layout == "code-system" %}
+        <script src="/js/code-system.js"></script>
+    {% endif %}
+
+    <style id="remove-menu-jump">
+        #framework-header .code-system-menu {
+            display: none;
+        }
+
+        #framework-header .code-system-menu.expandable {
+            display: block;
+        }
+
+        @media only screen and (min-width: 39rem) {
+            #framework-header .code-system-menu.expandable {
+                display: flex;
+            }
+        }
+    </style>
+
+</head>
