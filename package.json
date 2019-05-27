@@ -23,9 +23,7 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.32.2",
-    "webpack-cli": "^3.3.2"
-  },
-  "dependencies": {
-    "jquery": "^3.4.1"
+    "webpack-cli": "^3.3.2",
+    "source-map-loader": "^0.2.3"
   }
 }
