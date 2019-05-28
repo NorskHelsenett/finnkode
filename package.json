@@ -6,7 +6,7 @@
   "author": "Steffen Lien <steffen.lien@ehelse.no>",
   "license": "MIT",
   "scripts": {
-    "start": "yarn clean && concurrently -k \"yarn webpack:watch\" \"yarn jekyll:serve\"",
+    "start": "yarn clean && concurrently -k \"yarn webpack:watch\" \"bundle exec guard\"",
     "clean": "rimraf dist",
     "jekyll:serve": "bundle exec jekyll serve --watch",
     "build": "rimraf dist && webpack && bundle exec jekyll build",
@@ -16,6 +16,7 @@
     "concurrently": "^4.1.0",
     "css-loader": "^2.1.1",
     "expose-loader": "^0.7.5",
+    "livereload-js": "^3.0.0",
     "mini-css-extract-plugin": "^0.6.0",
     "node-sass": "^4.12.0",
     "rimraf": "^2.6.3",

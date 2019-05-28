@@ -1,3 +1,5 @@
+window.LiveReloadOptions = { host: 'localhost' };
+require('livereload-js');
 require('../scss/master.scss');
 
 require('./master/plugins');
