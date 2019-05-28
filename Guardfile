@@ -1,5 +1,5 @@
 guard 'jekyll-plus', :serve => true do
-    watch /.*/
+    watch /^src\/.*/
     ignore /^dist/
   end
 

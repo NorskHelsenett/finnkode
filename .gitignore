@@ -3,6 +3,7 @@
 .jekyll-cache/
 .jekyll-metadata/
 dist/
+js
 node_modules/
 
 # Editor
