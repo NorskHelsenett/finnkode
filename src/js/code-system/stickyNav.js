@@ -41,18 +41,11 @@
         }
 
         function onClick(e) {
-            // e.preventDefault();
-
             const targetEl = $(this).attr("href");
 
-            if ($(targetEl).length) {
+            if (targetEl.length) {
                 selectNavItem(this);
-
                 $(targetEl).fadeOut(0).fadeIn(500);
-
-                // $('.code-system-content').animate({
-                //     scrollTop: $(targetEl).offset().top - navHeight
-                // });
             }
         }
 

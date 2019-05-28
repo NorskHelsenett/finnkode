@@ -7,13 +7,13 @@
 *   Desc:   Tree widget that implements ARIA Authoring Practices
 *           for a tree being used as a file viewer
 */
+import TreeitemLink from './treeitemLinks';
 
 /**
  * ARIA Treeview example
  * @function onload
  * @desc  after page has loaded initialize all treeitems based on the role=treeitem
  */
-
 window.addEventListener('load', function () {
 
   var trees = document.querySelectorAll('[role="tree"]');
@@ -160,7 +160,6 @@ TreeLinks.prototype.setFocusToLastItem = function () {
 };
 
 TreeLinks.prototype.expandTreeitem = function (currentItem) {
-
   if (currentItem.isExpandable) {
     currentItem.domNode.setAttribute('aria-expanded', true);
     this.updateVisibleTreeitems();
