@@ -24,8 +24,7 @@ module.exports = {
                 {
                     loader: MiniCssExtractPlugin.loader,
                     options: {
-                        sourceMap: true,
-                        hmr: process.env.NODE_ENV === "development"
+                        sourceMap: true
                     }
                 },
                 {
@@ -41,6 +40,5 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "../css/[name].css"
         })
-    ],
-    watch: true
+    ]
 };
