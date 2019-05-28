@@ -13,25 +13,34 @@ module.exports = {
     mode: "development",
     output: {
         filename: "[name].js",
-        path: __dirname + "/dist/js/"
+        path: __dirname + "/dist/js/",
+        sourceMapFilename: "./maps/[name].js.map"
     },
+    devtool: "source-map",
     module: {
         rules: [{
             test: /\.(sa|sc|c)ss$/,
             use: [
                 {
-                    loader: MiniCssExtractPlugin.loader
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                        sourceMap: true,
+                        hmr: process.env.NODE_ENV === "development"
+                    }
                 },
                 {
-                    loader: "css-loader"
+                    loader: "css-loader",
+                    options: {sourceMap: true}
                 }, {
-                    loader: "sass-loader"
+                    loader: "sass-loader",
+                    options: {sourceMap: true}
                 }]
         }]
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: "../css/[name].css",
+            filename: "../css/[name].css"
         })
-    ]
+    ],
+    watch: true
 };
