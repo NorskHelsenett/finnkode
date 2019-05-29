@@ -1,5 +1,5 @@
 // https://dequeuniversity.com/library/aria/date-pickers/sf-date-picker
-console.log("datepicker");
+// console.log("search.js - datepicker.js");
 
 $(function () {
     $('#datepicker').datepicker({

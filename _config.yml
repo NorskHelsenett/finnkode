@@ -50,4 +50,4 @@ keep_files: [js, css, maps]
 #   - vendor/ruby/
 
 
-#sass -I _sass --watch src/_sass/master.scss:dist/assets/css/master.css
+# sass -I src/scss --watch src/scss/master.scss:dist/css/main.css

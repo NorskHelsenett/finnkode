@@ -1,9 +1,9 @@
-﻿//console.log("start - master/master.js");
+﻿//console.log("start - main.js");
 
 // "ready" triggers as soon as the dom is in place.  Use this for things
 // that are not affected by a change in layout or window size.
 $(window).on("ready", function () {
-    //console.log('ready - master/master.js');
+    //console.log('ready - main.js');
     layoutQ();
 });
 
@@ -11,7 +11,7 @@ $(window).on("ready", function () {
 // Use this for things that need to have their content fully loaded in
 // order to work correctly, e.g. stuff affected by height.
 $(window).on('load', function () {
-    //console.log('load - master/master.js');
+    //console.log('load - main.js');
     responsiveExpandableBlocks();
     expandableBlocks();
     textSizeExpander();
@@ -23,7 +23,7 @@ $(window).on('load', function () {
 // ready--we're going from no layout to one layout--you don't have to call
 // the function on document ready when you call it here.
 $(window).on("layoutchange", function () {
-    //console.log("layoutchange - master/master.js");
+    //console.log("layoutchange - main.js");
 
     responsiveExpandableBlocks();
 });
@@ -32,7 +32,7 @@ $(window).on("layoutchange", function () {
 // $(window).on(
 //     'conditionalresize',
 //     debounce(function () {
-//         //console.log("conditionalresize - master/master.js");
+//         //console.log("conditionalresize - main.js");
 //     }, 25)
 // );
 
@@ -42,7 +42,7 @@ $(window).on("layoutchange", function () {
 $(window).on(
     "resize orientationchange",
     debounce(function () {
-        //console.log("resize orientationchange - master/master.js");
+        //console.log("resize orientationchange - main.js");
         layoutQ();
     }, 25)
 );

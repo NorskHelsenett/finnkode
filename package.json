@@ -10,7 +10,9 @@
     "clean": "rimraf dist",
     "jekyll:serve": "bundle exec jekyll serve --watch",
     "build": "rimraf dist && webpack && bundle exec jekyll build",
-    "webpack:watch": "webpack --watch"
+    "webpack:watch": "webpack --watch  --progress -d",
+    "sass": "sass -I src/scss --watch src/scss/master.scss:dist/css/main.css",
+    "sarah": "yarn clean && concurrently -k \"yarn sass\"  \"yarn webpack:watch\" \"yarn jekyll:serve\""
   },
   "devDependencies": {
     "concurrently": "^4.1.0",

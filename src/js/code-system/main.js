@@ -1,9 +1,9 @@
-﻿//console.log("start - master/code-system.js");
+﻿//console.log("start - code-system.js");
 
 // "ready" triggers as soon as the dom is in place.  Use this for things
 // that are not affected by a change in layout or window size.
 $(window).on("ready", function () {
-    //console.log('ready - master/code-system.js');
+    //console.log('ready - code-system.js');
 
 });
 
@@ -11,7 +11,7 @@ $(window).on("ready", function () {
 // Use this for things that need to have their content fully loaded in
 // order to work correctly, e.g. stuff affected by height.
 $(window).on('load', function () {
-    //console.log('load - master/code-system.js');
+    //console.log('load - code-system.js');
 });
 
 
@@ -20,7 +20,7 @@ $(window).on('load', function () {
 // ready--we're going from no layout to one layout--you don't have to call
 // the function on document ready when you call it here.
 $(window).on("layoutchange", function () {
-    //console.log("layoutchange - master/code-system.js");
+    //console.log("layoutchange - code-system.js");
 
     $('.js-sticky-nav').stickynav();
 
@@ -30,7 +30,7 @@ $(window).on("layoutchange", function () {
 // $(window).on(
 //     'conditionalresize',
 //     debounce(function () {
-//         //console.log("conditionalresize - master/code-system.js");
+//         //console.log("conditionalresize - code-system.js");
 //     }, 25)
 // );
 
@@ -40,6 +40,6 @@ $(window).on("layoutchange", function () {
 $(window).on(
     "resize orientationchange",
     debounce(function () {
-        //console.log("resize orientationchange - master/code-system.js");
+        //console.log("resize orientationchange - code-system.js");
     }, 25)
 );
