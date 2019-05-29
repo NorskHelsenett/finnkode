@@ -1,7 +1,6 @@
 .code-system-content {
     padding: 1.5rem 1rem;
 
-
     h2 {
         font-size: $font-2xl;
         color: $blue;
@@ -43,160 +42,200 @@
 
     }
 
-    .codes {
-        .code-list {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
+    .code-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
 
-        .code-details {
-            padding: 1rem;
+    .code {
+        padding-top: 1rem;
+        position: relative;
+        z-index: 2;
 
-            ul {
-                list-style-type: disc;
-                margin: 0;
-            }
-
-            p + ul {
-                margin-top: -.75rem;
-            }
-        }
-
-        .code {
-            padding-top: 1rem;
-            position: relative;
-            z-index: 2;
-
-            &.node {
-                &::before {
-                    content: "";
-                    position: absolute;
-                    top: 1rem;
-                    bottom: 0;
-                    width: 0;
-                    left: 0;
-                    border-left: 1px dashed $light-grey;
-                    z-index: -1;
-                }
-            }
-
-            &.leaf {
-                .code-details {
-                    border: 1px solid $light-grey;
-                    border-width: 0 1px 1px 1px;
-                }
+        &.node {
+            &::before {
+                content: "";
+                position: absolute;
+                top: 1rem;
+                bottom: 0;
+                width: 0;
+                left: 0;
+                border-left: 1px dashed $light-grey;
+                z-index: -1;
             }
         }
 
-        .code-title {
-            font-size: $font-l;
-            background-color: $blue;
-            padding: .75rem 1rem;
-            color: #fff;
-        }
-
-        .code-number {
-            font-weight: 600;
-        }
-
-        .code-details + .subcodes {
-            margin-top: -1rem;
-        }
-
-        .subcodes {
-            padding-left: 1rem;
-            margin-bottom: 1rem;
-            list-style: none;
-        }
-
-        .validity {
-            margin: 0 0 .5rem;
-            display: flex;
-            flex-flow: row nowrap;
-            color: $grey;
-
-            p {
-                margin: 0 1.5rem 0 0;
-                line-height: 1.2;
-
-                &:last-child {
-                    margin-right: 0;
-                }
-            }
-
-            a {
-                color: $grey;
-            }
-
-        }
-
-        .notes {
-            border: 1px solid $light-grey;
-            border-width: 0 1px;
-        }
-
-        .note {
-            border-bottom: 1px solid $light-grey;
-
-            &.expanded {
-                .note-content {
-                    background-color: $lightest-grey;
-                }
-            }
-
-            .expander {
-                background-color: #fff;
-                padding: .5rem 1rem;
-                color: $blue;
-                position: relative;
-                transition: color .15s, background-color .15s;
-                outline: 0;
-                font-weight: 600;
-
-                &:hover, &:focus {
-                    background-color: $light-green;
-                }
-
-                &::after {
-                    content: "";
-                    position: absolute;
-                    height: 100%;
-                    right: 0;
-                    top: 0;
-                    width: 2.5rem;
-                    background: url("/images/chevron-down-blue.svg") right 1rem center / 1rem no-repeat;
-                    transform: scaleY(1);
-                    transition: transform .15s;
-                }
-
-                &[aria-expanded="true"] {
-                    background-color: $blue;
-                    color: #fff;
-
-                    &::after {
-                        transform: scaleY(- 1);
-                        background: url("/images/chevron-down-white.svg") center / 1rem no-repeat;
-                    }
-                }
-                //
-                //.expandable {
-                //    display: none;
-                //}
-
+        &.leaf {
+            .code-details {
+                border: 1px solid $light-grey;
+                border-width: 0 1px 1px 1px;
             }
         }
 
-        .note-content {
-            background-color: #fff;
-            padding: .5rem 1rem;
-
-            p {
-                margin: .5rem 0;
+        &.expired {
+            .title {
+                background-color: $dark-grey;
             }
         }
+    }
+
+    .title {
+        font-size: $font-xl;
+        background-color: $blue;
+        padding: .75rem 1rem;
+        color: #fff;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
 
     }
+
+    .number {
+        font-weight: 600;
+        padding-right: 1em;
+    }
+
+    .name {
+        flex: 0 0 100%;
+        order: 3;
+    }
+
+    .status {
+        text-transform: uppercase;
+        order: 2;
+        font-size: $font-m;
+        padding-top: .25rem;
+    }
+
+    .code-details {
+        overflow: hidden;
+        padding-bottom: .5rem;
+
+        ul {
+            list-style-type: disc;
+            margin: 0;
+        }
+
+        p + ul {
+            margin-top: -.75rem;
+        }
+    }
+
+    .status-info {
+        background-color: $light-blue;
+        color: $blue;
+        padding: .875rem 1rem;
+        display: flex;
+        justify-content: space-between;
+
+        strong {
+            order: 2;
+            font-weight: normal;
+            text-transform: uppercase;
+            padding-left: 2em;
+        }
+    }
+
+    .validity, .description {
+        margin: 1rem;
+    }
+
+    .description, .notes {
+        font-size: $font-s;
+    }
+
+    .validity {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        color: $grey;
+        font-size: $font-xs;
+
+        p {
+            margin: 0 1.5rem 0 0;
+            line-height: 1.2;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        a {
+            color: $grey;
+        }
+    }
+
+    .subcodes {
+        padding-left: 1rem;
+        margin-bottom: 1rem;
+        list-style: none;
+    }
+
+    .code-details + .subcodes {
+        margin-top: -1rem;
+    }
+
+    .notes {
+        border: 1px solid $light-grey;
+        border-width: 0 1px;
+    }
+
+    .note {
+        border-bottom: 1px solid $light-grey;
+
+        &.expanded {
+            .note-content {
+                background-color: $lightest-grey;
+            }
+        }
+
+        .expander {
+            background-color: #fff;
+            padding: .5rem 1rem;
+            color: $blue;
+            position: relative;
+            transition: color .15s, background-color .15s;
+            outline: 0;
+            font-weight: 600;
+
+            &:hover, &:focus {
+                background-color: $light-green;
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                height: 100%;
+                right: 0;
+                top: 0;
+                width: 2.5rem;
+                background: url("/images/chevron-down-blue.svg") right 1rem center / 1rem no-repeat;
+                transform: scaleY(1);
+                transition: transform .15s;
+            }
+
+            &[aria-expanded="true"] {
+                background-color: $blue;
+                color: #fff;
+
+                &::after {
+                    transform: scaleY(- 1);
+                    background: url("/images/chevron-down-white.svg") center / 1rem no-repeat;
+                }
+            }
+        }
+    }
+
+    .note-content {
+        background-color: #fff;
+        padding: .5rem 1rem;
+
+        p {
+            margin: .5rem 0;
+        }
+    }
+
 }
 
 @media only screen and (min-width: $two-to-three-col) {
@@ -205,37 +244,90 @@
             padding-top: 1.5rem;
         }
 
-        .codes {
-            .notes {
-                display: flex;
-                flex-flow: row nowrap;
-                align-items: stretch;
+        .title {
+            font-size: $font-2xl;
+            display: grid;
+            grid-template-areas: "number status" "name status";
+        }
 
-                .note {
-                    position: relative;
+        .number {
+            grid-area: number;
+        }
+
+        .name {
+            grid-area: name;
+        }
+
+        .status {
+            grid-area: status;
+            padding-left: 2em;
+            padding-top: .5em;
+        }
+
+
+        .validity, .description, .notes {
+            font-size: $font-m;
+        }
+
+        .notes {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: stretch;
+        }
+
+        .note {
+            position: relative;
+
+            .expander {
+                outline: 1px solid $blue;
+                white-space: nowrap;
+                padding: .5rem 2rem .5rem .75rem;
+
+
+                &[aria-expanded="false"] {
+
                 }
 
-                .expander {
-                    outline: 1px solid $blue;
-                    white-space: nowrap;
-                    padding: .5rem 2rem .5rem .75rem;
+                &[aria-expanded="true"] {
 
-
-                    &[aria-expanded="false"] {
-
-                    }
-
-                    &[aria-expanded="true"] {
-
-                    }
-
-                }
-
-                .expandable {
-                    display: none;
                 }
 
             }
+
+            .expandable {
+                display: none;
+            }
         }
     }
+
+}
+
+@media all and (-ms-high-contrast:none) {
+    .grid-container {
+        display: -ms-grid;
+        -ms-grid-columns: 1fr 150px;
+        -ms-grid-rows: 1auto 1auto;
+    }
+
+    .Status {
+        -ms-grid-row: 1;
+        -ms-grid-row-span: 2;
+        -ms-grid-column: 2;
+        -ms-grid-column-span: 1;
+    }
+
+    .Code-number {
+        -ms-grid-row: 1;
+        -ms-grid-row-span: 1;
+        -ms-grid-column: 1;
+        -ms-grid-column-span: 1;
+    }
+
+    .Code-name {
+        -ms-grid-row: 2;
+        -ms-grid-row-span: 1;
+        -ms-grid-column: 1;
+        -ms-grid-column-span: 1;
+    }
+
 }
