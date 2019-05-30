@@ -88,7 +88,10 @@
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
+    }
 
+    .code.expired .title {
+        background-color: $dark-grey;
     }
 
     .number {
@@ -184,24 +187,13 @@
     .note {
         border-bottom: 1px solid $light-grey;
 
-        &.expanded {
-            .note-content {
-                background-color: $lightest-grey;
-            }
-        }
-
         .expander {
-            background-color: #fff;
-            padding: .5rem 1rem;
             color: $blue;
+            padding: .5rem 1rem;
             position: relative;
-            transition: color .15s, background-color .15s;
+            transition: color .15s, background-color .2s;
             outline: 0;
             font-weight: 600;
-
-            &:hover, &:focus {
-                background-color: $light-green;
-            }
 
             &::after {
                 content: "";
@@ -215,16 +207,65 @@
                 transition: transform .15s;
             }
 
-            &[aria-expanded="true"] {
-                background-color: $blue;
-                color: #fff;
+            &:hover, &:focus {
+                background-color: $light-green;
+            }
 
+            &:focus {
+                transition: color .15s, background-color .15s .3s;
+            }
+
+            &[aria-expanded="true"] {
                 &::after {
                     transform: scaleY(- 1);
-                    background: url("/images/chevron-down-white.svg") center / 1rem no-repeat;
                 }
             }
         }
+
+        &.expanded {
+            .note-content {
+                background-color: $lightest-grey;
+            }
+
+            .expander {
+                background-color: $lightest-grey;
+
+                &:hover, &:focus {
+                    background-color: $light-green;
+                }
+
+                &:focus {
+                    transition: color .15s, background-color .3s;
+                }
+
+            }
+        }
+    }
+
+    .code.expired .note {
+        .expander {
+            color: $dark-grey;
+
+            &::after {
+                background-image: url("/images/chevron-down-dark-grey.svg");
+            }
+
+            &:hover, &:focus {
+                background-color: $lighter-grey;
+            }
+        }
+
+        &.expanded {
+            .expander {
+                background-color: $lightest-grey;
+
+                &:hover, &:focus {
+                    background-color: $lighter-grey;
+                }
+
+            }
+        }
+
     }
 
     .note-content {
@@ -264,7 +305,6 @@
             padding-top: .5em;
         }
 
-
         .validity, .description, .notes {
             font-size: $font-m;
         }
@@ -283,7 +323,6 @@
                 white-space: nowrap;
                 padding: .5rem 2rem .5rem .75rem;
 
-
                 &[aria-expanded="false"] {
 
                 }
@@ -298,32 +337,43 @@
                 display: none;
             }
         }
+
+        .code {
+            &.expired {
+                .note {
+                    .expander {
+                        outline: 1px solid $dark-grey;
+                    }
+                }
+            }
+        }
+
     }
 
 }
 
-@media all and (-ms-high-contrast:none) {
-    .grid-container {
+@media all and (-ms-high-contrast: none) {
+    .title {
         display: -ms-grid;
-        -ms-grid-columns: 1fr 150px;
-        -ms-grid-rows: 1auto 1auto;
+        -ms-grid-columns: 1fr 100px;
+        -ms-grid-rows: 1 auto 1 auto;
     }
 
-    .Status {
+    .status {
         -ms-grid-row: 1;
         -ms-grid-row-span: 2;
         -ms-grid-column: 2;
         -ms-grid-column-span: 1;
     }
 
-    .Code-number {
+    .number {
         -ms-grid-row: 1;
         -ms-grid-row-span: 1;
         -ms-grid-column: 1;
         -ms-grid-column-span: 1;
     }
 
-    .Code-name {
+    .name {
         -ms-grid-row: 2;
         -ms-grid-row-span: 1;
         -ms-grid-column: 1;
