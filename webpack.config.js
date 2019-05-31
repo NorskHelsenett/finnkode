@@ -7,6 +7,9 @@ module.exports = {
         "code-system": "./src/js/code-system.js",
         search: "./src/js/search.js"
     },
+    resolve: {
+        extensions: ['.js', '.scss']
+    },
     mode: "development",
     watchOptions: {
         poll: true,

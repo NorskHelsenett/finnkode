@@ -1,5 +1,5 @@
 ﻿// Used to fix issues with expand/collapse on text size button when using keyboard
-export default function textSizeExpander() {
+function textSizeExpander() {
     let isActive = false;
     $('.text-size button').on('click', function() {
         isActive = !isActive;

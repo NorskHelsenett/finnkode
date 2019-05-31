@@ -4,7 +4,6 @@
 // that are not affected by a change in layout or window size.
 $(window).on("ready", function () {
     //console.log('ready - code-system.js');
-
 });
 
 // // "load" triggers when all the content on the page has finished loading.
@@ -12,6 +11,7 @@ $(window).on("ready", function () {
 // order to work correctly, e.g. stuff affected by height.
 $(window).on('load', function () {
     //console.log('load - code-system.js');
+    resizableSplitter();
 });
 
 
@@ -21,7 +21,6 @@ $(window).on('load', function () {
 // the function on document ready when you call it here.
 $(window).on("layoutchange", function () {
     //console.log("layoutchange - code-system.js");
-
     $('.js-sticky-nav').stickynav();
 
 });

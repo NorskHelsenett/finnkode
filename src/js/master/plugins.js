@@ -1,4 +1,4 @@
-export default (function ($) {
+(function ($) {
     $.fn.getExpandableBlocks = function () {
         var expandBlocks = [];
 

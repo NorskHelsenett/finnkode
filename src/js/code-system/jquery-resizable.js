@@ -182,4 +182,4 @@ Licensed under MIT License
             }
         });
     };
-});
+})(jQuery);

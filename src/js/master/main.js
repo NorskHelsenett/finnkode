@@ -4,7 +4,6 @@
 // that are not affected by a change in layout or window size.
 $(window).on("ready", function () {
     //console.log('ready - main.js');
-    layoutQ();
 });
 
 // // "load" triggers when all the content on the page has finished loading.
@@ -12,6 +11,7 @@ $(window).on("ready", function () {
 // order to work correctly, e.g. stuff affected by height.
 $(window).on('load', function () {
     //console.log('load - main.js');
+    layoutQ();
     responsiveExpandableBlocks();
     expandableBlocks();
     textSizeExpander();
@@ -25,7 +25,7 @@ $(window).on('load', function () {
 $(window).on("layoutchange", function () {
     //console.log("layoutchange - main.js");
 
-    responsiveExpandableBlocks();
+    //responsiveExpandableBlocks();
 });
 
 // "conditionalresize" does stuff does stuff on debounced resize when the layout is 1-col.
@@ -43,6 +43,6 @@ $(window).on(
     "resize orientationchange",
     debounce(function () {
         //console.log("resize orientationchange - main.js");
-        layoutQ();
+        //layoutQ();
     }, 25)
 );
