@@ -10,10 +10,10 @@
     "clean": "rimraf dist",
     "jekyll:serve": "bundle exec jekyll serve --watch",
     "postcss:build": "postcss dist/css/main.css --use autoprefixer -d dist/css/",
-    "postcss:watch": "postcss dist/css/main.css --use autoprefixer -d dist/css/ -w",
+    "postcss:watch": "postcss dist/css/main.css --use autoprefixer -d dist/css/",
     "sass:build": "node-sass src/scss/master.scss dist/css/main.css --source-map true && yarn postcss:build",
     "sass:watch": "sass -I src/scss src/scss/master.scss:dist/css/main.css --watch",
-    "start": "yarn clean && concurrently -k \"yarn sass:watch\" \"yarn postcss:watch\" \"yarn webpack:watch\" \"yarn jekyll:serve\"",
+    "start": "yarn clean && concurrently -k \"yarn sass:watch\" \"yarn webpack:watch\" \"yarn jekyll:serve\"",
     "webpack:build": "webpack --progress",
     "webpack:watch": "webpack --watch  --progress -d"
   },
