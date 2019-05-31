@@ -20,5 +20,5 @@ module.exports = {
         path: path.resolve(__dirname, 'dist/js'),
         sourceMapFilename: "./maps/[name].js.map"
     },
-    devtool: "source-map"
+    devtool: "inline-source-map"
 };

@@ -11,7 +11,7 @@
     "jekyll:serve": "bundle exec jekyll serve --watch",
     "build": "rimraf dist && webpack && bundle exec jekyll build",
     "webpack:watch": "webpack --watch  --progress -d",
-    "sass": "sass -I src/scss --watch src/scss/master.scss:dist/css/main.css",
+    "sass": "sass -I src/scss --watch src/scss/master.scss:dist/css/main.css"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",
