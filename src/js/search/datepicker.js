@@ -14,7 +14,7 @@ $(function () {
     });
 
     // Add aria-describedby to the button referring to the label
-    $('.ui-datepicker-trigger').attr('aria-describedby', 'datepickerLabel');
+    $('.ui-datepicker-trigger').attr('aria-labelledby', 'datepickerLabel');
 
     dayTripper();
 

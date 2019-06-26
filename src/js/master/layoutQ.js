@@ -1,14 +1,15 @@
 // Creates a queue to give info about whether the layout has changed
 // and which layout we're in.
 
-//export const layoutQ = makeLayoutQ();
+var layoutQ = makeLayoutQ();
 
-function layoutQ() {
+function makeLayoutQ() {
     // Initializing the queue (on page load). The value 0
     // indicates first page load.
     // "true" is just a default value.
     var Q = { number: [0, 0], changed: true };
 
+    return function() {
         Q.changed = false;
 
         try {
@@ -44,7 +45,8 @@ function layoutQ() {
         }
 
         return Q;
+    };
 }
 
 window.layoutQ = layoutQ;
-//window.makeLayoutQ = makeLayoutQ;
+window.makeLayoutQ = makeLayoutQ;

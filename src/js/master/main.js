@@ -4,14 +4,16 @@
 // that are not affected by a change in layout or window size.
 $(window).on("ready", function () {
     //console.log('ready - main.js');
+    layoutQ();
 });
+
 
 // // "load" triggers when all the content on the page has finished loading.
 // Use this for things that need to have their content fully loaded in
 // order to work correctly, e.g. stuff affected by height.
-$(window).on('load', function () {
-    //console.log('load - main.js');
-    layoutQ();
+$(window).on("load", function () {
+    //console.log('load - master/master.js');
+    unhideMenu();
     responsiveExpandableBlocks();
     expandableBlocks();
     textSizeExpander();
@@ -23,18 +25,17 @@ $(window).on('load', function () {
 // ready--we're going from no layout to one layout--you don't have to call
 // the function on document ready when you call it here.
 $(window).on("layoutchange", function () {
-    //console.log("layoutchange - main.js");
-
-    //responsiveExpandableBlocks();
+    //console.log("layoutchange - master/master.js");
+    responsiveExpandableBlocks();
 });
 
 // "conditionalresize" does stuff does stuff on debounced resize when the layout is 1-col.
-// $(window).on(
-//     'conditionalresize',
-//     debounce(function () {
-//         //console.log("conditionalresize - main.js");
-//     }, 25)
-// );
+$(window).on(
+    'conditionalresize',
+    debounce(function () {
+        //console.log("conditionalresize - master/master.js");
+    }, 25)
+);
 
 // "resize orientationchange" triggers every time the browser window resizes
 // or the device's orientation changes. You almost certainly want to put your
@@ -42,7 +43,7 @@ $(window).on("layoutchange", function () {
 $(window).on(
     "resize orientationchange",
     debounce(function () {
-        //console.log("resize orientationchange - main.js");
-        //layoutQ();
+        //console.log("resize orientationchange - master/master.js");
+        layoutQ();
     }, 25)
 );
