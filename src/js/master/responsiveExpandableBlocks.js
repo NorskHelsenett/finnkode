@@ -1,7 +1,6 @@
 // Add collapsing/expanding functionality to responsive expanding blocks in 1-col.
 
 function responsiveExpandableBlocks() {
-    setTimeout(() => {
 
     var responsiveExpandableBlocks = $(".js-responsive-expand").getExpandableBlocks();
 
@@ -10,7 +9,6 @@ function responsiveExpandableBlocks() {
     } else {
         responsiveExpandableBlocks.addExpandability();
     }
-    }, 1000);
 }
 
 window.responsiveExpandableBlocks = responsiveExpandableBlocks;
