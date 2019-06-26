@@ -2,7 +2,7 @@
 
     .directorate-logo {
         margin: .75rem 1rem;
-        background: url("/assets/images/directorate-logo.svg") no-repeat;
+        background: url($directorate-logo) no-repeat;
         background-size: contain;
         color: #fff;
         height: 11px;
@@ -38,7 +38,7 @@
         height: 0;
         padding-top: 3rem;
         overflow: hidden;
-        background: url("/assets/images/logo.svg") center left / contain no-repeat;
+        background: url($finnkode-logo) center left / contain no-repeat;
         width: 9rem;
         margin-right: 1.5rem;
     }
@@ -95,13 +95,13 @@
 
             &.home {
                 &::before {
-                    background-image: url("/assets/images/home.svg");
+                    background-image: url($home);
                 }
             }
 
             &.code-systems {
                 &::before {
-                    background-image: url("/assets/images/code-systems.svg");
+                    background-image: url($code-systems);
                 }
             }
         }

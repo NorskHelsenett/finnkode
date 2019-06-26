@@ -212,7 +212,7 @@
                 right: 0;
                 top: 0;
                 width: 2.5rem;
-                background: url("/assets/images/chevron-down-blue.svg") right 1rem center / .85rem no-repeat;
+                background: url($chevron-down-blue) right 1rem center / .85rem no-repeat;
                 transform: scaleY(1);
                 transition: transform .15s;
             }
@@ -223,7 +223,7 @@
                 outline: 1px solid $blue;
 
                 &::after {
-                    background-image: url("/assets/images/chevron-down-white.svg");
+                    background-image: url($chevron-down-white);
                 }
 
             }
@@ -235,7 +235,7 @@
             //    outline: 1px solid $blue;
             //
             //    &::after {
-            //        background-image: url("/assets/images/chevron-down-white.svg");
+            //        background-image: url($chevron-down-white);
             //
             //        transform: scaleY(- 1);
             //    }
@@ -257,7 +257,7 @@
             color: $dark-grey;
 
             &::after {
-                background-image: url("/assets/images/chevron-down-dark-grey.svg");
+                background-image: url($chevron-down-dark-grey);
             }
 
             &:hover, &:focus {
