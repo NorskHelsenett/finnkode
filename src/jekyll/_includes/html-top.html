@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="no">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ page.title }} - FinnKode</title>
+
+    {% if jekyll.environment != "production" %}
+    <script src="http://localhost:35729/livereload.js"></script>
+    {% endif %}
+
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <script src="/js/main.js"></script>
+    <link rel="stylesheet" href="/css/main.css">
+
+
+    {% if page.layout != "toc" %}
+    <!-- Styles to fix the menu jump on page load -->
+    <style class="js-remove-menu-jump">
+        #framework-header .code-system-menu {
+            display: none;
+        }
+
+        #framework-header .code-system-menu.expandable {
+            display: block;
+        }
+
+        @media only screen and (min-width: 39rem) {
+            #framework-header .code-system-menu.expandable {
+                display: flex;
+            }
+        }
+    </style>
+
+    {% else %}
+    <!-- Styles for the prototype ToC -->
+    <style>
+
+        body {
+            font-family: sans-serif;
+            background-color: #fff;
+            color: #000;
+            margin: 2rem;
+        }
+
+        .page-title {
+            color: #666;
+            font-style: italic;
+        }
+
+        li {
+            margin-top: .5rem;
+        }
+
+        a {
+            color: blue;
+        }
+
+    </style>
+    {% endif %}
+
+    {% if page.layout == "code-system" or page.layout == "code-system-front-page" %}
+    <script src="/js/code-system.js"></script>
+    {% endif %}
+
+    {% if page.layout == "search" %}
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script
+        src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"
+        integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="
+        crossorigin="anonymous"></script>
+    <script src="/js/search.js"></script>
+    {% endif %}
+
+</head>
+
+<body class="{{page.layout}} {{page.page-name}}">
+<a class="skip-link" href="#page-content">Hopp til innholdet</a>

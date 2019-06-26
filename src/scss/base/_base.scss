@@ -51,11 +51,9 @@ input {
     font-style: italic;
 }
 
-// Custom outline
-
-:focus {
-    outline: 2px dashed $blue;
-}
+//:focus {
+//    outline: 2px dashed $blue;
+//}
 
 #framework-footer :focus {
     outline: 2px dashed $green;

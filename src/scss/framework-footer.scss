@@ -27,7 +27,7 @@
 
     .directorate-logo {
         justify-self: flex-end;
-        background: url("/images/directorate-logo.svg") center/contain no-repeat;
+        background: url("/assets/images/directorate-logo.svg") center/contain no-repeat;
         height: 0;
         overflow: hidden;
         width: 13rem;
@@ -72,7 +72,7 @@
                 height: 0;
                 padding: 3rem 0 0 0;
                 overflow: hidden;
-                background: transparent url("/images/text-size.svg") no-repeat center / 3rem;
+                background: transparent url("/assets/images/text-size.svg") no-repeat center / 3rem;
             }
 
             .expandable {

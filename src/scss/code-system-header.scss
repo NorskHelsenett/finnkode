@@ -17,6 +17,11 @@
         margin: 0;
         padding: 0 2rem .25rem 0;
         line-height: 1;
+
+        a {
+            text-decoration: none;
+            color: $blue;
+        }
     }
 
     ul {
@@ -33,14 +38,18 @@
         }
     }
 
-    a {
-        white-space: nowrap;
-        height: 2rem;
-        line-height: 2rem;
-        color: $blue;
-        display: block;
-        padding-top: .125rem;
+    .main-menu {
+        a {
+            white-space: nowrap;
+            height: 2rem;
+            line-height: 2rem;
+            color: $blue;
+            display: block;
+            padding-top: .125rem;
+        }
     }
+
+
 
     .search-field {
         flex: 1 0 100%;
@@ -100,7 +109,7 @@
             width: unset;
             font-size: $font-5xl;
 
-            span {
+            a {
                 display: table-caption;
             }
         }

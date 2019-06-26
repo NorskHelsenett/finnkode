@@ -1,12 +1,6 @@
 <!-- Used for the front page, full-width, only the framework header. -->
-
-<!doctype html>
-<html>
-
-{% include head.html %}
-
-<body class="{{page.layout}} {{page.page-name}}">
-<a class="skip-link" href="#page-content">Hopp til innholdet</a>
+{% include html-top.html %}
+<!-- ********************************************************************** -->
 
 {% include framework-header.html %}
 
@@ -16,5 +10,6 @@
 
 {% include framework-footer.html %}
 
-</body>
-</html>
+
+<!-- ********************************************************************** -->
+{% include html-bottom.html %}

@@ -1,6 +1,12 @@
-<div id="global-search-banner">
+<div class="global-search-banner">
     <div class="layout-container">
-        <h1 id="global-search-label">Søk i alle kodeverk</h1>
-        {% include search-field.html%}
+
+        <label class="global-search-label" for="global-search">Søk i alle kodeverk</label>
+
+        <form action="https://url-to-search.finnkode.no/global-search" method="get" role="search" class="search-field">
+            <input autofocus name="global-search" id="global-search" type="search" class="search-input" placeholder="f.eks. kreft, bevissthetssilstand, fødsel...">
+            <button class="search-button" type="submit">Søk i alle kodeverk</button>
+        </form>
+
     </div>
 </div>

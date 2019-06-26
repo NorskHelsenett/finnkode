@@ -1,5 +1,5 @@
-#global-search-banner {
-    background: url("/images/background-green.jpg") center / auto 9rem no-repeat;
+.global-search-banner {
+    background: url("/assets/images/background-green.jpg") center / auto 9rem no-repeat;
     height: 9rem;
     display: flex;
     flex-flow: column nowrap;
@@ -7,12 +7,11 @@
     justify-content: center;
 
     .layout-container {
-        padding: 0 1rem;
         width: 100%;
         max-width: $one-point-five-col;
     }
 
-    #global-search-label {
+    .global-search-label {
         font-weight: 600;
         color: $blue;
         display: block;
@@ -23,18 +22,19 @@
 }
 
 @media only screen and (min-width: $one-to-two-col) {
-    #global-search-banner {
+    .global-search-banner {
         height: 13rem;
         background-size: auto 13rem;
 
         .layout-container {
             max-width: $one-point-five-col;
+            padding: 0 1rem;
         }
     }
 }
 
 @media only screen and (min-width: $two-to-three-col) {
-    #global-search-banner {
+    .global-search-banner {
         height: 18rem;
         background-size: cover;
 
@@ -42,7 +42,7 @@
             max-width: $two-col;
         }
 
-        #global-search-label {
+        .global-search-label {
             font-size: $font-2xl;
         }
     }

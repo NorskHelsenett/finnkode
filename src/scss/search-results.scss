@@ -2,11 +2,8 @@
     margin: 1.5rem 1rem 0;
     padding-bottom: 3rem;
 
-    a {
-        color: $blue;
-    }
-
     .hits {
+        font-size: $font-s;
         color: $blue;
         padding: .75rem 1rem;
         margin: .5rem 0 0;
@@ -19,21 +16,22 @@
         padding: 0;
     }
 
-    li {
+    .code {
         margin: 0;
         padding: 0;
         border-bottom: 1px solid $blue;
-        background: url("/images/chevron-right-blue.svg") right 1rem center / .6rem no-repeat;
     }
 
     a {
         color: $blue;
-        display: block;
+        display: flex;
+        flex-flow: row wrap;
         text-decoration: none;
-        padding: .75rem 2.5rem .75rem 1rem;
+        padding: 1rem 2.5rem 1rem 1rem;
         position: relative;
         z-index: 2;
         transition: background-color .2s;
+        background: url("/assets/images/chevron-right-grey.svg") right 1rem center / 1rem 2rem no-repeat;
 
         &:hover, &:focus {
             background-color: $light-green;
@@ -61,55 +59,104 @@
                 bottom: -1px;
             }
         }
-
     }
 
-    .code-system-name {
-        font-size: .85rem;
-    }
-
-    .code-name {
+    .number, .name {
         font-weight: 600;
+        display: inline-flex;
     }
-}
 
-@media only screen and (min-width: $one-to-two-col) {
-    .search-results {
+    .number {
+        order: 2;
 
+        &::after {
+            content: "—";
+            padding: 0 .25em;
+        }
     }
+
+    .name {
+        font-weight: 600;
+        order: 3;
+    }
+
+    .description {
+        order: 4;
+        padding-top: .25rem
+    }
+
+    .system {
+        font-size: .85rem;
+        order: 1;
+        width: 100%;
+        padding-bottom: .25rem;
+    }
+
 }
 
 @media only screen and (min-width: $two-to-three-col) {
+    .search-results {
+        .hits {
+            padding: .75rem 1rem;
+            margin-top: 0;
+            line-height: 1.75rem;
+        }
+    }
+}
+
+
+@media only screen and (min-width: $three-to-four-col) {
     .search-results {
 
         .hits {
             padding: .75rem 1rem;
             margin-top: 0;
+            line-height: 1.75rem;
         }
 
         a {
-            display: flex;
-            flex-flow: row nowrap;
-            justify-content: space-between;
-            align-items: center;
-            font-size: $font-l;
+            background-position: right 1rem top 1.325rem;
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            padding-right: 5rem;
+            font-size: $font-xl;
+            display: grid;
+            grid-template-columns: 4em 1fr 9rem;
+            grid-template-rows: 1fr min-content;
 
+            grid-template-areas: "number name system" "number description system";
 
-            .code-system-name {
-                order: 2;
-                white-space: nowrap;
-                font-size: $font-l;
-                width: 10rem;
-                flex-shrink: 0;
+            .system {
+                grid-area: system;
+                font-size: $font-xl;
+                width: unset;
                 text-align: right;
+                padding-bottom: 0;
             }
 
-            .code-name {
-                order: 1;
-                padding-right: 2rem;
+            .name, .description {
+                padding: 0 2rem;
+            }
+
+            .name {
+                grid-area: name;
+            }
+
+            .description {
+                grid-area: description;
+                font-size: $font-l;
+                padding-top: .5rem;
+            }
+
+            .number {
+                grid-area: number;
+                display: unset;
+
+                &::after {
+                    display: none;
+                }
             }
 
         }
-
     }
 }

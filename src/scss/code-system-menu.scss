@@ -23,6 +23,10 @@
             position: relative;
             height: auto;
             padding: .5rem 1rem;
+
+            span {
+                display: block;
+            }
         }
 
         &.expand {
@@ -37,7 +41,7 @@
                     top: 0;
                     bottom: 0;
                     right: 1rem;
-                    background: url("/images/chevron-down-blue.svg") right center / 1.25rem no-repeat;
+                    background: url("/assets/images/chevron-down-blue.svg") right center / 1.25rem no-repeat;
                     transform: scaleY(1);
                     transition: transform .2s;
                     z-index: 1;
@@ -135,7 +139,7 @@
             padding: .75rem 1rem;
 
             // The chevron
-            background: url("/images/chevron-right-blue.svg") right 1rem center / .75rem no-repeat;
+            background: url("/assets/images/chevron-right-blue.svg") right 1rem center / .75rem no-repeat;
 
         }
     }

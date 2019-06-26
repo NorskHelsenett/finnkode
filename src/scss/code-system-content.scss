@@ -1,24 +1,29 @@
 .code-system-content {
     padding: 1.5rem 1rem;
 
+    .general-info {
+        max-width: 45rem;
+    }
+
     h2 {
         font-size: $font-2xl;
         color: $blue;
         line-height: 1.2;
         margin-top: 0;
         margin-bottom: 1.5rem;
+        font-weight: normal;
+    }
+
+    .chapter-number, .chapter-title {
+        display: block;
+    }
+
+    .chapter-title {
+        font-weight: 600;
     }
 
     h3 {
         font-size: $font-l;
-        font-weight: 600;
-    }
-
-    .chapter-number {
-        font-weight: normal;
-    }
-
-    .chapter-title {
         font-weight: 600;
     }
 
@@ -67,9 +72,11 @@
         }
 
         &.leaf {
+            border-bottom: 1px solid $light-grey;
+
             .code-details {
                 border: 1px solid $light-grey;
-                border-width: 0 1px 1px 1px;
+                border-width: 0 1px;
             }
         }
 
@@ -182,17 +189,20 @@
     .notes {
         border: 1px solid $light-grey;
         border-width: 0 1px;
-    }
+        list-style: none;
+        margin: 0;
+        padding: 0;
 
-    .note {
-        border-bottom: 1px solid $light-grey;
+        li {
+            border-top: 1px solid $light-grey;
+        }
 
-        .expander {
-            color: $blue;
-            padding: .5rem 1rem;
+        a {
+            display: block;
+            text-decoration: none;
+            padding: .75rem 2.5rem .75rem 1rem;
             position: relative;
-            transition: color .15s, background-color .2s;
-            outline: 0;
+            transition: .15s;
             font-weight: 600;
 
             &::after {
@@ -202,52 +212,52 @@
                 right: 0;
                 top: 0;
                 width: 2.5rem;
-                background: url("/images/chevron-down-blue.svg") right 1rem center / 1rem no-repeat;
+                background: url("/assets/images/chevron-down-blue.svg") right 1rem center / .85rem no-repeat;
                 transform: scaleY(1);
                 transition: transform .15s;
             }
 
             &:hover, &:focus {
-                background-color: $light-green;
-            }
+                background-color: $blue;
+                color: #fff;
+                outline: 1px solid $blue;
 
-            &:focus {
-                transition: color .15s, background-color .15s .3s;
-            }
-
-            &[aria-expanded="true"] {
                 &::after {
-                    transform: scaleY(- 1);
-                }
-            }
-        }
-
-        &.expanded {
-            .note-content {
-                background-color: $lightest-grey;
-            }
-
-            .expander {
-                background-color: $lightest-grey;
-
-                &:hover, &:focus {
-                    background-color: $light-green;
-                }
-
-                &:focus {
-                    transition: color .15s, background-color .3s;
+                    background-image: url("/assets/images/chevron-down-white.svg");
                 }
 
             }
+
+
+            //&.selected {
+            //    background-color: $blue;
+            //    color: #fff;
+            //    outline: 1px solid $blue;
+            //
+            //    &::after {
+            //        background-image: url("/assets/images/chevron-down-white.svg");
+            //
+            //        transform: scaleY(- 1);
+            //    }
+            //}
         }
     }
+
+    [role=tabpanel] {
+        animation: fadein .4s;
+
+        &.unselected {
+            display: none;
+        }
+    }
+
 
     .code.expired .note {
         .expander {
             color: $dark-grey;
 
             &::after {
-                background-image: url("/images/chevron-down-dark-grey.svg");
+                background-image: url("/assets/images/chevron-down-dark-grey.svg");
             }
 
             &:hover, &:focus {
@@ -270,19 +280,22 @@
 
     .note-content {
         background-color: #fff;
-        padding: .5rem 1rem;
+        padding: 1rem;
 
         p {
             margin: .5rem 0;
         }
     }
-
 }
 
 @media only screen and (min-width: $two-to-three-col) {
     .code-system-content {
         article {
             padding-top: 1.5rem;
+        }
+
+        h2 {
+            font-size: $font-4xl;
         }
 
         .title {
@@ -309,75 +322,84 @@
             font-size: $font-m;
         }
 
-        .notes {
+    }
+
+}
+
+@media only screen and (min-width: $three-to-four-col) {
+    .code-system-content {
+        h2 {
+            font-size: $font-5xl;
+            letter-spacing: -1px;
+        }
+
+
+        .code-details {
             display: flex;
-            flex-flow: row nowrap;
-            align-items: stretch;
-        }
+            flex-flow: row wrap;
+            justify-content: space-between;
 
-        .note {
-            position: relative;
-
-            .expander {
-                outline: 1px solid $blue;
-                white-space: nowrap;
-                padding: .5rem 2rem .5rem .75rem;
-
-                &[aria-expanded="false"] {
-
-                }
-
-                &[aria-expanded="true"] {
-
-                }
-
+            p {
+                margin: 0 0 1rem;
             }
 
-            .expandable {
-                display: none;
+            .status-info {
+                flex: 0 0 100%;
+                order: 1;
             }
-        }
 
-        .code {
-            &.expired {
-                .note {
-                    .expander {
-                        outline: 1px solid $dark-grey;
-                    }
+            .validity {
+                order: 3;
+                display: block;
+                color: $blue;
+
+                span {
+                    display: block;
+                    font-size: $font-xs;
+                    margin-bottom: .25rem;
+                }
+
+                a {
+                    color: $blue;
                 }
             }
-        }
 
+            .description {
+                order: 2;
+                flex: 1 1 auto;
+            }
+
+
+        }
     }
-
 }
 
-@media all and (-ms-high-contrast: none) {
-    .title {
-        display: -ms-grid;
-        -ms-grid-columns: 1fr 100px;
-        -ms-grid-rows: 1 auto 1 auto;
-    }
-
-    .status {
-        -ms-grid-row: 1;
-        -ms-grid-row-span: 2;
-        -ms-grid-column: 2;
-        -ms-grid-column-span: 1;
-    }
-
-    .number {
-        -ms-grid-row: 1;
-        -ms-grid-row-span: 1;
-        -ms-grid-column: 1;
-        -ms-grid-column-span: 1;
-    }
-
-    .name {
-        -ms-grid-row: 2;
-        -ms-grid-row-span: 1;
-        -ms-grid-column: 1;
-        -ms-grid-column-span: 1;
-    }
-
-}
+//@media all and (-ms-high-contrast: none) {
+//    .title {
+//        display: -ms-grid;
+//        -ms-grid-columns: 1fr 100px;
+//        -ms-grid-rows: 1 auto 1 auto;
+//    }
+//
+//    .status {
+//        -ms-grid-row: 1;
+//        -ms-grid-row-span: 2;
+//        -ms-grid-column: 2;
+//        -ms-grid-column-span: 1;
+//    }
+//
+//    .number {
+//        -ms-grid-row: 1;
+//        -ms-grid-row-span: 1;
+//        -ms-grid-column: 1;
+//        -ms-grid-column-span: 1;
+//    }
+//
+//    .name {
+//        -ms-grid-row: 2;
+//        -ms-grid-row-span: 1;
+//        -ms-grid-column: 1;
+//        -ms-grid-column-span: 1;
+//    }
+//
+//}
