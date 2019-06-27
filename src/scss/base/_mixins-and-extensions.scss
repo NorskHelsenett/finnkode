@@ -20,7 +20,6 @@
     border: unset;
 }
 
-
 @mixin button-reset {
     padding: 0;
     border: none;
@@ -32,4 +31,39 @@
 
 %box-shadow {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+}
+
+@mixin list-menu-item {
+    position: relative;
+    z-index: 2;
+    transition: background-color .2s;
+
+    &:hover, &:focus {
+        background-color: $light-green;
+    }
+
+    // The wider lines above and below the focused element
+    &:focus {
+        outline: 0;
+
+        &::before, &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            height: 2px;
+            left: 0;
+            right: 0;
+            background-color: $grey;
+            z-index: 1;
+        }
+
+        &::before {
+            top: -1px;
+        }
+
+        &::after {
+            bottom: -1px;
+        }
+    }
+
 }

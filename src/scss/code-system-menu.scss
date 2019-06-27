@@ -66,7 +66,7 @@
     .expander, a {
         position: relative;
         z-index: 2;
-        transition: background-color .2s;
+        transition: .15s;
 
         &:hover, &:focus {
             background-color: $light-green;
