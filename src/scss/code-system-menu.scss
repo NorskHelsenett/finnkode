@@ -84,6 +84,7 @@
                 left: 0;
                 right: 0;
                 background-color: $grey;
+                z-index: 1;
             }
 
             &::before {
