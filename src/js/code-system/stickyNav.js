@@ -1,3 +1,25 @@
+//
+
+function makeStickyNav() {
+
+    console.log("make stickyNav");
+
+    var tree = $('.js-sticky-nav');
+
+    if (tree.length !== 0) {
+        if (layoutQ().number[0] <= 2) {
+            console.log("destroy stickynav");
+            tree.stickynav("destroy");
+        } else {
+            console.log("create stickynav");
+            tree.stickynav();
+        }
+    }
+}
+
+window.makeStickyNav = makeStickyNav;
+
+
 /*!============================================================
  * jquery.sticky-nav.js
  * Copyright (c) Federico Cargnelutti <fedecarg@gmail.com>
@@ -9,9 +31,9 @@
     $.fn.stickynav = function (options) {
 
         const DEFAULT_SELECTORS = {
-            navActiveClass: "active",   // Selected nav item modifier class
-            navStickyClass: "sticky",   // Sticky nav modifier class
-            sectionSelector: "js-scrollto"   // Section id, class or tag selector
+            navActiveClass:    'active',   // Selected nav item modifier class
+            navStickyClass:    'sticky',   // Sticky nav modifier class
+            sectionSelector:   'section'   // Section id, class or tag selector
         };
 
         // Merge options with defaults
@@ -19,10 +41,8 @@
 
         // Set jQuery DOM elements
         const $nav = this;
-        const $navLinks = $nav.find("a");
-        const $sections = $(".js-scrollto");
-        const $scrollingPanel = $(".js-current-tree-location-panel");
-
+        const $navLinks = $nav.find('a');
+        const $sections = $(options.sectionSelector);
 
         const navHeight = $nav.height();
         const scrollTopOffset = $sections.first().height() / 2;
@@ -36,35 +56,39 @@
         }
 
         function bindEvents() {
-            $navLinks.on("click", onClick);
-            $scrollingPanel.on("scroll", throttle(onScroll, 20));
+            $navLinks.on('click', onClick);
+            $(window).on('scroll', throttle(onScroll, 20));
         }
 
         function onClick(e) {
-            const targetEl = $(this).attr("href");
+            e.preventDefault();
+            const targetEl = $(this).attr('href');
 
-            if (targetEl.length) {
+            if ($(targetEl).length) {
                 selectNavItem(this);
-                $(targetEl).fadeOut(0).fadeIn(500);
+
+                $('html, body').animate({
+                    scrollTop: $(targetEl).offset().top - navHeight
+                });
             }
         }
 
         function onScroll() {
-            // var scrollTop = $scrollingPanel.scrollTop() - navHeight,
-            //     closestPosition = findClosestNumber(scrollTop, offsetNumbers);
-            //
-            // // select navbar item
-            // if (closestPosition !== currentScrollPosition) {
-            //     selectNavItem(".section-offset-" + closestPosition);
-            //     currentScrollPosition = closestPosition;
-            // }
-            //
-            // // fix navbar
-            // // if (scrollTop > scrollTopOffset) {
-            // //     $nav.addClass(options.navStickyClass);
-            // // } else {
-            // //     $nav.removeClass(options.navStickyClass);
-            // // }
+            var scrollTop = $(document).scrollTop() + navHeight,
+                closestPosition = findClosestNumber(scrollTop, offsetNumbers);
+
+            // select navbar item
+            if (closestPosition !== currentScrollPosition) {
+                selectNavItem('.section-offset-' + closestPosition);
+                currentScrollPosition = closestPosition;
+            }
+
+            // fix navbar
+            if (scrollTop > scrollTopOffset) {
+                $nav.addClass(options.navStickyClass);
+            } else {
+                $nav.removeClass(options.navStickyClass);
+            }
         }
 
         function findClosestNumber(num, arr) {
@@ -79,26 +103,25 @@
                 const offsetTop = getOffsetTop(el);
 
                 offsetNumbers.push(offsetTop);
-                getNavItem(el).addClass("section-offset-" + offsetTop);
+                getNavItem(el).addClass('section-offset-' + offsetTop);
             });
         }
 
         function getOffsetTop(el) {
             const rect = el.getBoundingClientRect(),
-                scrollTop = $scrollingPanel.scrollTop();
-            // || document.$scrollingPanel.scrollTop;
+                scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
             return Math.round(rect.top + scrollTop);
         }
 
         function getNavItem(el) {
-            return $("nav a[href=\"#" + $(el).attr("id") + "\"]");
+            return $('nav a[href="#' + $(el).attr('id') + '"]');
         }
 
         function selectNavItem(el) {
-            // if (!$nav.hasClass(options.navStickyClass)) {
-            //     $nav.addClass(options.navStickyClass);
-            // }
+            if (!$nav.hasClass(options.navStickyClass)) {
+                $nav.addClass(options.navStickyClass);
+            }
 
             $navLinks.removeClass(options.navActiveClass);
             $(el).addClass(options.navActiveClass);
