@@ -15,8 +15,12 @@
         font-weight: 600;
         color: $blue;
         display: block;
-        margin: 0 0 .75rem 1rem;
+        margin: 0 0 .75rem 2rem;
         font-size: $font-m;
+    }
+
+    .search-field {
+        margin: 0 1rem;
     }
 
 }
@@ -29,6 +33,14 @@
         .layout-container {
             max-width: $one-point-five-col;
             padding: 0 1rem;
+        }
+
+        .search-field {
+            margin: 0;
+        }
+
+        .global-search-label {
+            margin-left: 1rem;
         }
     }
 }
