@@ -38,8 +38,26 @@ main {
 a {
     transition: .1s color, .1s background-color;
     text-decoration: underline;
-    text-decoration-skip: ink;
+    text-decoration-skip-ink: auto;
     color: $purple;
+
+    &:focus {
+        background-color: $green;
+        outline: 0;
+
+        &:hover {
+            background-color: $green;
+        }
+    }
+
+    &:hover {
+        background-color: $light-green;
+        color: $purple;
+    }
+
+    &:active {
+        color: $medium-purple;
+    }
 }
 
 input {
@@ -70,7 +88,6 @@ h1 {
 }
 
 
-
 // Expandable Block with transitions ==================================================
 .expand {
     transition-property: background-color, border-color;
@@ -78,6 +95,7 @@ h1 {
 
     &.initial.collapsed {
         transition: none;
+
         .expandable {
             transition: none;
         }

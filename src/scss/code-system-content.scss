@@ -321,6 +321,34 @@
             margin: .5rem 0;
         }
     }
+
+    .list-codes {
+        tr {
+            padding: 0 .325rem;
+        }
+
+        tbody {
+            tr {
+                &:hover {
+                    background-color: $light-green;
+
+                    a {
+                        color: $purple;
+                    }
+                }
+            }
+        }
+
+        td:first-child {
+            padding-right: 1rem;
+        }
+
+        th, td {
+            vertical-align: top;
+        }
+
+
+    }
 }
 
 @media only screen and (min-width: $two-to-three-col) {
