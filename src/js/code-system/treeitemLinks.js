@@ -265,5 +265,3 @@ TreeitemLink.prototype.handleMouseOver = function (event) {
 TreeitemLink.prototype.handleMouseOut = function (event) {
   event.currentTarget.classList.remove('hover');
 };
-
-export default TreeitemLink;

@@ -1,9 +1,9 @@
-﻿//console.log("start - main.js");
+﻿//console.log("start - master/master.js");
 
 // "ready" triggers as soon as the dom is in place.  Use this for things
 // that are not affected by a change in layout or window size.
-$(window).on("ready", function () {
-    //console.log('ready - main.js');
+$(function() {
+    //console.log('ready - master/master.js');
     layoutQ();
 });
 
@@ -18,7 +18,6 @@ $(window).on("load", function () {
     expandableBlocks();
     textSizeExpander();
 });
-
 
 // "layoutchange" triggers only when the layout changes, as opposed to
 // triggering on every resize.  Since the layout also changes on document

@@ -2,7 +2,7 @@
 
 // "ready" triggers as soon as the dom is in place.  Use this for things
 // that are not affected by a change in layout or window size.
-$(window).on("ready", function () {
+$(function() {
     //console.log('ready - code-system.js');
 });
 
@@ -14,7 +14,6 @@ $(window).on("load", function () {
     //console.log('load - code-system.js');
     navTreeExpand();
 });
-
 
 // "layoutchange" triggers only when the layout changes, as opposed to
 // triggering on every resize.  Since the layout also changes on document

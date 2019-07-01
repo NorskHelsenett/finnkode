@@ -36,6 +36,7 @@
     };
 
     $.fn.addExpandability = function () {
+
         $(this).each(function () {
             $(this).removeExpandability();
 

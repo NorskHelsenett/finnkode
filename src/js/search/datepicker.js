@@ -1,10 +1,9 @@
 // https://dequeuniversity.com/library/aria/date-pickers/sf-date-picker
-// console.log("search.js - datepicker.js");
 
 $(function () {
     $('#datepicker').datepicker({
         showOn: 'button',
-        buttonImage: '/images/calendar-blue.svg', // File (and file path) for the calendar image
+        buttonImage: '/assets/images/calendar-blue.svg', // File (and file path) for the calendar image
         buttonImageOnly: false,
         buttonText: 'Vis kalender',
         dayNamesShort: [ "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag" ],
@@ -19,6 +18,7 @@ $(function () {
     dayTripper();
 
 });
+
 
 function dayTripper() {
     $('.ui-datepicker-trigger').click(function () {
