@@ -389,6 +389,32 @@
 
 }
 
+@media only screen and (min-width: $one-to-two-col) {
+    .code-system-content {
+        .notes {
+
+            [role=tab] {
+                background-color: green;
+
+               &[aria-selected=true] {
+                    background-color: red;
+                }
+            }
+
+            [role=tabpanel] {
+
+                &[aria-hidden=true] {
+                    display: none;
+                }
+            }
+
+            [role=tablist] {
+
+            }
+        }
+    }
+}
+
 @media only screen and (min-width: $three-to-four-col) {
     .code-system-content {
         h2 {
