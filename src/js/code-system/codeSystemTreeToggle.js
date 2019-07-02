@@ -1,6 +1,6 @@
-// Handles how the code system layout changes from split to vertical depending on the layout
+// Makes the code system tree expand and collapse in 1- and 2-col layouts
 
-function navTreeExpand () {
+function codeSystemTreeToggle () {
     var treeContainer = $(".js-nav-tree-expand");
 
     if (treeContainer.length > 0) {
@@ -14,4 +14,4 @@ function navTreeExpand () {
     }
 }
 
-window.navTreeExpand = navTreeExpand;
+window.codeSystemTreeToggle = codeSystemTreeToggle;

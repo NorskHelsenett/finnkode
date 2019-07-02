@@ -2,8 +2,6 @@
 
 function resizableSplitter() {
 
-    console.log("resizableSplitter");
-
     var resizablePanel = $(".js-resizable-splitter");
 
     if (resizablePanel.length !== 0) {

@@ -1,23 +1,22 @@
-//
+// Sticks the code system tree to the left side
+// of the viewport in 3+ col layout
 
-function makeStickyNav() {
-
-    console.log("make stickyNav");
+function stickyCodeSystemTree() {
 
     var tree = $('.js-sticky-nav');
 
     if (tree.length !== 0) {
         if (layoutQ().number[0] <= 2) {
-            console.log("destroy stickynav");
-            tree.stickynav("destroy");
+            console.log("destroy sticky nav tree");
+            tree.makeStickycodeSystemTree("destroy");
         } else {
-            console.log("create stickynav");
-            tree.stickynav();
+            console.log("create sticky nav tree");
+            tree.makeStickycodeSystemTree();
         }
     }
 }
 
-window.makeStickyNav = makeStickyNav;
+window.stickyCodeSystemTree = stickyCodeSystemTree;
 
 
 /*!============================================================
@@ -28,7 +27,7 @@ window.makeStickyNav = makeStickyNav;
 
 (function ($) {
 
-    $.fn.stickynav = function (options) {
+    $.fn.makeStickyCodeSystemTree = function (options) {
 
         const DEFAULT_SELECTORS = {
             navActiveClass:    'active',   // Selected nav item modifier class
