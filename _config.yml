@@ -35,7 +35,7 @@ source: src/jekyll/
 # Bundle/build folder
 destination: dist/
 
-keep_files: [js, css, maps]
+keep_files: [assets/js, assets/css, maps]
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
@@ -50,4 +50,4 @@ keep_files: [js, css, maps]
 #   - vendor/ruby/
 
 
-# sass -I src/scss --watch src/scss/master.scss:dist/css/main.css
+# sass -I src/scss --watch src/scss/master.scss:dist/assets/css/master.css
