@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        main: "./src/js/master.js",
+        master: "./src/js/master.js",
         "code-system": "./src/js/code-system.js",
         search: "./src/js/search.js"
     },
@@ -17,7 +17,7 @@ module.exports = {
     },
     output: {
         filename: "[name].js",
-        path: path.resolve(__dirname, 'dist/js'),
+        path: path.resolve(__dirname, 'dist/assets/js'),
         sourceMapFilename: "./maps/[name].js.map"
     },
     devtool: "source-map"

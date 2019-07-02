@@ -13,7 +13,7 @@ $(window).on("ready", function () {
 // order to work correctly, e.g. stuff affected by height.
 $(window).on("load", function () {
     //console.log('load - master/master.js');
-    unhideMenu();
+    //unhideMenu();
     responsiveExpandableBlocks();
     expandableBlocks();
     textSizeExpander();

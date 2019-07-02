@@ -1,0 +1,25 @@
+layout: simple
+page-name: contact-us
+title: Kontakt oss
+toc-title: Contact Form (simple layout)
+ingress:  The contact form is accessible from all webpages via a link in the top menu. It requires a mail routing option configured on the server that hosts the application. The form itself is pending design and should be discussed in more details before implementation.
+---
+
+<p>
+
+The contact form will contain these fields:
+</p>
+
+
+<ul>
+    <li>“Codesystem”. Mandatory. Drop-down with type-ahead. Choices are all the codesystems configured in the application. Pre-filled codesystem when arriving from any codesystem.
+    <li>“Code”. Text field. Pre-filled if arriving from concept view.
+    <li>“Error description” - text field.
+    <li>“Code request” - text field.
+<li>“Synonym request” - text field.
+
+</ul>
+
+<p>Estimates include up to 2 days of extra work adapting additional form fields and design. To determine if this is enough, full design and field list will have to be delivered.</p>
+
+<p>A recipient mail address is configurable for each codesystem available in the “Codesystem” drop-down. When the form is submitted, it is sent to the relevant address.</p>
