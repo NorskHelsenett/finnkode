@@ -58,6 +58,7 @@ function codeTabs() {
                     panelToOpen = $('#' + panelToOpenID);
 
                 showTabPanel(event);
+
                 //
                 // if (selectedTab.hasClass('selected')) {
                 //     panelToOpen.focusWithoutScrolling();

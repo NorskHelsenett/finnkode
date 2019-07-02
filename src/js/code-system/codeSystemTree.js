@@ -15,10 +15,14 @@
  */
 function codeSystemTree() {
 
+  console.log("code system tree");
   var trees = document.querySelectorAll('[role="tree"]');
 
   for (var i = 0; i < trees.length; i++) {
+
+    console.log(t);
     var t = new TreeLinks(trees[i]);
+    console.log(t);
     t.init();
   }
 

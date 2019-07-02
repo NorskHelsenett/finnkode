@@ -8,20 +8,19 @@
     {% include code-system-header.html %}
 </div>
 
-<!--<div class="panel-container layout-container js-nav-tree-expand">-->
-    <div class="panel-container layout-container">
+<div class="panel-container layout-container js-tree-expand">
 
-<!--    {% if page.code-system-tree-expanded == true%}-->
+    {% if page.code-system-tree-expanded == true%}
 
-<!--        {% include code-system-tree-expanded.html %}-->
+    {% include code-system-tree-expanded.html %}
 
-<!--    {% else %}-->
+    {% else %}
 
-<!--        {% include code-system-tree-collapsed.html %}-->
+    {% include code-system-tree-collapsed.html %}
 
-<!--    {% endif %}-->
+    {% endif %}
 
-    <div class="splitter js-nav-tree-expander">
+    <div class="splitter js-tree-expander">
         <div class="splitter-name">{{page.code-system}}</div>
         <div class="splitter-instructions">Trekk for å utvide</div>
     </div>

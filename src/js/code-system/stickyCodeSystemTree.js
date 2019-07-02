@@ -3,23 +3,17 @@
 
 function stickyCodeSystemTree() {
 
-    var tree = $('.js-sticky-nav');
+    var tree = $(".js-sticky-tree");
 
     if (tree.length !== 0) {
-        if (layoutQ().number[0] <= 2) {
-            console.log("destroy sticky nav tree");
-            tree.makeStickycodeSystemTree("destroy");
-        } else {
-            console.log("create sticky nav tree");
-            tree.makeStickycodeSystemTree();
-        }
+        tree.makeStickyCodeSystemTree();
     }
 }
 
 window.stickyCodeSystemTree = stickyCodeSystemTree;
 
-
 /*!============================================================
+// Based on
  * jquery.sticky-nav.js
  * Copyright (c) Federico Cargnelutti <fedecarg@gmail.com>
  * http://www.fedecarg.com/
@@ -27,21 +21,13 @@ window.stickyCodeSystemTree = stickyCodeSystemTree;
 
 (function ($) {
 
-    $.fn.makeStickyCodeSystemTree = function (options) {
-
-        const DEFAULT_SELECTORS = {
-            navActiveClass:    'active',   // Selected nav item modifier class
-            navStickyClass:    'sticky',   // Sticky nav modifier class
-            sectionSelector:   'section'   // Section id, class or tag selector
-        };
-
-        // Merge options with defaults
-        options = $.extend({}, DEFAULT_SELECTORS, options);
+    $.fn.makeStickyCodeSystemTree = function () {
 
         // Set jQuery DOM elements
         const $nav = this;
-        const $navLinks = $nav.find('a');
-        const $sections = $(options.sectionSelector);
+        const $navLinks = $nav.find("a");
+        const $sections = $(".js-scrollto");
+        const $scrollingPanel = $(".js-current-tree-location-panel");
 
         const navHeight = $nav.height();
         const scrollTopOffset = $sections.first().height() / 2;
@@ -50,44 +36,43 @@ window.stickyCodeSystemTree = stickyCodeSystemTree;
         let offsetNumbers = [0];
 
         function initialise() {
+            $nav.resetStickyCodeSystemTree();
+
             calculateOffsets();
             bindEvents();
         }
 
         function bindEvents() {
-            $navLinks.on('click', onClick);
-            $(window).on('scroll', throttle(onScroll, 20));
+            $navLinks.on("click.makeStickyCodeSystemTree", onClick);
+            $scrollingPanel.on("scroll.makeStickyCodeSystemTree", throttle(onScroll, 20));
         }
 
         function onClick(e) {
-            e.preventDefault();
-            const targetEl = $(this).attr('href');
+            const targetEl = $(this).attr("href");
 
             if ($(targetEl).length) {
                 selectNavItem(this);
 
-                $('html, body').animate({
-                    scrollTop: $(targetEl).offset().top - navHeight
-                });
+                $(targetEl).fadeOut(0).fadeIn(400);
             }
         }
 
         function onScroll() {
-            var scrollTop = $(document).scrollTop() + navHeight,
-                closestPosition = findClosestNumber(scrollTop, offsetNumbers);
-
-            // select navbar item
-            if (closestPosition !== currentScrollPosition) {
-                selectNavItem('.section-offset-' + closestPosition);
-                currentScrollPosition = closestPosition;
-            }
-
-            // fix navbar
-            if (scrollTop > scrollTopOffset) {
-                $nav.addClass(options.navStickyClass);
-            } else {
-                $nav.removeClass(options.navStickyClass);
-            }
+            // var scrollTop = $scrollingPanel.scrollTop() - navHeight,
+            //     closestPosition = findClosestNumber(scrollTop, offsetNumbers);
+            //
+            // // select navbar item
+            // if (closestPosition !== currentScrollPosition) {
+            //     selectNavItem(".section-offset-" + closestPosition);
+            //     currentScrollPosition = closestPosition;
+            // }
+            //
+            // // fix navbar
+            // // if (scrollTop > scrollTopOffset) {
+            // //     $nav.addClass("sticky");
+            // // } else {
+            // //     $nav.removeClass("sticky");
+            // // }
         }
 
         function findClosestNumber(num, arr) {
@@ -102,28 +87,29 @@ window.stickyCodeSystemTree = stickyCodeSystemTree;
                 const offsetTop = getOffsetTop(el);
 
                 offsetNumbers.push(offsetTop);
-                getNavItem(el).addClass('section-offset-' + offsetTop);
+                getNavItem(el).addClass("section-offset-" + offsetTop);
             });
         }
 
         function getOffsetTop(el) {
             const rect = el.getBoundingClientRect(),
-                scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                scrollTop = $scrollingPanel.scrollTop();
+            // || document.$scrollingPanel.scrollTop;
 
             return Math.round(rect.top + scrollTop);
         }
 
         function getNavItem(el) {
-            return $('nav a[href="#' + $(el).attr('id') + '"]');
+            return $("nav a[href=\"#" + $(el).attr("id") + "\"]");
         }
 
         function selectNavItem(el) {
-            if (!$nav.hasClass(options.navStickyClass)) {
-                $nav.addClass(options.navStickyClass);
-            }
+            // if (!$nav.hasClass("sticky")) {
+            //     $nav.addClass("sticky");
+            // }
 
-            $navLinks.removeClass(options.navActiveClass);
-            $(el).addClass(options.navActiveClass);
+            $navLinks.removeClass("active");
+            $(el).addClass("active");
         }
 
         function throttle(func, delay) {
@@ -142,6 +128,19 @@ window.stickyCodeSystemTree = stickyCodeSystemTree;
 
         initialise();
     };
+
+    $.fn.resetStickyCodeSystemTree = function () {
+        const $nav = this;
+        const $navLinks = $nav.find("a");
+        const $scrollingPanel = $(".js-current-tree-location-panel");
+
+        $navLinks.off(".makeStickyCodeSystemTree");
+        $scrollingPanel.off(".makeStickyCodeSystemTree");
+
+        $navLinks.removeClass("active");
+        $nav.removeClass("sticky");
+    };
+
 
 }(jQuery))
 ;
