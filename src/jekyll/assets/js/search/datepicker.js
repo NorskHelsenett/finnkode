@@ -1,5 +1,4 @@
 // https://dequeuniversity.com/library/aria/date-pickers/sf-date-picker
-// console.log("search.js - datepicker.js");
 
 $(function () {
     $('#datepicker').datepicker({
@@ -19,6 +18,7 @@ $(function () {
     dayTripper();
 
 });
+
 
 function dayTripper() {
     $('.ui-datepicker-trigger').click(function () {
