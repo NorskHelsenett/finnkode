@@ -90,7 +90,7 @@
             width: 2em;
             height: 100%;
             background: $green url($chevron-down-blue) right 1rem center / 1rem no-repeat;
-            transition: .15s transform;
+            transition: .1s;
         }
 
         &[aria-expanded="true"] {
