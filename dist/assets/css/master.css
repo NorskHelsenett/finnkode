@@ -981,6 +981,12 @@ h1 {
     .search-refiners #datepicker:focus, .search-refiners #datepicker:hover {
       outline: 0; }
   .search-refiners .ui-datepicker-trigger {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
     background: #0f2d5e 12px 5px/1.125rem no-repeat;
     background-image: url("/assets/images/calendar-green.svg"), url("/assets/images/calendar-blue.svg");
     height: 0;
@@ -995,10 +1001,13 @@ h1 {
     border-style: solid;
     border-width: 2px 2px 2px 0;
     transition: .1s;
-    cursor: pointer; }
+    cursor: pointer;
+    outline: none; }
     .search-refiners .ui-datepicker-trigger:focus, .search-refiners .ui-datepicker-trigger:hover {
       background-color: #99eeb2;
       background-image: url("/assets/images/calendar-blue.svg");
+      outline: none; }
+    .search-refiners .ui-datepicker-trigger ::-moz-focus-inner {
       outline: 0; }
   .search-refiners .date-field, .search-refiners .expired-codes {
     display: inline-block; }
