@@ -153,11 +153,12 @@
     </div>
 </div>
 
-<div class="layout-container">
+<div class="layout-container" id="search-container" tabindex="-1">
     <div class="search-refiners js-expand">
     <div class="js-expander refiners-expander" aria-label="Vis/skjul filtre"></div>
     <div class="js-expandable">
         <div class="filters">
+            <a class="skip-link" href="#search-results">Hopp over filterne til resultatene</a>
 
             <div class="date">
 
@@ -187,8 +188,9 @@
     </div>
 </div>
 
-    <div class="search-results">
-    <div class="hits">197 resultater for "underleppe" i alle kodeverk</div>
+    <div id="search-results" tabindex="-1">
+
+    <div class="hits" aria-live="polite">197 resultater for "underleppe" i alle kodeverk</div>
 
     <ul>
         <li class="code">

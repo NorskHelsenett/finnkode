@@ -66,7 +66,8 @@ body {
   font-weight: 600;
   display: table-caption;
   padding: 1rem;
-  white-space: nowrap; }
+  white-space: nowrap;
+  border: 2px dashed #99eeb2; }
 
 main {
   background-color: #fff;
@@ -922,6 +923,8 @@ h1 {
   color: #0f2d5e;
   text-align: center;
   margin: 1.5rem 1rem; }
+  .search-refiners .skip-link, .search-refiners .skip-link:focus {
+    display: none; }
   .search-refiners .filters {
     text-align: left; }
   .search-refiners .expander {
@@ -1008,14 +1011,14 @@ h1 {
       display: block;
       margin: .75rem 0 1.5rem .5rem;
       padding-left: 2rem;
-      background: url("/assets/images/checkbvox-unchecked-blue.svg") 0.5rem center/0.9rem no-repeat; }
-    .search-refiners .expired-codes input + div {
-      background-image: url("/assets/images/checkbvox-unchecked-blue.svg"); }
-    .search-refiners .expired-codes input:hover + div, .search-refiners .expired-codes input:focus + div {
+      background: url("/assets/images/checkbox-unchecked-blue.svg") 0.5rem center/0.9rem no-repeat; }
+    .search-refiners .expired-codes input + span {
+      background-image: url("/assets/images/checkbox-unchecked-blue.svg"); }
+    .search-refiners .expired-codes input:hover + span, .search-refiners .expired-codes input:focus + span {
       background-image: url("/assets/images/checkbox-unchecked-green.svg"); }
-    .search-refiners .expired-codes input:checked + div {
+    .search-refiners .expired-codes input:checked + span {
       background-image: url("/assets/images/checkbox-checked-blue.svg"); }
-    .search-refiners .expired-codes input:checked:hover + div, .search-refiners .expired-codes input:checked:focus + div {
+    .search-refiners .expired-codes input:checked:hover + span, .search-refiners .expired-codes input:checked:focus + span {
       background-image: url("/assets/images/checkbox-checked-green.svg"); }
   .search-refiners .code-system-list {
     background: #99eeb2;
@@ -1091,6 +1094,8 @@ h1 {
   .search-refiners {
     padding-bottom: 3rem;
     margin-bottom: 0; }
+    .search-refiners .skip-link, .search-refiners .skip-link:focus {
+      display: table-caption; }
     .search-refiners .refiners-expander {
       display: none; }
     .search-refiners.expand.collapsed .expandable {
@@ -1130,24 +1135,24 @@ h1 {
     width: 304px; }
   .search-refiners .date-field {
     width: 12rem; } }
-.search-results {
+#search-results {
   margin: 1.5rem 1rem 0;
   padding-bottom: 3rem; }
-  .search-results .hits {
+  #search-results .hits {
     font-size: 0.875rem;
     color: #0f2d5e;
     padding: .75rem 1rem;
     margin: .5rem 0 0;
     border-bottom: 1px solid #0f2d5e; }
-  .search-results ul {
+  #search-results ul {
     list-style: none;
     margin: 0;
     padding: 0; }
-  .search-results .code {
+  #search-results .code {
     margin: 0;
     padding: 0;
     border-bottom: 1px solid #0f2d5e; }
-  .search-results a {
+  #search-results a {
     color: #0f2d5e;
     display: flex;
     flex-flow: row wrap;
@@ -1157,11 +1162,11 @@ h1 {
     z-index: 2;
     transition: background-color .2s;
     background: url("/assets/images/chevron-right-grey.svg") right 1rem center/1rem 2rem no-repeat; }
-    .search-results a:hover, .search-results a:focus {
+    #search-results a:hover, #search-results a:focus {
       background-color: rgba(153, 238, 178, 0.1); }
-    .search-results a:focus {
+    #search-results a:focus {
       outline: 0; }
-      .search-results a:focus::before, .search-results a:focus::after {
+      #search-results a:focus::before, #search-results a:focus::after {
         content: "";
         position: absolute;
         bottom: 0;
@@ -1169,41 +1174,41 @@ h1 {
         left: 0;
         right: 0;
         background-color: #767676; }
-      .search-results a:focus::before {
+      #search-results a:focus::before {
         top: -1px; }
-      .search-results a:focus::after {
+      #search-results a:focus::after {
         bottom: -1px; }
-  .search-results .number, .search-results .name {
+  #search-results .number, #search-results .name {
     font-weight: 600;
     display: inline-flex; }
-  .search-results .number {
+  #search-results .number {
     order: 2; }
-    .search-results .number::after {
+    #search-results .number::after {
       content: "—";
       padding: 0 .25em; }
-  .search-results .name {
+  #search-results .name {
     font-weight: 600;
     order: 3; }
-  .search-results .description {
+  #search-results .description {
     order: 4;
     padding-top: 0.25rem; }
-  .search-results .system {
+  #search-results .system {
     font-size: .85rem;
     order: 1;
     width: 100%;
     padding-bottom: .25rem; }
 
 @media only screen and (min-width: 960px) {
-  .search-results .hits {
+  #search-results .hits {
     padding: .75rem 1rem;
     margin-top: 0;
     line-height: 1.75rem; } }
 @media only screen and (min-width: 1264px) {
-  .search-results .hits {
+  #search-results .hits {
     padding: .75rem 1rem;
     margin-top: 0;
     line-height: 1.75rem; }
-  .search-results a {
+  #search-results a {
     background-position: right 1rem top 1.325rem;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
@@ -1213,24 +1218,24 @@ h1 {
     grid-template-columns: 4em 1fr 9rem;
     grid-template-rows: 1fr min-content;
     grid-template-areas: "number name system" "number description system"; }
-    .search-results a .system {
+    #search-results a .system {
       grid-area: system;
       font-size: 1.25rem;
       width: unset;
       text-align: right;
       padding-bottom: 0; }
-    .search-results a .name, .search-results a .description {
+    #search-results a .name, #search-results a .description {
       padding: 0 2rem; }
-    .search-results a .name {
+    #search-results a .name {
       grid-area: name; }
-    .search-results a .description {
+    #search-results a .description {
       grid-area: description;
       font-size: 1.125rem;
       padding-top: .5rem; }
-    .search-results a .number {
+    #search-results a .number {
       grid-area: number;
       display: unset; }
-      .search-results a .number::after {
+      #search-results a .number::after {
         display: none; } }
 .search-field {
   position: relative; }

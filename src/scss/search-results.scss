@@ -1,4 +1,4 @@
-.search-results {
+#search-results {
     margin: 1.5rem 1rem 0;
     padding-bottom: 3rem;
 
@@ -95,7 +95,7 @@
 }
 
 @media only screen and (min-width: $two-to-three-col) {
-    .search-results {
+    #search-results {
         .hits {
             padding: .75rem 1rem;
             margin-top: 0;
@@ -106,7 +106,7 @@
 
 
 @media only screen and (min-width: $three-to-four-col) {
-    .search-results {
+    #search-results {
 
         .hits {
             padding: .75rem 1rem;

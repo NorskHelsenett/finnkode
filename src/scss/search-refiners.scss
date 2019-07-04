@@ -3,6 +3,12 @@
     text-align: center;
     margin: 1.5rem 1rem;
 
+    .skip-link {
+        &, &:focus {
+            display: none;
+        }
+    }
+
     .filters {
         text-align: left;
     }
@@ -130,31 +136,28 @@
         input {
             @extend .visuallyhidden;
 
-            & + div {
+            & + span {
                 background-image: url($checkbox-unchecked-blue);
             }
 
             &:hover, &:focus {
-                & + div {
+                & + span {
                     background-image: url($checkbox-unchecked-green);
                 }
             }
 
             &:checked {
-                & + div {
+                & + span {
                     background-image: url($checkbox-checked-blue);
                 }
 
                 &:hover, &:focus {
-                    & + div {
+                    & + span {
                         background-image: url($checkbox-checked-green);
                     }
                 }
-
-
             }
         }
-
     }
 
     .code-system-list {
@@ -281,10 +284,15 @@
         padding-bottom: 3rem;
         margin-bottom: 0;
 
+        .skip-link {
+            &, &:focus {
+                display: table-caption;
+            }
+        }
+
         .refiners-expander {
             display: none;
         }
-
 
         &.expand.collapsed .expandable {
             max-height: unset;
