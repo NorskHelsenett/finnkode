@@ -1309,6 +1309,15 @@ h1 {
     padding: 3rem 0 0 0;
     border-radius: 0 1.5rem 1.5rem 0;
     width: 3.875rem; } }
+#ui-datepicker-div {
+  z-index: 1000 !important;
+  background-color: #fff; }
+
+.ui-datepicker a:hover, .ui-datepicker a:focus, .ui-datepicker button:hover, .ui-datepicker button:focus {
+  outline: 2px dashed purple !important; }
+.ui-datepicker a:focus:hover, .ui-datepicker button:focus:hover {
+  outline: 2px dashed red !important; }
+
 .simple main {
   border-top: 1px solid #767676; }
   .simple main .layout-container {
