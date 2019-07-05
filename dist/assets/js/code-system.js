@@ -93,7 +93,16 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("// Scripts that are used solely on the code system page\r\n\r\n__webpack_require__(/*! ./code-system/codeSystemTree */ \"./src/js/code-system/codeSystemTree.js\");\r\n__webpack_require__(/*! ./code-system/codeSystemTreeExpand */ \"./src/js/code-system/codeSystemTreeExpand.js\");\r\n__webpack_require__(/*! ./code-system/codeTabs */ \"./src/js/code-system/codeTabs.js\");\r\n__webpack_require__(/*! ./code-system/resizableSplitter */ \"./src/js/code-system/resizableSplitter.js\");\r\n__webpack_require__(/*! ./code-system/stickyCodeSystemTree */ \"./src/js/code-system/stickyCodeSystemTree.js\");\r\n__webpack_require__(/*! ./code-system/stickyHeader */ \"./src/js/code-system/stickyHeader.js\");\r\n\r\n__webpack_require__(/*! ./code-system/main */ \"./src/js/code-system/main.js\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvanMvY29kZS1zeXN0ZW0uanMuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvanMvY29kZS1zeXN0ZW0uanM/MWYxZSJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBTY3JpcHRzIHRoYXQgYXJlIHVzZWQgc29sZWx5IG9uIHRoZSBjb2RlIHN5c3RlbSBwYWdlXHJcblxyXG5yZXF1aXJlKCcuL2NvZGUtc3lzdGVtL2NvZGVTeXN0ZW1UcmVlJyk7XHJcbnJlcXVpcmUoJy4vY29kZS1zeXN0ZW0vY29kZVN5c3RlbVRyZWVFeHBhbmQnKTtcclxucmVxdWlyZSgnLi9jb2RlLXN5c3RlbS9jb2RlVGFicycpO1xyXG5yZXF1aXJlKCcuL2NvZGUtc3lzdGVtL3Jlc2l6YWJsZVNwbGl0dGVyJyk7XHJcbnJlcXVpcmUoJy4vY29kZS1zeXN0ZW0vc3RpY2t5Q29kZVN5c3RlbVRyZWUnKTtcclxucmVxdWlyZSgnLi9jb2RlLXN5c3RlbS9zdGlja3lIZWFkZXInKTtcclxuXHJcbnJlcXVpcmUoJy4vY29kZS1zeXN0ZW0vbWFpbicpOyJdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./src/js/code-system.js\n");
+// Scripts that are used solely on the code system page
+
+__webpack_require__(/*! ./code-system/codeSystemTree */ "./src/js/code-system/codeSystemTree.js");
+__webpack_require__(/*! ./code-system/codeSystemTreeExpand */ "./src/js/code-system/codeSystemTreeExpand.js");
+__webpack_require__(/*! ./code-system/codeTabs */ "./src/js/code-system/codeTabs.js");
+__webpack_require__(/*! ./code-system/resizableSplitter */ "./src/js/code-system/resizableSplitter.js");
+__webpack_require__(/*! ./code-system/stickyCodeSystemTree */ "./src/js/code-system/stickyCodeSystemTree.js");
+__webpack_require__(/*! ./code-system/stickyHeader */ "./src/js/code-system/stickyHeader.js");
+
+__webpack_require__(/*! ./code-system/main */ "./src/js/code-system/main.js");
 
 /***/ }),
 
@@ -104,7 +113,543 @@ eval("// Scripts that are used solely on the code system page\r\n\r\n__webpack_r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("/*\r\n*   This content is licensed according to the W3C Software License at\r\n*   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document\r\n*\r\n*   File:   TreeLinks.js\r\n*\r\n*   Desc:   Tree widget that implements ARIA Authoring Practices\r\n*           for a tree being used as a file viewer\r\n*/\r\n\r\n/**\r\n * ARIA Treeview example\r\n * @function onload\r\n * @desc  after page has loaded initialize all treeitems based on the role=treeitem\r\n */\r\nfunction codeSystemTree() {\r\n\r\n  console.log(\"code system tree\");\r\n  var trees = document.querySelectorAll('[role=\"tree\"]');\r\n\r\n  for (var i = 0; i < trees.length; i++) {\r\n\r\n    console.log(t);\r\n    var t = new TreeLinks(trees[i]);\r\n    console.log(t);\r\n    t.init();\r\n  }\r\n\r\n}\r\n\r\nwindow.codeSystemTree = codeSystemTree;\r\n\r\n\r\n\r\n/*\r\n*   @constructor\r\n*\r\n*   @desc\r\n*       Tree item object for representing the state and user interactions for a\r\n*       tree widget\r\n*\r\n*   @param node\r\n*       An element with the role=tree attribute\r\n*/\r\n\r\nvar TreeLinks = function (node) {\r\n  // Check whether node is a DOM element\r\n  if (typeof node !== 'object') {\r\n    return;\r\n  }\r\n\r\n  this.domNode = node;\r\n\r\n  this.treeitems = [];\r\n  this.firstChars = [];\r\n\r\n  this.firstTreeitem = null;\r\n  this.lastTreeitem = null;\r\n\r\n};\r\n\r\nTreeLinks.prototype.init = function () {\r\n\r\n  function findTreeitems (node, tree, group) {\r\n\r\n    var elem = node.firstElementChild;\r\n    var ti = group;\r\n\r\n    while (elem) {\r\n\r\n      if ((elem.tagName.toLowerCase() === 'li' && elem.firstElementChild.tagName.toLowerCase() === 'span') || elem.tagName.toLowerCase() === 'a') {\r\n        ti = new TreeitemLink(elem, tree, group);\r\n        ti.init();\r\n        tree.treeitems.push(ti);\r\n        tree.firstChars.push(ti.label.substring(0, 1).toLowerCase());\r\n      }\r\n\r\n      if (elem.firstElementChild) {\r\n        findTreeitems(elem, tree, ti);\r\n      }\r\n\r\n      elem = elem.nextElementSibling;\r\n    }\r\n  }\r\n\r\n  // initialize pop up menus\r\n  if (!this.domNode.getAttribute('role')) {\r\n    this.domNode.setAttribute('role', 'tree');\r\n  }\r\n\r\n  findTreeitems(this.domNode, this, false);\r\n\r\n  this.updateVisibleTreeitems();\r\n\r\n  this.firstTreeitem.domNode.tabIndex = 0;\r\n\r\n};\r\n\r\nTreeLinks.prototype.setFocusToItem = function (treeitem) {\r\n\r\n  for (var i = 0; i < this.treeitems.length; i++) {\r\n    var ti = this.treeitems[i];\r\n\r\n    if (ti === treeitem) {\r\n      ti.domNode.tabIndex = 0;\r\n      ti.domNode.focus();\r\n    }\r\n    else {\r\n      ti.domNode.tabIndex = -1;\r\n    }\r\n  }\r\n\r\n};\r\n\r\nTreeLinks.prototype.setFocusToNextItem = function (currentItem) {\r\n\r\n  var nextItem = false;\r\n\r\n  for (var i = (this.treeitems.length - 1); i >= 0; i--) {\r\n    var ti = this.treeitems[i];\r\n    if (ti === currentItem) {\r\n      break;\r\n    }\r\n    if (ti.isVisible) {\r\n      nextItem = ti;\r\n    }\r\n  }\r\n\r\n  if (nextItem) {\r\n    this.setFocusToItem(nextItem);\r\n  }\r\n\r\n};\r\n\r\nTreeLinks.prototype.setFocusToPreviousItem = function (currentItem) {\r\n\r\n  var prevItem = false;\r\n\r\n  for (var i = 0; i < this.treeitems.length; i++) {\r\n    var ti = this.treeitems[i];\r\n    if (ti === currentItem) {\r\n      break;\r\n    }\r\n    if (ti.isVisible) {\r\n      prevItem = ti;\r\n    }\r\n  }\r\n\r\n  if (prevItem) {\r\n    this.setFocusToItem(prevItem);\r\n  }\r\n};\r\n\r\nTreeLinks.prototype.setFocusToParentItem = function (currentItem) {\r\n\r\n  if (currentItem.groupTreeitem) {\r\n    this.setFocusToItem(currentItem.groupTreeitem);\r\n  }\r\n};\r\n\r\nTreeLinks.prototype.setFocusToFirstItem = function () {\r\n  this.setFocusToItem(this.firstTreeitem);\r\n};\r\n\r\nTreeLinks.prototype.setFocusToLastItem = function () {\r\n  this.setFocusToItem(this.lastTreeitem);\r\n};\r\n\r\nTreeLinks.prototype.expandTreeitem = function (currentItem) {\r\n  if (currentItem.isExpandable) {\r\n    currentItem.domNode.setAttribute('aria-expanded', true);\r\n    this.updateVisibleTreeitems();\r\n  }\r\n\r\n};\r\n\r\nTreeLinks.prototype.expandAllSiblingItems = function (currentItem) {\r\n  for (var i = 0; i < this.treeitems.length; i++) {\r\n    var ti = this.treeitems[i];\r\n\r\n    if ((ti.groupTreeitem === currentItem.groupTreeitem) && ti.isExpandable) {\r\n      this.expandTreeitem(ti);\r\n    }\r\n  }\r\n\r\n};\r\n\r\nTreeLinks.prototype.collapseTreeitem = function (currentItem) {\r\n\r\n  var groupTreeitem = false;\r\n\r\n  if (currentItem.isExpanded()) {\r\n    groupTreeitem = currentItem;\r\n  }\r\n  else {\r\n    groupTreeitem = currentItem.groupTreeitem;\r\n  }\r\n\r\n  if (groupTreeitem) {\r\n    groupTreeitem.domNode.setAttribute('aria-expanded', false);\r\n    this.updateVisibleTreeitems();\r\n    this.setFocusToItem(groupTreeitem);\r\n  }\r\n\r\n};\r\n\r\nTreeLinks.prototype.updateVisibleTreeitems = function () {\r\n\r\n  this.firstTreeitem = this.treeitems[0];\r\n\r\n  for (var i = 0; i < this.treeitems.length; i++) {\r\n    var ti = this.treeitems[i];\r\n\r\n    var parent = ti.domNode.parentNode;\r\n\r\n    ti.isVisible = true;\r\n\r\n    while (parent && (parent !== this.domNode)) {\r\n\r\n      if (parent.getAttribute('aria-expanded') == 'false') {\r\n        ti.isVisible = false;\r\n      }\r\n      parent = parent.parentNode;\r\n    }\r\n\r\n    if (ti.isVisible) {\r\n      this.lastTreeitem = ti;\r\n    }\r\n  }\r\n\r\n};\r\n\r\nTreeLinks.prototype.setFocusByFirstCharacter = function (currentItem, char) {\r\n  var start, index, char = char.toLowerCase();\r\n\r\n  // Get start index for search based on position of currentItem\r\n  start = this.treeitems.indexOf(currentItem) + 1;\r\n  if (start === this.treeitems.length) {\r\n    start = 0;\r\n  }\r\n\r\n  // Check remaining slots in the menu\r\n  index = this.getIndexFirstChars(start, char);\r\n\r\n  // If not found in remaining slots, check from beginning\r\n  if (index === -1) {\r\n    index = this.getIndexFirstChars(0, char);\r\n  }\r\n\r\n  // If match was found...\r\n  if (index > -1) {\r\n    this.setFocusToItem(this.treeitems[index]);\r\n  }\r\n};\r\n\r\nTreeLinks.prototype.getIndexFirstChars = function (startIndex, char) {\r\n  for (var i = startIndex; i < this.firstChars.length; i++) {\r\n    if (this.treeitems[i].isVisible) {\r\n      if (char === this.firstChars[i]) {\r\n        return i;\r\n      }\r\n    }\r\n  }\r\n  return -1;\r\n};\r\n\r\n\r\n\r\n// TreeItemLinks\r\n\r\n/*\r\n*   This content is licensed according to the W3C Software License at\r\n*   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document\r\n*\r\n*   File:   TreeitemLink.js\r\n*\r\n*   Desc:   Treeitem widget that implements ARIA Authoring Practices\r\n*           for a tree being used as a file viewer\r\n*/\r\n\r\n/*\r\n*   @constructor\r\n*\r\n*   @desc\r\n*       Treeitem object for representing the state and user interactions for a\r\n*       treeItem widget\r\n*\r\n*   @param node\r\n*       An element with the role=tree attribute\r\n*/\r\n\r\nvar TreeitemLink = function (node, treeObj, group) {\r\n\r\n  // Check whether node is a DOM element\r\n  if (typeof node !== 'object') {\r\n    return;\r\n  }\r\n\r\n  node.tabIndex = -1;\r\n  this.tree = treeObj;\r\n  this.groupTreeitem = group;\r\n  this.domNode = node;\r\n  this.label = node.textContent.trim();\r\n  this.stopDefaultClick = false;\r\n\r\n  if (node.getAttribute('aria-label')) {\r\n    this.label = node.getAttribute('aria-label').trim();\r\n  }\r\n\r\n  this.isExpandable = false;\r\n  this.isVisible = false;\r\n  this.inGroup = false;\r\n\r\n  if (group) {\r\n    this.inGroup = true;\r\n  }\r\n\r\n  var elem = node.firstElementChild;\r\n\r\n  while (elem) {\r\n\r\n    if (elem.tagName.toLowerCase() == 'ul') {\r\n      elem.setAttribute('role', 'group');\r\n      this.isExpandable = true;\r\n      break;\r\n    }\r\n\r\n    elem = elem.nextElementSibling;\r\n  }\r\n\r\n  this.keyCode = Object.freeze({\r\n    RETURN: 13,\r\n    SPACE: 32,\r\n    PAGEUP: 33,\r\n    PAGEDOWN: 34,\r\n    END: 35,\r\n    HOME: 36,\r\n    LEFT: 37,\r\n    UP: 38,\r\n    RIGHT: 39,\r\n    DOWN: 40\r\n  });\r\n};\r\n\r\nTreeitemLink.prototype.init = function () {\r\n  this.domNode.tabIndex = -1;\r\n\r\n  if (!this.domNode.getAttribute('role')) {\r\n    this.domNode.setAttribute('role', 'treeitem');\r\n  }\r\n\r\n  this.domNode.addEventListener('keydown', this.handleKeydown.bind(this));\r\n  this.domNode.addEventListener('click', this.handleClick.bind(this));\r\n  this.domNode.addEventListener('focus', this.handleFocus.bind(this));\r\n  this.domNode.addEventListener('blur', this.handleBlur.bind(this));\r\n\r\n  if (this.isExpandable) {\r\n    this.domNode.firstElementChild.addEventListener('mouseover', this.handleMouseOver.bind(this));\r\n    this.domNode.firstElementChild.addEventListener('mouseout', this.handleMouseOut.bind(this));\r\n  }\r\n  else {\r\n    this.domNode.addEventListener('mouseover', this.handleMouseOver.bind(this));\r\n    this.domNode.addEventListener('mouseout', this.handleMouseOut.bind(this));\r\n  }\r\n};\r\n\r\nTreeitemLink.prototype.isExpanded = function () {\r\n\r\n  if (this.isExpandable) {\r\n    return this.domNode.getAttribute('aria-expanded') === 'true';\r\n  }\r\n\r\n  return false;\r\n\r\n};\r\n\r\n/* EVENT HANDLERS */\r\n\r\nTreeitemLink.prototype.handleKeydown = function (event) {\r\n  var tgt = event.currentTarget,\r\n      flag = false,\r\n      char = event.key,\r\n      clickEvent;\r\n\r\n  function isPrintableCharacter (str) {\r\n    return str.length === 1 && str.match(/\\S/);\r\n  }\r\n\r\n  function printableCharacter (item) {\r\n    if (char == '*') {\r\n      item.tree.expandAllSiblingItems(item);\r\n      flag = true;\r\n    }\r\n    else {\r\n      if (isPrintableCharacter(char)) {\r\n        item.tree.setFocusByFirstCharacter(item, char);\r\n        flag = true;\r\n      }\r\n    }\r\n  }\r\n\r\n  this.stopDefaultClick = false;\r\n\r\n  if (event.altKey || event.ctrlKey || event.metaKey) {\r\n    return;\r\n  }\r\n\r\n  if (event.shift) {\r\n    if (event.keyCode == this.keyCode.SPACE || event.keyCode == this.keyCode.RETURN) {\r\n      event.stopPropagation();\r\n      this.stopDefaultClick = true;\r\n    }\r\n    else {\r\n      if (isPrintableCharacter(char)) {\r\n        printableCharacter(this);\r\n      }\r\n    }\r\n  }\r\n  else {\r\n    switch (event.keyCode) {\r\n      case this.keyCode.SPACE:\r\n      case this.keyCode.RETURN:\r\n        if (this.isExpandable) {\r\n          if (this.isExpanded()) {\r\n            this.tree.collapseTreeitem(this);\r\n          }\r\n          else {\r\n            this.tree.expandTreeitem(this);\r\n          }\r\n          flag = true;\r\n        }\r\n        else {\r\n          event.stopPropagation();\r\n          this.stopDefaultClick = true;\r\n        }\r\n        break;\r\n\r\n      case this.keyCode.UP:\r\n        this.tree.setFocusToPreviousItem(this);\r\n        flag = true;\r\n        break;\r\n\r\n      case this.keyCode.DOWN:\r\n        this.tree.setFocusToNextItem(this);\r\n        flag = true;\r\n        break;\r\n\r\n      case this.keyCode.RIGHT:\r\n        if (this.isExpandable) {\r\n          if (this.isExpanded()) {\r\n            this.tree.setFocusToNextItem(this);\r\n          }\r\n          else {\r\n            this.tree.expandTreeitem(this);\r\n          }\r\n        }\r\n        flag = true;\r\n        break;\r\n\r\n      case this.keyCode.LEFT:\r\n        if (this.isExpandable && this.isExpanded()) {\r\n          this.tree.collapseTreeitem(this);\r\n          flag = true;\r\n        }\r\n        else {\r\n          if (this.inGroup) {\r\n            this.tree.setFocusToParentItem(this);\r\n            flag = true;\r\n          }\r\n        }\r\n        break;\r\n\r\n      case this.keyCode.HOME:\r\n        this.tree.setFocusToFirstItem();\r\n        flag = true;\r\n        break;\r\n\r\n      case this.keyCode.END:\r\n        this.tree.setFocusToLastItem();\r\n        flag = true;\r\n        break;\r\n\r\n      default:\r\n        if (isPrintableCharacter(char)) {\r\n          printableCharacter(this);\r\n        }\r\n        break;\r\n    }\r\n  }\r\n\r\n  if (flag) {\r\n    event.stopPropagation();\r\n    event.preventDefault();\r\n  }\r\n};\r\n\r\nTreeitemLink.prototype.handleClick = function (event) {\r\n\r\n  // only process click events that directly happened on this treeitem\r\n  if (event.target !== this.domNode && event.target !== this.domNode.firstElementChild) {\r\n    return;\r\n  }\r\n\r\n  if (this.isExpandable) {\r\n    if (this.isExpanded()) {\r\n      this.tree.collapseTreeitem(this);\r\n    }\r\n    else {\r\n      this.tree.expandTreeitem(this);\r\n    }\r\n    event.stopPropagation();\r\n  }\r\n};\r\n\r\nTreeitemLink.prototype.handleFocus = function (event) {\r\n  var node = this.domNode;\r\n  if (this.isExpandable) {\r\n    node = node.firstElementChild;\r\n  }\r\n  node.classList.add('focus');\r\n};\r\n\r\nTreeitemLink.prototype.handleBlur = function (event) {\r\n  var node = this.domNode;\r\n  if (this.isExpandable) {\r\n    node = node.firstElementChild;\r\n  }\r\n  node.classList.remove('focus');\r\n};\r\n\r\nTreeitemLink.prototype.handleMouseOver = function (event) {\r\n  event.currentTarget.classList.add('hover');\r\n};\r\n\r\nTreeitemLink.prototype.handleMouseOut = function (event) {\r\n  event.currentTarget.classList.remove('hover');\r\n};//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvanMvY29kZS1zeXN0ZW0vY29kZVN5c3RlbVRyZWUuanMuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvanMvY29kZS1zeXN0ZW0vY29kZVN5c3RlbVRyZWUuanM/ZmZhNSJdLCJzb3VyY2VzQ29udGVudCI6WyIvKlxyXG4qICAgVGhpcyBjb250ZW50IGlzIGxpY2Vuc2VkIGFjY29yZGluZyB0byB0aGUgVzNDIFNvZnR3YXJlIExpY2Vuc2UgYXRcclxuKiAgIGh0dHBzOi8vd3d3LnczLm9yZy9Db25zb3J0aXVtL0xlZ2FsLzIwMTUvY29weXJpZ2h0LXNvZnR3YXJlLWFuZC1kb2N1bWVudFxyXG4qXHJcbiogICBGaWxlOiAgIFRyZWVMaW5rcy5qc1xyXG4qXHJcbiogICBEZXNjOiAgIFRyZWUgd2lkZ2V0IHRoYXQgaW1wbGVtZW50cyBBUklBIEF1dGhvcmluZyBQcmFjdGljZXNcclxuKiAgICAgICAgICAgZm9yIGEgdHJlZSBiZWluZyB1c2VkIGFzIGEgZmlsZSB2aWV3ZXJcclxuKi9cclxuXHJcbi8qKlxyXG4gKiBBUklBIFRyZWV2aWV3IGV4YW1wbGVcclxuICogQGZ1bmN0aW9uIG9ubG9hZFxyXG4gKiBAZGVzYyAgYWZ0ZXIgcGFnZSBoYXMgbG9hZGVkIGluaXRpYWxpemUgYWxsIHRyZWVpdGVtcyBiYXNlZCBvbiB0aGUgcm9sZT10cmVlaXRlbVxyXG4gKi9cclxuZnVuY3Rpb24gY29kZVN5c3RlbVRyZWUoKSB7XHJcblxyXG4gIGNvbnNvbGUubG9nKFwiY29kZSBzeXN0ZW0gdHJlZVwiKTtcclxuICB2YXIgdHJlZXMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCdbcm9sZT1cInRyZWVcIl0nKTtcclxuXHJcbiAgZm9yICh2YXIgaSA9IDA7IGkgPCB0cmVlcy5sZW5ndGg7IGkrKykge1xyXG5cclxuICAgIGNvbnNvbGUubG9nKHQpO1xyXG4gICAgdmFyIHQgPSBuZXcgVHJlZUxpbmtzKHRyZWVzW2ldKTtcclxuICAgIGNvbnNvbGUubG9nKHQpO1xyXG4gICAgdC5pbml0KCk7XHJcbiAgfVxyXG5cclxufVxyXG5cclxud2luZG93LmNvZGVTeXN0ZW1UcmVlID0gY29kZVN5c3RlbVRyZWU7XHJcblxyXG5cclxuXHJcbi8qXHJcbiogICBAY29uc3RydWN0b3JcclxuKlxyXG4qICAgQGRlc2NcclxuKiAgICAgICBUcmVlIGl0ZW0gb2JqZWN0IGZvciByZXByZXNlbnRpbmcgdGhlIHN0YXRlIGFuZCB1c2VyIGludGVyYWN0aW9ucyBmb3IgYVxyXG4qICAgICAgIHRyZWUgd2lkZ2V0XHJcbipcclxuKiAgIEBwYXJhbSBub2RlXHJcbiogICAgICAgQW4gZWxlbWVudCB3aXRoIHRoZSByb2xlPXRyZWUgYXR0cmlidXRlXHJcbiovXHJcblxyXG52YXIgVHJlZUxpbmtzID0gZnVuY3Rpb24gKG5vZGUpIHtcclxuICAvLyBDaGVjayB3aGV0aGVyIG5vZGUgaXMgYSBET00gZWxlbWVudFxyXG4gIGlmICh0eXBlb2Ygbm9kZSAhPT0gJ29iamVjdCcpIHtcclxuICAgIHJldHVybjtcclxuICB9XHJcblxyXG4gIHRoaXMuZG9tTm9kZSA9IG5vZGU7XHJcblxyXG4gIHRoaXMudHJlZWl0ZW1zID0gW107XHJcbiAgdGhpcy5maXJzdENoYXJzID0gW107XHJcblxyXG4gIHRoaXMuZmlyc3RUcmVlaXRlbSA9IG51bGw7XHJcbiAgdGhpcy5sYXN0VHJlZWl0ZW0gPSBudWxsO1xyXG5cclxufTtcclxuXHJcblRyZWVMaW5rcy5wcm90b3R5cGUuaW5pdCA9IGZ1bmN0aW9uICgpIHtcclxuXHJcbiAgZnVuY3Rpb24gZmluZFRyZWVpdGVtcyAobm9kZSwgdHJlZSwgZ3JvdXApIHtcclxuXHJcbiAgICB2YXIgZWxlbSA9IG5vZGUuZmlyc3RFbGVtZW50Q2hpbGQ7XHJcbiAgICB2YXIgdGkgPSBncm91cDtcclxuXHJcbiAgICB3aGlsZSAoZWxlbSkge1xyXG5cclxuICAgICAgaWYgKChlbGVtLnRhZ05hbWUudG9Mb3dlckNhc2UoKSA9PT0gJ2xpJyAmJiBlbGVtLmZpcnN0RWxlbWVudENoaWxkLnRhZ05hbWUudG9Mb3dlckNhc2UoKSA9PT0gJ3NwYW4nKSB8fCBlbGVtLnRhZ05hbWUudG9Mb3dlckNhc2UoKSA9PT0gJ2EnKSB7XHJcbiAgICAgICAgdGkgPSBuZXcgVHJlZWl0ZW1MaW5rKGVsZW0sIHRyZWUsIGdyb3VwKTtcclxuICAgICAgICB0aS5pbml0KCk7XHJcbiAgICAgICAgdHJlZS50cmVlaXRlbXMucHVzaCh0aSk7XHJcbiAgICAgICAgdHJlZS5maXJzdENoYXJzLnB1c2godGkubGFiZWwuc3Vic3RyaW5nKDAsIDEpLnRvTG93ZXJDYXNlKCkpO1xyXG4gICAgICB9XHJcblxyXG4gICAgICBpZiAoZWxlbS5maXJzdEVsZW1lbnRDaGlsZCkge1xyXG4gICAgICAgIGZpbmRUcmVlaXRlbXMoZWxlbSwgdHJlZSwgdGkpO1xyXG4gICAgICB9XHJcblxyXG4gICAgICBlbGVtID0gZWxlbS5uZXh0RWxlbWVudFNpYmxpbmc7XHJcbiAgICB9XHJcbiAgfVxyXG5cclxuICAvLyBpbml0aWFsaXplIHBvcCB1cCBtZW51c1xyXG4gIGlmICghdGhpcy5kb21Ob2RlLmdldEF0dHJpYnV0ZSgncm9sZScpKSB7XHJcbiAgICB0aGlzLmRvbU5vZGUuc2V0QXR0cmlidXRlKCdyb2xlJywgJ3RyZWUnKTtcclxuICB9XHJcblxyXG4gIGZpbmRUcmVlaXRlbXModGhpcy5kb21Ob2RlLCB0aGlzLCBmYWxzZSk7XHJcblxyXG4gIHRoaXMudXBkYXRlVmlzaWJsZVRyZWVpdGVtcygpO1xyXG5cclxuICB0aGlzLmZpcnN0VHJlZWl0ZW0uZG9tTm9kZS50YWJJbmRleCA9IDA7XHJcblxyXG59O1xyXG5cclxuVHJlZUxpbmtzLnByb3RvdHlwZS5zZXRGb2N1c1RvSXRlbSA9IGZ1bmN0aW9uICh0cmVlaXRlbSkge1xyXG5cclxuICBmb3IgKHZhciBpID0gMDsgaSA8IHRoaXMudHJlZWl0ZW1zLmxlbmd0aDsgaSsrKSB7XHJcbiAgICB2YXIgdGkgPSB0aGlzLnRyZWVpdGVtc1tpXTtcclxuXHJcbiAgICBpZiAodGkgPT09IHRyZWVpdGVtKSB7XHJcbiAgICAgIHRpLmRvbU5vZGUudGFiSW5kZXggPSAwO1xyXG4gICAgICB0aS5kb21Ob2RlLmZvY3VzKCk7XHJcbiAgICB9XHJcbiAgICBlbHNlIHtcclxuICAgICAgdGkuZG9tTm9kZS50YWJJbmRleCA9IC0xO1xyXG4gICAgfVxyXG4gIH1cclxuXHJcbn07XHJcblxyXG5UcmVlTGlua3MucHJvdG90eXBlLnNldEZvY3VzVG9OZXh0SXRlbSA9IGZ1bmN0aW9uIChjdXJyZW50SXRlbSkge1xyXG5cclxuICB2YXIgbmV4dEl0ZW0gPSBmYWxzZTtcclxuXHJcbiAgZm9yICh2YXIgaSA9ICh0aGlzLnRyZWVpdGVtcy5sZW5ndGggLSAxKTsgaSA+PSAwOyBpLS0pIHtcclxuICAgIHZhciB0aSA9IHRoaXMudHJlZWl0ZW1zW2ldO1xyXG4gICAgaWYgKHRpID09PSBjdXJyZW50SXRlbSkge1xyXG4gICAgICBicmVhaztcclxuICAgIH1cclxuICAgIGlmICh0aS5pc1Zpc2libGUpIHtcclxuICAgICAgbmV4dEl0ZW0gPSB0aTtcclxuICAgIH1cclxuICB9XHJcblxyXG4gIGlmIChuZXh0SXRlbSkge1xyXG4gICAgdGhpcy5zZXRGb2N1c1RvSXRlbShuZXh0SXRlbSk7XHJcbiAgfVxyXG5cclxufTtcclxuXHJcblRyZWVMaW5rcy5wcm90b3R5cGUuc2V0Rm9jdXNUb1ByZXZpb3VzSXRlbSA9IGZ1bmN0aW9uIChjdXJyZW50SXRlbSkge1xyXG5cclxuICB2YXIgcHJldkl0ZW0gPSBmYWxzZTtcclxuXHJcbiAgZm9yICh2YXIgaSA9IDA7IGkgPCB0aGlzLnRyZWVpdGVtcy5sZW5ndGg7IGkrKykge1xyXG4gICAgdmFyIHRpID0gdGhpcy50cmVlaXRlbXNbaV07XHJcbiAgICBpZiAodGkgPT09IGN1cnJlbnRJdGVtKSB7XHJcbiAgICAgIGJyZWFrO1xyXG4gICAgfVxyXG4gICAgaWYgKHRpLmlzVmlzaWJsZSkge1xyXG4gICAgICBwcmV2SXRlbSA9IHRpO1xyXG4gICAgfVxyXG4gIH1cclxuXHJcbiAgaWYgKHByZXZJdGVtKSB7XHJcbiAgICB0aGlzLnNldEZvY3VzVG9JdGVtKHByZXZJdGVtKTtcclxuICB9XHJcbn07XHJcblxyXG5UcmVlTGlua3MucHJvdG90eXBlLnNldEZvY3VzVG9QYXJlbnRJdGVtID0gZnVuY3Rpb24gKGN1cnJlbnRJdGVtKSB7XHJcblxyXG4gIGlmIChjdXJyZW50SXRlbS5ncm91cFRyZWVpdGVtKSB7XHJcbiAgICB0aGlzLnNldEZvY3VzVG9JdGVtKGN1cnJlbnRJdGVtLmdyb3VwVHJlZWl0ZW0pO1xyXG4gIH1cclxufTtcclxuXHJcblRyZWVMaW5rcy5wcm90b3R5cGUuc2V0Rm9jdXNUb0ZpcnN0SXRlbSA9IGZ1bmN0aW9uICgpIHtcclxuICB0aGlzLnNldEZvY3VzVG9JdGVtKHRoaXMuZmlyc3RUcmVlaXRlbSk7XHJcbn07XHJcblxyXG5UcmVlTGlua3MucHJvdG90eXBlLnNldEZvY3VzVG9MYXN0SXRlbSA9IGZ1bmN0aW9uICgpIHtcclxuICB0aGlzLnNldEZvY3VzVG9JdGVtKHRoaXMubGFzdFRyZWVpdGVtKTtcclxufTtcclxuXHJcblRyZWVMaW5rcy5wcm90b3R5cGUuZXhwYW5kVHJlZWl0ZW0gPSBmdW5jdGlvbiAoY3VycmVudEl0ZW0pIHtcclxuICBpZiAoY3VycmVudEl0ZW0uaXNFeHBhbmRhYmxlKSB7XHJcbiAgICBjdXJyZW50SXRlbS5kb21Ob2RlLnNldEF0dHJpYnV0ZSgnYXJpYS1leHBhbmRlZCcsIHRydWUpO1xyXG4gICAgdGhpcy51cGRhdGVWaXNpYmxlVHJlZWl0ZW1zKCk7XHJcbiAgfVxyXG5cclxufTtcclxuXHJcblRyZWVMaW5rcy5wcm90b3R5cGUuZXhwYW5kQWxsU2libGluZ0l0ZW1zID0gZnVuY3Rpb24gKGN1cnJlbnRJdGVtKSB7XHJcbiAgZm9yICh2YXIgaSA9IDA7IGkgPCB0aGlzLnRyZWVpdGVtcy5sZW5ndGg7IGkrKykge1xyXG4gICAgdmFyIHRpID0gdGhpcy50cmVlaXRlbXNbaV07XHJcblxyXG4gICAgaWYgKCh0aS5ncm91cFRyZWVpdGVtID09PSBjdXJyZW50SXRlbS5ncm91cFRyZWVpdGVtKSAmJiB0aS5pc0V4cGFuZGFibGUpIHtcclxuICAgICAgdGhpcy5leHBhbmRUcmVlaXRlbSh0aSk7XHJcbiAgICB9XHJcbiAgfVxyXG5cclxufTtcclxuXHJcblRyZWVMaW5rcy5wcm90b3R5cGUuY29sbGFwc2VUcmVlaXRlbSA9IGZ1bmN0aW9uIChjdXJyZW50SXRlbSkge1xyXG5cclxuICB2YXIgZ3JvdXBUcmVlaXRlbSA9IGZhbHNlO1xyXG5cclxuICBpZiAoY3VycmVudEl0ZW0uaXNFeHBhbmRlZCgpKSB7XHJcbiAgICBncm91cFRyZWVpdGVtID0gY3VycmVudEl0ZW07XHJcbiAgfVxyXG4gIGVsc2Uge1xyXG4gICAgZ3JvdXBUcmVlaXRlbSA9IGN1cnJlbnRJdGVtLmdyb3VwVHJlZWl0ZW07XHJcbiAgfVxyXG5cclxuICBpZiAoZ3JvdXBUcmVlaXRlbSkge1xyXG4gICAgZ3JvdXBUcmVlaXRlbS5kb21Ob2RlLnNldEF0dHJpYnV0ZSgnYXJpYS1leHBhbmRlZCcsIGZhbHNlKTtcclxuICAgIHRoaXMudXBkYXRlVmlzaWJsZVRyZWVpdGVtcygpO1xyXG4gICAgdGhpcy5zZXRGb2N1c1RvSXRlbShncm91cFRyZWVpdGVtKTtcclxuICB9XHJcblxyXG59O1xyXG5cclxuVHJlZUxpbmtzLnByb3RvdHlwZS51cGRhdGVWaXNpYmxlVHJlZWl0ZW1zID0gZnVuY3Rpb24gKCkge1xyXG5cclxuICB0aGlzLmZpcnN0VHJlZWl0ZW0gPSB0aGlzLnRyZWVpdGVtc1swXTtcclxuXHJcbiAgZm9yICh2YXIgaSA9IDA7IGkgPCB0aGlzLnRyZWVpdGVtcy5sZW5ndGg7IGkrKykge1xyXG4gICAgdmFyIHRpID0gdGhpcy50cmVlaXRlbXNbaV07XHJcblxyXG4gICAgdmFyIHBhcmVudCA9IHRpLmRvbU5vZGUucGFyZW50Tm9kZTtcclxuXHJcbiAgICB0aS5pc1Zpc2libGUgPSB0cnVlO1xyXG5cclxuICAgIHdoaWxlIChwYXJlbnQgJiYgKHBhcmVudCAhPT0gdGhpcy5kb21Ob2RlKSkge1xyXG5cclxuICAgICAgaWYgKHBhcmVudC5nZXRBdHRyaWJ1dGUoJ2FyaWEtZXhwYW5kZWQnKSA9PSAnZmFsc2UnKSB7XHJcbiAgICAgICAgdGkuaXNWaXNpYmxlID0gZmFsc2U7XHJcbiAgICAgIH1cclxuICAgICAgcGFyZW50ID0gcGFyZW50LnBhcmVudE5vZGU7XHJcbiAgICB9XHJcblxyXG4gICAgaWYgKHRpLmlzVmlzaWJsZSkge1xyXG4gICAgICB0aGlzLmxhc3RUcmVlaXRlbSA9IHRpO1xyXG4gICAgfVxyXG4gIH1cclxuXHJcbn07XHJcblxyXG5UcmVlTGlua3MucHJvdG90eXBlLnNldEZvY3VzQnlGaXJzdENoYXJhY3RlciA9IGZ1bmN0aW9uIChjdXJyZW50SXRlbSwgY2hhcikge1xyXG4gIHZhciBzdGFydCwgaW5kZXgsIGNoYXIgPSBjaGFyLnRvTG93ZXJDYXNlKCk7XHJcblxyXG4gIC8vIEdldCBzdGFydCBpbmRleCBmb3Igc2VhcmNoIGJhc2VkIG9uIHBvc2l0aW9uIG9mIGN1cnJlbnRJdGVtXHJcbiAgc3RhcnQgPSB0aGlzLnRyZWVpdGVtcy5pbmRleE9mKGN1cnJlbnRJdGVtKSArIDE7XHJcbiAgaWYgKHN0YXJ0ID09PSB0aGlzLnRyZWVpdGVtcy5sZW5ndGgpIHtcclxuICAgIHN0YXJ0ID0gMDtcclxuICB9XHJcblxyXG4gIC8vIENoZWNrIHJlbWFpbmluZyBzbG90cyBpbiB0aGUgbWVudVxyXG4gIGluZGV4ID0gdGhpcy5nZXRJbmRleEZpcnN0Q2hhcnMoc3RhcnQsIGNoYXIpO1xyXG5cclxuICAvLyBJZiBub3QgZm91bmQgaW4gcmVtYWluaW5nIHNsb3RzLCBjaGVjayBmcm9tIGJlZ2lubmluZ1xyXG4gIGlmIChpbmRleCA9PT0gLTEpIHtcclxuICAgIGluZGV4ID0gdGhpcy5nZXRJbmRleEZpcnN0Q2hhcnMoMCwgY2hhcik7XHJcbiAgfVxyXG5cclxuICAvLyBJZiBtYXRjaCB3YXMgZm91bmQuLi5cclxuICBpZiAoaW5kZXggPiAtMSkge1xyXG4gICAgdGhpcy5zZXRGb2N1c1RvSXRlbSh0aGlzLnRyZWVpdGVtc1tpbmRleF0pO1xyXG4gIH1cclxufTtcclxuXHJcblRyZWVMaW5rcy5wcm90b3R5cGUuZ2V0SW5kZXhGaXJzdENoYXJzID0gZnVuY3Rpb24gKHN0YXJ0SW5kZXgsIGNoYXIpIHtcclxuICBmb3IgKHZhciBpID0gc3RhcnRJbmRleDsgaSA8IHRoaXMuZmlyc3RDaGFycy5sZW5ndGg7IGkrKykge1xyXG4gICAgaWYgKHRoaXMudHJlZWl0ZW1zW2ldLmlzVmlzaWJsZSkge1xyXG4gICAgICBpZiAoY2hhciA9PT0gdGhpcy5maXJzdENoYXJzW2ldKSB7XHJcbiAgICAgICAgcmV0dXJuIGk7XHJcbiAgICAgIH1cclxuICAgIH1cclxuICB9XHJcbiAgcmV0dXJuIC0xO1xyXG59O1xyXG5cclxuXHJcblxyXG4vLyBUcmVlSXRlbUxpbmtzXHJcblxyXG4vKlxyXG4qICAgVGhpcyBjb250ZW50IGlzIGxpY2Vuc2VkIGFjY29yZGluZyB0byB0aGUgVzNDIFNvZnR3YXJlIExpY2Vuc2UgYXRcclxuKiAgIGh0dHBzOi8vd3d3LnczLm9yZy9Db25zb3J0aXVtL0xlZ2FsLzIwMTUvY29weXJpZ2h0LXNvZnR3YXJlLWFuZC1kb2N1bWVudFxyXG4qXHJcbiogICBGaWxlOiAgIFRyZWVpdGVtTGluay5qc1xyXG4qXHJcbiogICBEZXNjOiAgIFRyZWVpdGVtIHdpZGdldCB0aGF0IGltcGxlbWVudHMgQVJJQSBBdXRob3JpbmcgUHJhY3RpY2VzXHJcbiogICAgICAgICAgIGZvciBhIHRyZWUgYmVpbmcgdXNlZCBhcyBhIGZpbGUgdmlld2VyXHJcbiovXHJcblxyXG4vKlxyXG4qICAgQGNvbnN0cnVjdG9yXHJcbipcclxuKiAgIEBkZXNjXHJcbiogICAgICAgVHJlZWl0ZW0gb2JqZWN0IGZvciByZXByZXNlbnRpbmcgdGhlIHN0YXRlIGFuZCB1c2VyIGludGVyYWN0aW9ucyBmb3IgYVxyXG4qICAgICAgIHRyZWVJdGVtIHdpZGdldFxyXG4qXHJcbiogICBAcGFyYW0gbm9kZVxyXG4qICAgICAgIEFuIGVsZW1lbnQgd2l0aCB0aGUgcm9sZT10cmVlIGF0dHJpYnV0ZVxyXG4qL1xyXG5cclxudmFyIFRyZWVpdGVtTGluayA9IGZ1bmN0aW9uIChub2RlLCB0cmVlT2JqLCBncm91cCkge1xyXG5cclxuICAvLyBDaGVjayB3aGV0aGVyIG5vZGUgaXMgYSBET00gZWxlbWVudFxyXG4gIGlmICh0eXBlb2Ygbm9kZSAhPT0gJ29iamVjdCcpIHtcclxuICAgIHJldHVybjtcclxuICB9XHJcblxyXG4gIG5vZGUudGFiSW5kZXggPSAtMTtcclxuICB0aGlzLnRyZWUgPSB0cmVlT2JqO1xyXG4gIHRoaXMuZ3JvdXBUcmVlaXRlbSA9IGdyb3VwO1xyXG4gIHRoaXMuZG9tTm9kZSA9IG5vZGU7XHJcbiAgdGhpcy5sYWJlbCA9IG5vZGUudGV4dENvbnRlbnQudHJpbSgpO1xyXG4gIHRoaXMuc3RvcERlZmF1bHRDbGljayA9IGZhbHNlO1xyXG5cclxuICBpZiAobm9kZS5nZXRBdHRyaWJ1dGUoJ2FyaWEtbGFiZWwnKSkge1xyXG4gICAgdGhpcy5sYWJlbCA9IG5vZGUuZ2V0QXR0cmlidXRlKCdhcmlhLWxhYmVsJykudHJpbSgpO1xyXG4gIH1cclxuXHJcbiAgdGhpcy5pc0V4cGFuZGFibGUgPSBmYWxzZTtcclxuICB0aGlzLmlzVmlzaWJsZSA9IGZhbHNlO1xyXG4gIHRoaXMuaW5Hcm91cCA9IGZhbHNlO1xyXG5cclxuICBpZiAoZ3JvdXApIHtcclxuICAgIHRoaXMuaW5Hcm91cCA9IHRydWU7XHJcbiAgfVxyXG5cclxuICB2YXIgZWxlbSA9IG5vZGUuZmlyc3RFbGVtZW50Q2hpbGQ7XHJcblxyXG4gIHdoaWxlIChlbGVtKSB7XHJcblxyXG4gICAgaWYgKGVsZW0udGFnTmFtZS50b0xvd2VyQ2FzZSgpID09ICd1bCcpIHtcclxuICAgICAgZWxlbS5zZXRBdHRyaWJ1dGUoJ3JvbGUnLCAnZ3JvdXAnKTtcclxuICAgICAgdGhpcy5pc0V4cGFuZGFibGUgPSB0cnVlO1xyXG4gICAgICBicmVhaztcclxuICAgIH1cclxuXHJcbiAgICBlbGVtID0gZWxlbS5uZXh0RWxlbWVudFNpYmxpbmc7XHJcbiAgfVxyXG5cclxuICB0aGlzLmtleUNvZGUgPSBPYmplY3QuZnJlZXplKHtcclxuICAgIFJFVFVSTjogMTMsXHJcbiAgICBTUEFDRTogMzIsXHJcbiAgICBQQUdFVVA6IDMzLFxyXG4gICAgUEFHRURPV046IDM0LFxyXG4gICAgRU5EOiAzNSxcclxuICAgIEhPTUU6IDM2LFxyXG4gICAgTEVGVDogMzcsXHJcbiAgICBVUDogMzgsXHJcbiAgICBSSUdIVDogMzksXHJcbiAgICBET1dOOiA0MFxyXG4gIH0pO1xyXG59O1xyXG5cclxuVHJlZWl0ZW1MaW5rLnByb3RvdHlwZS5pbml0ID0gZnVuY3Rpb24gKCkge1xyXG4gIHRoaXMuZG9tTm9kZS50YWJJbmRleCA9IC0xO1xyXG5cclxuICBpZiAoIXRoaXMuZG9tTm9kZS5nZXRBdHRyaWJ1dGUoJ3JvbGUnKSkge1xyXG4gICAgdGhpcy5kb21Ob2RlLnNldEF0dHJpYnV0ZSgncm9sZScsICd0cmVlaXRlbScpO1xyXG4gIH1cclxuXHJcbiAgdGhpcy5kb21Ob2RlLmFkZEV2ZW50TGlzdGVuZXIoJ2tleWRvd24nLCB0aGlzLmhhbmRsZUtleWRvd24uYmluZCh0aGlzKSk7XHJcbiAgdGhpcy5kb21Ob2RlLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJywgdGhpcy5oYW5kbGVDbGljay5iaW5kKHRoaXMpKTtcclxuICB0aGlzLmRvbU5vZGUuYWRkRXZlbnRMaXN0ZW5lcignZm9jdXMnLCB0aGlzLmhhbmRsZUZvY3VzLmJpbmQodGhpcykpO1xyXG4gIHRoaXMuZG9tTm9kZS5hZGRFdmVudExpc3RlbmVyKCdibHVyJywgdGhpcy5oYW5kbGVCbHVyLmJpbmQodGhpcykpO1xyXG5cclxuICBpZiAodGhpcy5pc0V4cGFuZGFibGUpIHtcclxuICAgIHRoaXMuZG9tTm9kZS5maXJzdEVsZW1lbnRDaGlsZC5hZGRFdmVudExpc3RlbmVyKCdtb3VzZW92ZXInLCB0aGlzLmhhbmRsZU1vdXNlT3Zlci5iaW5kKHRoaXMpKTtcclxuICAgIHRoaXMuZG9tTm9kZS5maXJzdEVsZW1lbnRDaGlsZC5hZGRFdmVudExpc3RlbmVyKCdtb3VzZW91dCcsIHRoaXMuaGFuZGxlTW91c2VPdXQuYmluZCh0aGlzKSk7XHJcbiAgfVxyXG4gIGVsc2Uge1xyXG4gICAgdGhpcy5kb21Ob2RlLmFkZEV2ZW50TGlzdGVuZXIoJ21vdXNlb3ZlcicsIHRoaXMuaGFuZGxlTW91c2VPdmVyLmJpbmQodGhpcykpO1xyXG4gICAgdGhpcy5kb21Ob2RlLmFkZEV2ZW50TGlzdGVuZXIoJ21vdXNlb3V0JywgdGhpcy5oYW5kbGVNb3VzZU91dC5iaW5kKHRoaXMpKTtcclxuICB9XHJcbn07XHJcblxyXG5UcmVlaXRlbUxpbmsucHJvdG90eXBlLmlzRXhwYW5kZWQgPSBmdW5jdGlvbiAoKSB7XHJcblxyXG4gIGlmICh0aGlzLmlzRXhwYW5kYWJsZSkge1xyXG4gICAgcmV0dXJuIHRoaXMuZG9tTm9kZS5nZXRBdHRyaWJ1dGUoJ2FyaWEtZXhwYW5kZWQnKSA9PT0gJ3RydWUnO1xyXG4gIH1cclxuXHJcbiAgcmV0dXJuIGZhbHNlO1xyXG5cclxufTtcclxuXHJcbi8qIEVWRU5UIEhBTkRMRVJTICovXHJcblxyXG5UcmVlaXRlbUxpbmsucHJvdG90eXBlLmhhbmRsZUtleWRvd24gPSBmdW5jdGlvbiAoZXZlbnQpIHtcclxuICB2YXIgdGd0ID0gZXZlbnQuY3VycmVudFRhcmdldCxcclxuICAgICAgZmxhZyA9IGZhbHNlLFxyXG4gICAgICBjaGFyID0gZXZlbnQua2V5LFxyXG4gICAgICBjbGlja0V2ZW50O1xyXG5cclxuICBmdW5jdGlvbiBpc1ByaW50YWJsZUNoYXJhY3RlciAoc3RyKSB7XHJcbiAgICByZXR1cm4gc3RyLmxlbmd0aCA9PT0gMSAmJiBzdHIubWF0Y2goL1xcUy8pO1xyXG4gIH1cclxuXHJcbiAgZnVuY3Rpb24gcHJpbnRhYmxlQ2hhcmFjdGVyIChpdGVtKSB7XHJcbiAgICBpZiAoY2hhciA9PSAnKicpIHtcclxuICAgICAgaXRlbS50cmVlLmV4cGFuZEFsbFNpYmxpbmdJdGVtcyhpdGVtKTtcclxuICAgICAgZmxhZyA9IHRydWU7XHJcbiAgICB9XHJcbiAgICBlbHNlIHtcclxuICAgICAgaWYgKGlzUHJpbnRhYmxlQ2hhcmFjdGVyKGNoYXIpKSB7XHJcbiAgICAgICAgaXRlbS50cmVlLnNldEZvY3VzQnlGaXJzdENoYXJhY3RlcihpdGVtLCBjaGFyKTtcclxuICAgICAgICBmbGFnID0gdHJ1ZTtcclxuICAgICAgfVxyXG4gICAgfVxyXG4gIH1cclxuXHJcbiAgdGhpcy5zdG9wRGVmYXVsdENsaWNrID0gZmFsc2U7XHJcblxyXG4gIGlmIChldmVudC5hbHRLZXkgfHwgZXZlbnQuY3RybEtleSB8fCBldmVudC5tZXRhS2V5KSB7XHJcbiAgICByZXR1cm47XHJcbiAgfVxyXG5cclxuICBpZiAoZXZlbnQuc2hpZnQpIHtcclxuICAgIGlmIChldmVudC5rZXlDb2RlID09IHRoaXMua2V5Q29kZS5TUEFDRSB8fCBldmVudC5rZXlDb2RlID09IHRoaXMua2V5Q29kZS5SRVRVUk4pIHtcclxuICAgICAgZXZlbnQuc3RvcFByb3BhZ2F0aW9uKCk7XHJcbiAgICAgIHRoaXMuc3RvcERlZmF1bHRDbGljayA9IHRydWU7XHJcbiAgICB9XHJcbiAgICBlbHNlIHtcclxuICAgICAgaWYgKGlzUHJpbnRhYmxlQ2hhcmFjdGVyKGNoYXIpKSB7XHJcbiAgICAgICAgcHJpbnRhYmxlQ2hhcmFjdGVyKHRoaXMpO1xyXG4gICAgICB9XHJcbiAgICB9XHJcbiAgfVxyXG4gIGVsc2Uge1xyXG4gICAgc3dpdGNoIChldmVudC5rZXlDb2RlKSB7XHJcbiAgICAgIGNhc2UgdGhpcy5rZXlDb2RlLlNQQUNFOlxyXG4gICAgICBjYXNlIHRoaXMua2V5Q29kZS5SRVRVUk46XHJcbiAgICAgICAgaWYgKHRoaXMuaXNFeHBhbmRhYmxlKSB7XHJcbiAgICAgICAgICBpZiAodGhpcy5pc0V4cGFuZGVkKCkpIHtcclxuICAgICAgICAgICAgdGhpcy50cmVlLmNvbGxhcHNlVHJlZWl0ZW0odGhpcyk7XHJcbiAgICAgICAgICB9XHJcbiAgICAgICAgICBlbHNlIHtcclxuICAgICAgICAgICAgdGhpcy50cmVlLmV4cGFuZFRyZWVpdGVtKHRoaXMpO1xyXG4gICAgICAgICAgfVxyXG4gICAgICAgICAgZmxhZyA9IHRydWU7XHJcbiAgICAgICAgfVxyXG4gICAgICAgIGVsc2Uge1xyXG4gICAgICAgICAgZXZlbnQuc3RvcFByb3BhZ2F0aW9uKCk7XHJcbiAgICAgICAgICB0aGlzLnN0b3BEZWZhdWx0Q2xpY2sgPSB0cnVlO1xyXG4gICAgICAgIH1cclxuICAgICAgICBicmVhaztcclxuXHJcbiAgICAgIGNhc2UgdGhpcy5rZXlDb2RlLlVQOlxyXG4gICAgICAgIHRoaXMudHJlZS5zZXRGb2N1c1RvUHJldmlvdXNJdGVtKHRoaXMpO1xyXG4gICAgICAgIGZsYWcgPSB0cnVlO1xyXG4gICAgICAgIGJyZWFrO1xyXG5cclxuICAgICAgY2FzZSB0aGlzLmtleUNvZGUuRE9XTjpcclxuICAgICAgICB0aGlzLnRyZWUuc2V0Rm9jdXNUb05leHRJdGVtKHRoaXMpO1xyXG4gICAgICAgIGZsYWcgPSB0cnVlO1xyXG4gICAgICAgIGJyZWFrO1xyXG5cclxuICAgICAgY2FzZSB0aGlzLmtleUNvZGUuUklHSFQ6XHJcbiAgICAgICAgaWYgKHRoaXMuaXNFeHBhbmRhYmxlKSB7XHJcbiAgICAgICAgICBpZiAodGhpcy5pc0V4cGFuZGVkKCkpIHtcclxuICAgICAgICAgICAgdGhpcy50cmVlLnNldEZvY3VzVG9OZXh0SXRlbSh0aGlzKTtcclxuICAgICAgICAgIH1cclxuICAgICAgICAgIGVsc2Uge1xyXG4gICAgICAgICAgICB0aGlzLnRyZWUuZXhwYW5kVHJlZWl0ZW0odGhpcyk7XHJcbiAgICAgICAgICB9XHJcbiAgICAgICAgfVxyXG4gICAgICAgIGZsYWcgPSB0cnVlO1xyXG4gICAgICAgIGJyZWFrO1xyXG5cclxuICAgICAgY2FzZSB0aGlzLmtleUNvZGUuTEVGVDpcclxuICAgICAgICBpZiAodGhpcy5pc0V4cGFuZGFibGUgJiYgdGhpcy5pc0V4cGFuZGVkKCkpIHtcclxuICAgICAgICAgIHRoaXMudHJlZS5jb2xsYXBzZVRyZWVpdGVtKHRoaXMpO1xyXG4gICAgICAgICAgZmxhZyA9IHRydWU7XHJcbiAgICAgICAgfVxyXG4gICAgICAgIGVsc2Uge1xyXG4gICAgICAgICAgaWYgKHRoaXMuaW5Hcm91cCkge1xyXG4gICAgICAgICAgICB0aGlzLnRyZWUuc2V0Rm9jdXNUb1BhcmVudEl0ZW0odGhpcyk7XHJcbiAgICAgICAgICAgIGZsYWcgPSB0cnVlO1xyXG4gICAgICAgICAgfVxyXG4gICAgICAgIH1cclxuICAgICAgICBicmVhaztcclxuXHJcbiAgICAgIGNhc2UgdGhpcy5rZXlDb2RlLkhPTUU6XHJcbiAgICAgICAgdGhpcy50cmVlLnNldEZvY3VzVG9GaXJzdEl0ZW0oKTtcclxuICAgICAgICBmbGFnID0gdHJ1ZTtcclxuICAgICAgICBicmVhaztcclxuXHJcbiAgICAgIGNhc2UgdGhpcy5rZXlDb2RlLkVORDpcclxuICAgICAgICB0aGlzLnRyZWUuc2V0Rm9jdXNUb0xhc3RJdGVtKCk7XHJcbiAgICAgICAgZmxhZyA9IHRydWU7XHJcbiAgICAgICAgYnJlYWs7XHJcblxyXG4gICAgICBkZWZhdWx0OlxyXG4gICAgICAgIGlmIChpc1ByaW50YWJsZUNoYXJhY3RlcihjaGFyKSkge1xyXG4gICAgICAgICAgcHJpbnRhYmxlQ2hhcmFjdGVyKHRoaXMpO1xyXG4gICAgICAgIH1cclxuICAgICAgICBicmVhaztcclxuICAgIH1cclxuICB9XHJcblxyXG4gIGlmIChmbGFnKSB7XHJcbiAgICBldmVudC5zdG9wUHJvcGFnYXRpb24oKTtcclxuICAgIGV2ZW50LnByZXZlbnREZWZhdWx0KCk7XHJcbiAgfVxyXG59O1xyXG5cclxuVHJlZWl0ZW1MaW5rLnByb3RvdHlwZS5oYW5kbGVDbGljayA9IGZ1bmN0aW9uIChldmVudCkge1xyXG5cclxuICAvLyBvbmx5IHByb2Nlc3MgY2xpY2sgZXZlbnRzIHRoYXQgZGlyZWN0bHkgaGFwcGVuZWQgb24gdGhpcyB0cmVlaXRlbVxyXG4gIGlmIChldmVudC50YXJnZXQgIT09IHRoaXMuZG9tTm9kZSAmJiBldmVudC50YXJnZXQgIT09IHRoaXMuZG9tTm9kZS5maXJzdEVsZW1lbnRDaGlsZCkge1xyXG4gICAgcmV0dXJuO1xyXG4gIH1cclxuXHJcbiAgaWYgKHRoaXMuaXNFeHBhbmRhYmxlKSB7XHJcbiAgICBpZiAodGhpcy5pc0V4cGFuZGVkKCkpIHtcclxuICAgICAgdGhpcy50cmVlLmNvbGxhcHNlVHJlZWl0ZW0odGhpcyk7XHJcbiAgICB9XHJcbiAgICBlbHNlIHtcclxuICAgICAgdGhpcy50cmVlLmV4cGFuZFRyZWVpdGVtKHRoaXMpO1xyXG4gICAgfVxyXG4gICAgZXZlbnQuc3RvcFByb3BhZ2F0aW9uKCk7XHJcbiAgfVxyXG59O1xyXG5cclxuVHJlZWl0ZW1MaW5rLnByb3RvdHlwZS5oYW5kbGVGb2N1cyA9IGZ1bmN0aW9uIChldmVudCkge1xyXG4gIHZhciBub2RlID0gdGhpcy5kb21Ob2RlO1xyXG4gIGlmICh0aGlzLmlzRXhwYW5kYWJsZSkge1xyXG4gICAgbm9kZSA9IG5vZGUuZmlyc3RFbGVtZW50Q2hpbGQ7XHJcbiAgfVxyXG4gIG5vZGUuY2xhc3NMaXN0LmFkZCgnZm9jdXMnKTtcclxufTtcclxuXHJcblRyZWVpdGVtTGluay5wcm90b3R5cGUuaGFuZGxlQmx1ciA9IGZ1bmN0aW9uIChldmVudCkge1xyXG4gIHZhciBub2RlID0gdGhpcy5kb21Ob2RlO1xyXG4gIGlmICh0aGlzLmlzRXhwYW5kYWJsZSkge1xyXG4gICAgbm9kZSA9IG5vZGUuZmlyc3RFbGVtZW50Q2hpbGQ7XHJcbiAgfVxyXG4gIG5vZGUuY2xhc3NMaXN0LnJlbW92ZSgnZm9jdXMnKTtcclxufTtcclxuXHJcblRyZWVpdGVtTGluay5wcm90b3R5cGUuaGFuZGxlTW91c2VPdmVyID0gZnVuY3Rpb24gKGV2ZW50KSB7XHJcbiAgZXZlbnQuY3VycmVudFRhcmdldC5jbGFzc0xpc3QuYWRkKCdob3ZlcicpO1xyXG59O1xyXG5cclxuVHJlZWl0ZW1MaW5rLnByb3RvdHlwZS5oYW5kbGVNb3VzZU91dCA9IGZ1bmN0aW9uIChldmVudCkge1xyXG4gIGV2ZW50LmN1cnJlbnRUYXJnZXQuY2xhc3NMaXN0LnJlbW92ZSgnaG92ZXInKTtcclxufTsiXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/js/code-system/codeSystemTree.js\n");
+/*
+*   This content is licensed according to the W3C Software License at
+*   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
+*
+*   File:   TreeLinks.js
+*
+*   Desc:   Tree widget that implements ARIA Authoring Practices
+*           for a tree being used as a file viewer
+*/
+
+/**
+ * ARIA Treeview example
+ * @function onload
+ * @desc  after page has loaded initialize all treeitems based on the role=treeitem
+ */
+function codeSystemTree() {
+
+  console.log("code system tree");
+  var trees = document.querySelectorAll('[role="tree"]');
+
+  for (var i = 0; i < trees.length; i++) {
+
+    console.log(t);
+    var t = new TreeLinks(trees[i]);
+    console.log(t);
+    t.init();
+  }
+
+}
+
+window.codeSystemTree = codeSystemTree;
+
+
+
+/*
+*   @constructor
+*
+*   @desc
+*       Tree item object for representing the state and user interactions for a
+*       tree widget
+*
+*   @param node
+*       An element with the role=tree attribute
+*/
+
+var TreeLinks = function (node) {
+  // Check whether node is a DOM element
+  if (typeof node !== 'object') {
+    return;
+  }
+
+  this.domNode = node;
+
+  this.treeitems = [];
+  this.firstChars = [];
+
+  this.firstTreeitem = null;
+  this.lastTreeitem = null;
+
+};
+
+TreeLinks.prototype.init = function () {
+
+  function findTreeitems (node, tree, group) {
+
+    var elem = node.firstElementChild;
+    var ti = group;
+
+    while (elem) {
+
+      if ((elem.tagName.toLowerCase() === 'li' && elem.firstElementChild.tagName.toLowerCase() === 'span') || elem.tagName.toLowerCase() === 'a') {
+        ti = new TreeitemLink(elem, tree, group);
+        ti.init();
+        tree.treeitems.push(ti);
+        tree.firstChars.push(ti.label.substring(0, 1).toLowerCase());
+      }
+
+      if (elem.firstElementChild) {
+        findTreeitems(elem, tree, ti);
+      }
+
+      elem = elem.nextElementSibling;
+    }
+  }
+
+  // initialize pop up menus
+  if (!this.domNode.getAttribute('role')) {
+    this.domNode.setAttribute('role', 'tree');
+  }
+
+  findTreeitems(this.domNode, this, false);
+
+  this.updateVisibleTreeitems();
+
+  this.firstTreeitem.domNode.tabIndex = 0;
+
+};
+
+TreeLinks.prototype.setFocusToItem = function (treeitem) {
+
+  for (var i = 0; i < this.treeitems.length; i++) {
+    var ti = this.treeitems[i];
+
+    if (ti === treeitem) {
+      ti.domNode.tabIndex = 0;
+      ti.domNode.focus();
+    }
+    else {
+      ti.domNode.tabIndex = -1;
+    }
+  }
+
+};
+
+TreeLinks.prototype.setFocusToNextItem = function (currentItem) {
+
+  var nextItem = false;
+
+  for (var i = (this.treeitems.length - 1); i >= 0; i--) {
+    var ti = this.treeitems[i];
+    if (ti === currentItem) {
+      break;
+    }
+    if (ti.isVisible) {
+      nextItem = ti;
+    }
+  }
+
+  if (nextItem) {
+    this.setFocusToItem(nextItem);
+  }
+
+};
+
+TreeLinks.prototype.setFocusToPreviousItem = function (currentItem) {
+
+  var prevItem = false;
+
+  for (var i = 0; i < this.treeitems.length; i++) {
+    var ti = this.treeitems[i];
+    if (ti === currentItem) {
+      break;
+    }
+    if (ti.isVisible) {
+      prevItem = ti;
+    }
+  }
+
+  if (prevItem) {
+    this.setFocusToItem(prevItem);
+  }
+};
+
+TreeLinks.prototype.setFocusToParentItem = function (currentItem) {
+
+  if (currentItem.groupTreeitem) {
+    this.setFocusToItem(currentItem.groupTreeitem);
+  }
+};
+
+TreeLinks.prototype.setFocusToFirstItem = function () {
+  this.setFocusToItem(this.firstTreeitem);
+};
+
+TreeLinks.prototype.setFocusToLastItem = function () {
+  this.setFocusToItem(this.lastTreeitem);
+};
+
+TreeLinks.prototype.expandTreeitem = function (currentItem) {
+  if (currentItem.isExpandable) {
+    currentItem.domNode.setAttribute('aria-expanded', true);
+    this.updateVisibleTreeitems();
+  }
+
+};
+
+TreeLinks.prototype.expandAllSiblingItems = function (currentItem) {
+  for (var i = 0; i < this.treeitems.length; i++) {
+    var ti = this.treeitems[i];
+
+    if ((ti.groupTreeitem === currentItem.groupTreeitem) && ti.isExpandable) {
+      this.expandTreeitem(ti);
+    }
+  }
+
+};
+
+TreeLinks.prototype.collapseTreeitem = function (currentItem) {
+
+  var groupTreeitem = false;
+
+  if (currentItem.isExpanded()) {
+    groupTreeitem = currentItem;
+  }
+  else {
+    groupTreeitem = currentItem.groupTreeitem;
+  }
+
+  if (groupTreeitem) {
+    groupTreeitem.domNode.setAttribute('aria-expanded', false);
+    this.updateVisibleTreeitems();
+    this.setFocusToItem(groupTreeitem);
+  }
+
+};
+
+TreeLinks.prototype.updateVisibleTreeitems = function () {
+
+  this.firstTreeitem = this.treeitems[0];
+
+  for (var i = 0; i < this.treeitems.length; i++) {
+    var ti = this.treeitems[i];
+
+    var parent = ti.domNode.parentNode;
+
+    ti.isVisible = true;
+
+    while (parent && (parent !== this.domNode)) {
+
+      if (parent.getAttribute('aria-expanded') == 'false') {
+        ti.isVisible = false;
+      }
+      parent = parent.parentNode;
+    }
+
+    if (ti.isVisible) {
+      this.lastTreeitem = ti;
+    }
+  }
+
+};
+
+TreeLinks.prototype.setFocusByFirstCharacter = function (currentItem, char) {
+  var start, index, char = char.toLowerCase();
+
+  // Get start index for search based on position of currentItem
+  start = this.treeitems.indexOf(currentItem) + 1;
+  if (start === this.treeitems.length) {
+    start = 0;
+  }
+
+  // Check remaining slots in the menu
+  index = this.getIndexFirstChars(start, char);
+
+  // If not found in remaining slots, check from beginning
+  if (index === -1) {
+    index = this.getIndexFirstChars(0, char);
+  }
+
+  // If match was found...
+  if (index > -1) {
+    this.setFocusToItem(this.treeitems[index]);
+  }
+};
+
+TreeLinks.prototype.getIndexFirstChars = function (startIndex, char) {
+  for (var i = startIndex; i < this.firstChars.length; i++) {
+    if (this.treeitems[i].isVisible) {
+      if (char === this.firstChars[i]) {
+        return i;
+      }
+    }
+  }
+  return -1;
+};
+
+
+
+// TreeItemLinks
+
+/*
+*   This content is licensed according to the W3C Software License at
+*   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
+*
+*   File:   TreeitemLink.js
+*
+*   Desc:   Treeitem widget that implements ARIA Authoring Practices
+*           for a tree being used as a file viewer
+*/
+
+/*
+*   @constructor
+*
+*   @desc
+*       Treeitem object for representing the state and user interactions for a
+*       treeItem widget
+*
+*   @param node
+*       An element with the role=tree attribute
+*/
+
+var TreeitemLink = function (node, treeObj, group) {
+
+  // Check whether node is a DOM element
+  if (typeof node !== 'object') {
+    return;
+  }
+
+  node.tabIndex = -1;
+  this.tree = treeObj;
+  this.groupTreeitem = group;
+  this.domNode = node;
+  this.label = node.textContent.trim();
+  this.stopDefaultClick = false;
+
+  if (node.getAttribute('aria-label')) {
+    this.label = node.getAttribute('aria-label').trim();
+  }
+
+  this.isExpandable = false;
+  this.isVisible = false;
+  this.inGroup = false;
+
+  if (group) {
+    this.inGroup = true;
+  }
+
+  var elem = node.firstElementChild;
+
+  while (elem) {
+
+    if (elem.tagName.toLowerCase() == 'ul') {
+      elem.setAttribute('role', 'group');
+      this.isExpandable = true;
+      break;
+    }
+
+    elem = elem.nextElementSibling;
+  }
+
+  this.keyCode = Object.freeze({
+    RETURN: 13,
+    SPACE: 32,
+    PAGEUP: 33,
+    PAGEDOWN: 34,
+    END: 35,
+    HOME: 36,
+    LEFT: 37,
+    UP: 38,
+    RIGHT: 39,
+    DOWN: 40
+  });
+};
+
+TreeitemLink.prototype.init = function () {
+  this.domNode.tabIndex = -1;
+
+  if (!this.domNode.getAttribute('role')) {
+    this.domNode.setAttribute('role', 'treeitem');
+  }
+
+  this.domNode.addEventListener('keydown', this.handleKeydown.bind(this));
+  this.domNode.addEventListener('click', this.handleClick.bind(this));
+  this.domNode.addEventListener('focus', this.handleFocus.bind(this));
+  this.domNode.addEventListener('blur', this.handleBlur.bind(this));
+
+  if (this.isExpandable) {
+    this.domNode.firstElementChild.addEventListener('mouseover', this.handleMouseOver.bind(this));
+    this.domNode.firstElementChild.addEventListener('mouseout', this.handleMouseOut.bind(this));
+  }
+  else {
+    this.domNode.addEventListener('mouseover', this.handleMouseOver.bind(this));
+    this.domNode.addEventListener('mouseout', this.handleMouseOut.bind(this));
+  }
+};
+
+TreeitemLink.prototype.isExpanded = function () {
+
+  if (this.isExpandable) {
+    return this.domNode.getAttribute('aria-expanded') === 'true';
+  }
+
+  return false;
+
+};
+
+/* EVENT HANDLERS */
+
+TreeitemLink.prototype.handleKeydown = function (event) {
+  var tgt = event.currentTarget,
+      flag = false,
+      char = event.key,
+      clickEvent;
+
+  function isPrintableCharacter (str) {
+    return str.length === 1 && str.match(/\S/);
+  }
+
+  function printableCharacter (item) {
+    if (char == '*') {
+      item.tree.expandAllSiblingItems(item);
+      flag = true;
+    }
+    else {
+      if (isPrintableCharacter(char)) {
+        item.tree.setFocusByFirstCharacter(item, char);
+        flag = true;
+      }
+    }
+  }
+
+  this.stopDefaultClick = false;
+
+  if (event.altKey || event.ctrlKey || event.metaKey) {
+    return;
+  }
+
+  if (event.shift) {
+    if (event.keyCode == this.keyCode.SPACE || event.keyCode == this.keyCode.RETURN) {
+      event.stopPropagation();
+      this.stopDefaultClick = true;
+    }
+    else {
+      if (isPrintableCharacter(char)) {
+        printableCharacter(this);
+      }
+    }
+  }
+  else {
+    switch (event.keyCode) {
+      case this.keyCode.SPACE:
+      case this.keyCode.RETURN:
+        if (this.isExpandable) {
+          if (this.isExpanded()) {
+            this.tree.collapseTreeitem(this);
+          }
+          else {
+            this.tree.expandTreeitem(this);
+          }
+          flag = true;
+        }
+        else {
+          event.stopPropagation();
+          this.stopDefaultClick = true;
+        }
+        break;
+
+      case this.keyCode.UP:
+        this.tree.setFocusToPreviousItem(this);
+        flag = true;
+        break;
+
+      case this.keyCode.DOWN:
+        this.tree.setFocusToNextItem(this);
+        flag = true;
+        break;
+
+      case this.keyCode.RIGHT:
+        if (this.isExpandable) {
+          if (this.isExpanded()) {
+            this.tree.setFocusToNextItem(this);
+          }
+          else {
+            this.tree.expandTreeitem(this);
+          }
+        }
+        flag = true;
+        break;
+
+      case this.keyCode.LEFT:
+        if (this.isExpandable && this.isExpanded()) {
+          this.tree.collapseTreeitem(this);
+          flag = true;
+        }
+        else {
+          if (this.inGroup) {
+            this.tree.setFocusToParentItem(this);
+            flag = true;
+          }
+        }
+        break;
+
+      case this.keyCode.HOME:
+        this.tree.setFocusToFirstItem();
+        flag = true;
+        break;
+
+      case this.keyCode.END:
+        this.tree.setFocusToLastItem();
+        flag = true;
+        break;
+
+      default:
+        if (isPrintableCharacter(char)) {
+          printableCharacter(this);
+        }
+        break;
+    }
+  }
+
+  if (flag) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+};
+
+TreeitemLink.prototype.handleClick = function (event) {
+
+  // only process click events that directly happened on this treeitem
+  if (event.target !== this.domNode && event.target !== this.domNode.firstElementChild) {
+    return;
+  }
+
+  if (this.isExpandable) {
+    if (this.isExpanded()) {
+      this.tree.collapseTreeitem(this);
+    }
+    else {
+      this.tree.expandTreeitem(this);
+    }
+    event.stopPropagation();
+  }
+};
+
+TreeitemLink.prototype.handleFocus = function (event) {
+  var node = this.domNode;
+  if (this.isExpandable) {
+    node = node.firstElementChild;
+  }
+  node.classList.add('focus');
+};
+
+TreeitemLink.prototype.handleBlur = function (event) {
+  var node = this.domNode;
+  if (this.isExpandable) {
+    node = node.firstElementChild;
+  }
+  node.classList.remove('focus');
+};
+
+TreeitemLink.prototype.handleMouseOver = function (event) {
+  event.currentTarget.classList.add('hover');
+};
+
+TreeitemLink.prototype.handleMouseOut = function (event) {
+  event.currentTarget.classList.remove('hover');
+};
 
 /***/ }),
 
@@ -115,7 +660,23 @@ eval("/*\r\n*   This content is licensed according to the W3C Software License a
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("// Makes the code system tree expand and collapse in 1- and 2-col layouts\r\n\r\nfunction codeSystemTreeExpand () {\r\n    var treeContainer = $(\".js-tree-expand\");\r\n\r\n    if (treeContainer.length > 0) {\r\n        var treeExpandBlocks = $(\".js-tree-expand\").getExpandableBlocks();\r\n\r\n        if (layoutQ().number[0] > 2) {\r\n            treeExpandBlocks.removeExpandability();\r\n        } else {\r\n            treeExpandBlocks.addExpandability();\r\n        }\r\n    }\r\n}\r\n\r\nwindow.codeSystemTreeExpand = codeSystemTreeExpand;//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvanMvY29kZS1zeXN0ZW0vY29kZVN5c3RlbVRyZWVFeHBhbmQuanMuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvanMvY29kZS1zeXN0ZW0vY29kZVN5c3RlbVRyZWVFeHBhbmQuanM/MmU3MCJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBNYWtlcyB0aGUgY29kZSBzeXN0ZW0gdHJlZSBleHBhbmQgYW5kIGNvbGxhcHNlIGluIDEtIGFuZCAyLWNvbCBsYXlvdXRzXHJcblxyXG5mdW5jdGlvbiBjb2RlU3lzdGVtVHJlZUV4cGFuZCAoKSB7XHJcbiAgICB2YXIgdHJlZUNvbnRhaW5lciA9ICQoXCIuanMtdHJlZS1leHBhbmRcIik7XHJcblxyXG4gICAgaWYgKHRyZWVDb250YWluZXIubGVuZ3RoID4gMCkge1xyXG4gICAgICAgIHZhciB0cmVlRXhwYW5kQmxvY2tzID0gJChcIi5qcy10cmVlLWV4cGFuZFwiKS5nZXRFeHBhbmRhYmxlQmxvY2tzKCk7XHJcblxyXG4gICAgICAgIGlmIChsYXlvdXRRKCkubnVtYmVyWzBdID4gMikge1xyXG4gICAgICAgICAgICB0cmVlRXhwYW5kQmxvY2tzLnJlbW92ZUV4cGFuZGFiaWxpdHkoKTtcclxuICAgICAgICB9IGVsc2Uge1xyXG4gICAgICAgICAgICB0cmVlRXhwYW5kQmxvY2tzLmFkZEV4cGFuZGFiaWxpdHkoKTtcclxuICAgICAgICB9XHJcbiAgICB9XHJcbn1cclxuXHJcbndpbmRvdy5jb2RlU3lzdGVtVHJlZUV4cGFuZCA9IGNvZGVTeXN0ZW1UcmVlRXhwYW5kOyJdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/js/code-system/codeSystemTreeExpand.js\n");
+// Makes the code system tree expand and collapse in 1- and 2-col layouts
+
+function codeSystemTreeExpand () {
+    var treeContainer = $(".js-tree-expand");
+
+    if (treeContainer.length > 0) {
+        var treeExpandBlocks = $(".js-tree-expand").getExpandableBlocks();
+
+        if (layoutQ().number[0] > 2) {
+            treeExpandBlocks.removeExpandability();
+        } else {
+            treeExpandBlocks.addExpandability();
+        }
+    }
+}
+
+window.codeSystemTreeExpand = codeSystemTreeExpand;
 
 /***/ }),
 
@@ -126,7 +687,92 @@ eval("// Makes the code system tree expand and collapse in 1- and 2-col layouts\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("// This ensures the correct ARIA-attributes and keyboard nav for the tabs at the bottom of the code cards.\r\n\r\nfunction codeTabs() {\r\n\r\n\r\n    var tabList = $('.js-tab-list'),\r\n        tabPanelContainer = $('.js-tab-panels');\r\n\r\n    if (tabPanelContainer.length !== 0 && tabList.length !== 0) {\r\n\r\n        var tabs = tabList.find($('[role=tab]')),\r\n            panels = tabPanelContainer.find($('[role=tabpanel]'));\r\n\r\n        // Reset all tabs\r\n        tabs.removeAttr('aria-selected');\r\n        tabs.attr(\"tabindex\",\"0\");\r\n        tabs.removeClass('selected unselected');\r\n        panels.removeClass('selected unselected');\r\n\r\n        //if (layoutQ().number[0] >= 3) {\r\n            var selectedTab;\r\n\r\n            function showTabPanel(event) {\r\n                var currentTabs = tabList.find($('[role=tab]')),\r\n                    panels = tabPanelContainer.find($('[role=tabpanel]'));\r\n\r\n                if (typeof selectedTab === 'undefined') {\r\n                    selectedTab = currentTabs.first();\r\n                } else {\r\n                    selectedTab = $(event.target);\r\n                }\r\n\r\n                // Reset all tabs\r\n                currentTabs.removeAttr('aria-selected');\r\n                currentTabs.removeClass('selected unselected');\r\n                panels.removeClass('selected unselected');\r\n\r\n                // Select the clicked tab, unselect the others\r\n                currentTabs.not(selectedTab).attr('aria-selected', 'false');\r\n                currentTabs.not(selectedTab).addClass('unselected');\r\n\r\n                selectedTab.attr('aria-selected', 'true');\r\n                selectedTab.addClass('selected');\r\n\r\n                // Show the associated panel\r\n                var panelToOpenID = selectedTab.attr('aria-controls'),\r\n                    panelToOpen = $('#' + panelToOpenID);\r\n\r\n                panels.not(panelToOpen).addClass('unselected');\r\n                panelToOpen.addClass('selected');\r\n            }\r\n\r\n            showTabPanel();\r\n\r\n            tabs.off('codeTabs').on('click', function (event) {\r\n                var selectedTab = $(event.target),\r\n                    panelToOpenID = selectedTab.attr('aria-controls'),\r\n                    panelToOpen = $('#' + panelToOpenID);\r\n\r\n                showTabPanel(event);\r\n\r\n                //\r\n                // if (selectedTab.hasClass('selected')) {\r\n                //     panelToOpen.focusWithoutScrolling();\r\n                // }\r\n\r\n            });\r\n\r\n            tabList.off('codeTabs').on('keydown', function (event) {\r\n\r\n                // Left arrow\r\n                if (event.keyCode === 37) {\r\n                    $(event.target).prev().focus();\r\n                }\r\n\r\n                // Right arrow\r\n                if (event.keyCode === 39) {\r\n                    $(event.target).next().focus();\r\n                }\r\n            });\r\n        //}\r\n    }\r\n\r\n}\r\n\r\nwindow.codeTabs = codeTabs;//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvanMvY29kZS1zeXN0ZW0vY29kZVRhYnMuanMuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvanMvY29kZS1zeXN0ZW0vY29kZVRhYnMuanM/ZmI3MSJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBUaGlzIGVuc3VyZXMgdGhlIGNvcnJlY3QgQVJJQS1hdHRyaWJ1dGVzIGFuZCBrZXlib2FyZCBuYXYgZm9yIHRoZSB0YWJzIGF0IHRoZSBib3R0b20gb2YgdGhlIGNvZGUgY2FyZHMuXHJcblxyXG5mdW5jdGlvbiBjb2RlVGFicygpIHtcclxuXHJcblxyXG4gICAgdmFyIHRhYkxpc3QgPSAkKCcuanMtdGFiLWxpc3QnKSxcclxuICAgICAgICB0YWJQYW5lbENvbnRhaW5lciA9ICQoJy5qcy10YWItcGFuZWxzJyk7XHJcblxyXG4gICAgaWYgKHRhYlBhbmVsQ29udGFpbmVyLmxlbmd0aCAhPT0gMCAmJiB0YWJMaXN0Lmxlbmd0aCAhPT0gMCkge1xyXG5cclxuICAgICAgICB2YXIgdGFicyA9IHRhYkxpc3QuZmluZCgkKCdbcm9sZT10YWJdJykpLFxyXG4gICAgICAgICAgICBwYW5lbHMgPSB0YWJQYW5lbENvbnRhaW5lci5maW5kKCQoJ1tyb2xlPXRhYnBhbmVsXScpKTtcclxuXHJcbiAgICAgICAgLy8gUmVzZXQgYWxsIHRhYnNcclxuICAgICAgICB0YWJzLnJlbW92ZUF0dHIoJ2FyaWEtc2VsZWN0ZWQnKTtcclxuICAgICAgICB0YWJzLmF0dHIoXCJ0YWJpbmRleFwiLFwiMFwiKTtcclxuICAgICAgICB0YWJzLnJlbW92ZUNsYXNzKCdzZWxlY3RlZCB1bnNlbGVjdGVkJyk7XHJcbiAgICAgICAgcGFuZWxzLnJlbW92ZUNsYXNzKCdzZWxlY3RlZCB1bnNlbGVjdGVkJyk7XHJcblxyXG4gICAgICAgIC8vaWYgKGxheW91dFEoKS5udW1iZXJbMF0gPj0gMykge1xyXG4gICAgICAgICAgICB2YXIgc2VsZWN0ZWRUYWI7XHJcblxyXG4gICAgICAgICAgICBmdW5jdGlvbiBzaG93VGFiUGFuZWwoZXZlbnQpIHtcclxuICAgICAgICAgICAgICAgIHZhciBjdXJyZW50VGFicyA9IHRhYkxpc3QuZmluZCgkKCdbcm9sZT10YWJdJykpLFxyXG4gICAgICAgICAgICAgICAgICAgIHBhbmVscyA9IHRhYlBhbmVsQ29udGFpbmVyLmZpbmQoJCgnW3JvbGU9dGFicGFuZWxdJykpO1xyXG5cclxuICAgICAgICAgICAgICAgIGlmICh0eXBlb2Ygc2VsZWN0ZWRUYWIgPT09ICd1bmRlZmluZWQnKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgc2VsZWN0ZWRUYWIgPSBjdXJyZW50VGFicy5maXJzdCgpO1xyXG4gICAgICAgICAgICAgICAgfSBlbHNlIHtcclxuICAgICAgICAgICAgICAgICAgICBzZWxlY3RlZFRhYiA9ICQoZXZlbnQudGFyZ2V0KTtcclxuICAgICAgICAgICAgICAgIH1cclxuXHJcbiAgICAgICAgICAgICAgICAvLyBSZXNldCBhbGwgdGFic1xyXG4gICAgICAgICAgICAgICAgY3VycmVudFRhYnMucmVtb3ZlQXR0cignYXJpYS1zZWxlY3RlZCcpO1xyXG4gICAgICAgICAgICAgICAgY3VycmVudFRhYnMucmVtb3ZlQ2xhc3MoJ3NlbGVjdGVkIHVuc2VsZWN0ZWQnKTtcclxuICAgICAgICAgICAgICAgIHBhbmVscy5yZW1vdmVDbGFzcygnc2VsZWN0ZWQgdW5zZWxlY3RlZCcpO1xyXG5cclxuICAgICAgICAgICAgICAgIC8vIFNlbGVjdCB0aGUgY2xpY2tlZCB0YWIsIHVuc2VsZWN0IHRoZSBvdGhlcnNcclxuICAgICAgICAgICAgICAgIGN1cnJlbnRUYWJzLm5vdChzZWxlY3RlZFRhYikuYXR0cignYXJpYS1zZWxlY3RlZCcsICdmYWxzZScpO1xyXG4gICAgICAgICAgICAgICAgY3VycmVudFRhYnMubm90KHNlbGVjdGVkVGFiKS5hZGRDbGFzcygndW5zZWxlY3RlZCcpO1xyXG5cclxuICAgICAgICAgICAgICAgIHNlbGVjdGVkVGFiLmF0dHIoJ2FyaWEtc2VsZWN0ZWQnLCAndHJ1ZScpO1xyXG4gICAgICAgICAgICAgICAgc2VsZWN0ZWRUYWIuYWRkQ2xhc3MoJ3NlbGVjdGVkJyk7XHJcblxyXG4gICAgICAgICAgICAgICAgLy8gU2hvdyB0aGUgYXNzb2NpYXRlZCBwYW5lbFxyXG4gICAgICAgICAgICAgICAgdmFyIHBhbmVsVG9PcGVuSUQgPSBzZWxlY3RlZFRhYi5hdHRyKCdhcmlhLWNvbnRyb2xzJyksXHJcbiAgICAgICAgICAgICAgICAgICAgcGFuZWxUb09wZW4gPSAkKCcjJyArIHBhbmVsVG9PcGVuSUQpO1xyXG5cclxuICAgICAgICAgICAgICAgIHBhbmVscy5ub3QocGFuZWxUb09wZW4pLmFkZENsYXNzKCd1bnNlbGVjdGVkJyk7XHJcbiAgICAgICAgICAgICAgICBwYW5lbFRvT3Blbi5hZGRDbGFzcygnc2VsZWN0ZWQnKTtcclxuICAgICAgICAgICAgfVxyXG5cclxuICAgICAgICAgICAgc2hvd1RhYlBhbmVsKCk7XHJcblxyXG4gICAgICAgICAgICB0YWJzLm9mZignY29kZVRhYnMnKS5vbignY2xpY2snLCBmdW5jdGlvbiAoZXZlbnQpIHtcclxuICAgICAgICAgICAgICAgIHZhciBzZWxlY3RlZFRhYiA9ICQoZXZlbnQudGFyZ2V0KSxcclxuICAgICAgICAgICAgICAgICAgICBwYW5lbFRvT3BlbklEID0gc2VsZWN0ZWRUYWIuYXR0cignYXJpYS1jb250cm9scycpLFxyXG4gICAgICAgICAgICAgICAgICAgIHBhbmVsVG9PcGVuID0gJCgnIycgKyBwYW5lbFRvT3BlbklEKTtcclxuXHJcbiAgICAgICAgICAgICAgICBzaG93VGFiUGFuZWwoZXZlbnQpO1xyXG5cclxuICAgICAgICAgICAgICAgIC8vXHJcbiAgICAgICAgICAgICAgICAvLyBpZiAoc2VsZWN0ZWRUYWIuaGFzQ2xhc3MoJ3NlbGVjdGVkJykpIHtcclxuICAgICAgICAgICAgICAgIC8vICAgICBwYW5lbFRvT3Blbi5mb2N1c1dpdGhvdXRTY3JvbGxpbmcoKTtcclxuICAgICAgICAgICAgICAgIC8vIH1cclxuXHJcbiAgICAgICAgICAgIH0pO1xyXG5cclxuICAgICAgICAgICAgdGFiTGlzdC5vZmYoJ2NvZGVUYWJzJykub24oJ2tleWRvd24nLCBmdW5jdGlvbiAoZXZlbnQpIHtcclxuXHJcbiAgICAgICAgICAgICAgICAvLyBMZWZ0IGFycm93XHJcbiAgICAgICAgICAgICAgICBpZiAoZXZlbnQua2V5Q29kZSA9PT0gMzcpIHtcclxuICAgICAgICAgICAgICAgICAgICAkKGV2ZW50LnRhcmdldCkucHJldigpLmZvY3VzKCk7XHJcbiAgICAgICAgICAgICAgICB9XHJcblxyXG4gICAgICAgICAgICAgICAgLy8gUmlnaHQgYXJyb3dcclxuICAgICAgICAgICAgICAgIGlmIChldmVudC5rZXlDb2RlID09PSAzOSkge1xyXG4gICAgICAgICAgICAgICAgICAgICQoZXZlbnQudGFyZ2V0KS5uZXh0KCkuZm9jdXMoKTtcclxuICAgICAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgLy99XHJcbiAgICB9XHJcblxyXG59XHJcblxyXG53aW5kb3cuY29kZVRhYnMgPSBjb2RlVGFiczsiXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./src/js/code-system/codeTabs.js\n");
+// This ensures the correct ARIA-attributes and keyboard nav for the tabs at the bottom of the code cards.
+
+function codeTabs() {
+
+
+    var tabList = $('.js-tab-list'),
+        tabPanelContainer = $('.js-tab-panels');
+
+    if (tabPanelContainer.length !== 0 && tabList.length !== 0) {
+
+        var tabs = tabList.find($('[role=tab]')),
+            panels = tabPanelContainer.find($('[role=tabpanel]'));
+
+        // Reset all tabs
+        tabs.removeAttr('aria-selected');
+        tabs.attr("tabindex","0");
+        tabs.removeClass('selected unselected');
+        panels.removeClass('selected unselected');
+
+        //if (layoutQ().number[0] >= 3) {
+            var selectedTab;
+
+            function showTabPanel(event) {
+                var currentTabs = tabList.find($('[role=tab]')),
+                    panels = tabPanelContainer.find($('[role=tabpanel]'));
+
+                if (typeof selectedTab === 'undefined') {
+                    selectedTab = currentTabs.first();
+                } else {
+                    selectedTab = $(event.target);
+                }
+
+                // Reset all tabs
+                currentTabs.removeAttr('aria-selected');
+                currentTabs.removeClass('selected unselected');
+                panels.removeClass('selected unselected');
+
+                // Select the clicked tab, unselect the others
+                currentTabs.not(selectedTab).attr('aria-selected', 'false');
+                currentTabs.not(selectedTab).addClass('unselected');
+
+                selectedTab.attr('aria-selected', 'true');
+                selectedTab.addClass('selected');
+
+                // Show the associated panel
+                var panelToOpenID = selectedTab.attr('aria-controls'),
+                    panelToOpen = $('#' + panelToOpenID);
+
+                panels.not(panelToOpen).addClass('unselected');
+                panelToOpen.addClass('selected');
+            }
+
+            showTabPanel();
+
+            tabs.off('codeTabs').on('click', function (event) {
+                var selectedTab = $(event.target),
+                    panelToOpenID = selectedTab.attr('aria-controls'),
+                    panelToOpen = $('#' + panelToOpenID);
+
+                showTabPanel(event);
+
+                //
+                // if (selectedTab.hasClass('selected')) {
+                //     panelToOpen.focusWithoutScrolling();
+                // }
+
+            });
+
+            tabList.off('codeTabs').on('keydown', function (event) {
+
+                // Left arrow
+                if (event.keyCode === 37) {
+                    $(event.target).prev().focus();
+                }
+
+                // Right arrow
+                if (event.keyCode === 39) {
+                    $(event.target).next().focus();
+                }
+            });
+        //}
+    }
+
+}
+
+window.codeTabs = codeTabs;
 
 /***/ }),
 
@@ -137,7 +783,56 @@ eval("// This ensures the correct ARIA-attributes and keyboard nav for the tabs 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("﻿//console.log(\"start - code-system.js\");\r\n\r\n// \"ready\" triggers as soon as the dom is in place.  Use this for things\r\n// that are not affected by a change in layout or window size.\r\n$(window).on(\"ready\", function () {\r\n    //console.log('ready - code-system.js');\r\n});\r\n\r\n\r\n// \"load\" triggers when all the content on the page has finished loading.\r\n// Use this for things that need to have their content fully loaded in\r\n// order to work correctly, e.g. stuff affected by height.\r\n$(window).on(\"load\", function () {\r\n    //console.log('load - code-system.js');\r\n    codeSystemTree();\r\n    resizableSplitter();\r\n});\r\n\r\n\r\n// \"layoutchange\" triggers only when the layout changes, as opposed to\r\n// triggering on every resize.  Since the layout also changes on document\r\n// ready--we're going from no layout to one layout--you don't have to call\r\n// the function on document ready when you call it here.\r\n$(window).on(\"layoutchange\", function () {\r\n    //console.log(\"layoutchange - code-system.js\");\r\n    stickyHeader();\r\n    codeSystemTreeExpand();\r\n    codeTabs();\r\n    stickyCodeSystemTree();\r\n});\r\n\r\n// \"conditionalresize\" does stuff does stuff on debounced resize when the layout is 1-col.\r\n$(window).on(\r\n    'conditionalresize',\r\n    debounce(function () {\r\n        //console.log(\"conditionalresize - code-system.js\");\r\n    }, 25)\r\n);\r\n\r\n// \"resize orientationchange\" triggers every time the browser window resizes\r\n// or the device's orientation changes. You almost certainly want to put your\r\n// function call in \"layoutchange\" or \"conditionalresize\" and not here.\r\n$(window).on(\r\n    \"resize orientationchange\",\r\n    debounce(function () {\r\n        //console.log(\"resize orientationchange - code-system.js\");\r\n        resizableSplitter();\r\n    }, 25)\r\n);\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvanMvY29kZS1zeXN0ZW0vbWFpbi5qcy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9qcy9jb2RlLXN5c3RlbS9tYWluLmpzPzFlNDkiXSwic291cmNlc0NvbnRlbnQiOlsi77u/Ly9jb25zb2xlLmxvZyhcInN0YXJ0IC0gY29kZS1zeXN0ZW0uanNcIik7XHJcblxyXG4vLyBcInJlYWR5XCIgdHJpZ2dlcnMgYXMgc29vbiBhcyB0aGUgZG9tIGlzIGluIHBsYWNlLiAgVXNlIHRoaXMgZm9yIHRoaW5nc1xyXG4vLyB0aGF0IGFyZSBub3QgYWZmZWN0ZWQgYnkgYSBjaGFuZ2UgaW4gbGF5b3V0IG9yIHdpbmRvdyBzaXplLlxyXG4kKHdpbmRvdykub24oXCJyZWFkeVwiLCBmdW5jdGlvbiAoKSB7XHJcbiAgICAvL2NvbnNvbGUubG9nKCdyZWFkeSAtIGNvZGUtc3lzdGVtLmpzJyk7XHJcbn0pO1xyXG5cclxuXHJcbi8vIFwibG9hZFwiIHRyaWdnZXJzIHdoZW4gYWxsIHRoZSBjb250ZW50IG9uIHRoZSBwYWdlIGhhcyBmaW5pc2hlZCBsb2FkaW5nLlxyXG4vLyBVc2UgdGhpcyBmb3IgdGhpbmdzIHRoYXQgbmVlZCB0byBoYXZlIHRoZWlyIGNvbnRlbnQgZnVsbHkgbG9hZGVkIGluXHJcbi8vIG9yZGVyIHRvIHdvcmsgY29ycmVjdGx5LCBlLmcuIHN0dWZmIGFmZmVjdGVkIGJ5IGhlaWdodC5cclxuJCh3aW5kb3cpLm9uKFwibG9hZFwiLCBmdW5jdGlvbiAoKSB7XHJcbiAgICAvL2NvbnNvbGUubG9nKCdsb2FkIC0gY29kZS1zeXN0ZW0uanMnKTtcclxuICAgIGNvZGVTeXN0ZW1UcmVlKCk7XHJcbiAgICByZXNpemFibGVTcGxpdHRlcigpO1xyXG59KTtcclxuXHJcblxyXG4vLyBcImxheW91dGNoYW5nZVwiIHRyaWdnZXJzIG9ubHkgd2hlbiB0aGUgbGF5b3V0IGNoYW5nZXMsIGFzIG9wcG9zZWQgdG9cclxuLy8gdHJpZ2dlcmluZyBvbiBldmVyeSByZXNpemUuICBTaW5jZSB0aGUgbGF5b3V0IGFsc28gY2hhbmdlcyBvbiBkb2N1bWVudFxyXG4vLyByZWFkeS0td2UncmUgZ29pbmcgZnJvbSBubyBsYXlvdXQgdG8gb25lIGxheW91dC0teW91IGRvbid0IGhhdmUgdG8gY2FsbFxyXG4vLyB0aGUgZnVuY3Rpb24gb24gZG9jdW1lbnQgcmVhZHkgd2hlbiB5b3UgY2FsbCBpdCBoZXJlLlxyXG4kKHdpbmRvdykub24oXCJsYXlvdXRjaGFuZ2VcIiwgZnVuY3Rpb24gKCkge1xyXG4gICAgLy9jb25zb2xlLmxvZyhcImxheW91dGNoYW5nZSAtIGNvZGUtc3lzdGVtLmpzXCIpO1xyXG4gICAgc3RpY2t5SGVhZGVyKCk7XHJcbiAgICBjb2RlU3lzdGVtVHJlZUV4cGFuZCgpO1xyXG4gICAgY29kZVRhYnMoKTtcclxuICAgIHN0aWNreUNvZGVTeXN0ZW1UcmVlKCk7XHJcbn0pO1xyXG5cclxuLy8gXCJjb25kaXRpb25hbHJlc2l6ZVwiIGRvZXMgc3R1ZmYgZG9lcyBzdHVmZiBvbiBkZWJvdW5jZWQgcmVzaXplIHdoZW4gdGhlIGxheW91dCBpcyAxLWNvbC5cclxuJCh3aW5kb3cpLm9uKFxyXG4gICAgJ2NvbmRpdGlvbmFscmVzaXplJyxcclxuICAgIGRlYm91bmNlKGZ1bmN0aW9uICgpIHtcclxuICAgICAgICAvL2NvbnNvbGUubG9nKFwiY29uZGl0aW9uYWxyZXNpemUgLSBjb2RlLXN5c3RlbS5qc1wiKTtcclxuICAgIH0sIDI1KVxyXG4pO1xyXG5cclxuLy8gXCJyZXNpemUgb3JpZW50YXRpb25jaGFuZ2VcIiB0cmlnZ2VycyBldmVyeSB0aW1lIHRoZSBicm93c2VyIHdpbmRvdyByZXNpemVzXHJcbi8vIG9yIHRoZSBkZXZpY2UncyBvcmllbnRhdGlvbiBjaGFuZ2VzLiBZb3UgYWxtb3N0IGNlcnRhaW5seSB3YW50IHRvIHB1dCB5b3VyXHJcbi8vIGZ1bmN0aW9uIGNhbGwgaW4gXCJsYXlvdXRjaGFuZ2VcIiBvciBcImNvbmRpdGlvbmFscmVzaXplXCIgYW5kIG5vdCBoZXJlLlxyXG4kKHdpbmRvdykub24oXHJcbiAgICBcInJlc2l6ZSBvcmllbnRhdGlvbmNoYW5nZVwiLFxyXG4gICAgZGVib3VuY2UoZnVuY3Rpb24gKCkge1xyXG4gICAgICAgIC8vY29uc29sZS5sb2coXCJyZXNpemUgb3JpZW50YXRpb25jaGFuZ2UgLSBjb2RlLXN5c3RlbS5qc1wiKTtcclxuICAgICAgICByZXNpemFibGVTcGxpdHRlcigpO1xyXG4gICAgfSwgMjUpXHJcbik7XHJcbiJdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Iiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/js/code-system/main.js\n");
+﻿//console.log("start - code-system.js");
+
+// "ready" triggers as soon as the dom is in place.  Use this for things
+// that are not affected by a change in layout or window size.
+$(window).on("ready", function () {
+    //console.log('ready - code-system.js');
+});
+
+
+// "load" triggers when all the content on the page has finished loading.
+// Use this for things that need to have their content fully loaded in
+// order to work correctly, e.g. stuff affected by height.
+$(window).on("load", function () {
+    //console.log('load - code-system.js');
+    codeSystemTree();
+    resizableSplitter();
+});
+
+
+// "layoutchange" triggers only when the layout changes, as opposed to
+// triggering on every resize.  Since the layout also changes on document
+// ready--we're going from no layout to one layout--you don't have to call
+// the function on document ready when you call it here.
+$(window).on("layoutchange", function () {
+    //console.log("layoutchange - code-system.js");
+    stickyHeader();
+    codeSystemTreeExpand();
+    codeTabs();
+    stickyCodeSystemTree();
+});
+
+// "conditionalresize" does stuff does stuff on debounced resize when the layout is 1-col.
+$(window).on(
+    'conditionalresize',
+    debounce(function () {
+        //console.log("conditionalresize - code-system.js");
+    }, 25)
+);
+
+// "resize orientationchange" triggers every time the browser window resizes
+// or the device's orientation changes. You almost certainly want to put your
+// function call in "layoutchange" or "conditionalresize" and not here.
+$(window).on(
+    "resize orientationchange",
+    debounce(function () {
+        //console.log("resize orientationchange - code-system.js");
+        resizableSplitter();
+    }, 25)
+);
+
 
 /***/ }),
 
@@ -148,7 +843,214 @@ eval("﻿//console.log(\"start - code-system.js\");\r\n\r\n// \"ready\" triggers
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("// The vertical splitter on code system pages in 3- and 4-col layouts\r\n\r\nfunction resizableSplitter() {\r\n\r\n    var resizablePanel = $(\".js-resizable-splitter\");\r\n\r\n    if (resizablePanel.length !== 0) {\r\n        if (layoutQ().number[0] <= 2) {\r\n            console.log(\"destroy splitter\");\r\n            resizablePanel.resizable(\"destroy\");\r\n        } else {\r\n            console.log(\"create splitter\");\r\n            resizablePanel.resizable({\r\n                handleSelector: \".splitter\",\r\n                resizeHeight: false\r\n            });\r\n        }\r\n    }\r\n}\r\n\r\nwindow.resizableSplitter = resizableSplitter;\r\n\r\n\r\n/*\r\njquery-resizable\r\nVersion 0.32 - 5/5/2018\r\n© 2015-2018 Rick Strahl, West Wind Technologies\r\nwww.west-wind.com\r\nLicensed under MIT License\r\n*/\r\n(function ($, undefined) {\r\n\r\n    console.log(\"jquery-resizable\");\r\n\r\n    if ($.fn.resizable)\r\n        return;\r\n\r\n    $.fn.resizable = function fnResizable(options) {\r\n        var defaultOptions = {\r\n            // selector for handle that starts dragging\r\n            handleSelector: null,\r\n            // resize the width\r\n            resizeWidth: true,\r\n            // resize the height\r\n            resizeHeight: true,\r\n            // the side that the width resizing is relative to\r\n            resizeWidthFrom: \"right\",\r\n            // the side that the height resizing is relative to\r\n            resizeHeightFrom: \"bottom\",\r\n            // hook into start drag operation (event passed)\r\n            onDragStart: null,\r\n            // hook into stop drag operation (event passed)\r\n            onDragEnd: null,\r\n            // hook into each drag operation (event passed)\r\n            onDrag: null,\r\n            // disable touch-action on $handle\r\n            // prevents browser level actions like forward back gestures\r\n            touchActionNone: true,\r\n            // instance id\r\n            instanceId: null\r\n        };\r\n        if (typeof options == \"object\")\r\n            defaultOptions = $.extend(defaultOptions, options);\r\n\r\n        return this.each(function () {\r\n            var opt = $.extend({}, defaultOptions);\r\n            if (!opt.instanceId)\r\n                opt.instanceId = \"rsz_\" + new Date().getTime();\r\n\r\n            var startPos, startTransition;\r\n\r\n            // get the element to resize\r\n            var $el = $(this);\r\n            var $handle;\r\n\r\n            if (options === \"destroy\") {\r\n                opt = $el.data(\"resizable\");\r\n                if (!opt)\r\n                    return;\r\n\r\n                $handle = getHandle(opt.handleSelector, $el);\r\n                $handle.off(\"mousedown.\" + opt.instanceId + \" touchstart.\" + opt.instanceId);\r\n                if (opt.touchActionNone)\r\n                    $handle.css(\"touch-action\", \"\");\r\n                $el.removeClass(\"resizable\");\r\n                $el.removeAttr(\"style\");\r\n                return;\r\n            }\r\n\r\n            $el.data(\"resizable\", opt);\r\n\r\n            // get the drag handle\r\n\r\n            $handle = getHandle(opt.handleSelector, $el);\r\n\r\n            if (opt.touchActionNone)\r\n                $handle.css(\"touch-action\", \"none\");\r\n\r\n            $el.addClass(\"resizable\");\r\n            $handle.on(\"mousedown.\" + opt.instanceId + \" touchstart.\" + opt.instanceId, startDragging);\r\n\r\n            function noop(e) {\r\n                e.stopPropagation();\r\n                e.preventDefault();\r\n            };\r\n\r\n            function startDragging(e) {\r\n                // Prevent dragging a ghost image in HTML5 / Firefox and maybe others\r\n                if (e.preventDefault) {\r\n                    e.preventDefault();\r\n                }\r\n\r\n                startPos = getMousePos(e);\r\n                startPos.width = parseInt($el.width(), 10);\r\n                startPos.height = parseInt($el.height(), 10);\r\n\r\n                startTransition = $el.css(\"transition\");\r\n                $el.css(\"transition\", \"none\");\r\n\r\n                if (opt.onDragStart) {\r\n                    if (opt.onDragStart(e, $el, opt) === false)\r\n                        return;\r\n                }\r\n\r\n                $(document).on(\"mousemove.\" + opt.instanceId, doDrag);\r\n                $(document).on(\"mouseup.\" + opt.instanceId, stopDragging);\r\n                if (window.Touch || navigator.maxTouchPoints) {\r\n                    $(document).on(\"touchmove.\" + opt.instanceId, doDrag);\r\n                    $(document).on(\"touchend.\" + opt.instanceId, stopDragging);\r\n                }\r\n                $(document).on(\"selectstart.\" + opt.instanceId, noop); // disable selection\r\n                $(\"iframe\").css(\"pointer-events\", \"none\");\r\n            }\r\n\r\n            function doDrag(e) {\r\n\r\n                var pos = getMousePos(e), newWidth, newHeight;\r\n\r\n                if (opt.resizeWidthFrom === \"left\")\r\n                    newWidth = startPos.width - pos.x + startPos.x;\r\n                else\r\n                    newWidth = startPos.width + pos.x - startPos.x;\r\n\r\n                if (opt.resizeHeightFrom === \"top\")\r\n                    newHeight = startPos.height - pos.y + startPos.y;\r\n                else\r\n                    newHeight = startPos.height + pos.y - startPos.y;\r\n\r\n                if (!opt.onDrag || opt.onDrag(e, $el, newWidth, newHeight, opt) !== false) {\r\n                    if (opt.resizeHeight)\r\n                        $el.height(newHeight);\r\n\r\n                    if (opt.resizeWidth)\r\n                        $el.width(newWidth);\r\n                }\r\n            }\r\n\r\n            function stopDragging(e) {\r\n                e.stopPropagation();\r\n                e.preventDefault();\r\n\r\n                $(document).off(\"mousemove.\" + opt.instanceId);\r\n                $(document).off(\"mouseup.\" + opt.instanceId);\r\n\r\n                if (window.Touch || navigator.maxTouchPoints) {\r\n                    $(document).off(\"touchmove.\" + opt.instanceId);\r\n                    $(document).off(\"touchend.\" + opt.instanceId);\r\n                }\r\n                $(document).off(\"selectstart.\" + opt.instanceId, noop);\r\n\r\n                // reset changed values\r\n                $el.css(\"transition\", startTransition);\r\n                $(\"iframe\").css(\"pointer-events\", \"auto\");\r\n\r\n                if (opt.onDragEnd)\r\n                    opt.onDragEnd(e, $el, opt);\r\n\r\n                return false;\r\n            }\r\n\r\n            function getMousePos(e) {\r\n                var pos = {x: 0, y: 0, width: 0, height: 0};\r\n                if (typeof e.clientX === \"number\") {\r\n                    pos.x = e.clientX;\r\n                    pos.y = e.clientY;\r\n                } else if (e.originalEvent.touches) {\r\n                    pos.x = e.originalEvent.touches[0].clientX;\r\n                    pos.y = e.originalEvent.touches[0].clientY;\r\n                } else\r\n                    return null;\r\n\r\n                return pos;\r\n            }\r\n\r\n            function getHandle(selector, $el) {\r\n                if (selector && selector.trim()[0] === \">\") {\r\n                    selector = selector.trim().replace(/^>\\s*/, \"\");\r\n                    return $el.find(selector);\r\n                }\r\n\r\n                // Search for the selector, but only in the parent element to limit the scope\r\n                // This works for multiple objects on a page (using .class syntax most likely)\r\n                // as long as each has a separate parent container.\r\n                return selector ? $el.parent().find(selector) : $el;\r\n            }\r\n        });\r\n    };\r\n})(jQuery);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvanMvY29kZS1zeXN0ZW0vcmVzaXphYmxlU3BsaXR0ZXIuanMuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvanMvY29kZS1zeXN0ZW0vcmVzaXphYmxlU3BsaXR0ZXIuanM/ZjIyMyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBUaGUgdmVydGljYWwgc3BsaXR0ZXIgb24gY29kZSBzeXN0ZW0gcGFnZXMgaW4gMy0gYW5kIDQtY29sIGxheW91dHNcclxuXHJcbmZ1bmN0aW9uIHJlc2l6YWJsZVNwbGl0dGVyKCkge1xyXG5cclxuICAgIHZhciByZXNpemFibGVQYW5lbCA9ICQoXCIuanMtcmVzaXphYmxlLXNwbGl0dGVyXCIpO1xyXG5cclxuICAgIGlmIChyZXNpemFibGVQYW5lbC5sZW5ndGggIT09IDApIHtcclxuICAgICAgICBpZiAobGF5b3V0USgpLm51bWJlclswXSA8PSAyKSB7XHJcbiAgICAgICAgICAgIGNvbnNvbGUubG9nKFwiZGVzdHJveSBzcGxpdHRlclwiKTtcclxuICAgICAgICAgICAgcmVzaXphYmxlUGFuZWwucmVzaXphYmxlKFwiZGVzdHJveVwiKTtcclxuICAgICAgICB9IGVsc2Uge1xyXG4gICAgICAgICAgICBjb25zb2xlLmxvZyhcImNyZWF0ZSBzcGxpdHRlclwiKTtcclxuICAgICAgICAgICAgcmVzaXphYmxlUGFuZWwucmVzaXphYmxlKHtcclxuICAgICAgICAgICAgICAgIGhhbmRsZVNlbGVjdG9yOiBcIi5zcGxpdHRlclwiLFxyXG4gICAgICAgICAgICAgICAgcmVzaXplSGVpZ2h0OiBmYWxzZVxyXG4gICAgICAgICAgICB9KTtcclxuICAgICAgICB9XHJcbiAgICB9XHJcbn1cclxuXHJcbndpbmRvdy5yZXNpemFibGVTcGxpdHRlciA9IHJlc2l6YWJsZVNwbGl0dGVyO1xyXG5cclxuXHJcbi8qXHJcbmpxdWVyeS1yZXNpemFibGVcclxuVmVyc2lvbiAwLjMyIC0gNS81LzIwMThcclxuwqkgMjAxNS0yMDE4IFJpY2sgU3RyYWhsLCBXZXN0IFdpbmQgVGVjaG5vbG9naWVzXHJcbnd3dy53ZXN0LXdpbmQuY29tXHJcbkxpY2Vuc2VkIHVuZGVyIE1JVCBMaWNlbnNlXHJcbiovXHJcbihmdW5jdGlvbiAoJCwgdW5kZWZpbmVkKSB7XHJcblxyXG4gICAgY29uc29sZS5sb2coXCJqcXVlcnktcmVzaXphYmxlXCIpO1xyXG5cclxuICAgIGlmICgkLmZuLnJlc2l6YWJsZSlcclxuICAgICAgICByZXR1cm47XHJcblxyXG4gICAgJC5mbi5yZXNpemFibGUgPSBmdW5jdGlvbiBmblJlc2l6YWJsZShvcHRpb25zKSB7XHJcbiAgICAgICAgdmFyIGRlZmF1bHRPcHRpb25zID0ge1xyXG4gICAgICAgICAgICAvLyBzZWxlY3RvciBmb3IgaGFuZGxlIHRoYXQgc3RhcnRzIGRyYWdnaW5nXHJcbiAgICAgICAgICAgIGhhbmRsZVNlbGVjdG9yOiBudWxsLFxyXG4gICAgICAgICAgICAvLyByZXNpemUgdGhlIHdpZHRoXHJcbiAgICAgICAgICAgIHJlc2l6ZVdpZHRoOiB0cnVlLFxyXG4gICAgICAgICAgICAvLyByZXNpemUgdGhlIGhlaWdodFxyXG4gICAgICAgICAgICByZXNpemVIZWlnaHQ6IHRydWUsXHJcbiAgICAgICAgICAgIC8vIHRoZSBzaWRlIHRoYXQgdGhlIHdpZHRoIHJlc2l6aW5nIGlzIHJlbGF0aXZlIHRvXHJcbiAgICAgICAgICAgIHJlc2l6ZVdpZHRoRnJvbTogXCJyaWdodFwiLFxyXG4gICAgICAgICAgICAvLyB0aGUgc2lkZSB0aGF0IHRoZSBoZWlnaHQgcmVzaXppbmcgaXMgcmVsYXRpdmUgdG9cclxuICAgICAgICAgICAgcmVzaXplSGVpZ2h0RnJvbTogXCJib3R0b21cIixcclxuICAgICAgICAgICAgLy8gaG9vayBpbnRvIHN0YXJ0IGRyYWcgb3BlcmF0aW9uIChldmVudCBwYXNzZWQpXHJcbiAgICAgICAgICAgIG9uRHJhZ1N0YXJ0OiBudWxsLFxyXG4gICAgICAgICAgICAvLyBob29rIGludG8gc3RvcCBkcmFnIG9wZXJhdGlvbiAoZXZlbnQgcGFzc2VkKVxyXG4gICAgICAgICAgICBvbkRyYWdFbmQ6IG51bGwsXHJcbiAgICAgICAgICAgIC8vIGhvb2sgaW50byBlYWNoIGRyYWcgb3BlcmF0aW9uIChldmVudCBwYXNzZWQpXHJcbiAgICAgICAgICAgIG9uRHJhZzogbnVsbCxcclxuICAgICAgICAgICAgLy8gZGlzYWJsZSB0b3VjaC1hY3Rpb24gb24gJGhhbmRsZVxyXG4gICAgICAgICAgICAvLyBwcmV2ZW50cyBicm93c2VyIGxldmVsIGFjdGlvbnMgbGlrZSBmb3J3YXJkIGJhY2sgZ2VzdHVyZXNcclxuICAgICAgICAgICAgdG91Y2hBY3Rpb25Ob25lOiB0cnVlLFxyXG4gICAgICAgICAgICAvLyBpbnN0YW5jZSBpZFxyXG4gICAgICAgICAgICBpbnN0YW5jZUlkOiBudWxsXHJcbiAgICAgICAgfTtcclxuICAgICAgICBpZiAodHlwZW9mIG9wdGlvbnMgPT0gXCJvYmplY3RcIilcclxuICAgICAgICAgICAgZGVmYXVsdE9wdGlvbnMgPSAkLmV4dGVuZChkZWZhdWx0T3B0aW9ucywgb3B0aW9ucyk7XHJcblxyXG4gICAgICAgIHJldHVybiB0aGlzLmVhY2goZnVuY3Rpb24gKCkge1xyXG4gICAgICAgICAgICB2YXIgb3B0ID0gJC5leHRlbmQoe30sIGRlZmF1bHRPcHRpb25zKTtcclxuICAgICAgICAgICAgaWYgKCFvcHQuaW5zdGFuY2VJZClcclxuICAgICAgICAgICAgICAgIG9wdC5pbnN0YW5jZUlkID0gXCJyc3pfXCIgKyBuZXcgRGF0ZSgpLmdldFRpbWUoKTtcclxuXHJcbiAgICAgICAgICAgIHZhciBzdGFydFBvcywgc3RhcnRUcmFuc2l0aW9uO1xyXG5cclxuICAgICAgICAgICAgLy8gZ2V0IHRoZSBlbGVtZW50IHRvIHJlc2l6ZVxyXG4gICAgICAgICAgICB2YXIgJGVsID0gJCh0aGlzKTtcclxuICAgICAgICAgICAgdmFyICRoYW5kbGU7XHJcblxyXG4gICAgICAgICAgICBpZiAob3B0aW9ucyA9PT0gXCJkZXN0cm95XCIpIHtcclxuICAgICAgICAgICAgICAgIG9wdCA9ICRlbC5kYXRhKFwicmVzaXphYmxlXCIpO1xyXG4gICAgICAgICAgICAgICAgaWYgKCFvcHQpXHJcbiAgICAgICAgICAgICAgICAgICAgcmV0dXJuO1xyXG5cclxuICAgICAgICAgICAgICAgICRoYW5kbGUgPSBnZXRIYW5kbGUob3B0LmhhbmRsZVNlbGVjdG9yLCAkZWwpO1xyXG4gICAgICAgICAgICAgICAgJGhhbmRsZS5vZmYoXCJtb3VzZWRvd24uXCIgKyBvcHQuaW5zdGFuY2VJZCArIFwiIHRvdWNoc3RhcnQuXCIgKyBvcHQuaW5zdGFuY2VJZCk7XHJcbiAgICAgICAgICAgICAgICBpZiAob3B0LnRvdWNoQWN0aW9uTm9uZSlcclxuICAgICAgICAgICAgICAgICAgICAkaGFuZGxlLmNzcyhcInRvdWNoLWFjdGlvblwiLCBcIlwiKTtcclxuICAgICAgICAgICAgICAgICRlbC5yZW1vdmVDbGFzcyhcInJlc2l6YWJsZVwiKTtcclxuICAgICAgICAgICAgICAgICRlbC5yZW1vdmVBdHRyKFwic3R5bGVcIik7XHJcbiAgICAgICAgICAgICAgICByZXR1cm47XHJcbiAgICAgICAgICAgIH1cclxuXHJcbiAgICAgICAgICAgICRlbC5kYXRhKFwicmVzaXphYmxlXCIsIG9wdCk7XHJcblxyXG4gICAgICAgICAgICAvLyBnZXQgdGhlIGRyYWcgaGFuZGxlXHJcblxyXG4gICAgICAgICAgICAkaGFuZGxlID0gZ2V0SGFuZGxlKG9wdC5oYW5kbGVTZWxlY3RvciwgJGVsKTtcclxuXHJcbiAgICAgICAgICAgIGlmIChvcHQudG91Y2hBY3Rpb25Ob25lKVxyXG4gICAgICAgICAgICAgICAgJGhhbmRsZS5jc3MoXCJ0b3VjaC1hY3Rpb25cIiwgXCJub25lXCIpO1xyXG5cclxuICAgICAgICAgICAgJGVsLmFkZENsYXNzKFwicmVzaXphYmxlXCIpO1xyXG4gICAgICAgICAgICAkaGFuZGxlLm9uKFwibW91c2Vkb3duLlwiICsgb3B0Lmluc3RhbmNlSWQgKyBcIiB0b3VjaHN0YXJ0LlwiICsgb3B0Lmluc3RhbmNlSWQsIHN0YXJ0RHJhZ2dpbmcpO1xyXG5cclxuICAgICAgICAgICAgZnVuY3Rpb24gbm9vcChlKSB7XHJcbiAgICAgICAgICAgICAgICBlLnN0b3BQcm9wYWdhdGlvbigpO1xyXG4gICAgICAgICAgICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpO1xyXG4gICAgICAgICAgICB9O1xyXG5cclxuICAgICAgICAgICAgZnVuY3Rpb24gc3RhcnREcmFnZ2luZyhlKSB7XHJcbiAgICAgICAgICAgICAgICAvLyBQcmV2ZW50IGRyYWdnaW5nIGEgZ2hvc3QgaW1hZ2UgaW4gSFRNTDUgLyBGaXJlZm94IGFuZCBtYXliZSBvdGhlcnNcclxuICAgICAgICAgICAgICAgIGlmIChlLnByZXZlbnREZWZhdWx0KSB7XHJcbiAgICAgICAgICAgICAgICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpO1xyXG4gICAgICAgICAgICAgICAgfVxyXG5cclxuICAgICAgICAgICAgICAgIHN0YXJ0UG9zID0gZ2V0TW91c2VQb3MoZSk7XHJcbiAgICAgICAgICAgICAgICBzdGFydFBvcy53aWR0aCA9IHBhcnNlSW50KCRlbC53aWR0aCgpLCAxMCk7XHJcbiAgICAgICAgICAgICAgICBzdGFydFBvcy5oZWlnaHQgPSBwYXJzZUludCgkZWwuaGVpZ2h0KCksIDEwKTtcclxuXHJcbiAgICAgICAgICAgICAgICBzdGFydFRyYW5zaXRpb24gPSAkZWwuY3NzKFwidHJhbnNpdGlvblwiKTtcclxuICAgICAgICAgICAgICAgICRlbC5jc3MoXCJ0cmFuc2l0aW9uXCIsIFwibm9uZVwiKTtcclxuXHJcbiAgICAgICAgICAgICAgICBpZiAob3B0Lm9uRHJhZ1N0YXJ0KSB7XHJcbiAgICAgICAgICAgICAgICAgICAgaWYgKG9wdC5vbkRyYWdTdGFydChlLCAkZWwsIG9wdCkgPT09IGZhbHNlKVxyXG4gICAgICAgICAgICAgICAgICAgICAgICByZXR1cm47XHJcbiAgICAgICAgICAgICAgICB9XHJcblxyXG4gICAgICAgICAgICAgICAgJChkb2N1bWVudCkub24oXCJtb3VzZW1vdmUuXCIgKyBvcHQuaW5zdGFuY2VJZCwgZG9EcmFnKTtcclxuICAgICAgICAgICAgICAgICQoZG9jdW1lbnQpLm9uKFwibW91c2V1cC5cIiArIG9wdC5pbnN0YW5jZUlkLCBzdG9wRHJhZ2dpbmcpO1xyXG4gICAgICAgICAgICAgICAgaWYgKHdpbmRvdy5Ub3VjaCB8fCBuYXZpZ2F0b3IubWF4VG91Y2hQb2ludHMpIHtcclxuICAgICAgICAgICAgICAgICAgICAkKGRvY3VtZW50KS5vbihcInRvdWNobW92ZS5cIiArIG9wdC5pbnN0YW5jZUlkLCBkb0RyYWcpO1xyXG4gICAgICAgICAgICAgICAgICAgICQoZG9jdW1lbnQpLm9uKFwidG91Y2hlbmQuXCIgKyBvcHQuaW5zdGFuY2VJZCwgc3RvcERyYWdnaW5nKTtcclxuICAgICAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgICAgICQoZG9jdW1lbnQpLm9uKFwic2VsZWN0c3RhcnQuXCIgKyBvcHQuaW5zdGFuY2VJZCwgbm9vcCk7IC8vIGRpc2FibGUgc2VsZWN0aW9uXHJcbiAgICAgICAgICAgICAgICAkKFwiaWZyYW1lXCIpLmNzcyhcInBvaW50ZXItZXZlbnRzXCIsIFwibm9uZVwiKTtcclxuICAgICAgICAgICAgfVxyXG5cclxuICAgICAgICAgICAgZnVuY3Rpb24gZG9EcmFnKGUpIHtcclxuXHJcbiAgICAgICAgICAgICAgICB2YXIgcG9zID0gZ2V0TW91c2VQb3MoZSksIG5ld1dpZHRoLCBuZXdIZWlnaHQ7XHJcblxyXG4gICAgICAgICAgICAgICAgaWYgKG9wdC5yZXNpemVXaWR0aEZyb20gPT09IFwibGVmdFwiKVxyXG4gICAgICAgICAgICAgICAgICAgIG5ld1dpZHRoID0gc3RhcnRQb3Mud2lkdGggLSBwb3MueCArIHN0YXJ0UG9zLng7XHJcbiAgICAgICAgICAgICAgICBlbHNlXHJcbiAgICAgICAgICAgICAgICAgICAgbmV3V2lkdGggPSBzdGFydFBvcy53aWR0aCArIHBvcy54IC0gc3RhcnRQb3MueDtcclxuXHJcbiAgICAgICAgICAgICAgICBpZiAob3B0LnJlc2l6ZUhlaWdodEZyb20gPT09IFwidG9wXCIpXHJcbiAgICAgICAgICAgICAgICAgICAgbmV3SGVpZ2h0ID0gc3RhcnRQb3MuaGVpZ2h0IC0gcG9zLnkgKyBzdGFydFBvcy55O1xyXG4gICAgICAgICAgICAgICAgZWxzZVxyXG4gICAgICAgICAgICAgICAgICAgIG5ld0hlaWdodCA9IHN0YXJ0UG9zLmhlaWdodCArIHBvcy55IC0gc3RhcnRQb3MueTtcclxuXHJcbiAgICAgICAgICAgICAgICBpZiAoIW9wdC5vbkRyYWcgfHwgb3B0Lm9uRHJhZyhlLCAkZWwsIG5ld1dpZHRoLCBuZXdIZWlnaHQsIG9wdCkgIT09IGZhbHNlKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgaWYgKG9wdC5yZXNpemVIZWlnaHQpXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICRlbC5oZWlnaHQobmV3SGVpZ2h0KTtcclxuXHJcbiAgICAgICAgICAgICAgICAgICAgaWYgKG9wdC5yZXNpemVXaWR0aClcclxuICAgICAgICAgICAgICAgICAgICAgICAgJGVsLndpZHRoKG5ld1dpZHRoKTtcclxuICAgICAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgfVxyXG5cclxuICAgICAgICAgICAgZnVuY3Rpb24gc3RvcERyYWdnaW5nKGUpIHtcclxuICAgICAgICAgICAgICAgIGUuc3RvcFByb3BhZ2F0aW9uKCk7XHJcbiAgICAgICAgICAgICAgICBlLnByZXZlbnREZWZhdWx0KCk7XHJcblxyXG4gICAgICAgICAgICAgICAgJChkb2N1bWVudCkub2ZmKFwibW91c2Vtb3ZlLlwiICsgb3B0Lmluc3RhbmNlSWQpO1xyXG4gICAgICAgICAgICAgICAgJChkb2N1bWVudCkub2ZmKFwibW91c2V1cC5cIiArIG9wdC5pbnN0YW5jZUlkKTtcclxuXHJcbiAgICAgICAgICAgICAgICBpZiAod2luZG93LlRvdWNoIHx8IG5hdmlnYXRvci5tYXhUb3VjaFBvaW50cykge1xyXG4gICAgICAgICAgICAgICAgICAgICQoZG9jdW1lbnQpLm9mZihcInRvdWNobW92ZS5cIiArIG9wdC5pbnN0YW5jZUlkKTtcclxuICAgICAgICAgICAgICAgICAgICAkKGRvY3VtZW50KS5vZmYoXCJ0b3VjaGVuZC5cIiArIG9wdC5pbnN0YW5jZUlkKTtcclxuICAgICAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgICAgICQoZG9jdW1lbnQpLm9mZihcInNlbGVjdHN0YXJ0LlwiICsgb3B0Lmluc3RhbmNlSWQsIG5vb3ApO1xyXG5cclxuICAgICAgICAgICAgICAgIC8vIHJlc2V0IGNoYW5nZWQgdmFsdWVzXHJcbiAgICAgICAgICAgICAgICAkZWwuY3NzKFwidHJhbnNpdGlvblwiLCBzdGFydFRyYW5zaXRpb24pO1xyXG4gICAgICAgICAgICAgICAgJChcImlmcmFtZVwiKS5jc3MoXCJwb2ludGVyLWV2ZW50c1wiLCBcImF1dG9cIik7XHJcblxyXG4gICAgICAgICAgICAgICAgaWYgKG9wdC5vbkRyYWdFbmQpXHJcbiAgICAgICAgICAgICAgICAgICAgb3B0Lm9uRHJhZ0VuZChlLCAkZWwsIG9wdCk7XHJcblxyXG4gICAgICAgICAgICAgICAgcmV0dXJuIGZhbHNlO1xyXG4gICAgICAgICAgICB9XHJcblxyXG4gICAgICAgICAgICBmdW5jdGlvbiBnZXRNb3VzZVBvcyhlKSB7XHJcbiAgICAgICAgICAgICAgICB2YXIgcG9zID0ge3g6IDAsIHk6IDAsIHdpZHRoOiAwLCBoZWlnaHQ6IDB9O1xyXG4gICAgICAgICAgICAgICAgaWYgKHR5cGVvZiBlLmNsaWVudFggPT09IFwibnVtYmVyXCIpIHtcclxuICAgICAgICAgICAgICAgICAgICBwb3MueCA9IGUuY2xpZW50WDtcclxuICAgICAgICAgICAgICAgICAgICBwb3MueSA9IGUuY2xpZW50WTtcclxuICAgICAgICAgICAgICAgIH0gZWxzZSBpZiAoZS5vcmlnaW5hbEV2ZW50LnRvdWNoZXMpIHtcclxuICAgICAgICAgICAgICAgICAgICBwb3MueCA9IGUub3JpZ2luYWxFdmVudC50b3VjaGVzWzBdLmNsaWVudFg7XHJcbiAgICAgICAgICAgICAgICAgICAgcG9zLnkgPSBlLm9yaWdpbmFsRXZlbnQudG91Y2hlc1swXS5jbGllbnRZO1xyXG4gICAgICAgICAgICAgICAgfSBlbHNlXHJcbiAgICAgICAgICAgICAgICAgICAgcmV0dXJuIG51bGw7XHJcblxyXG4gICAgICAgICAgICAgICAgcmV0dXJuIHBvcztcclxuICAgICAgICAgICAgfVxyXG5cclxuICAgICAgICAgICAgZnVuY3Rpb24gZ2V0SGFuZGxlKHNlbGVjdG9yLCAkZWwpIHtcclxuICAgICAgICAgICAgICAgIGlmIChzZWxlY3RvciAmJiBzZWxlY3Rvci50cmltKClbMF0gPT09IFwiPlwiKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgc2VsZWN0b3IgPSBzZWxlY3Rvci50cmltKCkucmVwbGFjZSgvXj5cXHMqLywgXCJcIik7XHJcbiAgICAgICAgICAgICAgICAgICAgcmV0dXJuICRlbC5maW5kKHNlbGVjdG9yKTtcclxuICAgICAgICAgICAgICAgIH1cclxuXHJcbiAgICAgICAgICAgICAgICAvLyBTZWFyY2ggZm9yIHRoZSBzZWxlY3RvciwgYnV0IG9ubHkgaW4gdGhlIHBhcmVudCBlbGVtZW50IHRvIGxpbWl0IHRoZSBzY29wZVxyXG4gICAgICAgICAgICAgICAgLy8gVGhpcyB3b3JrcyBmb3IgbXVsdGlwbGUgb2JqZWN0cyBvbiBhIHBhZ2UgKHVzaW5nIC5jbGFzcyBzeW50YXggbW9zdCBsaWtlbHkpXHJcbiAgICAgICAgICAgICAgICAvLyBhcyBsb25nIGFzIGVhY2ggaGFzIGEgc2VwYXJhdGUgcGFyZW50IGNvbnRhaW5lci5cclxuICAgICAgICAgICAgICAgIHJldHVybiBzZWxlY3RvciA/ICRlbC5wYXJlbnQoKS5maW5kKHNlbGVjdG9yKSA6ICRlbDtcclxuICAgICAgICAgICAgfVxyXG4gICAgICAgIH0pO1xyXG4gICAgfTtcclxufSkoalF1ZXJ5KTsiXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/js/code-system/resizableSplitter.js\n");
+// The vertical splitter on code system pages in 3- and 4-col layouts
+
+function resizableSplitter() {
+
+    var resizablePanel = $(".js-resizable-splitter");
+
+    if (resizablePanel.length !== 0) {
+        if (layoutQ().number[0] <= 2) {
+            console.log("destroy splitter");
+            resizablePanel.resizable("destroy");
+        } else {
+            console.log("create splitter");
+            resizablePanel.resizable({
+                handleSelector: ".splitter",
+                resizeHeight: false
+            });
+        }
+    }
+}
+
+window.resizableSplitter = resizableSplitter;
+
+
+/*
+jquery-resizable
+Version 0.32 - 5/5/2018
+© 2015-2018 Rick Strahl, West Wind Technologies
+www.west-wind.com
+Licensed under MIT License
+*/
+(function ($, undefined) {
+
+    console.log("jquery-resizable");
+
+    if ($.fn.resizable)
+        return;
+
+    $.fn.resizable = function fnResizable(options) {
+        var defaultOptions = {
+            // selector for handle that starts dragging
+            handleSelector: null,
+            // resize the width
+            resizeWidth: true,
+            // resize the height
+            resizeHeight: true,
+            // the side that the width resizing is relative to
+            resizeWidthFrom: "right",
+            // the side that the height resizing is relative to
+            resizeHeightFrom: "bottom",
+            // hook into start drag operation (event passed)
+            onDragStart: null,
+            // hook into stop drag operation (event passed)
+            onDragEnd: null,
+            // hook into each drag operation (event passed)
+            onDrag: null,
+            // disable touch-action on $handle
+            // prevents browser level actions like forward back gestures
+            touchActionNone: true,
+            // instance id
+            instanceId: null
+        };
+        if (typeof options == "object")
+            defaultOptions = $.extend(defaultOptions, options);
+
+        return this.each(function () {
+            var opt = $.extend({}, defaultOptions);
+            if (!opt.instanceId)
+                opt.instanceId = "rsz_" + new Date().getTime();
+
+            var startPos, startTransition;
+
+            // get the element to resize
+            var $el = $(this);
+            var $handle;
+
+            if (options === "destroy") {
+                opt = $el.data("resizable");
+                if (!opt)
+                    return;
+
+                $handle = getHandle(opt.handleSelector, $el);
+                $handle.off("mousedown." + opt.instanceId + " touchstart." + opt.instanceId);
+                if (opt.touchActionNone)
+                    $handle.css("touch-action", "");
+                $el.removeClass("resizable");
+                $el.removeAttr("style");
+                return;
+            }
+
+            $el.data("resizable", opt);
+
+            // get the drag handle
+
+            $handle = getHandle(opt.handleSelector, $el);
+
+            if (opt.touchActionNone)
+                $handle.css("touch-action", "none");
+
+            $el.addClass("resizable");
+            $handle.on("mousedown." + opt.instanceId + " touchstart." + opt.instanceId, startDragging);
+
+            function noop(e) {
+                e.stopPropagation();
+                e.preventDefault();
+            };
+
+            function startDragging(e) {
+                // Prevent dragging a ghost image in HTML5 / Firefox and maybe others
+                if (e.preventDefault) {
+                    e.preventDefault();
+                }
+
+                startPos = getMousePos(e);
+                startPos.width = parseInt($el.width(), 10);
+                startPos.height = parseInt($el.height(), 10);
+
+                startTransition = $el.css("transition");
+                $el.css("transition", "none");
+
+                if (opt.onDragStart) {
+                    if (opt.onDragStart(e, $el, opt) === false)
+                        return;
+                }
+
+                $(document).on("mousemove." + opt.instanceId, doDrag);
+                $(document).on("mouseup." + opt.instanceId, stopDragging);
+                if (window.Touch || navigator.maxTouchPoints) {
+                    $(document).on("touchmove." + opt.instanceId, doDrag);
+                    $(document).on("touchend." + opt.instanceId, stopDragging);
+                }
+                $(document).on("selectstart." + opt.instanceId, noop); // disable selection
+                $("iframe").css("pointer-events", "none");
+            }
+
+            function doDrag(e) {
+
+                var pos = getMousePos(e), newWidth, newHeight;
+
+                if (opt.resizeWidthFrom === "left")
+                    newWidth = startPos.width - pos.x + startPos.x;
+                else
+                    newWidth = startPos.width + pos.x - startPos.x;
+
+                if (opt.resizeHeightFrom === "top")
+                    newHeight = startPos.height - pos.y + startPos.y;
+                else
+                    newHeight = startPos.height + pos.y - startPos.y;
+
+                if (!opt.onDrag || opt.onDrag(e, $el, newWidth, newHeight, opt) !== false) {
+                    if (opt.resizeHeight)
+                        $el.height(newHeight);
+
+                    if (opt.resizeWidth)
+                        $el.width(newWidth);
+                }
+            }
+
+            function stopDragging(e) {
+                e.stopPropagation();
+                e.preventDefault();
+
+                $(document).off("mousemove." + opt.instanceId);
+                $(document).off("mouseup." + opt.instanceId);
+
+                if (window.Touch || navigator.maxTouchPoints) {
+                    $(document).off("touchmove." + opt.instanceId);
+                    $(document).off("touchend." + opt.instanceId);
+                }
+                $(document).off("selectstart." + opt.instanceId, noop);
+
+                // reset changed values
+                $el.css("transition", startTransition);
+                $("iframe").css("pointer-events", "auto");
+
+                if (opt.onDragEnd)
+                    opt.onDragEnd(e, $el, opt);
+
+                return false;
+            }
+
+            function getMousePos(e) {
+                var pos = {x: 0, y: 0, width: 0, height: 0};
+                if (typeof e.clientX === "number") {
+                    pos.x = e.clientX;
+                    pos.y = e.clientY;
+                } else if (e.originalEvent.touches) {
+                    pos.x = e.originalEvent.touches[0].clientX;
+                    pos.y = e.originalEvent.touches[0].clientY;
+                } else
+                    return null;
+
+                return pos;
+            }
+
+            function getHandle(selector, $el) {
+                if (selector && selector.trim()[0] === ">") {
+                    selector = selector.trim().replace(/^>\s*/, "");
+                    return $el.find(selector);
+                }
+
+                // Search for the selector, but only in the parent element to limit the scope
+                // This works for multiple objects on a page (using .class syntax most likely)
+                // as long as each has a separate parent container.
+                return selector ? $el.parent().find(selector) : $el;
+            }
+        });
+    };
+})(jQuery);
 
 /***/ }),
 
@@ -159,7 +1061,152 @@ eval("// The vertical splitter on code system pages in 3- and 4-col layouts\r\n\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("// Sticks the code system tree to the left side\r\n// of the viewport in 3+ col layout\r\n\r\nfunction stickyCodeSystemTree() {\r\n\r\n    var tree = $(\".js-sticky-tree\");\r\n\r\n    if (tree.length !== 0) {\r\n        tree.makeStickyCodeSystemTree();\r\n    }\r\n}\r\n\r\nwindow.stickyCodeSystemTree = stickyCodeSystemTree;\r\n\r\n/*!============================================================\r\n// Based on\r\n * jquery.sticky-nav.js\r\n * Copyright (c) Federico Cargnelutti <fedecarg@gmail.com>\r\n * http://www.fedecarg.com/\r\n ============================================================*/\r\n\r\n(function ($) {\r\n\r\n    $.fn.makeStickyCodeSystemTree = function () {\r\n\r\n        // Set jQuery DOM elements\r\n        const $nav = this;\r\n        const $navLinks = $nav.find(\"a\");\r\n        const $sections = $(\".js-scrollto\");\r\n        const $scrollingPanel = $(\".js-current-tree-location-panel\");\r\n\r\n        const navHeight = $nav.height();\r\n        const scrollTopOffset = $sections.first().height() / 2;\r\n\r\n        let currentScrollPosition = 0;\r\n        let offsetNumbers = [0];\r\n\r\n        function initialise() {\r\n            $nav.resetStickyCodeSystemTree();\r\n\r\n            calculateOffsets();\r\n            bindEvents();\r\n        }\r\n\r\n        function bindEvents() {\r\n            $navLinks.on(\"click.makeStickyCodeSystemTree\", onClick);\r\n            $scrollingPanel.on(\"scroll.makeStickyCodeSystemTree\", throttle(onScroll, 20));\r\n        }\r\n\r\n        function onClick(e) {\r\n            const targetEl = $(this).attr(\"href\");\r\n\r\n            if ($(targetEl).length) {\r\n                selectNavItem(this);\r\n\r\n                $(targetEl).fadeOut(0).fadeIn(400);\r\n            }\r\n        }\r\n\r\n        function onScroll() {\r\n            // var scrollTop = $scrollingPanel.scrollTop() - navHeight,\r\n            //     closestPosition = findClosestNumber(scrollTop, offsetNumbers);\r\n            //\r\n            // // select navbar item\r\n            // if (closestPosition !== currentScrollPosition) {\r\n            //     selectNavItem(\".section-offset-\" + closestPosition);\r\n            //     currentScrollPosition = closestPosition;\r\n            // }\r\n            //\r\n            // // fix navbar\r\n            // // if (scrollTop > scrollTopOffset) {\r\n            // //     $nav.addClass(\"sticky\");\r\n            // // } else {\r\n            // //     $nav.removeClass(\"sticky\");\r\n            // // }\r\n        }\r\n\r\n        function findClosestNumber(num, arr) {\r\n            return arr.reduce(function (prev, curr) {\r\n                return (Math.abs(curr - num) < Math.abs(prev - num) ? curr : prev);\r\n            });\r\n        }\r\n\r\n        function calculateOffsets() {\r\n            $sections.each(function (index) {\r\n                const el = $(this)[0];\r\n                const offsetTop = getOffsetTop(el);\r\n\r\n                offsetNumbers.push(offsetTop);\r\n                getNavItem(el).addClass(\"section-offset-\" + offsetTop);\r\n            });\r\n        }\r\n\r\n        function getOffsetTop(el) {\r\n            const rect = el.getBoundingClientRect(),\r\n                scrollTop = $scrollingPanel.scrollTop();\r\n            // || document.$scrollingPanel.scrollTop;\r\n\r\n            return Math.round(rect.top + scrollTop);\r\n        }\r\n\r\n        function getNavItem(el) {\r\n            return $(\"nav a[href=\\\"#\" + $(el).attr(\"id\") + \"\\\"]\");\r\n        }\r\n\r\n        function selectNavItem(el) {\r\n            // if (!$nav.hasClass(\"sticky\")) {\r\n            //     $nav.addClass(\"sticky\");\r\n            // }\r\n\r\n            $navLinks.removeClass(\"active\");\r\n            $(el).addClass(\"active\");\r\n        }\r\n\r\n        function throttle(func, delay) {\r\n            let timer = 0;\r\n\r\n            return function () {\r\n                const context = this,\r\n                    args = [].slice.call(arguments);\r\n\r\n                clearTimeout(timer);\r\n                timer = setTimeout(function () {\r\n                    func.apply(context, args);\r\n                }, delay);\r\n            };\r\n        }\r\n\r\n        initialise();\r\n    };\r\n\r\n    $.fn.resetStickyCodeSystemTree = function () {\r\n        const $nav = this;\r\n        const $navLinks = $nav.find(\"a\");\r\n        const $scrollingPanel = $(\".js-current-tree-location-panel\");\r\n\r\n        $navLinks.off(\".makeStickyCodeSystemTree\");\r\n        $scrollingPanel.off(\".makeStickyCodeSystemTree\");\r\n\r\n        $navLinks.removeClass(\"active\");\r\n        $nav.removeClass(\"sticky\");\r\n    };\r\n\r\n\r\n}(jQuery))\r\n;//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvanMvY29kZS1zeXN0ZW0vc3RpY2t5Q29kZVN5c3RlbVRyZWUuanMuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvanMvY29kZS1zeXN0ZW0vc3RpY2t5Q29kZVN5c3RlbVRyZWUuanM/NTU0ZiJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBTdGlja3MgdGhlIGNvZGUgc3lzdGVtIHRyZWUgdG8gdGhlIGxlZnQgc2lkZVxyXG4vLyBvZiB0aGUgdmlld3BvcnQgaW4gMysgY29sIGxheW91dFxyXG5cclxuZnVuY3Rpb24gc3RpY2t5Q29kZVN5c3RlbVRyZWUoKSB7XHJcblxyXG4gICAgdmFyIHRyZWUgPSAkKFwiLmpzLXN0aWNreS10cmVlXCIpO1xyXG5cclxuICAgIGlmICh0cmVlLmxlbmd0aCAhPT0gMCkge1xyXG4gICAgICAgIHRyZWUubWFrZVN0aWNreUNvZGVTeXN0ZW1UcmVlKCk7XHJcbiAgICB9XHJcbn1cclxuXHJcbndpbmRvdy5zdGlja3lDb2RlU3lzdGVtVHJlZSA9IHN0aWNreUNvZGVTeXN0ZW1UcmVlO1xyXG5cclxuLyohPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XHJcbi8vIEJhc2VkIG9uXHJcbiAqIGpxdWVyeS5zdGlja3ktbmF2LmpzXHJcbiAqIENvcHlyaWdodCAoYykgRmVkZXJpY28gQ2FyZ25lbHV0dGkgPGZlZGVjYXJnQGdtYWlsLmNvbT5cclxuICogaHR0cDovL3d3dy5mZWRlY2FyZy5jb20vXHJcbiA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0qL1xyXG5cclxuKGZ1bmN0aW9uICgkKSB7XHJcblxyXG4gICAgJC5mbi5tYWtlU3RpY2t5Q29kZVN5c3RlbVRyZWUgPSBmdW5jdGlvbiAoKSB7XHJcblxyXG4gICAgICAgIC8vIFNldCBqUXVlcnkgRE9NIGVsZW1lbnRzXHJcbiAgICAgICAgY29uc3QgJG5hdiA9IHRoaXM7XHJcbiAgICAgICAgY29uc3QgJG5hdkxpbmtzID0gJG5hdi5maW5kKFwiYVwiKTtcclxuICAgICAgICBjb25zdCAkc2VjdGlvbnMgPSAkKFwiLmpzLXNjcm9sbHRvXCIpO1xyXG4gICAgICAgIGNvbnN0ICRzY3JvbGxpbmdQYW5lbCA9ICQoXCIuanMtY3VycmVudC10cmVlLWxvY2F0aW9uLXBhbmVsXCIpO1xyXG5cclxuICAgICAgICBjb25zdCBuYXZIZWlnaHQgPSAkbmF2LmhlaWdodCgpO1xyXG4gICAgICAgIGNvbnN0IHNjcm9sbFRvcE9mZnNldCA9ICRzZWN0aW9ucy5maXJzdCgpLmhlaWdodCgpIC8gMjtcclxuXHJcbiAgICAgICAgbGV0IGN1cnJlbnRTY3JvbGxQb3NpdGlvbiA9IDA7XHJcbiAgICAgICAgbGV0IG9mZnNldE51bWJlcnMgPSBbMF07XHJcblxyXG4gICAgICAgIGZ1bmN0aW9uIGluaXRpYWxpc2UoKSB7XHJcbiAgICAgICAgICAgICRuYXYucmVzZXRTdGlja3lDb2RlU3lzdGVtVHJlZSgpO1xyXG5cclxuICAgICAgICAgICAgY2FsY3VsYXRlT2Zmc2V0cygpO1xyXG4gICAgICAgICAgICBiaW5kRXZlbnRzKCk7XHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICBmdW5jdGlvbiBiaW5kRXZlbnRzKCkge1xyXG4gICAgICAgICAgICAkbmF2TGlua3Mub24oXCJjbGljay5tYWtlU3RpY2t5Q29kZVN5c3RlbVRyZWVcIiwgb25DbGljayk7XHJcbiAgICAgICAgICAgICRzY3JvbGxpbmdQYW5lbC5vbihcInNjcm9sbC5tYWtlU3RpY2t5Q29kZVN5c3RlbVRyZWVcIiwgdGhyb3R0bGUob25TY3JvbGwsIDIwKSk7XHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICBmdW5jdGlvbiBvbkNsaWNrKGUpIHtcclxuICAgICAgICAgICAgY29uc3QgdGFyZ2V0RWwgPSAkKHRoaXMpLmF0dHIoXCJocmVmXCIpO1xyXG5cclxuICAgICAgICAgICAgaWYgKCQodGFyZ2V0RWwpLmxlbmd0aCkge1xyXG4gICAgICAgICAgICAgICAgc2VsZWN0TmF2SXRlbSh0aGlzKTtcclxuXHJcbiAgICAgICAgICAgICAgICAkKHRhcmdldEVsKS5mYWRlT3V0KDApLmZhZGVJbig0MDApO1xyXG4gICAgICAgICAgICB9XHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICBmdW5jdGlvbiBvblNjcm9sbCgpIHtcclxuICAgICAgICAgICAgLy8gdmFyIHNjcm9sbFRvcCA9ICRzY3JvbGxpbmdQYW5lbC5zY3JvbGxUb3AoKSAtIG5hdkhlaWdodCxcclxuICAgICAgICAgICAgLy8gICAgIGNsb3Nlc3RQb3NpdGlvbiA9IGZpbmRDbG9zZXN0TnVtYmVyKHNjcm9sbFRvcCwgb2Zmc2V0TnVtYmVycyk7XHJcbiAgICAgICAgICAgIC8vXHJcbiAgICAgICAgICAgIC8vIC8vIHNlbGVjdCBuYXZiYXIgaXRlbVxyXG4gICAgICAgICAgICAvLyBpZiAoY2xvc2VzdFBvc2l0aW9uICE9PSBjdXJyZW50U2Nyb2xsUG9zaXRpb24pIHtcclxuICAgICAgICAgICAgLy8gICAgIHNlbGVjdE5hdkl0ZW0oXCIuc2VjdGlvbi1vZmZzZXQtXCIgKyBjbG9zZXN0UG9zaXRpb24pO1xyXG4gICAgICAgICAgICAvLyAgICAgY3VycmVudFNjcm9sbFBvc2l0aW9uID0gY2xvc2VzdFBvc2l0aW9uO1xyXG4gICAgICAgICAgICAvLyB9XHJcbiAgICAgICAgICAgIC8vXHJcbiAgICAgICAgICAgIC8vIC8vIGZpeCBuYXZiYXJcclxuICAgICAgICAgICAgLy8gLy8gaWYgKHNjcm9sbFRvcCA+IHNjcm9sbFRvcE9mZnNldCkge1xyXG4gICAgICAgICAgICAvLyAvLyAgICAgJG5hdi5hZGRDbGFzcyhcInN0aWNreVwiKTtcclxuICAgICAgICAgICAgLy8gLy8gfSBlbHNlIHtcclxuICAgICAgICAgICAgLy8gLy8gICAgICRuYXYucmVtb3ZlQ2xhc3MoXCJzdGlja3lcIik7XHJcbiAgICAgICAgICAgIC8vIC8vIH1cclxuICAgICAgICB9XHJcblxyXG4gICAgICAgIGZ1bmN0aW9uIGZpbmRDbG9zZXN0TnVtYmVyKG51bSwgYXJyKSB7XHJcbiAgICAgICAgICAgIHJldHVybiBhcnIucmVkdWNlKGZ1bmN0aW9uIChwcmV2LCBjdXJyKSB7XHJcbiAgICAgICAgICAgICAgICByZXR1cm4gKE1hdGguYWJzKGN1cnIgLSBudW0pIDwgTWF0aC5hYnMocHJldiAtIG51bSkgPyBjdXJyIDogcHJldik7XHJcbiAgICAgICAgICAgIH0pO1xyXG4gICAgICAgIH1cclxuXHJcbiAgICAgICAgZnVuY3Rpb24gY2FsY3VsYXRlT2Zmc2V0cygpIHtcclxuICAgICAgICAgICAgJHNlY3Rpb25zLmVhY2goZnVuY3Rpb24gKGluZGV4KSB7XHJcbiAgICAgICAgICAgICAgICBjb25zdCBlbCA9ICQodGhpcylbMF07XHJcbiAgICAgICAgICAgICAgICBjb25zdCBvZmZzZXRUb3AgPSBnZXRPZmZzZXRUb3AoZWwpO1xyXG5cclxuICAgICAgICAgICAgICAgIG9mZnNldE51bWJlcnMucHVzaChvZmZzZXRUb3ApO1xyXG4gICAgICAgICAgICAgICAgZ2V0TmF2SXRlbShlbCkuYWRkQ2xhc3MoXCJzZWN0aW9uLW9mZnNldC1cIiArIG9mZnNldFRvcCk7XHJcbiAgICAgICAgICAgIH0pO1xyXG4gICAgICAgIH1cclxuXHJcbiAgICAgICAgZnVuY3Rpb24gZ2V0T2Zmc2V0VG9wKGVsKSB7XHJcbiAgICAgICAgICAgIGNvbnN0IHJlY3QgPSBlbC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKSxcclxuICAgICAgICAgICAgICAgIHNjcm9sbFRvcCA9ICRzY3JvbGxpbmdQYW5lbC5zY3JvbGxUb3AoKTtcclxuICAgICAgICAgICAgLy8gfHwgZG9jdW1lbnQuJHNjcm9sbGluZ1BhbmVsLnNjcm9sbFRvcDtcclxuXHJcbiAgICAgICAgICAgIHJldHVybiBNYXRoLnJvdW5kKHJlY3QudG9wICsgc2Nyb2xsVG9wKTtcclxuICAgICAgICB9XHJcblxyXG4gICAgICAgIGZ1bmN0aW9uIGdldE5hdkl0ZW0oZWwpIHtcclxuICAgICAgICAgICAgcmV0dXJuICQoXCJuYXYgYVtocmVmPVxcXCIjXCIgKyAkKGVsKS5hdHRyKFwiaWRcIikgKyBcIlxcXCJdXCIpO1xyXG4gICAgICAgIH1cclxuXHJcbiAgICAgICAgZnVuY3Rpb24gc2VsZWN0TmF2SXRlbShlbCkge1xyXG4gICAgICAgICAgICAvLyBpZiAoISRuYXYuaGFzQ2xhc3MoXCJzdGlja3lcIikpIHtcclxuICAgICAgICAgICAgLy8gICAgICRuYXYuYWRkQ2xhc3MoXCJzdGlja3lcIik7XHJcbiAgICAgICAgICAgIC8vIH1cclxuXHJcbiAgICAgICAgICAgICRuYXZMaW5rcy5yZW1vdmVDbGFzcyhcImFjdGl2ZVwiKTtcclxuICAgICAgICAgICAgJChlbCkuYWRkQ2xhc3MoXCJhY3RpdmVcIik7XHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICBmdW5jdGlvbiB0aHJvdHRsZShmdW5jLCBkZWxheSkge1xyXG4gICAgICAgICAgICBsZXQgdGltZXIgPSAwO1xyXG5cclxuICAgICAgICAgICAgcmV0dXJuIGZ1bmN0aW9uICgpIHtcclxuICAgICAgICAgICAgICAgIGNvbnN0IGNvbnRleHQgPSB0aGlzLFxyXG4gICAgICAgICAgICAgICAgICAgIGFyZ3MgPSBbXS5zbGljZS5jYWxsKGFyZ3VtZW50cyk7XHJcblxyXG4gICAgICAgICAgICAgICAgY2xlYXJUaW1lb3V0KHRpbWVyKTtcclxuICAgICAgICAgICAgICAgIHRpbWVyID0gc2V0VGltZW91dChmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgZnVuYy5hcHBseShjb250ZXh0LCBhcmdzKTtcclxuICAgICAgICAgICAgICAgIH0sIGRlbGF5KTtcclxuICAgICAgICAgICAgfTtcclxuICAgICAgICB9XHJcblxyXG4gICAgICAgIGluaXRpYWxpc2UoKTtcclxuICAgIH07XHJcblxyXG4gICAgJC5mbi5yZXNldFN0aWNreUNvZGVTeXN0ZW1UcmVlID0gZnVuY3Rpb24gKCkge1xyXG4gICAgICAgIGNvbnN0ICRuYXYgPSB0aGlzO1xyXG4gICAgICAgIGNvbnN0ICRuYXZMaW5rcyA9ICRuYXYuZmluZChcImFcIik7XHJcbiAgICAgICAgY29uc3QgJHNjcm9sbGluZ1BhbmVsID0gJChcIi5qcy1jdXJyZW50LXRyZWUtbG9jYXRpb24tcGFuZWxcIik7XHJcblxyXG4gICAgICAgICRuYXZMaW5rcy5vZmYoXCIubWFrZVN0aWNreUNvZGVTeXN0ZW1UcmVlXCIpO1xyXG4gICAgICAgICRzY3JvbGxpbmdQYW5lbC5vZmYoXCIubWFrZVN0aWNreUNvZGVTeXN0ZW1UcmVlXCIpO1xyXG5cclxuICAgICAgICAkbmF2TGlua3MucmVtb3ZlQ2xhc3MoXCJhY3RpdmVcIik7XHJcbiAgICAgICAgJG5hdi5yZW1vdmVDbGFzcyhcInN0aWNreVwiKTtcclxuICAgIH07XHJcblxyXG5cclxufShqUXVlcnkpKVxyXG47Il0sIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/js/code-system/stickyCodeSystemTree.js\n");
+// Sticks the code system tree to the left side
+// of the viewport in 3+ col layout
+
+function stickyCodeSystemTree() {
+
+    var tree = $(".js-sticky-tree");
+
+    if (tree.length !== 0) {
+        tree.makeStickyCodeSystemTree();
+    }
+}
+
+window.stickyCodeSystemTree = stickyCodeSystemTree;
+
+/*!============================================================
+// Based on
+ * jquery.sticky-nav.js
+ * Copyright (c) Federico Cargnelutti <fedecarg@gmail.com>
+ * http://www.fedecarg.com/
+ ============================================================*/
+
+(function ($) {
+
+    $.fn.makeStickyCodeSystemTree = function () {
+
+        // Set jQuery DOM elements
+        const $nav = this;
+        const $navLinks = $nav.find("a");
+        const $sections = $(".js-scrollto");
+        const $scrollingPanel = $(".js-current-tree-location-panel");
+
+        const navHeight = $nav.height();
+        const scrollTopOffset = $sections.first().height() / 2;
+
+        let currentScrollPosition = 0;
+        let offsetNumbers = [0];
+
+        function initialise() {
+            $nav.resetStickyCodeSystemTree();
+
+            calculateOffsets();
+            bindEvents();
+        }
+
+        function bindEvents() {
+            $navLinks.on("click.makeStickyCodeSystemTree", onClick);
+            $scrollingPanel.on("scroll.makeStickyCodeSystemTree", throttle(onScroll, 20));
+        }
+
+        function onClick(e) {
+            const targetEl = $(this).attr("href");
+
+            if ($(targetEl).length) {
+                selectNavItem(this);
+
+                $(targetEl).fadeOut(0).fadeIn(400);
+            }
+        }
+
+        function onScroll() {
+            // var scrollTop = $scrollingPanel.scrollTop() - navHeight,
+            //     closestPosition = findClosestNumber(scrollTop, offsetNumbers);
+            //
+            // // select navbar item
+            // if (closestPosition !== currentScrollPosition) {
+            //     selectNavItem(".section-offset-" + closestPosition);
+            //     currentScrollPosition = closestPosition;
+            // }
+            //
+            // // fix navbar
+            // // if (scrollTop > scrollTopOffset) {
+            // //     $nav.addClass("sticky");
+            // // } else {
+            // //     $nav.removeClass("sticky");
+            // // }
+        }
+
+        function findClosestNumber(num, arr) {
+            return arr.reduce(function (prev, curr) {
+                return (Math.abs(curr - num) < Math.abs(prev - num) ? curr : prev);
+            });
+        }
+
+        function calculateOffsets() {
+            $sections.each(function (index) {
+                const el = $(this)[0];
+                const offsetTop = getOffsetTop(el);
+
+                offsetNumbers.push(offsetTop);
+                getNavItem(el).addClass("section-offset-" + offsetTop);
+            });
+        }
+
+        function getOffsetTop(el) {
+            const rect = el.getBoundingClientRect(),
+                scrollTop = $scrollingPanel.scrollTop();
+            // || document.$scrollingPanel.scrollTop;
+
+            return Math.round(rect.top + scrollTop);
+        }
+
+        function getNavItem(el) {
+            return $("nav a[href=\"#" + $(el).attr("id") + "\"]");
+        }
+
+        function selectNavItem(el) {
+            // if (!$nav.hasClass("sticky")) {
+            //     $nav.addClass("sticky");
+            // }
+
+            $navLinks.removeClass("active");
+            $(el).addClass("active");
+        }
+
+        function throttle(func, delay) {
+            let timer = 0;
+
+            return function () {
+                const context = this,
+                    args = [].slice.call(arguments);
+
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    func.apply(context, args);
+                }, delay);
+            };
+        }
+
+        initialise();
+    };
+
+    $.fn.resetStickyCodeSystemTree = function () {
+        const $nav = this;
+        const $navLinks = $nav.find("a");
+        const $scrollingPanel = $(".js-current-tree-location-panel");
+
+        $navLinks.off(".makeStickyCodeSystemTree");
+        $scrollingPanel.off(".makeStickyCodeSystemTree");
+
+        $navLinks.removeClass("active");
+        $nav.removeClass("sticky");
+    };
+
+
+}(jQuery))
+;
 
 /***/ }),
 
@@ -170,8 +1217,25 @@ eval("// Sticks the code system tree to the left side\r\n// of the viewport in 3
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("// Sticks the header to the top of the viewport on code system pages\r\n\r\nfunction stickyHeader() {\r\n\r\n    var header = $(\".js-sticky-header\");\r\n\r\n    if (header.length > 0) {\r\n        if (layoutQ().number[0] <= 3) {\r\n            header.addClass(\"sticky\");\r\n\r\n        } else {\r\n            header.removeClass(\"sticky\");\r\n        }\r\n    }\r\n}\r\n\r\nwindow.stickyHeader = stickyHeader;//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvanMvY29kZS1zeXN0ZW0vc3RpY2t5SGVhZGVyLmpzLmpzIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vc3JjL2pzL2NvZGUtc3lzdGVtL3N0aWNreUhlYWRlci5qcz9kNzkxIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIFN0aWNrcyB0aGUgaGVhZGVyIHRvIHRoZSB0b3Agb2YgdGhlIHZpZXdwb3J0IG9uIGNvZGUgc3lzdGVtIHBhZ2VzXHJcblxyXG5mdW5jdGlvbiBzdGlja3lIZWFkZXIoKSB7XHJcblxyXG4gICAgdmFyIGhlYWRlciA9ICQoXCIuanMtc3RpY2t5LWhlYWRlclwiKTtcclxuXHJcbiAgICBpZiAoaGVhZGVyLmxlbmd0aCA+IDApIHtcclxuICAgICAgICBpZiAobGF5b3V0USgpLm51bWJlclswXSA8PSAzKSB7XHJcbiAgICAgICAgICAgIGhlYWRlci5hZGRDbGFzcyhcInN0aWNreVwiKTtcclxuXHJcbiAgICAgICAgfSBlbHNlIHtcclxuICAgICAgICAgICAgaGVhZGVyLnJlbW92ZUNsYXNzKFwic3RpY2t5XCIpO1xyXG4gICAgICAgIH1cclxuICAgIH1cclxufVxyXG5cclxud2luZG93LnN0aWNreUhlYWRlciA9IHN0aWNreUhlYWRlcjsiXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./src/js/code-system/stickyHeader.js\n");
+// Sticks the header to the top of the viewport on code system pages
+
+function stickyHeader() {
+
+    var header = $(".js-sticky-header");
+
+    if (header.length > 0) {
+        if (layoutQ().number[0] <= 3) {
+            header.addClass("sticky");
+
+        } else {
+            header.removeClass("sticky");
+        }
+    }
+}
+
+window.stickyHeader = stickyHeader;
 
 /***/ })
 
 /******/ });
+//# sourceMappingURL=maps/code-system.js.map

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("__webpack_require__(/*! ./search/datepicker */ \"./src/js/search/datepicker.js\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvanMvc2VhcmNoLmpzLmpzIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vc3JjL2pzL3NlYXJjaC5qcz84MGU0Il0sInNvdXJjZXNDb250ZW50IjpbInJlcXVpcmUoJy4vc2VhcmNoL2RhdGVwaWNrZXInKTsiXSwibWFwcGluZ3MiOiJBQUFBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/js/search.js\n");
+__webpack_require__(/*! ./search/datepicker */ "./src/js/search/datepicker.js");
 
 /***/ }),
 
@@ -104,8 +104,679 @@ eval("__webpack_require__(/*! ./search/datepicker */ \"./src/js/search/datepicke
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("// https://dequeuniversity.com/library/aria/date-pickers/sf-date-picker\r\n// console.log(\"search.js - datepicker.js\");\r\n\r\n$(function () {\r\n    $('#datepicker').datepicker({\r\n        showOn: 'button',\r\n        buttonImage: '/assets/images/calendar-blue.svg', // File (and file path) for the calendar image\r\n        buttonImageOnly: false,\r\n        buttonText: 'Vis kalender',\r\n        dayNamesShort: [ \"Mandag\", \"Tirsdag\", \"Onsdag\", \"Torsdag\", \"Fredag\", \"Lørdag\", \"Søndag\" ],\r\n        showButtonPanel: true,\r\n        closeText: 'Lukk',\r\n        onClose: removeAria\r\n    });\r\n\r\n    // Add aria-describedby to the button referring to the label\r\n    $('.ui-datepicker-trigger').attr('aria-labelledby', 'datepickerLabel');\r\n\r\n    dayTripper();\r\n\r\n});\r\n\r\nfunction dayTripper() {\r\n    $('.ui-datepicker-trigger').click(function () {\r\n        setTimeout(function () {\r\n            var today = $('.ui-datepicker-today a')[0];\r\n\r\n            if (!today) {\r\n                today = $('.ui-state-active')[0] ||\r\n                    $('.ui-state-default')[0];\r\n            }\r\n\r\n\r\n            // Hide the entire page (except the date picker)\r\n            // from screen readers to prevent document navigation\r\n            // (by headings, etc.) while the popup is open\r\n            $(\"main\").attr('id','dp-container');\r\n            $(\"#dp-container\").attr('aria-hidden','true');\r\n            $(\"#skipnav\").attr('aria-hidden','true');\r\n\r\n            // Hide the \"today\" button because it doesn't do what\r\n            // you think it supposed to do\r\n            $(\".ui-datepicker-current\").hide();\r\n\r\n            today.focus();\r\n            datePickHandler();\r\n            $(document).on('click', '#ui-datepicker-div .ui-datepicker-close', function () {\r\n                closeCalendar();\r\n            });\r\n        }, 0);\r\n    });\r\n}\r\n\r\nfunction datePickHandler() {\r\n    var activeDate;\r\n    var container = document.getElementById('ui-datepicker-div');\r\n    var input = document.getElementById('datepicker');\r\n\r\n    if (!container || !input) {\r\n        return;\r\n    }\r\n\r\n    // $(container).find('table').first().attr('role', 'grid');\r\n\r\n    container.setAttribute('role', 'application');\r\n    container.setAttribute('aria-label', 'Calendar view date-picker');\r\n\r\n    // the top controls:\r\n    var prev = $('.ui-datepicker-prev', container)[0],\r\n        next = $('.ui-datepicker-next', container)[0];\r\n\r\n\r\n// This is the line that needs to be fixed for use on pages with base URL set in head\r\n    next.href = 'javascript:void(0)';\r\n    prev.href = 'javascript:void(0)';\r\n\r\n    next.setAttribute('role', 'button');\r\n    next.removeAttribute('title');\r\n    prev.setAttribute('role', 'button');\r\n    prev.removeAttribute('title');\r\n\r\n    appendOffscreenMonthText(next);\r\n    appendOffscreenMonthText(prev);\r\n\r\n    // delegation won't work here for whatever reason, so we are\r\n    // forced to attach individual click listeners to the prev /\r\n    // next month buttons each time they are added to the DOM\r\n    $(next).on('click', handleNextClicks);\r\n    $(prev).on('click', handlePrevClicks);\r\n\r\n    monthDayYearText();\r\n\r\n    $(container).on('keydown', function calendarKeyboardListener(keyVent) {\r\n        var which = keyVent.which;\r\n        var target = keyVent.target;\r\n        var dateCurrent = getCurrentDate(container);\r\n\r\n        if (!dateCurrent) {\r\n            dateCurrent = $('a.ui-state-default')[0];\r\n            setHighlightState(dateCurrent, container);\r\n        }\r\n\r\n        if (27 === which) {\r\n            keyVent.stopPropagation();\r\n            return closeCalendar();\r\n        } else if (which === 9 && keyVent.shiftKey) { // SHIFT + TAB\r\n            keyVent.preventDefault();\r\n            if ($(target).hasClass('ui-datepicker-close')) { // close button\r\n                $('.ui-datepicker-prev')[0].focus();\r\n            } else if ($(target).hasClass('ui-state-default')) { // a date link\r\n                $('.ui-datepicker-close')[0].focus();\r\n            } else if ($(target).hasClass('ui-datepicker-prev')) { // the prev link\r\n                $('.ui-datepicker-next')[0].focus();\r\n            } else if ($(target).hasClass('ui-datepicker-next')) { // the next link\r\n                activeDate = $('.ui-state-highlight') ||\r\n                    $('.ui-state-active')[0];\r\n                if (activeDate) {\r\n                    activeDate.focus();\r\n                }\r\n            }\r\n        } else if (which === 9) { // TAB\r\n            keyVent.preventDefault();\r\n            if ($(target).hasClass('ui-datepicker-close')) { // close button\r\n                activeDate = $('.ui-state-highlight') ||\r\n                    $('.ui-state-active')[0];\r\n                if (activeDate) {\r\n                    activeDate.focus();\r\n                }\r\n            } else if ($(target).hasClass('ui-state-default')) {\r\n                $('.ui-datepicker-next')[0].focus();\r\n            } else if ($(target).hasClass('ui-datepicker-next')) {\r\n                $('.ui-datepicker-prev')[0].focus();\r\n            } else if ($(target).hasClass('ui-datepicker-prev')) {\r\n                $('.ui-datepicker-close')[0].focus();\r\n            }\r\n        } else if (which === 37) { // LEFT arrow key\r\n            // if we're on a date link...\r\n            if (!$(target).hasClass('ui-datepicker-close') && $(target).hasClass('ui-state-default')) {\r\n                keyVent.preventDefault();\r\n                previousDay(target);\r\n            }\r\n        } else if (which === 39) { // RIGHT arrow key\r\n            // if we're on a date link...\r\n            if (!$(target).hasClass('ui-datepicker-close') && $(target).hasClass('ui-state-default')) {\r\n                keyVent.preventDefault();\r\n                nextDay(target);\r\n            }\r\n        } else if (which === 38) { // UP arrow key\r\n            if (!$(target).hasClass('ui-datepicker-close') && $(target).hasClass('ui-state-default')) {\r\n                keyVent.preventDefault();\r\n                upHandler(target, container, prev);\r\n            }\r\n        } else if (which === 40) { // DOWN arrow key\r\n            if (!$(target).hasClass('ui-datepicker-close') && $(target).hasClass('ui-state-default')) {\r\n                keyVent.preventDefault();\r\n                downHandler(target, container, next);\r\n            }\r\n        } else if (which === 13) { // ENTER\r\n            if ($(target).hasClass('ui-state-default')) {\r\n                setTimeout(function () {\r\n                    closeCalendar();\r\n                }, 100);\r\n            } else if ($(target).hasClass('ui-datepicker-prev')) {\r\n                handlePrevClicks();\r\n            } else if ($(target).hasClass('ui-datepicker-next')) {\r\n                handleNextClicks();\r\n            }\r\n        } else if (32 === which) {\r\n            if ($(target).hasClass('ui-datepicker-prev') || $(target).hasClass('ui-datepicker-next')) {\r\n                target.click();\r\n            }\r\n        } else if (33 === which) { // PAGE UP\r\n            moveOneMonth(target, 'prev');\r\n        } else if (34 === which) { // PAGE DOWN\r\n            moveOneMonth(target, 'next');\r\n        } else if (36 === which) { // HOME\r\n            var firstOfMonth = $(target).closest('tbody').find('.ui-state-default')[0];\r\n            if (firstOfMonth) {\r\n                firstOfMonth.focus();\r\n                setHighlightState(firstOfMonth, $('#ui-datepicker-div')[0]);\r\n            }\r\n        } else if (35 === which) { // END\r\n            var $daysOfMonth = $(target).closest('tbody').find('.ui-state-default');\r\n            var lastDay = $daysOfMonth[$daysOfMonth.length - 1];\r\n            if (lastDay) {\r\n                lastDay.focus();\r\n                setHighlightState(lastDay, $('#ui-datepicker-div')[0]);\r\n            }\r\n        }\r\n        $(\".ui-datepicker-current\").hide();\r\n    });\r\n}\r\n\r\nfunction closeCalendar() {\r\n    var container = $('#ui-datepicker-div');\r\n    $(container).off('keydown');\r\n    var input = $('#datepicker')[0];\r\n    $(input).datepicker('hide');\r\n\r\n    input.focus();\r\n}\r\n\r\nfunction removeAria() {\r\n    // make the rest of the page accessible again:\r\n    $(\"#dp-container\").removeAttr('aria-hidden');\r\n    $(\"#skipnav\").removeAttr('aria-hidden');\r\n}\r\n\r\n///////////////////////////////\r\n//////////////////////////// //\r\n///////////////////////// // //\r\n// UTILITY-LIKE THINGS // // //\r\n///////////////////////// // //\r\n//////////////////////////// //\r\n///////////////////////////////\r\nfunction isOdd(num) {\r\n    return num % 2;\r\n}\r\n\r\nfunction moveOneMonth(currentDate, dir) {\r\n    var button = (dir === 'next')\r\n        ? $('.ui-datepicker-next')[0]\r\n        : $('.ui-datepicker-prev')[0];\r\n\r\n    if (!button) {\r\n        return;\r\n    }\r\n\r\n    var ENABLED_SELECTOR = '#ui-datepicker-div tbody td:not(.ui-state-disabled)';\r\n    var $currentCells = $(ENABLED_SELECTOR);\r\n    var currentIdx = $.inArray(currentDate.parentNode, $currentCells);\r\n\r\n    button.click();\r\n    setTimeout(function () {\r\n        updateHeaderElements();\r\n\r\n        var $newCells = $(ENABLED_SELECTOR);\r\n        var newTd = $newCells[currentIdx];\r\n        var newAnchor = newTd && $(newTd).find('a')[0];\r\n\r\n        while (!newAnchor) {\r\n            currentIdx--;\r\n            newTd = $newCells[currentIdx];\r\n            newAnchor = newTd && $(newTd).find('a')[0];\r\n        }\r\n\r\n        setHighlightState(newAnchor, $('#ui-datepicker-div')[0]);\r\n        newAnchor.focus();\r\n\r\n    }, 0);\r\n\r\n}\r\n\r\nfunction handleNextClicks() {\r\n    setTimeout(function () {\r\n        updateHeaderElements();\r\n        prepHighlightState();\r\n        $('.ui-datepicker-next').focus();\r\n        $(\".ui-datepicker-current\").hide();\r\n    }, 0);\r\n}\r\n\r\nfunction handlePrevClicks() {\r\n    setTimeout(function () {\r\n        updateHeaderElements();\r\n        prepHighlightState();\r\n        $('.ui-datepicker-prev').focus();\r\n        $(\".ui-datepicker-current\").hide();\r\n    }, 0);\r\n}\r\n\r\nfunction previousDay(dateLink) {\r\n    var container = document.getElementById('ui-datepicker-div');\r\n    if (!dateLink) {\r\n        return;\r\n    }\r\n    var td = $(dateLink).closest('td');\r\n    if (!td) {\r\n        return;\r\n    }\r\n\r\n    var prevTd = $(td).prev(),\r\n        prevDateLink = $('a.ui-state-default', prevTd)[0];\r\n\r\n    if (prevTd && prevDateLink) {\r\n        setHighlightState(prevDateLink, container);\r\n        prevDateLink.focus();\r\n    } else {\r\n        handlePrevious(dateLink);\r\n    }\r\n}\r\n\r\n\r\nfunction handlePrevious(target) {\r\n    var container = document.getElementById('ui-datepicker-div');\r\n    if (!target) {\r\n        return;\r\n    }\r\n    var currentRow = $(target).closest('tr');\r\n    if (!currentRow) {\r\n        return;\r\n    }\r\n    var previousRow = $(currentRow).prev();\r\n\r\n    if (!previousRow || previousRow.length === 0) {\r\n        // there is not previous row, so we go to previous month...\r\n        previousMonth();\r\n    } else {\r\n        var prevRowDates = $('td a.ui-state-default', previousRow);\r\n        var prevRowDate = prevRowDates[prevRowDates.length - 1];\r\n\r\n        if (prevRowDate) {\r\n            setTimeout(function () {\r\n                setHighlightState(prevRowDate, container);\r\n                prevRowDate.focus();\r\n            }, 0);\r\n        }\r\n    }\r\n}\r\n\r\nfunction previousMonth() {\r\n    var prevLink = $('.ui-datepicker-prev')[0];\r\n    var container = document.getElementById('ui-datepicker-div');\r\n    prevLink.click();\r\n    // focus last day of new month\r\n    setTimeout(function () {\r\n        var trs = $('tr', container),\r\n            lastRowTdLinks = $('td a.ui-state-default', trs[trs.length - 1]),\r\n            lastDate = lastRowTdLinks[lastRowTdLinks.length - 1];\r\n\r\n        // updating the cached header elements\r\n        updateHeaderElements();\r\n\r\n        setHighlightState(lastDate, container);\r\n        lastDate.focus();\r\n\r\n    }, 0);\r\n}\r\n\r\n///////////////// NEXT /////////////////\r\n/**\r\n * Handles right arrow key navigation\r\n * @param  {HTMLElement} dateLink The target of the keyboard event\r\n */\r\nfunction nextDay(dateLink) {\r\n    var container = document.getElementById('ui-datepicker-div');\r\n    if (!dateLink) {\r\n        return;\r\n    }\r\n    var td = $(dateLink).closest('td');\r\n    if (!td) {\r\n        return;\r\n    }\r\n    var nextTd = $(td).next(),\r\n        nextDateLink = $('a.ui-state-default', nextTd)[0];\r\n\r\n    if (nextTd && nextDateLink) {\r\n        setHighlightState(nextDateLink, container);\r\n        nextDateLink.focus(); // the next day (same row)\r\n    } else {\r\n        handleNext(dateLink);\r\n    }\r\n}\r\n\r\nfunction handleNext(target) {\r\n    var container = document.getElementById('ui-datepicker-div');\r\n    if (!target) {\r\n        return;\r\n    }\r\n    var currentRow = $(target).closest('tr'),\r\n        nextRow = $(currentRow).next();\r\n\r\n    if (!nextRow || nextRow.length === 0) {\r\n        nextMonth();\r\n    } else {\r\n        var nextRowFirstDate = $('a.ui-state-default', nextRow)[0];\r\n        if (nextRowFirstDate) {\r\n            setHighlightState(nextRowFirstDate, container);\r\n            nextRowFirstDate.focus();\r\n        }\r\n    }\r\n}\r\n\r\nfunction nextMonth() {\r\n    nextMon = $('.ui-datepicker-next')[0];\r\n    var container = document.getElementById('ui-datepicker-div');\r\n    nextMon.click();\r\n    // focus the first day of the new month\r\n    setTimeout(function () {\r\n        // updating the cached header elements\r\n        updateHeaderElements();\r\n\r\n        var firstDate = $('a.ui-state-default', container)[0];\r\n        setHighlightState(firstDate, container);\r\n        firstDate.focus();\r\n    }, 0);\r\n}\r\n\r\n/////////// UP ///////////\r\n/**\r\n * Handle the up arrow navigation through dates\r\n * @param  {HTMLElement} target   The target of the keyboard event (day)\r\n * @param  {HTMLElement} cont     The calendar container\r\n * @param  {HTMLElement} prevLink Link to navigate to previous month\r\n */\r\nfunction upHandler(target, cont, prevLink) {\r\n    prevLink = $('.ui-datepicker-prev')[0];\r\n    var rowContext = $(target).closest('tr');\r\n    if (!rowContext) {\r\n        return;\r\n    }\r\n    var rowTds = $('td', rowContext),\r\n        rowLinks = $('a.ui-state-default', rowContext),\r\n        targetIndex = $.inArray(target, rowLinks),\r\n        prevRow = $(rowContext).prev(),\r\n        prevRowTds = $('td', prevRow),\r\n        parallel = prevRowTds[targetIndex],\r\n        linkCheck = $('a.ui-state-default', parallel)[0];\r\n\r\n    if (prevRow && parallel && linkCheck) {\r\n        // there is a previous row, a td at the same index\r\n        // of the target AND theres a link in that td\r\n        setHighlightState(linkCheck, cont);\r\n        linkCheck.focus();\r\n    } else {\r\n        // we're either on the first row of a month, or we're on the\r\n        // second and there is not a date link directly above the target\r\n        prevLink.click();\r\n        setTimeout(function () {\r\n            // updating the cached header elements\r\n            updateHeaderElements();\r\n            var newRows = $('tr', cont),\r\n                lastRow = newRows[newRows.length - 1],\r\n                lastRowTds = $('td', lastRow),\r\n                tdParallelIndex = $.inArray(target.parentNode, rowTds),\r\n                newParallel = lastRowTds[tdParallelIndex],\r\n                newCheck = $('a.ui-state-default', newParallel)[0];\r\n\r\n            if (lastRow && newParallel && newCheck) {\r\n                setHighlightState(newCheck, cont);\r\n                newCheck.focus();\r\n            } else {\r\n                // theres no date link on the last week (row) of the new month\r\n                // meaning its an empty cell, so we'll try the 2nd to last week\r\n                var secondLastRow = newRows[newRows.length - 2],\r\n                    secondTds = $('td', secondLastRow),\r\n                    targetTd = secondTds[tdParallelIndex],\r\n                    linkCheck = $('a.ui-state-default', targetTd)[0];\r\n\r\n                if (linkCheck) {\r\n                    setHighlightState(linkCheck, cont);\r\n                    linkCheck.focus();\r\n                }\r\n\r\n            }\r\n        }, 0);\r\n    }\r\n}\r\n\r\n//////////////// DOWN ////////////////\r\n/**\r\n * Handles down arrow navigation through dates in calendar\r\n * @param  {HTMLElement} target   The target of the keyboard event (day)\r\n * @param  {HTMLElement} cont     The calendar container\r\n * @param  {HTMLElement} nextLink Link to navigate to next month\r\n */\r\nfunction downHandler(target, cont, nextLink) {\r\n    nextLink = $('.ui-datepicker-next')[0];\r\n    var targetRow = $(target).closest('tr');\r\n    if (!targetRow) {\r\n        return;\r\n    }\r\n    var targetCells = $('td', targetRow),\r\n        cellIndex = $.inArray(target.parentNode, targetCells), // the td (parent of target) index\r\n        nextRow = $(targetRow).next(),\r\n        nextRowCells = $('td', nextRow),\r\n        nextWeekTd = nextRowCells[cellIndex],\r\n        nextWeekCheck = $('a.ui-state-default', nextWeekTd)[0];\r\n\r\n    if (nextRow && nextWeekTd && nextWeekCheck) {\r\n        // theres a next row, a TD at the same index of `target`,\r\n        // and theres an anchor within that td\r\n        setHighlightState(nextWeekCheck, cont);\r\n        nextWeekCheck.focus();\r\n    } else {\r\n        nextLink.click();\r\n\r\n        setTimeout(function () {\r\n            // updating the cached header elements\r\n            updateHeaderElements();\r\n\r\n            var nextMonthTrs = $('tbody tr', cont),\r\n                firstTds = $('td', nextMonthTrs[0]),\r\n                firstParallel = firstTds[cellIndex],\r\n                firstCheck = $('a.ui-state-default', firstParallel)[0];\r\n\r\n            if (firstParallel && firstCheck) {\r\n                setHighlightState(firstCheck, cont);\r\n                firstCheck.focus();\r\n            } else {\r\n                // lets try the second row b/c we didnt find a\r\n                // date link in the first row at the target's index\r\n                var secondRow = nextMonthTrs[1],\r\n                    secondTds = $('td', secondRow),\r\n                    secondRowTd = secondTds[cellIndex],\r\n                    secondCheck = $('a.ui-state-default', secondRowTd)[0];\r\n\r\n                if (secondRow && secondCheck) {\r\n                    setHighlightState(secondCheck, cont);\r\n                    secondCheck.focus();\r\n                }\r\n            }\r\n        }, 0);\r\n    }\r\n}\r\n\r\n\r\nfunction onCalendarHide() {\r\n    closeCalendar();\r\n}\r\n\r\n// add an aria-label to the date link indicating the currently focused date\r\n// (formatted identically to the required format: mm/dd/yyyy)\r\nfunction monthDayYearText() {\r\n    var cleanUps = $('.amaze-date');\r\n\r\n    $(cleanUps).each(function (clean) {\r\n        // each(cleanUps, function (clean) {\r\n        clean.parentNode.removeChild(clean);\r\n    });\r\n\r\n    var datePickDiv = document.getElementById('ui-datepicker-div');\r\n    // in case we find no datepick div\r\n    if (!datePickDiv) {\r\n        return;\r\n    }\r\n\r\n    var dates = $('a.ui-state-default', datePickDiv);\r\n    $(dates).attr('role', 'button').on('keydown', function (e) {\r\n        if (e.which === 32) {\r\n            e.preventDefault();\r\n            e.target.click();\r\n            setTimeout(function () {\r\n                closeCalendar();\r\n            }, 100);\r\n        }\r\n    });\r\n    $(dates).each(function (index, date) {\r\n        var currentRow = $(date).closest('tr'),\r\n            currentTds = $('td', currentRow),\r\n            currentIndex = $.inArray(date.parentNode, currentTds),\r\n            headThs = $('thead tr th', datePickDiv),\r\n            dayIndex = headThs[currentIndex],\r\n            daySpan = $('span', dayIndex)[0],\r\n            monthName = $('.ui-datepicker-month', datePickDiv)[0].innerHTML,\r\n            year = $('.ui-datepicker-year', datePickDiv)[0].innerHTML,\r\n            number = date.innerHTML;\r\n\r\n        if (!daySpan || !monthName || !number || !year) {\r\n            return;\r\n        }\r\n\r\n        // AT Reads: {month} {date} {year} {day}\r\n        // \"December 18 2014 Thursday\"\r\n        var dateText = date.innerHTML + ' ' + monthName + ' ' + year + ' ' + daySpan.title;\r\n        // AT Reads: {date(number)} {name of day} {name of month} {year(number)}\r\n        // var dateText = date.innerHTML + ' ' + daySpan.title + ' ' + monthName + ' ' + year;\r\n        // add an aria-label to the date link reading out the currently focused date\r\n        date.setAttribute('aria-label', dateText);\r\n    });\r\n}\r\n\r\n\r\n\r\n// update the cached header elements because we're in a new month or year\r\nfunction updateHeaderElements() {\r\n    var context = document.getElementById('ui-datepicker-div');\r\n    if (!context) {\r\n        return;\r\n    }\r\n\r\n//  $(context).find('table').first().attr('role', 'grid');\r\n\r\n    prev = $('.ui-datepicker-prev', context)[0];\r\n    next = $('.ui-datepicker-next', context)[0];\r\n\r\n    //make them click/focus - able\r\n    next.href = 'javascript:void(0)';\r\n    prev.href = 'javascript:void(0)';\r\n\r\n    next.setAttribute('role', 'button');\r\n    prev.setAttribute('role', 'button');\r\n    appendOffscreenMonthText(next);\r\n    appendOffscreenMonthText(prev);\r\n\r\n    $(next).on('click', handleNextClicks);\r\n    $(prev).on('click', handlePrevClicks);\r\n\r\n    // add month day year text\r\n    monthDayYearText();\r\n}\r\n\r\n\r\nfunction prepHighlightState() {\r\n    var highlight;\r\n    var cage = document.getElementById('ui-datepicker-div');\r\n    highlight = $('.ui-state-highlight', cage)[0] ||\r\n        $('.ui-state-default', cage)[0];\r\n    if (highlight && cage) {\r\n        setHighlightState(highlight, cage);\r\n    }\r\n}\r\n\r\n// Set the highlighted class to date elements, when focus is received\r\nfunction setHighlightState(newHighlight, container) {\r\n    var prevHighlight = getCurrentDate(container);\r\n    // remove the highlight state from previously\r\n    // highlighted date and add it to our newly active date\r\n    $(prevHighlight).removeClass('ui-state-highlight');\r\n    $(newHighlight).addClass('ui-state-highlight');\r\n}\r\n\r\n\r\n// grabs the current date based on the highlight class\r\nfunction getCurrentDate(container) {\r\n    var currentDate = $('.ui-state-highlight', container)[0];\r\n    return currentDate;\r\n}\r\n\r\n/**\r\n * Appends logical next/prev month text to the buttons\r\n * - ex: Next Month, January 2015\r\n *       Previous Month, November 2014\r\n */\r\nfunction appendOffscreenMonthText(button) {\r\n    var buttonText;\r\n    var isNext = $(button).hasClass('ui-datepicker-next');\r\n    var months = [\r\n        'january', 'february',\r\n        'march', 'april',\r\n        'may', 'june', 'july',\r\n        'august', 'september',\r\n        'october',\r\n        'november', 'december'\r\n    ];\r\n\r\n    var currentMonth = $('.ui-datepicker-title .ui-datepicker-month').text().toLowerCase();\r\n    var monthIndex = $.inArray(currentMonth.toLowerCase(), months);\r\n    var currentYear = $('.ui-datepicker-title .ui-datepicker-year').text().toLowerCase();\r\n    var adjacentIndex = (isNext) ? monthIndex + 1 : monthIndex - 1;\r\n\r\n    if (isNext && currentMonth === 'december') {\r\n        currentYear = parseInt(currentYear, 10) + 1;\r\n        adjacentIndex = 0;\r\n    } else if (!isNext && currentMonth === 'january') {\r\n        currentYear = parseInt(currentYear, 10) - 1;\r\n        adjacentIndex = months.length - 1;\r\n    }\r\n\r\n    buttonText = (isNext)\r\n        ? 'Next Month, ' + firstToCap(months[adjacentIndex]) + ' ' + currentYear\r\n        : 'Previous Month, ' + firstToCap(months[adjacentIndex]) + ' ' + currentYear;\r\n\r\n    $(button).find('.ui-icon').html(buttonText);\r\n\r\n}\r\n\r\n// Returns the string with the first letter capitalized\r\nfunction firstToCap(s) {\r\n    return s.charAt(0).toUpperCase() + s.slice(1);\r\n}//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvanMvc2VhcmNoL2RhdGVwaWNrZXIuanMuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvanMvc2VhcmNoL2RhdGVwaWNrZXIuanM/MjU4YiJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBodHRwczovL2RlcXVldW5pdmVyc2l0eS5jb20vbGlicmFyeS9hcmlhL2RhdGUtcGlja2Vycy9zZi1kYXRlLXBpY2tlclxyXG4vLyBjb25zb2xlLmxvZyhcInNlYXJjaC5qcyAtIGRhdGVwaWNrZXIuanNcIik7XHJcblxyXG4kKGZ1bmN0aW9uICgpIHtcclxuICAgICQoJyNkYXRlcGlja2VyJykuZGF0ZXBpY2tlcih7XHJcbiAgICAgICAgc2hvd09uOiAnYnV0dG9uJyxcclxuICAgICAgICBidXR0b25JbWFnZTogJy9hc3NldHMvaW1hZ2VzL2NhbGVuZGFyLWJsdWUuc3ZnJywgLy8gRmlsZSAoYW5kIGZpbGUgcGF0aCkgZm9yIHRoZSBjYWxlbmRhciBpbWFnZVxyXG4gICAgICAgIGJ1dHRvbkltYWdlT25seTogZmFsc2UsXHJcbiAgICAgICAgYnV0dG9uVGV4dDogJ1ZpcyBrYWxlbmRlcicsXHJcbiAgICAgICAgZGF5TmFtZXNTaG9ydDogWyBcIk1hbmRhZ1wiLCBcIlRpcnNkYWdcIiwgXCJPbnNkYWdcIiwgXCJUb3JzZGFnXCIsIFwiRnJlZGFnXCIsIFwiTMO4cmRhZ1wiLCBcIlPDuG5kYWdcIiBdLFxyXG4gICAgICAgIHNob3dCdXR0b25QYW5lbDogdHJ1ZSxcclxuICAgICAgICBjbG9zZVRleHQ6ICdMdWtrJyxcclxuICAgICAgICBvbkNsb3NlOiByZW1vdmVBcmlhXHJcbiAgICB9KTtcclxuXHJcbiAgICAvLyBBZGQgYXJpYS1kZXNjcmliZWRieSB0byB0aGUgYnV0dG9uIHJlZmVycmluZyB0byB0aGUgbGFiZWxcclxuICAgICQoJy51aS1kYXRlcGlja2VyLXRyaWdnZXInKS5hdHRyKCdhcmlhLWxhYmVsbGVkYnknLCAnZGF0ZXBpY2tlckxhYmVsJyk7XHJcblxyXG4gICAgZGF5VHJpcHBlcigpO1xyXG5cclxufSk7XHJcblxyXG5mdW5jdGlvbiBkYXlUcmlwcGVyKCkge1xyXG4gICAgJCgnLnVpLWRhdGVwaWNrZXItdHJpZ2dlcicpLmNsaWNrKGZ1bmN0aW9uICgpIHtcclxuICAgICAgICBzZXRUaW1lb3V0KGZ1bmN0aW9uICgpIHtcclxuICAgICAgICAgICAgdmFyIHRvZGF5ID0gJCgnLnVpLWRhdGVwaWNrZXItdG9kYXkgYScpWzBdO1xyXG5cclxuICAgICAgICAgICAgaWYgKCF0b2RheSkge1xyXG4gICAgICAgICAgICAgICAgdG9kYXkgPSAkKCcudWktc3RhdGUtYWN0aXZlJylbMF0gfHxcclxuICAgICAgICAgICAgICAgICAgICAkKCcudWktc3RhdGUtZGVmYXVsdCcpWzBdO1xyXG4gICAgICAgICAgICB9XHJcblxyXG5cclxuICAgICAgICAgICAgLy8gSGlkZSB0aGUgZW50aXJlIHBhZ2UgKGV4Y2VwdCB0aGUgZGF0ZSBwaWNrZXIpXHJcbiAgICAgICAgICAgIC8vIGZyb20gc2NyZWVuIHJlYWRlcnMgdG8gcHJldmVudCBkb2N1bWVudCBuYXZpZ2F0aW9uXHJcbiAgICAgICAgICAgIC8vIChieSBoZWFkaW5ncywgZXRjLikgd2hpbGUgdGhlIHBvcHVwIGlzIG9wZW5cclxuICAgICAgICAgICAgJChcIm1haW5cIikuYXR0cignaWQnLCdkcC1jb250YWluZXInKTtcclxuICAgICAgICAgICAgJChcIiNkcC1jb250YWluZXJcIikuYXR0cignYXJpYS1oaWRkZW4nLCd0cnVlJyk7XHJcbiAgICAgICAgICAgICQoXCIjc2tpcG5hdlwiKS5hdHRyKCdhcmlhLWhpZGRlbicsJ3RydWUnKTtcclxuXHJcbiAgICAgICAgICAgIC8vIEhpZGUgdGhlIFwidG9kYXlcIiBidXR0b24gYmVjYXVzZSBpdCBkb2Vzbid0IGRvIHdoYXRcclxuICAgICAgICAgICAgLy8geW91IHRoaW5rIGl0IHN1cHBvc2VkIHRvIGRvXHJcbiAgICAgICAgICAgICQoXCIudWktZGF0ZXBpY2tlci1jdXJyZW50XCIpLmhpZGUoKTtcclxuXHJcbiAgICAgICAgICAgIHRvZGF5LmZvY3VzKCk7XHJcbiAgICAgICAgICAgIGRhdGVQaWNrSGFuZGxlcigpO1xyXG4gICAgICAgICAgICAkKGRvY3VtZW50KS5vbignY2xpY2snLCAnI3VpLWRhdGVwaWNrZXItZGl2IC51aS1kYXRlcGlja2VyLWNsb3NlJywgZnVuY3Rpb24gKCkge1xyXG4gICAgICAgICAgICAgICAgY2xvc2VDYWxlbmRhcigpO1xyXG4gICAgICAgICAgICB9KTtcclxuICAgICAgICB9LCAwKTtcclxuICAgIH0pO1xyXG59XHJcblxyXG5mdW5jdGlvbiBkYXRlUGlja0hhbmRsZXIoKSB7XHJcbiAgICB2YXIgYWN0aXZlRGF0ZTtcclxuICAgIHZhciBjb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndWktZGF0ZXBpY2tlci1kaXYnKTtcclxuICAgIHZhciBpbnB1dCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdkYXRlcGlja2VyJyk7XHJcblxyXG4gICAgaWYgKCFjb250YWluZXIgfHwgIWlucHV0KSB7XHJcbiAgICAgICAgcmV0dXJuO1xyXG4gICAgfVxyXG5cclxuICAgIC8vICQoY29udGFpbmVyKS5maW5kKCd0YWJsZScpLmZpcnN0KCkuYXR0cigncm9sZScsICdncmlkJyk7XHJcblxyXG4gICAgY29udGFpbmVyLnNldEF0dHJpYnV0ZSgncm9sZScsICdhcHBsaWNhdGlvbicpO1xyXG4gICAgY29udGFpbmVyLnNldEF0dHJpYnV0ZSgnYXJpYS1sYWJlbCcsICdDYWxlbmRhciB2aWV3IGRhdGUtcGlja2VyJyk7XHJcblxyXG4gICAgLy8gdGhlIHRvcCBjb250cm9sczpcclxuICAgIHZhciBwcmV2ID0gJCgnLnVpLWRhdGVwaWNrZXItcHJldicsIGNvbnRhaW5lcilbMF0sXHJcbiAgICAgICAgbmV4dCA9ICQoJy51aS1kYXRlcGlja2VyLW5leHQnLCBjb250YWluZXIpWzBdO1xyXG5cclxuXHJcbi8vIFRoaXMgaXMgdGhlIGxpbmUgdGhhdCBuZWVkcyB0byBiZSBmaXhlZCBmb3IgdXNlIG9uIHBhZ2VzIHdpdGggYmFzZSBVUkwgc2V0IGluIGhlYWRcclxuICAgIG5leHQuaHJlZiA9ICdqYXZhc2NyaXB0OnZvaWQoMCknO1xyXG4gICAgcHJldi5ocmVmID0gJ2phdmFzY3JpcHQ6dm9pZCgwKSc7XHJcblxyXG4gICAgbmV4dC5zZXRBdHRyaWJ1dGUoJ3JvbGUnLCAnYnV0dG9uJyk7XHJcbiAgICBuZXh0LnJlbW92ZUF0dHJpYnV0ZSgndGl0bGUnKTtcclxuICAgIHByZXYuc2V0QXR0cmlidXRlKCdyb2xlJywgJ2J1dHRvbicpO1xyXG4gICAgcHJldi5yZW1vdmVBdHRyaWJ1dGUoJ3RpdGxlJyk7XHJcblxyXG4gICAgYXBwZW5kT2Zmc2NyZWVuTW9udGhUZXh0KG5leHQpO1xyXG4gICAgYXBwZW5kT2Zmc2NyZWVuTW9udGhUZXh0KHByZXYpO1xyXG5cclxuICAgIC8vIGRlbGVnYXRpb24gd29uJ3Qgd29yayBoZXJlIGZvciB3aGF0ZXZlciByZWFzb24sIHNvIHdlIGFyZVxyXG4gICAgLy8gZm9yY2VkIHRvIGF0dGFjaCBpbmRpdmlkdWFsIGNsaWNrIGxpc3RlbmVycyB0byB0aGUgcHJldiAvXHJcbiAgICAvLyBuZXh0IG1vbnRoIGJ1dHRvbnMgZWFjaCB0aW1lIHRoZXkgYXJlIGFkZGVkIHRvIHRoZSBET01cclxuICAgICQobmV4dCkub24oJ2NsaWNrJywgaGFuZGxlTmV4dENsaWNrcyk7XHJcbiAgICAkKHByZXYpLm9uKCdjbGljaycsIGhhbmRsZVByZXZDbGlja3MpO1xyXG5cclxuICAgIG1vbnRoRGF5WWVhclRleHQoKTtcclxuXHJcbiAgICAkKGNvbnRhaW5lcikub24oJ2tleWRvd24nLCBmdW5jdGlvbiBjYWxlbmRhcktleWJvYXJkTGlzdGVuZXIoa2V5VmVudCkge1xyXG4gICAgICAgIHZhciB3aGljaCA9IGtleVZlbnQud2hpY2g7XHJcbiAgICAgICAgdmFyIHRhcmdldCA9IGtleVZlbnQudGFyZ2V0O1xyXG4gICAgICAgIHZhciBkYXRlQ3VycmVudCA9IGdldEN1cnJlbnREYXRlKGNvbnRhaW5lcik7XHJcblxyXG4gICAgICAgIGlmICghZGF0ZUN1cnJlbnQpIHtcclxuICAgICAgICAgICAgZGF0ZUN1cnJlbnQgPSAkKCdhLnVpLXN0YXRlLWRlZmF1bHQnKVswXTtcclxuICAgICAgICAgICAgc2V0SGlnaGxpZ2h0U3RhdGUoZGF0ZUN1cnJlbnQsIGNvbnRhaW5lcik7XHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICBpZiAoMjcgPT09IHdoaWNoKSB7XHJcbiAgICAgICAgICAgIGtleVZlbnQuc3RvcFByb3BhZ2F0aW9uKCk7XHJcbiAgICAgICAgICAgIHJldHVybiBjbG9zZUNhbGVuZGFyKCk7XHJcbiAgICAgICAgfSBlbHNlIGlmICh3aGljaCA9PT0gOSAmJiBrZXlWZW50LnNoaWZ0S2V5KSB7IC8vIFNISUZUICsgVEFCXHJcbiAgICAgICAgICAgIGtleVZlbnQucHJldmVudERlZmF1bHQoKTtcclxuICAgICAgICAgICAgaWYgKCQodGFyZ2V0KS5oYXNDbGFzcygndWktZGF0ZXBpY2tlci1jbG9zZScpKSB7IC8vIGNsb3NlIGJ1dHRvblxyXG4gICAgICAgICAgICAgICAgJCgnLnVpLWRhdGVwaWNrZXItcHJldicpWzBdLmZvY3VzKCk7XHJcbiAgICAgICAgICAgIH0gZWxzZSBpZiAoJCh0YXJnZXQpLmhhc0NsYXNzKCd1aS1zdGF0ZS1kZWZhdWx0JykpIHsgLy8gYSBkYXRlIGxpbmtcclxuICAgICAgICAgICAgICAgICQoJy51aS1kYXRlcGlja2VyLWNsb3NlJylbMF0uZm9jdXMoKTtcclxuICAgICAgICAgICAgfSBlbHNlIGlmICgkKHRhcmdldCkuaGFzQ2xhc3MoJ3VpLWRhdGVwaWNrZXItcHJldicpKSB7IC8vIHRoZSBwcmV2IGxpbmtcclxuICAgICAgICAgICAgICAgICQoJy51aS1kYXRlcGlja2VyLW5leHQnKVswXS5mb2N1cygpO1xyXG4gICAgICAgICAgICB9IGVsc2UgaWYgKCQodGFyZ2V0KS5oYXNDbGFzcygndWktZGF0ZXBpY2tlci1uZXh0JykpIHsgLy8gdGhlIG5leHQgbGlua1xyXG4gICAgICAgICAgICAgICAgYWN0aXZlRGF0ZSA9ICQoJy51aS1zdGF0ZS1oaWdobGlnaHQnKSB8fFxyXG4gICAgICAgICAgICAgICAgICAgICQoJy51aS1zdGF0ZS1hY3RpdmUnKVswXTtcclxuICAgICAgICAgICAgICAgIGlmIChhY3RpdmVEYXRlKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgYWN0aXZlRGF0ZS5mb2N1cygpO1xyXG4gICAgICAgICAgICAgICAgfVxyXG4gICAgICAgICAgICB9XHJcbiAgICAgICAgfSBlbHNlIGlmICh3aGljaCA9PT0gOSkgeyAvLyBUQUJcclxuICAgICAgICAgICAga2V5VmVudC5wcmV2ZW50RGVmYXVsdCgpO1xyXG4gICAgICAgICAgICBpZiAoJCh0YXJnZXQpLmhhc0NsYXNzKCd1aS1kYXRlcGlja2VyLWNsb3NlJykpIHsgLy8gY2xvc2UgYnV0dG9uXHJcbiAgICAgICAgICAgICAgICBhY3RpdmVEYXRlID0gJCgnLnVpLXN0YXRlLWhpZ2hsaWdodCcpIHx8XHJcbiAgICAgICAgICAgICAgICAgICAgJCgnLnVpLXN0YXRlLWFjdGl2ZScpWzBdO1xyXG4gICAgICAgICAgICAgICAgaWYgKGFjdGl2ZURhdGUpIHtcclxuICAgICAgICAgICAgICAgICAgICBhY3RpdmVEYXRlLmZvY3VzKCk7XHJcbiAgICAgICAgICAgICAgICB9XHJcbiAgICAgICAgICAgIH0gZWxzZSBpZiAoJCh0YXJnZXQpLmhhc0NsYXNzKCd1aS1zdGF0ZS1kZWZhdWx0JykpIHtcclxuICAgICAgICAgICAgICAgICQoJy51aS1kYXRlcGlja2VyLW5leHQnKVswXS5mb2N1cygpO1xyXG4gICAgICAgICAgICB9IGVsc2UgaWYgKCQodGFyZ2V0KS5oYXNDbGFzcygndWktZGF0ZXBpY2tlci1uZXh0JykpIHtcclxuICAgICAgICAgICAgICAgICQoJy51aS1kYXRlcGlja2VyLXByZXYnKVswXS5mb2N1cygpO1xyXG4gICAgICAgICAgICB9IGVsc2UgaWYgKCQodGFyZ2V0KS5oYXNDbGFzcygndWktZGF0ZXBpY2tlci1wcmV2JykpIHtcclxuICAgICAgICAgICAgICAgICQoJy51aS1kYXRlcGlja2VyLWNsb3NlJylbMF0uZm9jdXMoKTtcclxuICAgICAgICAgICAgfVxyXG4gICAgICAgIH0gZWxzZSBpZiAod2hpY2ggPT09IDM3KSB7IC8vIExFRlQgYXJyb3cga2V5XHJcbiAgICAgICAgICAgIC8vIGlmIHdlJ3JlIG9uIGEgZGF0ZSBsaW5rLi4uXHJcbiAgICAgICAgICAgIGlmICghJCh0YXJnZXQpLmhhc0NsYXNzKCd1aS1kYXRlcGlja2VyLWNsb3NlJykgJiYgJCh0YXJnZXQpLmhhc0NsYXNzKCd1aS1zdGF0ZS1kZWZhdWx0JykpIHtcclxuICAgICAgICAgICAgICAgIGtleVZlbnQucHJldmVudERlZmF1bHQoKTtcclxuICAgICAgICAgICAgICAgIHByZXZpb3VzRGF5KHRhcmdldCk7XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICB9IGVsc2UgaWYgKHdoaWNoID09PSAzOSkgeyAvLyBSSUdIVCBhcnJvdyBrZXlcclxuICAgICAgICAgICAgLy8gaWYgd2UncmUgb24gYSBkYXRlIGxpbmsuLi5cclxuICAgICAgICAgICAgaWYgKCEkKHRhcmdldCkuaGFzQ2xhc3MoJ3VpLWRhdGVwaWNrZXItY2xvc2UnKSAmJiAkKHRhcmdldCkuaGFzQ2xhc3MoJ3VpLXN0YXRlLWRlZmF1bHQnKSkge1xyXG4gICAgICAgICAgICAgICAga2V5VmVudC5wcmV2ZW50RGVmYXVsdCgpO1xyXG4gICAgICAgICAgICAgICAgbmV4dERheSh0YXJnZXQpO1xyXG4gICAgICAgICAgICB9XHJcbiAgICAgICAgfSBlbHNlIGlmICh3aGljaCA9PT0gMzgpIHsgLy8gVVAgYXJyb3cga2V5XHJcbiAgICAgICAgICAgIGlmICghJCh0YXJnZXQpLmhhc0NsYXNzKCd1aS1kYXRlcGlja2VyLWNsb3NlJykgJiYgJCh0YXJnZXQpLmhhc0NsYXNzKCd1aS1zdGF0ZS1kZWZhdWx0JykpIHtcclxuICAgICAgICAgICAgICAgIGtleVZlbnQucHJldmVudERlZmF1bHQoKTtcclxuICAgICAgICAgICAgICAgIHVwSGFuZGxlcih0YXJnZXQsIGNvbnRhaW5lciwgcHJldik7XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICB9IGVsc2UgaWYgKHdoaWNoID09PSA0MCkgeyAvLyBET1dOIGFycm93IGtleVxyXG4gICAgICAgICAgICBpZiAoISQodGFyZ2V0KS5oYXNDbGFzcygndWktZGF0ZXBpY2tlci1jbG9zZScpICYmICQodGFyZ2V0KS5oYXNDbGFzcygndWktc3RhdGUtZGVmYXVsdCcpKSB7XHJcbiAgICAgICAgICAgICAgICBrZXlWZW50LnByZXZlbnREZWZhdWx0KCk7XHJcbiAgICAgICAgICAgICAgICBkb3duSGFuZGxlcih0YXJnZXQsIGNvbnRhaW5lciwgbmV4dCk7XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICB9IGVsc2UgaWYgKHdoaWNoID09PSAxMykgeyAvLyBFTlRFUlxyXG4gICAgICAgICAgICBpZiAoJCh0YXJnZXQpLmhhc0NsYXNzKCd1aS1zdGF0ZS1kZWZhdWx0JykpIHtcclxuICAgICAgICAgICAgICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gKCkge1xyXG4gICAgICAgICAgICAgICAgICAgIGNsb3NlQ2FsZW5kYXIoKTtcclxuICAgICAgICAgICAgICAgIH0sIDEwMCk7XHJcbiAgICAgICAgICAgIH0gZWxzZSBpZiAoJCh0YXJnZXQpLmhhc0NsYXNzKCd1aS1kYXRlcGlja2VyLXByZXYnKSkge1xyXG4gICAgICAgICAgICAgICAgaGFuZGxlUHJldkNsaWNrcygpO1xyXG4gICAgICAgICAgICB9IGVsc2UgaWYgKCQodGFyZ2V0KS5oYXNDbGFzcygndWktZGF0ZXBpY2tlci1uZXh0JykpIHtcclxuICAgICAgICAgICAgICAgIGhhbmRsZU5leHRDbGlja3MoKTtcclxuICAgICAgICAgICAgfVxyXG4gICAgICAgIH0gZWxzZSBpZiAoMzIgPT09IHdoaWNoKSB7XHJcbiAgICAgICAgICAgIGlmICgkKHRhcmdldCkuaGFzQ2xhc3MoJ3VpLWRhdGVwaWNrZXItcHJldicpIHx8ICQodGFyZ2V0KS5oYXNDbGFzcygndWktZGF0ZXBpY2tlci1uZXh0JykpIHtcclxuICAgICAgICAgICAgICAgIHRhcmdldC5jbGljaygpO1xyXG4gICAgICAgICAgICB9XHJcbiAgICAgICAgfSBlbHNlIGlmICgzMyA9PT0gd2hpY2gpIHsgLy8gUEFHRSBVUFxyXG4gICAgICAgICAgICBtb3ZlT25lTW9udGgodGFyZ2V0LCAncHJldicpO1xyXG4gICAgICAgIH0gZWxzZSBpZiAoMzQgPT09IHdoaWNoKSB7IC8vIFBBR0UgRE9XTlxyXG4gICAgICAgICAgICBtb3ZlT25lTW9udGgodGFyZ2V0LCAnbmV4dCcpO1xyXG4gICAgICAgIH0gZWxzZSBpZiAoMzYgPT09IHdoaWNoKSB7IC8vIEhPTUVcclxuICAgICAgICAgICAgdmFyIGZpcnN0T2ZNb250aCA9ICQodGFyZ2V0KS5jbG9zZXN0KCd0Ym9keScpLmZpbmQoJy51aS1zdGF0ZS1kZWZhdWx0JylbMF07XHJcbiAgICAgICAgICAgIGlmIChmaXJzdE9mTW9udGgpIHtcclxuICAgICAgICAgICAgICAgIGZpcnN0T2ZNb250aC5mb2N1cygpO1xyXG4gICAgICAgICAgICAgICAgc2V0SGlnaGxpZ2h0U3RhdGUoZmlyc3RPZk1vbnRoLCAkKCcjdWktZGF0ZXBpY2tlci1kaXYnKVswXSk7XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICB9IGVsc2UgaWYgKDM1ID09PSB3aGljaCkgeyAvLyBFTkRcclxuICAgICAgICAgICAgdmFyICRkYXlzT2ZNb250aCA9ICQodGFyZ2V0KS5jbG9zZXN0KCd0Ym9keScpLmZpbmQoJy51aS1zdGF0ZS1kZWZhdWx0Jyk7XHJcbiAgICAgICAgICAgIHZhciBsYXN0RGF5ID0gJGRheXNPZk1vbnRoWyRkYXlzT2ZNb250aC5sZW5ndGggLSAxXTtcclxuICAgICAgICAgICAgaWYgKGxhc3REYXkpIHtcclxuICAgICAgICAgICAgICAgIGxhc3REYXkuZm9jdXMoKTtcclxuICAgICAgICAgICAgICAgIHNldEhpZ2hsaWdodFN0YXRlKGxhc3REYXksICQoJyN1aS1kYXRlcGlja2VyLWRpdicpWzBdKTtcclxuICAgICAgICAgICAgfVxyXG4gICAgICAgIH1cclxuICAgICAgICAkKFwiLnVpLWRhdGVwaWNrZXItY3VycmVudFwiKS5oaWRlKCk7XHJcbiAgICB9KTtcclxufVxyXG5cclxuZnVuY3Rpb24gY2xvc2VDYWxlbmRhcigpIHtcclxuICAgIHZhciBjb250YWluZXIgPSAkKCcjdWktZGF0ZXBpY2tlci1kaXYnKTtcclxuICAgICQoY29udGFpbmVyKS5vZmYoJ2tleWRvd24nKTtcclxuICAgIHZhciBpbnB1dCA9ICQoJyNkYXRlcGlja2VyJylbMF07XHJcbiAgICAkKGlucHV0KS5kYXRlcGlja2VyKCdoaWRlJyk7XHJcblxyXG4gICAgaW5wdXQuZm9jdXMoKTtcclxufVxyXG5cclxuZnVuY3Rpb24gcmVtb3ZlQXJpYSgpIHtcclxuICAgIC8vIG1ha2UgdGhlIHJlc3Qgb2YgdGhlIHBhZ2UgYWNjZXNzaWJsZSBhZ2FpbjpcclxuICAgICQoXCIjZHAtY29udGFpbmVyXCIpLnJlbW92ZUF0dHIoJ2FyaWEtaGlkZGVuJyk7XHJcbiAgICAkKFwiI3NraXBuYXZcIikucmVtb3ZlQXR0cignYXJpYS1oaWRkZW4nKTtcclxufVxyXG5cclxuLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vL1xyXG4vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vIC8vXHJcbi8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8gLy8gLy9cclxuLy8gVVRJTElUWS1MSUtFIFRISU5HUyAvLyAvLyAvL1xyXG4vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vIC8vIC8vXHJcbi8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8gLy9cclxuLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vL1xyXG5mdW5jdGlvbiBpc09kZChudW0pIHtcclxuICAgIHJldHVybiBudW0gJSAyO1xyXG59XHJcblxyXG5mdW5jdGlvbiBtb3ZlT25lTW9udGgoY3VycmVudERhdGUsIGRpcikge1xyXG4gICAgdmFyIGJ1dHRvbiA9IChkaXIgPT09ICduZXh0JylcclxuICAgICAgICA/ICQoJy51aS1kYXRlcGlja2VyLW5leHQnKVswXVxyXG4gICAgICAgIDogJCgnLnVpLWRhdGVwaWNrZXItcHJldicpWzBdO1xyXG5cclxuICAgIGlmICghYnV0dG9uKSB7XHJcbiAgICAgICAgcmV0dXJuO1xyXG4gICAgfVxyXG5cclxuICAgIHZhciBFTkFCTEVEX1NFTEVDVE9SID0gJyN1aS1kYXRlcGlja2VyLWRpdiB0Ym9keSB0ZDpub3QoLnVpLXN0YXRlLWRpc2FibGVkKSc7XHJcbiAgICB2YXIgJGN1cnJlbnRDZWxscyA9ICQoRU5BQkxFRF9TRUxFQ1RPUik7XHJcbiAgICB2YXIgY3VycmVudElkeCA9ICQuaW5BcnJheShjdXJyZW50RGF0ZS5wYXJlbnROb2RlLCAkY3VycmVudENlbGxzKTtcclxuXHJcbiAgICBidXR0b24uY2xpY2soKTtcclxuICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gKCkge1xyXG4gICAgICAgIHVwZGF0ZUhlYWRlckVsZW1lbnRzKCk7XHJcblxyXG4gICAgICAgIHZhciAkbmV3Q2VsbHMgPSAkKEVOQUJMRURfU0VMRUNUT1IpO1xyXG4gICAgICAgIHZhciBuZXdUZCA9ICRuZXdDZWxsc1tjdXJyZW50SWR4XTtcclxuICAgICAgICB2YXIgbmV3QW5jaG9yID0gbmV3VGQgJiYgJChuZXdUZCkuZmluZCgnYScpWzBdO1xyXG5cclxuICAgICAgICB3aGlsZSAoIW5ld0FuY2hvcikge1xyXG4gICAgICAgICAgICBjdXJyZW50SWR4LS07XHJcbiAgICAgICAgICAgIG5ld1RkID0gJG5ld0NlbGxzW2N1cnJlbnRJZHhdO1xyXG4gICAgICAgICAgICBuZXdBbmNob3IgPSBuZXdUZCAmJiAkKG5ld1RkKS5maW5kKCdhJylbMF07XHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICBzZXRIaWdobGlnaHRTdGF0ZShuZXdBbmNob3IsICQoJyN1aS1kYXRlcGlja2VyLWRpdicpWzBdKTtcclxuICAgICAgICBuZXdBbmNob3IuZm9jdXMoKTtcclxuXHJcbiAgICB9LCAwKTtcclxuXHJcbn1cclxuXHJcbmZ1bmN0aW9uIGhhbmRsZU5leHRDbGlja3MoKSB7XHJcbiAgICBzZXRUaW1lb3V0KGZ1bmN0aW9uICgpIHtcclxuICAgICAgICB1cGRhdGVIZWFkZXJFbGVtZW50cygpO1xyXG4gICAgICAgIHByZXBIaWdobGlnaHRTdGF0ZSgpO1xyXG4gICAgICAgICQoJy51aS1kYXRlcGlja2VyLW5leHQnKS5mb2N1cygpO1xyXG4gICAgICAgICQoXCIudWktZGF0ZXBpY2tlci1jdXJyZW50XCIpLmhpZGUoKTtcclxuICAgIH0sIDApO1xyXG59XHJcblxyXG5mdW5jdGlvbiBoYW5kbGVQcmV2Q2xpY2tzKCkge1xyXG4gICAgc2V0VGltZW91dChmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgdXBkYXRlSGVhZGVyRWxlbWVudHMoKTtcclxuICAgICAgICBwcmVwSGlnaGxpZ2h0U3RhdGUoKTtcclxuICAgICAgICAkKCcudWktZGF0ZXBpY2tlci1wcmV2JykuZm9jdXMoKTtcclxuICAgICAgICAkKFwiLnVpLWRhdGVwaWNrZXItY3VycmVudFwiKS5oaWRlKCk7XHJcbiAgICB9LCAwKTtcclxufVxyXG5cclxuZnVuY3Rpb24gcHJldmlvdXNEYXkoZGF0ZUxpbmspIHtcclxuICAgIHZhciBjb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndWktZGF0ZXBpY2tlci1kaXYnKTtcclxuICAgIGlmICghZGF0ZUxpbmspIHtcclxuICAgICAgICByZXR1cm47XHJcbiAgICB9XHJcbiAgICB2YXIgdGQgPSAkKGRhdGVMaW5rKS5jbG9zZXN0KCd0ZCcpO1xyXG4gICAgaWYgKCF0ZCkge1xyXG4gICAgICAgIHJldHVybjtcclxuICAgIH1cclxuXHJcbiAgICB2YXIgcHJldlRkID0gJCh0ZCkucHJldigpLFxyXG4gICAgICAgIHByZXZEYXRlTGluayA9ICQoJ2EudWktc3RhdGUtZGVmYXVsdCcsIHByZXZUZClbMF07XHJcblxyXG4gICAgaWYgKHByZXZUZCAmJiBwcmV2RGF0ZUxpbmspIHtcclxuICAgICAgICBzZXRIaWdobGlnaHRTdGF0ZShwcmV2RGF0ZUxpbmssIGNvbnRhaW5lcik7XHJcbiAgICAgICAgcHJldkRhdGVMaW5rLmZvY3VzKCk7XHJcbiAgICB9IGVsc2Uge1xyXG4gICAgICAgIGhhbmRsZVByZXZpb3VzKGRhdGVMaW5rKTtcclxuICAgIH1cclxufVxyXG5cclxuXHJcbmZ1bmN0aW9uIGhhbmRsZVByZXZpb3VzKHRhcmdldCkge1xyXG4gICAgdmFyIGNvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd1aS1kYXRlcGlja2VyLWRpdicpO1xyXG4gICAgaWYgKCF0YXJnZXQpIHtcclxuICAgICAgICByZXR1cm47XHJcbiAgICB9XHJcbiAgICB2YXIgY3VycmVudFJvdyA9ICQodGFyZ2V0KS5jbG9zZXN0KCd0cicpO1xyXG4gICAgaWYgKCFjdXJyZW50Um93KSB7XHJcbiAgICAgICAgcmV0dXJuO1xyXG4gICAgfVxyXG4gICAgdmFyIHByZXZpb3VzUm93ID0gJChjdXJyZW50Um93KS5wcmV2KCk7XHJcblxyXG4gICAgaWYgKCFwcmV2aW91c1JvdyB8fCBwcmV2aW91c1Jvdy5sZW5ndGggPT09IDApIHtcclxuICAgICAgICAvLyB0aGVyZSBpcyBub3QgcHJldmlvdXMgcm93LCBzbyB3ZSBnbyB0byBwcmV2aW91cyBtb250aC4uLlxyXG4gICAgICAgIHByZXZpb3VzTW9udGgoKTtcclxuICAgIH0gZWxzZSB7XHJcbiAgICAgICAgdmFyIHByZXZSb3dEYXRlcyA9ICQoJ3RkIGEudWktc3RhdGUtZGVmYXVsdCcsIHByZXZpb3VzUm93KTtcclxuICAgICAgICB2YXIgcHJldlJvd0RhdGUgPSBwcmV2Um93RGF0ZXNbcHJldlJvd0RhdGVzLmxlbmd0aCAtIDFdO1xyXG5cclxuICAgICAgICBpZiAocHJldlJvd0RhdGUpIHtcclxuICAgICAgICAgICAgc2V0VGltZW91dChmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgICAgICAgICBzZXRIaWdobGlnaHRTdGF0ZShwcmV2Um93RGF0ZSwgY29udGFpbmVyKTtcclxuICAgICAgICAgICAgICAgIHByZXZSb3dEYXRlLmZvY3VzKCk7XHJcbiAgICAgICAgICAgIH0sIDApO1xyXG4gICAgICAgIH1cclxuICAgIH1cclxufVxyXG5cclxuZnVuY3Rpb24gcHJldmlvdXNNb250aCgpIHtcclxuICAgIHZhciBwcmV2TGluayA9ICQoJy51aS1kYXRlcGlja2VyLXByZXYnKVswXTtcclxuICAgIHZhciBjb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndWktZGF0ZXBpY2tlci1kaXYnKTtcclxuICAgIHByZXZMaW5rLmNsaWNrKCk7XHJcbiAgICAvLyBmb2N1cyBsYXN0IGRheSBvZiBuZXcgbW9udGhcclxuICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gKCkge1xyXG4gICAgICAgIHZhciB0cnMgPSAkKCd0cicsIGNvbnRhaW5lciksXHJcbiAgICAgICAgICAgIGxhc3RSb3dUZExpbmtzID0gJCgndGQgYS51aS1zdGF0ZS1kZWZhdWx0JywgdHJzW3Rycy5sZW5ndGggLSAxXSksXHJcbiAgICAgICAgICAgIGxhc3REYXRlID0gbGFzdFJvd1RkTGlua3NbbGFzdFJvd1RkTGlua3MubGVuZ3RoIC0gMV07XHJcblxyXG4gICAgICAgIC8vIHVwZGF0aW5nIHRoZSBjYWNoZWQgaGVhZGVyIGVsZW1lbnRzXHJcbiAgICAgICAgdXBkYXRlSGVhZGVyRWxlbWVudHMoKTtcclxuXHJcbiAgICAgICAgc2V0SGlnaGxpZ2h0U3RhdGUobGFzdERhdGUsIGNvbnRhaW5lcik7XHJcbiAgICAgICAgbGFzdERhdGUuZm9jdXMoKTtcclxuXHJcbiAgICB9LCAwKTtcclxufVxyXG5cclxuLy8vLy8vLy8vLy8vLy8vLy8gTkVYVCAvLy8vLy8vLy8vLy8vLy8vL1xyXG4vKipcclxuICogSGFuZGxlcyByaWdodCBhcnJvdyBrZXkgbmF2aWdhdGlvblxyXG4gKiBAcGFyYW0gIHtIVE1MRWxlbWVudH0gZGF0ZUxpbmsgVGhlIHRhcmdldCBvZiB0aGUga2V5Ym9hcmQgZXZlbnRcclxuICovXHJcbmZ1bmN0aW9uIG5leHREYXkoZGF0ZUxpbmspIHtcclxuICAgIHZhciBjb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndWktZGF0ZXBpY2tlci1kaXYnKTtcclxuICAgIGlmICghZGF0ZUxpbmspIHtcclxuICAgICAgICByZXR1cm47XHJcbiAgICB9XHJcbiAgICB2YXIgdGQgPSAkKGRhdGVMaW5rKS5jbG9zZXN0KCd0ZCcpO1xyXG4gICAgaWYgKCF0ZCkge1xyXG4gICAgICAgIHJldHVybjtcclxuICAgIH1cclxuICAgIHZhciBuZXh0VGQgPSAkKHRkKS5uZXh0KCksXHJcbiAgICAgICAgbmV4dERhdGVMaW5rID0gJCgnYS51aS1zdGF0ZS1kZWZhdWx0JywgbmV4dFRkKVswXTtcclxuXHJcbiAgICBpZiAobmV4dFRkICYmIG5leHREYXRlTGluaykge1xyXG4gICAgICAgIHNldEhpZ2hsaWdodFN0YXRlKG5leHREYXRlTGluaywgY29udGFpbmVyKTtcclxuICAgICAgICBuZXh0RGF0ZUxpbmsuZm9jdXMoKTsgLy8gdGhlIG5leHQgZGF5IChzYW1lIHJvdylcclxuICAgIH0gZWxzZSB7XHJcbiAgICAgICAgaGFuZGxlTmV4dChkYXRlTGluayk7XHJcbiAgICB9XHJcbn1cclxuXHJcbmZ1bmN0aW9uIGhhbmRsZU5leHQodGFyZ2V0KSB7XHJcbiAgICB2YXIgY29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3VpLWRhdGVwaWNrZXItZGl2Jyk7XHJcbiAgICBpZiAoIXRhcmdldCkge1xyXG4gICAgICAgIHJldHVybjtcclxuICAgIH1cclxuICAgIHZhciBjdXJyZW50Um93ID0gJCh0YXJnZXQpLmNsb3Nlc3QoJ3RyJyksXHJcbiAgICAgICAgbmV4dFJvdyA9ICQoY3VycmVudFJvdykubmV4dCgpO1xyXG5cclxuICAgIGlmICghbmV4dFJvdyB8fCBuZXh0Um93Lmxlbmd0aCA9PT0gMCkge1xyXG4gICAgICAgIG5leHRNb250aCgpO1xyXG4gICAgfSBlbHNlIHtcclxuICAgICAgICB2YXIgbmV4dFJvd0ZpcnN0RGF0ZSA9ICQoJ2EudWktc3RhdGUtZGVmYXVsdCcsIG5leHRSb3cpWzBdO1xyXG4gICAgICAgIGlmIChuZXh0Um93Rmlyc3REYXRlKSB7XHJcbiAgICAgICAgICAgIHNldEhpZ2hsaWdodFN0YXRlKG5leHRSb3dGaXJzdERhdGUsIGNvbnRhaW5lcik7XHJcbiAgICAgICAgICAgIG5leHRSb3dGaXJzdERhdGUuZm9jdXMoKTtcclxuICAgICAgICB9XHJcbiAgICB9XHJcbn1cclxuXHJcbmZ1bmN0aW9uIG5leHRNb250aCgpIHtcclxuICAgIG5leHRNb24gPSAkKCcudWktZGF0ZXBpY2tlci1uZXh0JylbMF07XHJcbiAgICB2YXIgY29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3VpLWRhdGVwaWNrZXItZGl2Jyk7XHJcbiAgICBuZXh0TW9uLmNsaWNrKCk7XHJcbiAgICAvLyBmb2N1cyB0aGUgZmlyc3QgZGF5IG9mIHRoZSBuZXcgbW9udGhcclxuICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gKCkge1xyXG4gICAgICAgIC8vIHVwZGF0aW5nIHRoZSBjYWNoZWQgaGVhZGVyIGVsZW1lbnRzXHJcbiAgICAgICAgdXBkYXRlSGVhZGVyRWxlbWVudHMoKTtcclxuXHJcbiAgICAgICAgdmFyIGZpcnN0RGF0ZSA9ICQoJ2EudWktc3RhdGUtZGVmYXVsdCcsIGNvbnRhaW5lcilbMF07XHJcbiAgICAgICAgc2V0SGlnaGxpZ2h0U3RhdGUoZmlyc3REYXRlLCBjb250YWluZXIpO1xyXG4gICAgICAgIGZpcnN0RGF0ZS5mb2N1cygpO1xyXG4gICAgfSwgMCk7XHJcbn1cclxuXHJcbi8vLy8vLy8vLy8vIFVQIC8vLy8vLy8vLy8vXHJcbi8qKlxyXG4gKiBIYW5kbGUgdGhlIHVwIGFycm93IG5hdmlnYXRpb24gdGhyb3VnaCBkYXRlc1xyXG4gKiBAcGFyYW0gIHtIVE1MRWxlbWVudH0gdGFyZ2V0ICAgVGhlIHRhcmdldCBvZiB0aGUga2V5Ym9hcmQgZXZlbnQgKGRheSlcclxuICogQHBhcmFtICB7SFRNTEVsZW1lbnR9IGNvbnQgICAgIFRoZSBjYWxlbmRhciBjb250YWluZXJcclxuICogQHBhcmFtICB7SFRNTEVsZW1lbnR9IHByZXZMaW5rIExpbmsgdG8gbmF2aWdhdGUgdG8gcHJldmlvdXMgbW9udGhcclxuICovXHJcbmZ1bmN0aW9uIHVwSGFuZGxlcih0YXJnZXQsIGNvbnQsIHByZXZMaW5rKSB7XHJcbiAgICBwcmV2TGluayA9ICQoJy51aS1kYXRlcGlja2VyLXByZXYnKVswXTtcclxuICAgIHZhciByb3dDb250ZXh0ID0gJCh0YXJnZXQpLmNsb3Nlc3QoJ3RyJyk7XHJcbiAgICBpZiAoIXJvd0NvbnRleHQpIHtcclxuICAgICAgICByZXR1cm47XHJcbiAgICB9XHJcbiAgICB2YXIgcm93VGRzID0gJCgndGQnLCByb3dDb250ZXh0KSxcclxuICAgICAgICByb3dMaW5rcyA9ICQoJ2EudWktc3RhdGUtZGVmYXVsdCcsIHJvd0NvbnRleHQpLFxyXG4gICAgICAgIHRhcmdldEluZGV4ID0gJC5pbkFycmF5KHRhcmdldCwgcm93TGlua3MpLFxyXG4gICAgICAgIHByZXZSb3cgPSAkKHJvd0NvbnRleHQpLnByZXYoKSxcclxuICAgICAgICBwcmV2Um93VGRzID0gJCgndGQnLCBwcmV2Um93KSxcclxuICAgICAgICBwYXJhbGxlbCA9IHByZXZSb3dUZHNbdGFyZ2V0SW5kZXhdLFxyXG4gICAgICAgIGxpbmtDaGVjayA9ICQoJ2EudWktc3RhdGUtZGVmYXVsdCcsIHBhcmFsbGVsKVswXTtcclxuXHJcbiAgICBpZiAocHJldlJvdyAmJiBwYXJhbGxlbCAmJiBsaW5rQ2hlY2spIHtcclxuICAgICAgICAvLyB0aGVyZSBpcyBhIHByZXZpb3VzIHJvdywgYSB0ZCBhdCB0aGUgc2FtZSBpbmRleFxyXG4gICAgICAgIC8vIG9mIHRoZSB0YXJnZXQgQU5EIHRoZXJlcyBhIGxpbmsgaW4gdGhhdCB0ZFxyXG4gICAgICAgIHNldEhpZ2hsaWdodFN0YXRlKGxpbmtDaGVjaywgY29udCk7XHJcbiAgICAgICAgbGlua0NoZWNrLmZvY3VzKCk7XHJcbiAgICB9IGVsc2Uge1xyXG4gICAgICAgIC8vIHdlJ3JlIGVpdGhlciBvbiB0aGUgZmlyc3Qgcm93IG9mIGEgbW9udGgsIG9yIHdlJ3JlIG9uIHRoZVxyXG4gICAgICAgIC8vIHNlY29uZCBhbmQgdGhlcmUgaXMgbm90IGEgZGF0ZSBsaW5rIGRpcmVjdGx5IGFib3ZlIHRoZSB0YXJnZXRcclxuICAgICAgICBwcmV2TGluay5jbGljaygpO1xyXG4gICAgICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gKCkge1xyXG4gICAgICAgICAgICAvLyB1cGRhdGluZyB0aGUgY2FjaGVkIGhlYWRlciBlbGVtZW50c1xyXG4gICAgICAgICAgICB1cGRhdGVIZWFkZXJFbGVtZW50cygpO1xyXG4gICAgICAgICAgICB2YXIgbmV3Um93cyA9ICQoJ3RyJywgY29udCksXHJcbiAgICAgICAgICAgICAgICBsYXN0Um93ID0gbmV3Um93c1tuZXdSb3dzLmxlbmd0aCAtIDFdLFxyXG4gICAgICAgICAgICAgICAgbGFzdFJvd1RkcyA9ICQoJ3RkJywgbGFzdFJvdyksXHJcbiAgICAgICAgICAgICAgICB0ZFBhcmFsbGVsSW5kZXggPSAkLmluQXJyYXkodGFyZ2V0LnBhcmVudE5vZGUsIHJvd1RkcyksXHJcbiAgICAgICAgICAgICAgICBuZXdQYXJhbGxlbCA9IGxhc3RSb3dUZHNbdGRQYXJhbGxlbEluZGV4XSxcclxuICAgICAgICAgICAgICAgIG5ld0NoZWNrID0gJCgnYS51aS1zdGF0ZS1kZWZhdWx0JywgbmV3UGFyYWxsZWwpWzBdO1xyXG5cclxuICAgICAgICAgICAgaWYgKGxhc3RSb3cgJiYgbmV3UGFyYWxsZWwgJiYgbmV3Q2hlY2spIHtcclxuICAgICAgICAgICAgICAgIHNldEhpZ2hsaWdodFN0YXRlKG5ld0NoZWNrLCBjb250KTtcclxuICAgICAgICAgICAgICAgIG5ld0NoZWNrLmZvY3VzKCk7XHJcbiAgICAgICAgICAgIH0gZWxzZSB7XHJcbiAgICAgICAgICAgICAgICAvLyB0aGVyZXMgbm8gZGF0ZSBsaW5rIG9uIHRoZSBsYXN0IHdlZWsgKHJvdykgb2YgdGhlIG5ldyBtb250aFxyXG4gICAgICAgICAgICAgICAgLy8gbWVhbmluZyBpdHMgYW4gZW1wdHkgY2VsbCwgc28gd2UnbGwgdHJ5IHRoZSAybmQgdG8gbGFzdCB3ZWVrXHJcbiAgICAgICAgICAgICAgICB2YXIgc2Vjb25kTGFzdFJvdyA9IG5ld1Jvd3NbbmV3Um93cy5sZW5ndGggLSAyXSxcclxuICAgICAgICAgICAgICAgICAgICBzZWNvbmRUZHMgPSAkKCd0ZCcsIHNlY29uZExhc3RSb3cpLFxyXG4gICAgICAgICAgICAgICAgICAgIHRhcmdldFRkID0gc2Vjb25kVGRzW3RkUGFyYWxsZWxJbmRleF0sXHJcbiAgICAgICAgICAgICAgICAgICAgbGlua0NoZWNrID0gJCgnYS51aS1zdGF0ZS1kZWZhdWx0JywgdGFyZ2V0VGQpWzBdO1xyXG5cclxuICAgICAgICAgICAgICAgIGlmIChsaW5rQ2hlY2spIHtcclxuICAgICAgICAgICAgICAgICAgICBzZXRIaWdobGlnaHRTdGF0ZShsaW5rQ2hlY2ssIGNvbnQpO1xyXG4gICAgICAgICAgICAgICAgICAgIGxpbmtDaGVjay5mb2N1cygpO1xyXG4gICAgICAgICAgICAgICAgfVxyXG5cclxuICAgICAgICAgICAgfVxyXG4gICAgICAgIH0sIDApO1xyXG4gICAgfVxyXG59XHJcblxyXG4vLy8vLy8vLy8vLy8vLy8vIERPV04gLy8vLy8vLy8vLy8vLy8vL1xyXG4vKipcclxuICogSGFuZGxlcyBkb3duIGFycm93IG5hdmlnYXRpb24gdGhyb3VnaCBkYXRlcyBpbiBjYWxlbmRhclxyXG4gKiBAcGFyYW0gIHtIVE1MRWxlbWVudH0gdGFyZ2V0ICAgVGhlIHRhcmdldCBvZiB0aGUga2V5Ym9hcmQgZXZlbnQgKGRheSlcclxuICogQHBhcmFtICB7SFRNTEVsZW1lbnR9IGNvbnQgICAgIFRoZSBjYWxlbmRhciBjb250YWluZXJcclxuICogQHBhcmFtICB7SFRNTEVsZW1lbnR9IG5leHRMaW5rIExpbmsgdG8gbmF2aWdhdGUgdG8gbmV4dCBtb250aFxyXG4gKi9cclxuZnVuY3Rpb24gZG93bkhhbmRsZXIodGFyZ2V0LCBjb250LCBuZXh0TGluaykge1xyXG4gICAgbmV4dExpbmsgPSAkKCcudWktZGF0ZXBpY2tlci1uZXh0JylbMF07XHJcbiAgICB2YXIgdGFyZ2V0Um93ID0gJCh0YXJnZXQpLmNsb3Nlc3QoJ3RyJyk7XHJcbiAgICBpZiAoIXRhcmdldFJvdykge1xyXG4gICAgICAgIHJldHVybjtcclxuICAgIH1cclxuICAgIHZhciB0YXJnZXRDZWxscyA9ICQoJ3RkJywgdGFyZ2V0Um93KSxcclxuICAgICAgICBjZWxsSW5kZXggPSAkLmluQXJyYXkodGFyZ2V0LnBhcmVudE5vZGUsIHRhcmdldENlbGxzKSwgLy8gdGhlIHRkIChwYXJlbnQgb2YgdGFyZ2V0KSBpbmRleFxyXG4gICAgICAgIG5leHRSb3cgPSAkKHRhcmdldFJvdykubmV4dCgpLFxyXG4gICAgICAgIG5leHRSb3dDZWxscyA9ICQoJ3RkJywgbmV4dFJvdyksXHJcbiAgICAgICAgbmV4dFdlZWtUZCA9IG5leHRSb3dDZWxsc1tjZWxsSW5kZXhdLFxyXG4gICAgICAgIG5leHRXZWVrQ2hlY2sgPSAkKCdhLnVpLXN0YXRlLWRlZmF1bHQnLCBuZXh0V2Vla1RkKVswXTtcclxuXHJcbiAgICBpZiAobmV4dFJvdyAmJiBuZXh0V2Vla1RkICYmIG5leHRXZWVrQ2hlY2spIHtcclxuICAgICAgICAvLyB0aGVyZXMgYSBuZXh0IHJvdywgYSBURCBhdCB0aGUgc2FtZSBpbmRleCBvZiBgdGFyZ2V0YCxcclxuICAgICAgICAvLyBhbmQgdGhlcmVzIGFuIGFuY2hvciB3aXRoaW4gdGhhdCB0ZFxyXG4gICAgICAgIHNldEhpZ2hsaWdodFN0YXRlKG5leHRXZWVrQ2hlY2ssIGNvbnQpO1xyXG4gICAgICAgIG5leHRXZWVrQ2hlY2suZm9jdXMoKTtcclxuICAgIH0gZWxzZSB7XHJcbiAgICAgICAgbmV4dExpbmsuY2xpY2soKTtcclxuXHJcbiAgICAgICAgc2V0VGltZW91dChmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgICAgIC8vIHVwZGF0aW5nIHRoZSBjYWNoZWQgaGVhZGVyIGVsZW1lbnRzXHJcbiAgICAgICAgICAgIHVwZGF0ZUhlYWRlckVsZW1lbnRzKCk7XHJcblxyXG4gICAgICAgICAgICB2YXIgbmV4dE1vbnRoVHJzID0gJCgndGJvZHkgdHInLCBjb250KSxcclxuICAgICAgICAgICAgICAgIGZpcnN0VGRzID0gJCgndGQnLCBuZXh0TW9udGhUcnNbMF0pLFxyXG4gICAgICAgICAgICAgICAgZmlyc3RQYXJhbGxlbCA9IGZpcnN0VGRzW2NlbGxJbmRleF0sXHJcbiAgICAgICAgICAgICAgICBmaXJzdENoZWNrID0gJCgnYS51aS1zdGF0ZS1kZWZhdWx0JywgZmlyc3RQYXJhbGxlbClbMF07XHJcblxyXG4gICAgICAgICAgICBpZiAoZmlyc3RQYXJhbGxlbCAmJiBmaXJzdENoZWNrKSB7XHJcbiAgICAgICAgICAgICAgICBzZXRIaWdobGlnaHRTdGF0ZShmaXJzdENoZWNrLCBjb250KTtcclxuICAgICAgICAgICAgICAgIGZpcnN0Q2hlY2suZm9jdXMoKTtcclxuICAgICAgICAgICAgfSBlbHNlIHtcclxuICAgICAgICAgICAgICAgIC8vIGxldHMgdHJ5IHRoZSBzZWNvbmQgcm93IGIvYyB3ZSBkaWRudCBmaW5kIGFcclxuICAgICAgICAgICAgICAgIC8vIGRhdGUgbGluayBpbiB0aGUgZmlyc3Qgcm93IGF0IHRoZSB0YXJnZXQncyBpbmRleFxyXG4gICAgICAgICAgICAgICAgdmFyIHNlY29uZFJvdyA9IG5leHRNb250aFRyc1sxXSxcclxuICAgICAgICAgICAgICAgICAgICBzZWNvbmRUZHMgPSAkKCd0ZCcsIHNlY29uZFJvdyksXHJcbiAgICAgICAgICAgICAgICAgICAgc2Vjb25kUm93VGQgPSBzZWNvbmRUZHNbY2VsbEluZGV4XSxcclxuICAgICAgICAgICAgICAgICAgICBzZWNvbmRDaGVjayA9ICQoJ2EudWktc3RhdGUtZGVmYXVsdCcsIHNlY29uZFJvd1RkKVswXTtcclxuXHJcbiAgICAgICAgICAgICAgICBpZiAoc2Vjb25kUm93ICYmIHNlY29uZENoZWNrKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgc2V0SGlnaGxpZ2h0U3RhdGUoc2Vjb25kQ2hlY2ssIGNvbnQpO1xyXG4gICAgICAgICAgICAgICAgICAgIHNlY29uZENoZWNrLmZvY3VzKCk7XHJcbiAgICAgICAgICAgICAgICB9XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICB9LCAwKTtcclxuICAgIH1cclxufVxyXG5cclxuXHJcbmZ1bmN0aW9uIG9uQ2FsZW5kYXJIaWRlKCkge1xyXG4gICAgY2xvc2VDYWxlbmRhcigpO1xyXG59XHJcblxyXG4vLyBhZGQgYW4gYXJpYS1sYWJlbCB0byB0aGUgZGF0ZSBsaW5rIGluZGljYXRpbmcgdGhlIGN1cnJlbnRseSBmb2N1c2VkIGRhdGVcclxuLy8gKGZvcm1hdHRlZCBpZGVudGljYWxseSB0byB0aGUgcmVxdWlyZWQgZm9ybWF0OiBtbS9kZC95eXl5KVxyXG5mdW5jdGlvbiBtb250aERheVllYXJUZXh0KCkge1xyXG4gICAgdmFyIGNsZWFuVXBzID0gJCgnLmFtYXplLWRhdGUnKTtcclxuXHJcbiAgICAkKGNsZWFuVXBzKS5lYWNoKGZ1bmN0aW9uIChjbGVhbikge1xyXG4gICAgICAgIC8vIGVhY2goY2xlYW5VcHMsIGZ1bmN0aW9uIChjbGVhbikge1xyXG4gICAgICAgIGNsZWFuLnBhcmVudE5vZGUucmVtb3ZlQ2hpbGQoY2xlYW4pO1xyXG4gICAgfSk7XHJcblxyXG4gICAgdmFyIGRhdGVQaWNrRGl2ID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3VpLWRhdGVwaWNrZXItZGl2Jyk7XHJcbiAgICAvLyBpbiBjYXNlIHdlIGZpbmQgbm8gZGF0ZXBpY2sgZGl2XHJcbiAgICBpZiAoIWRhdGVQaWNrRGl2KSB7XHJcbiAgICAgICAgcmV0dXJuO1xyXG4gICAgfVxyXG5cclxuICAgIHZhciBkYXRlcyA9ICQoJ2EudWktc3RhdGUtZGVmYXVsdCcsIGRhdGVQaWNrRGl2KTtcclxuICAgICQoZGF0ZXMpLmF0dHIoJ3JvbGUnLCAnYnV0dG9uJykub24oJ2tleWRvd24nLCBmdW5jdGlvbiAoZSkge1xyXG4gICAgICAgIGlmIChlLndoaWNoID09PSAzMikge1xyXG4gICAgICAgICAgICBlLnByZXZlbnREZWZhdWx0KCk7XHJcbiAgICAgICAgICAgIGUudGFyZ2V0LmNsaWNrKCk7XHJcbiAgICAgICAgICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gKCkge1xyXG4gICAgICAgICAgICAgICAgY2xvc2VDYWxlbmRhcigpO1xyXG4gICAgICAgICAgICB9LCAxMDApO1xyXG4gICAgICAgIH1cclxuICAgIH0pO1xyXG4gICAgJChkYXRlcykuZWFjaChmdW5jdGlvbiAoaW5kZXgsIGRhdGUpIHtcclxuICAgICAgICB2YXIgY3VycmVudFJvdyA9ICQoZGF0ZSkuY2xvc2VzdCgndHInKSxcclxuICAgICAgICAgICAgY3VycmVudFRkcyA9ICQoJ3RkJywgY3VycmVudFJvdyksXHJcbiAgICAgICAgICAgIGN1cnJlbnRJbmRleCA9ICQuaW5BcnJheShkYXRlLnBhcmVudE5vZGUsIGN1cnJlbnRUZHMpLFxyXG4gICAgICAgICAgICBoZWFkVGhzID0gJCgndGhlYWQgdHIgdGgnLCBkYXRlUGlja0RpdiksXHJcbiAgICAgICAgICAgIGRheUluZGV4ID0gaGVhZFRoc1tjdXJyZW50SW5kZXhdLFxyXG4gICAgICAgICAgICBkYXlTcGFuID0gJCgnc3BhbicsIGRheUluZGV4KVswXSxcclxuICAgICAgICAgICAgbW9udGhOYW1lID0gJCgnLnVpLWRhdGVwaWNrZXItbW9udGgnLCBkYXRlUGlja0RpdilbMF0uaW5uZXJIVE1MLFxyXG4gICAgICAgICAgICB5ZWFyID0gJCgnLnVpLWRhdGVwaWNrZXIteWVhcicsIGRhdGVQaWNrRGl2KVswXS5pbm5lckhUTUwsXHJcbiAgICAgICAgICAgIG51bWJlciA9IGRhdGUuaW5uZXJIVE1MO1xyXG5cclxuICAgICAgICBpZiAoIWRheVNwYW4gfHwgIW1vbnRoTmFtZSB8fCAhbnVtYmVyIHx8ICF5ZWFyKSB7XHJcbiAgICAgICAgICAgIHJldHVybjtcclxuICAgICAgICB9XHJcblxyXG4gICAgICAgIC8vIEFUIFJlYWRzOiB7bW9udGh9IHtkYXRlfSB7eWVhcn0ge2RheX1cclxuICAgICAgICAvLyBcIkRlY2VtYmVyIDE4IDIwMTQgVGh1cnNkYXlcIlxyXG4gICAgICAgIHZhciBkYXRlVGV4dCA9IGRhdGUuaW5uZXJIVE1MICsgJyAnICsgbW9udGhOYW1lICsgJyAnICsgeWVhciArICcgJyArIGRheVNwYW4udGl0bGU7XHJcbiAgICAgICAgLy8gQVQgUmVhZHM6IHtkYXRlKG51bWJlcil9IHtuYW1lIG9mIGRheX0ge25hbWUgb2YgbW9udGh9IHt5ZWFyKG51bWJlcil9XHJcbiAgICAgICAgLy8gdmFyIGRhdGVUZXh0ID0gZGF0ZS5pbm5lckhUTUwgKyAnICcgKyBkYXlTcGFuLnRpdGxlICsgJyAnICsgbW9udGhOYW1lICsgJyAnICsgeWVhcjtcclxuICAgICAgICAvLyBhZGQgYW4gYXJpYS1sYWJlbCB0byB0aGUgZGF0ZSBsaW5rIHJlYWRpbmcgb3V0IHRoZSBjdXJyZW50bHkgZm9jdXNlZCBkYXRlXHJcbiAgICAgICAgZGF0ZS5zZXRBdHRyaWJ1dGUoJ2FyaWEtbGFiZWwnLCBkYXRlVGV4dCk7XHJcbiAgICB9KTtcclxufVxyXG5cclxuXHJcblxyXG4vLyB1cGRhdGUgdGhlIGNhY2hlZCBoZWFkZXIgZWxlbWVudHMgYmVjYXVzZSB3ZSdyZSBpbiBhIG5ldyBtb250aCBvciB5ZWFyXHJcbmZ1bmN0aW9uIHVwZGF0ZUhlYWRlckVsZW1lbnRzKCkge1xyXG4gICAgdmFyIGNvbnRleHQgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndWktZGF0ZXBpY2tlci1kaXYnKTtcclxuICAgIGlmICghY29udGV4dCkge1xyXG4gICAgICAgIHJldHVybjtcclxuICAgIH1cclxuXHJcbi8vICAkKGNvbnRleHQpLmZpbmQoJ3RhYmxlJykuZmlyc3QoKS5hdHRyKCdyb2xlJywgJ2dyaWQnKTtcclxuXHJcbiAgICBwcmV2ID0gJCgnLnVpLWRhdGVwaWNrZXItcHJldicsIGNvbnRleHQpWzBdO1xyXG4gICAgbmV4dCA9ICQoJy51aS1kYXRlcGlja2VyLW5leHQnLCBjb250ZXh0KVswXTtcclxuXHJcbiAgICAvL21ha2UgdGhlbSBjbGljay9mb2N1cyAtIGFibGVcclxuICAgIG5leHQuaHJlZiA9ICdqYXZhc2NyaXB0OnZvaWQoMCknO1xyXG4gICAgcHJldi5ocmVmID0gJ2phdmFzY3JpcHQ6dm9pZCgwKSc7XHJcblxyXG4gICAgbmV4dC5zZXRBdHRyaWJ1dGUoJ3JvbGUnLCAnYnV0dG9uJyk7XHJcbiAgICBwcmV2LnNldEF0dHJpYnV0ZSgncm9sZScsICdidXR0b24nKTtcclxuICAgIGFwcGVuZE9mZnNjcmVlbk1vbnRoVGV4dChuZXh0KTtcclxuICAgIGFwcGVuZE9mZnNjcmVlbk1vbnRoVGV4dChwcmV2KTtcclxuXHJcbiAgICAkKG5leHQpLm9uKCdjbGljaycsIGhhbmRsZU5leHRDbGlja3MpO1xyXG4gICAgJChwcmV2KS5vbignY2xpY2snLCBoYW5kbGVQcmV2Q2xpY2tzKTtcclxuXHJcbiAgICAvLyBhZGQgbW9udGggZGF5IHllYXIgdGV4dFxyXG4gICAgbW9udGhEYXlZZWFyVGV4dCgpO1xyXG59XHJcblxyXG5cclxuZnVuY3Rpb24gcHJlcEhpZ2hsaWdodFN0YXRlKCkge1xyXG4gICAgdmFyIGhpZ2hsaWdodDtcclxuICAgIHZhciBjYWdlID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3VpLWRhdGVwaWNrZXItZGl2Jyk7XHJcbiAgICBoaWdobGlnaHQgPSAkKCcudWktc3RhdGUtaGlnaGxpZ2h0JywgY2FnZSlbMF0gfHxcclxuICAgICAgICAkKCcudWktc3RhdGUtZGVmYXVsdCcsIGNhZ2UpWzBdO1xyXG4gICAgaWYgKGhpZ2hsaWdodCAmJiBjYWdlKSB7XHJcbiAgICAgICAgc2V0SGlnaGxpZ2h0U3RhdGUoaGlnaGxpZ2h0LCBjYWdlKTtcclxuICAgIH1cclxufVxyXG5cclxuLy8gU2V0IHRoZSBoaWdobGlnaHRlZCBjbGFzcyB0byBkYXRlIGVsZW1lbnRzLCB3aGVuIGZvY3VzIGlzIHJlY2VpdmVkXHJcbmZ1bmN0aW9uIHNldEhpZ2hsaWdodFN0YXRlKG5ld0hpZ2hsaWdodCwgY29udGFpbmVyKSB7XHJcbiAgICB2YXIgcHJldkhpZ2hsaWdodCA9IGdldEN1cnJlbnREYXRlKGNvbnRhaW5lcik7XHJcbiAgICAvLyByZW1vdmUgdGhlIGhpZ2hsaWdodCBzdGF0ZSBmcm9tIHByZXZpb3VzbHlcclxuICAgIC8vIGhpZ2hsaWdodGVkIGRhdGUgYW5kIGFkZCBpdCB0byBvdXIgbmV3bHkgYWN0aXZlIGRhdGVcclxuICAgICQocHJldkhpZ2hsaWdodCkucmVtb3ZlQ2xhc3MoJ3VpLXN0YXRlLWhpZ2hsaWdodCcpO1xyXG4gICAgJChuZXdIaWdobGlnaHQpLmFkZENsYXNzKCd1aS1zdGF0ZS1oaWdobGlnaHQnKTtcclxufVxyXG5cclxuXHJcbi8vIGdyYWJzIHRoZSBjdXJyZW50IGRhdGUgYmFzZWQgb24gdGhlIGhpZ2hsaWdodCBjbGFzc1xyXG5mdW5jdGlvbiBnZXRDdXJyZW50RGF0ZShjb250YWluZXIpIHtcclxuICAgIHZhciBjdXJyZW50RGF0ZSA9ICQoJy51aS1zdGF0ZS1oaWdobGlnaHQnLCBjb250YWluZXIpWzBdO1xyXG4gICAgcmV0dXJuIGN1cnJlbnREYXRlO1xyXG59XHJcblxyXG4vKipcclxuICogQXBwZW5kcyBsb2dpY2FsIG5leHQvcHJldiBtb250aCB0ZXh0IHRvIHRoZSBidXR0b25zXHJcbiAqIC0gZXg6IE5leHQgTW9udGgsIEphbnVhcnkgMjAxNVxyXG4gKiAgICAgICBQcmV2aW91cyBNb250aCwgTm92ZW1iZXIgMjAxNFxyXG4gKi9cclxuZnVuY3Rpb24gYXBwZW5kT2Zmc2NyZWVuTW9udGhUZXh0KGJ1dHRvbikge1xyXG4gICAgdmFyIGJ1dHRvblRleHQ7XHJcbiAgICB2YXIgaXNOZXh0ID0gJChidXR0b24pLmhhc0NsYXNzKCd1aS1kYXRlcGlja2VyLW5leHQnKTtcclxuICAgIHZhciBtb250aHMgPSBbXHJcbiAgICAgICAgJ2phbnVhcnknLCAnZmVicnVhcnknLFxyXG4gICAgICAgICdtYXJjaCcsICdhcHJpbCcsXHJcbiAgICAgICAgJ21heScsICdqdW5lJywgJ2p1bHknLFxyXG4gICAgICAgICdhdWd1c3QnLCAnc2VwdGVtYmVyJyxcclxuICAgICAgICAnb2N0b2JlcicsXHJcbiAgICAgICAgJ25vdmVtYmVyJywgJ2RlY2VtYmVyJ1xyXG4gICAgXTtcclxuXHJcbiAgICB2YXIgY3VycmVudE1vbnRoID0gJCgnLnVpLWRhdGVwaWNrZXItdGl0bGUgLnVpLWRhdGVwaWNrZXItbW9udGgnKS50ZXh0KCkudG9Mb3dlckNhc2UoKTtcclxuICAgIHZhciBtb250aEluZGV4ID0gJC5pbkFycmF5KGN1cnJlbnRNb250aC50b0xvd2VyQ2FzZSgpLCBtb250aHMpO1xyXG4gICAgdmFyIGN1cnJlbnRZZWFyID0gJCgnLnVpLWRhdGVwaWNrZXItdGl0bGUgLnVpLWRhdGVwaWNrZXIteWVhcicpLnRleHQoKS50b0xvd2VyQ2FzZSgpO1xyXG4gICAgdmFyIGFkamFjZW50SW5kZXggPSAoaXNOZXh0KSA/IG1vbnRoSW5kZXggKyAxIDogbW9udGhJbmRleCAtIDE7XHJcblxyXG4gICAgaWYgKGlzTmV4dCAmJiBjdXJyZW50TW9udGggPT09ICdkZWNlbWJlcicpIHtcclxuICAgICAgICBjdXJyZW50WWVhciA9IHBhcnNlSW50KGN1cnJlbnRZZWFyLCAxMCkgKyAxO1xyXG4gICAgICAgIGFkamFjZW50SW5kZXggPSAwO1xyXG4gICAgfSBlbHNlIGlmICghaXNOZXh0ICYmIGN1cnJlbnRNb250aCA9PT0gJ2phbnVhcnknKSB7XHJcbiAgICAgICAgY3VycmVudFllYXIgPSBwYXJzZUludChjdXJyZW50WWVhciwgMTApIC0gMTtcclxuICAgICAgICBhZGphY2VudEluZGV4ID0gbW9udGhzLmxlbmd0aCAtIDE7XHJcbiAgICB9XHJcblxyXG4gICAgYnV0dG9uVGV4dCA9IChpc05leHQpXHJcbiAgICAgICAgPyAnTmV4dCBNb250aCwgJyArIGZpcnN0VG9DYXAobW9udGhzW2FkamFjZW50SW5kZXhdKSArICcgJyArIGN1cnJlbnRZZWFyXHJcbiAgICAgICAgOiAnUHJldmlvdXMgTW9udGgsICcgKyBmaXJzdFRvQ2FwKG1vbnRoc1thZGphY2VudEluZGV4XSkgKyAnICcgKyBjdXJyZW50WWVhcjtcclxuXHJcbiAgICAkKGJ1dHRvbikuZmluZCgnLnVpLWljb24nKS5odG1sKGJ1dHRvblRleHQpO1xyXG5cclxufVxyXG5cclxuLy8gUmV0dXJucyB0aGUgc3RyaW5nIHdpdGggdGhlIGZpcnN0IGxldHRlciBjYXBpdGFsaXplZFxyXG5mdW5jdGlvbiBmaXJzdFRvQ2FwKHMpIHtcclxuICAgIHJldHVybiBzLmNoYXJBdCgwKS50b1VwcGVyQ2FzZSgpICsgcy5zbGljZSgxKTtcclxufSJdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/js/search/datepicker.js\n");
+// https://dequeuniversity.com/library/aria/date-pickers/sf-date-picker
+// console.log("search.js - datepicker.js");
+
+$(function () {
+    $('#datepicker').datepicker({
+        showOn: 'button',
+        buttonImage: '/assets/images/calendar-blue.svg', // File (and file path) for the calendar image
+        buttonImageOnly: false,
+        buttonText: 'Vis kalender',
+        dayNamesShort: [ "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag" ],
+        showButtonPanel: true,
+        closeText: 'Lukk',
+        onClose: removeAria
+    });
+
+    // Add aria-describedby to the button referring to the label
+    $('.ui-datepicker-trigger').attr('aria-labelledby', 'datepickerLabel');
+
+    dayTripper();
+
+});
+
+function dayTripper() {
+    $('.ui-datepicker-trigger').click(function () {
+        setTimeout(function () {
+            var today = $('.ui-datepicker-today a')[0];
+
+            if (!today) {
+                today = $('.ui-state-active')[0] ||
+                    $('.ui-state-default')[0];
+            }
+
+
+            // Hide the entire page (except the date picker)
+            // from screen readers to prevent document navigation
+            // (by headings, etc.) while the popup is open
+            $("main").attr('id','dp-container');
+            $("#dp-container").attr('aria-hidden','true');
+            $("#skipnav").attr('aria-hidden','true');
+
+            // Hide the "today" button because it doesn't do what
+            // you think it supposed to do
+            $(".ui-datepicker-current").hide();
+
+            today.focus();
+            datePickHandler();
+            $(document).on('click', '#ui-datepicker-div .ui-datepicker-close', function () {
+                closeCalendar();
+            });
+        }, 0);
+    });
+}
+
+function datePickHandler() {
+    var activeDate;
+    var container = document.getElementById('ui-datepicker-div');
+    var input = document.getElementById('datepicker');
+
+    if (!container || !input) {
+        return;
+    }
+
+    // $(container).find('table').first().attr('role', 'grid');
+
+    container.setAttribute('role', 'application');
+    container.setAttribute('aria-label', 'Calendar view date-picker');
+
+    // the top controls:
+    var prev = $('.ui-datepicker-prev', container)[0],
+        next = $('.ui-datepicker-next', container)[0];
+
+
+// This is the line that needs to be fixed for use on pages with base URL set in head
+    next.href = 'javascript:void(0)';
+    prev.href = 'javascript:void(0)';
+
+    next.setAttribute('role', 'button');
+    next.removeAttribute('title');
+    prev.setAttribute('role', 'button');
+    prev.removeAttribute('title');
+
+    appendOffscreenMonthText(next);
+    appendOffscreenMonthText(prev);
+
+    // delegation won't work here for whatever reason, so we are
+    // forced to attach individual click listeners to the prev /
+    // next month buttons each time they are added to the DOM
+    $(next).on('click', handleNextClicks);
+    $(prev).on('click', handlePrevClicks);
+
+    monthDayYearText();
+
+    $(container).on('keydown', function calendarKeyboardListener(keyVent) {
+        var which = keyVent.which;
+        var target = keyVent.target;
+        var dateCurrent = getCurrentDate(container);
+
+        if (!dateCurrent) {
+            dateCurrent = $('a.ui-state-default')[0];
+            setHighlightState(dateCurrent, container);
+        }
+
+        if (27 === which) {
+            keyVent.stopPropagation();
+            return closeCalendar();
+        } else if (which === 9 && keyVent.shiftKey) { // SHIFT + TAB
+            keyVent.preventDefault();
+            if ($(target).hasClass('ui-datepicker-close')) { // close button
+                $('.ui-datepicker-prev')[0].focus();
+            } else if ($(target).hasClass('ui-state-default')) { // a date link
+                $('.ui-datepicker-close')[0].focus();
+            } else if ($(target).hasClass('ui-datepicker-prev')) { // the prev link
+                $('.ui-datepicker-next')[0].focus();
+            } else if ($(target).hasClass('ui-datepicker-next')) { // the next link
+                activeDate = $('.ui-state-highlight') ||
+                    $('.ui-state-active')[0];
+                if (activeDate) {
+                    activeDate.focus();
+                }
+            }
+        } else if (which === 9) { // TAB
+            keyVent.preventDefault();
+            if ($(target).hasClass('ui-datepicker-close')) { // close button
+                activeDate = $('.ui-state-highlight') ||
+                    $('.ui-state-active')[0];
+                if (activeDate) {
+                    activeDate.focus();
+                }
+            } else if ($(target).hasClass('ui-state-default')) {
+                $('.ui-datepicker-next')[0].focus();
+            } else if ($(target).hasClass('ui-datepicker-next')) {
+                $('.ui-datepicker-prev')[0].focus();
+            } else if ($(target).hasClass('ui-datepicker-prev')) {
+                $('.ui-datepicker-close')[0].focus();
+            }
+        } else if (which === 37) { // LEFT arrow key
+            // if we're on a date link...
+            if (!$(target).hasClass('ui-datepicker-close') && $(target).hasClass('ui-state-default')) {
+                keyVent.preventDefault();
+                previousDay(target);
+            }
+        } else if (which === 39) { // RIGHT arrow key
+            // if we're on a date link...
+            if (!$(target).hasClass('ui-datepicker-close') && $(target).hasClass('ui-state-default')) {
+                keyVent.preventDefault();
+                nextDay(target);
+            }
+        } else if (which === 38) { // UP arrow key
+            if (!$(target).hasClass('ui-datepicker-close') && $(target).hasClass('ui-state-default')) {
+                keyVent.preventDefault();
+                upHandler(target, container, prev);
+            }
+        } else if (which === 40) { // DOWN arrow key
+            if (!$(target).hasClass('ui-datepicker-close') && $(target).hasClass('ui-state-default')) {
+                keyVent.preventDefault();
+                downHandler(target, container, next);
+            }
+        } else if (which === 13) { // ENTER
+            if ($(target).hasClass('ui-state-default')) {
+                setTimeout(function () {
+                    closeCalendar();
+                }, 100);
+            } else if ($(target).hasClass('ui-datepicker-prev')) {
+                handlePrevClicks();
+            } else if ($(target).hasClass('ui-datepicker-next')) {
+                handleNextClicks();
+            }
+        } else if (32 === which) {
+            if ($(target).hasClass('ui-datepicker-prev') || $(target).hasClass('ui-datepicker-next')) {
+                target.click();
+            }
+        } else if (33 === which) { // PAGE UP
+            moveOneMonth(target, 'prev');
+        } else if (34 === which) { // PAGE DOWN
+            moveOneMonth(target, 'next');
+        } else if (36 === which) { // HOME
+            var firstOfMonth = $(target).closest('tbody').find('.ui-state-default')[0];
+            if (firstOfMonth) {
+                firstOfMonth.focus();
+                setHighlightState(firstOfMonth, $('#ui-datepicker-div')[0]);
+            }
+        } else if (35 === which) { // END
+            var $daysOfMonth = $(target).closest('tbody').find('.ui-state-default');
+            var lastDay = $daysOfMonth[$daysOfMonth.length - 1];
+            if (lastDay) {
+                lastDay.focus();
+                setHighlightState(lastDay, $('#ui-datepicker-div')[0]);
+            }
+        }
+        $(".ui-datepicker-current").hide();
+    });
+}
+
+function closeCalendar() {
+    var container = $('#ui-datepicker-div');
+    $(container).off('keydown');
+    var input = $('#datepicker')[0];
+    $(input).datepicker('hide');
+
+    input.focus();
+}
+
+function removeAria() {
+    // make the rest of the page accessible again:
+    $("#dp-container").removeAttr('aria-hidden');
+    $("#skipnav").removeAttr('aria-hidden');
+}
+
+///////////////////////////////
+//////////////////////////// //
+///////////////////////// // //
+// UTILITY-LIKE THINGS // // //
+///////////////////////// // //
+//////////////////////////// //
+///////////////////////////////
+function isOdd(num) {
+    return num % 2;
+}
+
+function moveOneMonth(currentDate, dir) {
+    var button = (dir === 'next')
+        ? $('.ui-datepicker-next')[0]
+        : $('.ui-datepicker-prev')[0];
+
+    if (!button) {
+        return;
+    }
+
+    var ENABLED_SELECTOR = '#ui-datepicker-div tbody td:not(.ui-state-disabled)';
+    var $currentCells = $(ENABLED_SELECTOR);
+    var currentIdx = $.inArray(currentDate.parentNode, $currentCells);
+
+    button.click();
+    setTimeout(function () {
+        updateHeaderElements();
+
+        var $newCells = $(ENABLED_SELECTOR);
+        var newTd = $newCells[currentIdx];
+        var newAnchor = newTd && $(newTd).find('a')[0];
+
+        while (!newAnchor) {
+            currentIdx--;
+            newTd = $newCells[currentIdx];
+            newAnchor = newTd && $(newTd).find('a')[0];
+        }
+
+        setHighlightState(newAnchor, $('#ui-datepicker-div')[0]);
+        newAnchor.focus();
+
+    }, 0);
+
+}
+
+function handleNextClicks() {
+    setTimeout(function () {
+        updateHeaderElements();
+        prepHighlightState();
+        $('.ui-datepicker-next').focus();
+        $(".ui-datepicker-current").hide();
+    }, 0);
+}
+
+function handlePrevClicks() {
+    setTimeout(function () {
+        updateHeaderElements();
+        prepHighlightState();
+        $('.ui-datepicker-prev').focus();
+        $(".ui-datepicker-current").hide();
+    }, 0);
+}
+
+function previousDay(dateLink) {
+    var container = document.getElementById('ui-datepicker-div');
+    if (!dateLink) {
+        return;
+    }
+    var td = $(dateLink).closest('td');
+    if (!td) {
+        return;
+    }
+
+    var prevTd = $(td).prev(),
+        prevDateLink = $('a.ui-state-default', prevTd)[0];
+
+    if (prevTd && prevDateLink) {
+        setHighlightState(prevDateLink, container);
+        prevDateLink.focus();
+    } else {
+        handlePrevious(dateLink);
+    }
+}
+
+
+function handlePrevious(target) {
+    var container = document.getElementById('ui-datepicker-div');
+    if (!target) {
+        return;
+    }
+    var currentRow = $(target).closest('tr');
+    if (!currentRow) {
+        return;
+    }
+    var previousRow = $(currentRow).prev();
+
+    if (!previousRow || previousRow.length === 0) {
+        // there is not previous row, so we go to previous month...
+        previousMonth();
+    } else {
+        var prevRowDates = $('td a.ui-state-default', previousRow);
+        var prevRowDate = prevRowDates[prevRowDates.length - 1];
+
+        if (prevRowDate) {
+            setTimeout(function () {
+                setHighlightState(prevRowDate, container);
+                prevRowDate.focus();
+            }, 0);
+        }
+    }
+}
+
+function previousMonth() {
+    var prevLink = $('.ui-datepicker-prev')[0];
+    var container = document.getElementById('ui-datepicker-div');
+    prevLink.click();
+    // focus last day of new month
+    setTimeout(function () {
+        var trs = $('tr', container),
+            lastRowTdLinks = $('td a.ui-state-default', trs[trs.length - 1]),
+            lastDate = lastRowTdLinks[lastRowTdLinks.length - 1];
+
+        // updating the cached header elements
+        updateHeaderElements();
+
+        setHighlightState(lastDate, container);
+        lastDate.focus();
+
+    }, 0);
+}
+
+///////////////// NEXT /////////////////
+/**
+ * Handles right arrow key navigation
+ * @param  {HTMLElement} dateLink The target of the keyboard event
+ */
+function nextDay(dateLink) {
+    var container = document.getElementById('ui-datepicker-div');
+    if (!dateLink) {
+        return;
+    }
+    var td = $(dateLink).closest('td');
+    if (!td) {
+        return;
+    }
+    var nextTd = $(td).next(),
+        nextDateLink = $('a.ui-state-default', nextTd)[0];
+
+    if (nextTd && nextDateLink) {
+        setHighlightState(nextDateLink, container);
+        nextDateLink.focus(); // the next day (same row)
+    } else {
+        handleNext(dateLink);
+    }
+}
+
+function handleNext(target) {
+    var container = document.getElementById('ui-datepicker-div');
+    if (!target) {
+        return;
+    }
+    var currentRow = $(target).closest('tr'),
+        nextRow = $(currentRow).next();
+
+    if (!nextRow || nextRow.length === 0) {
+        nextMonth();
+    } else {
+        var nextRowFirstDate = $('a.ui-state-default', nextRow)[0];
+        if (nextRowFirstDate) {
+            setHighlightState(nextRowFirstDate, container);
+            nextRowFirstDate.focus();
+        }
+    }
+}
+
+function nextMonth() {
+    nextMon = $('.ui-datepicker-next')[0];
+    var container = document.getElementById('ui-datepicker-div');
+    nextMon.click();
+    // focus the first day of the new month
+    setTimeout(function () {
+        // updating the cached header elements
+        updateHeaderElements();
+
+        var firstDate = $('a.ui-state-default', container)[0];
+        setHighlightState(firstDate, container);
+        firstDate.focus();
+    }, 0);
+}
+
+/////////// UP ///////////
+/**
+ * Handle the up arrow navigation through dates
+ * @param  {HTMLElement} target   The target of the keyboard event (day)
+ * @param  {HTMLElement} cont     The calendar container
+ * @param  {HTMLElement} prevLink Link to navigate to previous month
+ */
+function upHandler(target, cont, prevLink) {
+    prevLink = $('.ui-datepicker-prev')[0];
+    var rowContext = $(target).closest('tr');
+    if (!rowContext) {
+        return;
+    }
+    var rowTds = $('td', rowContext),
+        rowLinks = $('a.ui-state-default', rowContext),
+        targetIndex = $.inArray(target, rowLinks),
+        prevRow = $(rowContext).prev(),
+        prevRowTds = $('td', prevRow),
+        parallel = prevRowTds[targetIndex],
+        linkCheck = $('a.ui-state-default', parallel)[0];
+
+    if (prevRow && parallel && linkCheck) {
+        // there is a previous row, a td at the same index
+        // of the target AND theres a link in that td
+        setHighlightState(linkCheck, cont);
+        linkCheck.focus();
+    } else {
+        // we're either on the first row of a month, or we're on the
+        // second and there is not a date link directly above the target
+        prevLink.click();
+        setTimeout(function () {
+            // updating the cached header elements
+            updateHeaderElements();
+            var newRows = $('tr', cont),
+                lastRow = newRows[newRows.length - 1],
+                lastRowTds = $('td', lastRow),
+                tdParallelIndex = $.inArray(target.parentNode, rowTds),
+                newParallel = lastRowTds[tdParallelIndex],
+                newCheck = $('a.ui-state-default', newParallel)[0];
+
+            if (lastRow && newParallel && newCheck) {
+                setHighlightState(newCheck, cont);
+                newCheck.focus();
+            } else {
+                // theres no date link on the last week (row) of the new month
+                // meaning its an empty cell, so we'll try the 2nd to last week
+                var secondLastRow = newRows[newRows.length - 2],
+                    secondTds = $('td', secondLastRow),
+                    targetTd = secondTds[tdParallelIndex],
+                    linkCheck = $('a.ui-state-default', targetTd)[0];
+
+                if (linkCheck) {
+                    setHighlightState(linkCheck, cont);
+                    linkCheck.focus();
+                }
+
+            }
+        }, 0);
+    }
+}
+
+//////////////// DOWN ////////////////
+/**
+ * Handles down arrow navigation through dates in calendar
+ * @param  {HTMLElement} target   The target of the keyboard event (day)
+ * @param  {HTMLElement} cont     The calendar container
+ * @param  {HTMLElement} nextLink Link to navigate to next month
+ */
+function downHandler(target, cont, nextLink) {
+    nextLink = $('.ui-datepicker-next')[0];
+    var targetRow = $(target).closest('tr');
+    if (!targetRow) {
+        return;
+    }
+    var targetCells = $('td', targetRow),
+        cellIndex = $.inArray(target.parentNode, targetCells), // the td (parent of target) index
+        nextRow = $(targetRow).next(),
+        nextRowCells = $('td', nextRow),
+        nextWeekTd = nextRowCells[cellIndex],
+        nextWeekCheck = $('a.ui-state-default', nextWeekTd)[0];
+
+    if (nextRow && nextWeekTd && nextWeekCheck) {
+        // theres a next row, a TD at the same index of `target`,
+        // and theres an anchor within that td
+        setHighlightState(nextWeekCheck, cont);
+        nextWeekCheck.focus();
+    } else {
+        nextLink.click();
+
+        setTimeout(function () {
+            // updating the cached header elements
+            updateHeaderElements();
+
+            var nextMonthTrs = $('tbody tr', cont),
+                firstTds = $('td', nextMonthTrs[0]),
+                firstParallel = firstTds[cellIndex],
+                firstCheck = $('a.ui-state-default', firstParallel)[0];
+
+            if (firstParallel && firstCheck) {
+                setHighlightState(firstCheck, cont);
+                firstCheck.focus();
+            } else {
+                // lets try the second row b/c we didnt find a
+                // date link in the first row at the target's index
+                var secondRow = nextMonthTrs[1],
+                    secondTds = $('td', secondRow),
+                    secondRowTd = secondTds[cellIndex],
+                    secondCheck = $('a.ui-state-default', secondRowTd)[0];
+
+                if (secondRow && secondCheck) {
+                    setHighlightState(secondCheck, cont);
+                    secondCheck.focus();
+                }
+            }
+        }, 0);
+    }
+}
+
+
+function onCalendarHide() {
+    closeCalendar();
+}
+
+// add an aria-label to the date link indicating the currently focused date
+// (formatted identically to the required format: mm/dd/yyyy)
+function monthDayYearText() {
+    var cleanUps = $('.amaze-date');
+
+    $(cleanUps).each(function (clean) {
+        // each(cleanUps, function (clean) {
+        clean.parentNode.removeChild(clean);
+    });
+
+    var datePickDiv = document.getElementById('ui-datepicker-div');
+    // in case we find no datepick div
+    if (!datePickDiv) {
+        return;
+    }
+
+    var dates = $('a.ui-state-default', datePickDiv);
+    $(dates).attr('role', 'button').on('keydown', function (e) {
+        if (e.which === 32) {
+            e.preventDefault();
+            e.target.click();
+            setTimeout(function () {
+                closeCalendar();
+            }, 100);
+        }
+    });
+    $(dates).each(function (index, date) {
+        var currentRow = $(date).closest('tr'),
+            currentTds = $('td', currentRow),
+            currentIndex = $.inArray(date.parentNode, currentTds),
+            headThs = $('thead tr th', datePickDiv),
+            dayIndex = headThs[currentIndex],
+            daySpan = $('span', dayIndex)[0],
+            monthName = $('.ui-datepicker-month', datePickDiv)[0].innerHTML,
+            year = $('.ui-datepicker-year', datePickDiv)[0].innerHTML,
+            number = date.innerHTML;
+
+        if (!daySpan || !monthName || !number || !year) {
+            return;
+        }
+
+        // AT Reads: {month} {date} {year} {day}
+        // "December 18 2014 Thursday"
+        var dateText = date.innerHTML + ' ' + monthName + ' ' + year + ' ' + daySpan.title;
+        // AT Reads: {date(number)} {name of day} {name of month} {year(number)}
+        // var dateText = date.innerHTML + ' ' + daySpan.title + ' ' + monthName + ' ' + year;
+        // add an aria-label to the date link reading out the currently focused date
+        date.setAttribute('aria-label', dateText);
+    });
+}
+
+
+
+// update the cached header elements because we're in a new month or year
+function updateHeaderElements() {
+    var context = document.getElementById('ui-datepicker-div');
+    if (!context) {
+        return;
+    }
+
+//  $(context).find('table').first().attr('role', 'grid');
+
+    prev = $('.ui-datepicker-prev', context)[0];
+    next = $('.ui-datepicker-next', context)[0];
+
+    //make them click/focus - able
+    next.href = 'javascript:void(0)';
+    prev.href = 'javascript:void(0)';
+
+    next.setAttribute('role', 'button');
+    prev.setAttribute('role', 'button');
+    appendOffscreenMonthText(next);
+    appendOffscreenMonthText(prev);
+
+    $(next).on('click', handleNextClicks);
+    $(prev).on('click', handlePrevClicks);
+
+    // add month day year text
+    monthDayYearText();
+}
+
+
+function prepHighlightState() {
+    var highlight;
+    var cage = document.getElementById('ui-datepicker-div');
+    highlight = $('.ui-state-highlight', cage)[0] ||
+        $('.ui-state-default', cage)[0];
+    if (highlight && cage) {
+        setHighlightState(highlight, cage);
+    }
+}
+
+// Set the highlighted class to date elements, when focus is received
+function setHighlightState(newHighlight, container) {
+    var prevHighlight = getCurrentDate(container);
+    // remove the highlight state from previously
+    // highlighted date and add it to our newly active date
+    $(prevHighlight).removeClass('ui-state-highlight');
+    $(newHighlight).addClass('ui-state-highlight');
+}
+
+
+// grabs the current date based on the highlight class
+function getCurrentDate(container) {
+    var currentDate = $('.ui-state-highlight', container)[0];
+    return currentDate;
+}
+
+/**
+ * Appends logical next/prev month text to the buttons
+ * - ex: Next Month, January 2015
+ *       Previous Month, November 2014
+ */
+function appendOffscreenMonthText(button) {
+    var buttonText;
+    var isNext = $(button).hasClass('ui-datepicker-next');
+    var months = [
+        'january', 'february',
+        'march', 'april',
+        'may', 'june', 'july',
+        'august', 'september',
+        'october',
+        'november', 'december'
+    ];
+
+    var currentMonth = $('.ui-datepicker-title .ui-datepicker-month').text().toLowerCase();
+    var monthIndex = $.inArray(currentMonth.toLowerCase(), months);
+    var currentYear = $('.ui-datepicker-title .ui-datepicker-year').text().toLowerCase();
+    var adjacentIndex = (isNext) ? monthIndex + 1 : monthIndex - 1;
+
+    if (isNext && currentMonth === 'december') {
+        currentYear = parseInt(currentYear, 10) + 1;
+        adjacentIndex = 0;
+    } else if (!isNext && currentMonth === 'january') {
+        currentYear = parseInt(currentYear, 10) - 1;
+        adjacentIndex = months.length - 1;
+    }
+
+    buttonText = (isNext)
+        ? 'Next Month, ' + firstToCap(months[adjacentIndex]) + ' ' + currentYear
+        : 'Previous Month, ' + firstToCap(months[adjacentIndex]) + ' ' + currentYear;
+
+    $(button).find('.ui-icon').html(buttonText);
+
+}
+
+// Returns the string with the first letter capitalized
+function firstToCap(s) {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+}
 
 /***/ })
 
 /******/ });
+//# sourceMappingURL=maps/search.js.map
