@@ -48,8 +48,9 @@ function css() {
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: "expanded"}))
         .pipe(gulp.dest("./dist/assets/css/"))
-        .pipe(rename({suffix: ".min"}))
-        .pipe(postcss([autoprefixer(), cssnano()]))
+        // .pipe(rename({suffix: ".min"}))
+        // .pipe(postcss([autoprefixer(), cssnano()]))
+        .pipe(postcss([autoprefixer()]))
         .pipe(sourcemaps.write("./maps"))
         .pipe(gulp.dest("./dist/assets/css/"))
         .pipe(browsersync.stream());

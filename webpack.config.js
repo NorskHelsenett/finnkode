@@ -18,7 +18,7 @@ module.exports = {
     output: {
         filename: "[name].js",
         path: path.resolve(__dirname, 'dist/assets/js'),
-        sourceMapFilename: "./maps/[name].js.map"
+        sourceMapFilename: "./[name].js.map"
     },
     devtool: "source-map"
 };
