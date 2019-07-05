@@ -1175,7 +1175,7 @@ h1 {
     opacity: 1; } }
     #search-results .hits p {
       margin: 0;
-      animation: fadein 2s; }
+      animation: fadein 1s; }
 @keyframes blink {
   0% {
     opacity: .2; }
