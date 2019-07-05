@@ -4,15 +4,12 @@
 const autoprefixer = require("autoprefixer");
 const browsersync = require("browser-sync").create();
 const cp = require("child_process");
-const cssnano = require("cssnano");
 const del = require("del");
 const gulp = require("gulp");
 const newer = require("gulp-newer");
 const plumber = require("gulp-plumber");
 const postcss = require("gulp-postcss");
-const rename = require("gulp-rename");
 const sass = require("gulp-sass");
-const bundle = require("gulp-bundle-assets");
 const sourcemaps = require("gulp-sourcemaps");
 const webpack = require("webpack");
 const webpackconfig = require("./webpack.config.js");
@@ -48,8 +45,6 @@ function css() {
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: "expanded"}))
         .pipe(gulp.dest("./dist/assets/css/"))
-        // .pipe(rename({suffix: ".min"}))
-        // .pipe(postcss([autoprefixer(), cssnano()]))
         .pipe(postcss([autoprefixer()]))
         .pipe(sourcemaps.write("./maps"))
         .pipe(gulp.dest("./dist/assets/css/"))
