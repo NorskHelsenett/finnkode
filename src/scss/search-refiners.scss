@@ -116,10 +116,6 @@
             background-image: url($calendar-blue);
             outline: none;
         }
-
-        ::-moz-focus-inner {
-            outline: 0;
-        }
     }
 
     .date-field, .expired-codes {

@@ -70,9 +70,9 @@ input {
     font-style: italic;
 }
 
-//:focus {
-//    outline: 2px dashed $blue;
-//}
+:focus, ::-moz-focus-inner {
+    outline: 0;
+}
 
 #framework-footer :focus {
     outline: 2px dashed $green;

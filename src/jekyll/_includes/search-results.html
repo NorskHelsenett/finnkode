@@ -1,6 +1,16 @@
 <div id="search-results" tabindex="-1">
 
-    <div class="hits" aria-live="polite">197 resultater for "underleppe" i alle kodeverk</div>
+    {% if page.loading == true %}
+
+    <div class="hits" aria-busy="true" aria-live="polite">
+        <p>Laster søkeresultater<span>.</span><span>.</span><span>.</span></p>
+    </div>
+
+    {% else %}
+
+    <div class="hits" aria-busy="false"  aria-live="polite">
+        <p>197 resultater for "underleppe" i alle kodeverk.</p>
+    </div>
 
     <ul>
         <li class="code">
@@ -77,4 +87,7 @@
         </li>
 
     </ul>
+
+    {% endif %}
+
 </div>

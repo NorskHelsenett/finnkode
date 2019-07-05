@@ -1,0 +1,41 @@
+
+//.loading {
+//
+//    outline: 1px solid red;
+//
+//
+//    animation-play-state: running;
+//    opacity: 1;
+//    position: relative;
+//    height: 80px;
+//    padding: 40px 40px 0;
+//
+//    &::before {
+//        animation: 1.5s linear infinite loading;
+//        animation-play-state: inherit;
+//        border: solid 3px #fff;
+//        border-bottom-color: #EF6565;
+//        border-radius: 50%;
+//        content: "";
+//        height: 40px;
+//        left: 50%;
+//        opacity: inherit;
+//        position: absolute;
+//        top: 50%;
+//        transform: translate3d(-50%, -50%, 0);
+//        width: 40px;
+//        will-change: transform;
+//    }
+//
+//    @keyframes loading {
+//        0% {
+//            transform: translate3d(-50%, -50%, 0) rotate(0deg);
+//        }
+//
+//        100% {
+//            transform: translate3d(-50%, -50%, 0) rotate(360deg);
+//        }
+//    }
+//
+//}
+

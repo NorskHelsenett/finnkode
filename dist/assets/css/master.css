@@ -96,6 +96,9 @@ input {
   color: #8796ae;
   font-style: italic; }
 
+:focus, ::-moz-focus-inner {
+  outline: 0; }
+
 #framework-footer :focus {
   outline: 2px dashed #99eeb2; }
 
@@ -1007,8 +1010,6 @@ h1 {
       background-color: #99eeb2;
       background-image: url("/assets/images/calendar-blue.svg");
       outline: none; }
-    .search-refiners .ui-datepicker-trigger ::-moz-focus-inner {
-      outline: 0; }
   .search-refiners .date-field, .search-refiners .expired-codes {
     display: inline-block; }
   .search-refiners .date-field {
@@ -1159,13 +1160,38 @@ h1 {
     width: 304px; } }
 #search-results {
   margin: 1.5rem 1rem 0;
-  padding-bottom: 3rem; }
+  padding-bottom: 3rem;
+  flex: 1; }
   #search-results .hits {
     font-size: 0.875rem;
     color: #0f2d5e;
     padding: .75rem 1rem;
     margin: .5rem 0 0;
     border-bottom: 1px solid #0f2d5e; }
+@keyframes fadein {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+    #search-results .hits p {
+      margin: 0;
+      animation: fadein 2s; }
+@keyframes blink {
+  0% {
+    opacity: .2; }
+  20% {
+    opacity: 1; }
+  100% {
+    opacity: .2; } }
+    #search-results .hits[aria-busy="true"] span {
+      animation-name: blink;
+      animation-duration: 1.4s;
+      animation-iteration-count: infinite;
+      animation-fill-mode: both; }
+    #search-results .hits[aria-busy="true"] span:nth-child(2) {
+      animation-delay: .2s; }
+    #search-results .hits[aria-busy="true"] span:nth-child(3) {
+      animation-delay: .4s; }
   #search-results ul {
     list-style: none;
     margin: 0;
