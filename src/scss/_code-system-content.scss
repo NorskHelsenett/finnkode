@@ -1,3 +1,4 @@
+
 .code-system-content {
     padding: 1.5rem 1rem;
 
@@ -385,6 +386,29 @@
 
 
 }
+
+
+@media only screen and (min-width: $one-to-two-col) {
+    .code-system-content {
+
+        .notes {
+
+
+            .tabtitle {
+                &.selected {
+                    font-weight: bold;
+                }
+            }
+
+            .tabpanel {
+                &:not(".selected") {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
 
 @media only screen and (min-width: $two-to-three-col) {
     .code-system-content {

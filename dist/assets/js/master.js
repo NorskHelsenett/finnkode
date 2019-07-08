@@ -397,6 +397,107 @@ $(window).on(
         return this;
     };
 
+    $.fn.makeTabs = function () {
+
+        var tabgroups = $(this);
+
+        tabgroups.resetTabs();
+
+        var tablists = $(".js-tablist"),
+            tabtitles = $(".js-tabtitle"),
+            tabs = $(".js-tab"),
+            tabpanels = $(".js-tabpanel");
+
+        // Set up tab roles and properties
+        tabgroups.addClass("tabgroup");
+
+        tablists.addClass("tablist");
+        tablists.attr("role", "tablist");
+
+        tabtitles.addClass("tabtitle");
+
+        tabs.addClass("tab");
+        tabs.attr("role", "tab");
+
+        tabpanels.addClass("tabpanel");
+        tabpanels.attr("role", "tabpanel");
+
+        // Select the first tab in each group
+        tabtitles.filter(":first-child").addClass("selected");
+        tabtitles.filter(":first-child").find(".js-tab").attr("aria-selected", "true");
+        tabpanels.filter(":nth-child(2)").addClass("selected");
+
+
+        // Make the clicking functionality
+        tabs.on("click.makeTabs", function () {
+            var clickedTab = $(this),
+                clickedTabpanel = $("#" + clickedTab.attr("aria-controls")),
+
+                tabgroup = clickedTab.closest(".js-tabgroup"),
+                tabs = tabgroup.find(".js-tab"),
+                tabpanels = tabgroup.find(".js-tabpanel"),
+
+                otherTabs = tabs.not(clickedTab),
+                otherTabpanels = tabpanels.not(clickedTabpanel);
+
+            clickedTab.attr("aria-selected", "true");
+            clickedTab.closest(".js-tabtitle").addClass("selected");
+
+            otherTabs.attr("aria-selected", "false");
+            otherTabs.closest(".js-tabtitle").removeClass("selected");
+
+            clickedTabpanel.addClass("selected");
+            otherTabpanels.removeClass("selected");
+        });
+
+
+        // Set up the keyboard nav
+        tablists.on("keydown.makeTabs", function (e) {
+
+            // Left arrow and up arrow select the previous tab
+            if (e.keyCode == 37 || e.keyCode == 38) {
+                $(".js-tab:focus").closest(".js-tabtitle").prev().find(".js-tab").click().focus();
+                e.preventDefault();
+            }
+
+            // Right arrow and down arrow select the next tab
+            if (e.keyCode == 39 || e.keyCode == 40) {
+                $(".js-tab:focus").closest(".js-tabtitle").next().find(".js-tab").click().focus();
+                e.preventDefault();
+            }
+
+        });
+
+        return this;
+    };
+
+    $.fn.resetTabs = function () {
+
+        var tabgroups = $(this);
+
+        var tablists = $(".js-tablist"),
+            tabtitles = $(".js-tabtitle"),
+            tabs = $(".js-tab"),
+            tabpanels = $(".js-tabpanel");
+
+        tabgroups.removeClass("tabgroup");
+
+        tablists.removeClass("tablist");
+        tablists.removeAttr("role");
+        tablists.off("keydown.makeTabs");
+
+        tabtitles.removeClass("tabtitle selected");
+
+        tabs.removeClass("tab");
+        tabs.removeAttr("role aria-selected");
+        tabs.off("click.makeTabs");
+
+        tabpanels.removeClass("tabpanel selected");
+        tabpanels.removeAttr("role");
+
+        return this;
+    };
+
 })(jQuery);
 
 /***/ }),
