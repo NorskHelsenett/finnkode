@@ -1,30 +1,28 @@
 // This ensures the correct ARIA-attributes and keyboard nav for the tabs at the bottom of the code cards.
+// https://www.deque.com/blog/a11y-support-series-part-1-aria-tab-panel-accessibility/
 
 function codeTabs() {
 
+    var tabs = $("[role=tab]");
 
-    var tabList = $("[role=tab]");
+    if (tabs.length !== 0) {
 
-    if (tabList.length !== 0) {
+        tabs.on("click", showTabPanel);
 
-        var tabs = document.querySelectorAll("[role=tab]"); //get all role=tab elements as a variable
-        for (i = 0; i < tabs.length; i++) {
-            tabs[i].addEventListener("click", showTabPanel);
-        } //add click event to each tab to run the showTabPanel function
         function showTabPanel(el) { //runs when tab is clicked
-            var tabs2 = document.querySelectorAll("[role=tab]"); //get tabs again as a different variable
-            for (i = 0; i < tabs2.length; i++) {
-                tabs2[i].setAttribute("aria-selected", "false");
-                tabs2[i].setAttribute("style", "font-weight:normal");
-            } //reset all tabs to aria-selected=false and normal font weight
-            el.target.setAttribute("aria-selected", "true"); //set aria-selected=true for clicked tab
-            el.target.setAttribute("style", "font-weight:bold"); //make clicked tab have bold font
-            var tabPanelToOpen = el.target.getAttribute("aria-controls"); //get the aria-controls value of the tab that was clicked
-            var tabPanels = document.querySelectorAll("[role=tabpanel]"); //get all tabpanels as a variable
-            for (i = 0; i < tabPanels.length; i++) {
-                tabPanels[i].style.display = "none";
-            } //hide all tabpanels
-            document.getElementById(tabPanelToOpen).style.display = "block"; //show tabpanel who's tab was clicked
+            var clickTabs = tabs = $("[role=tab]"),
+            clickedTab = $(el.target);
+
+            clickTabs.attr("aria-selected", "false");
+            clickTabs.attr("style", "font-weight:normal");
+            clickedTab.attr("aria-selected", "true");
+            clickedTab.attr("style", "font-weight:bold");
+
+            var tabPanelToOpen = $("#" + clickedTab.attr("aria-controls")),
+                tabPanels = $("[role=tabpanel]");
+
+            tabPanels.attr("style","display:none");
+            tabPanelToOpen.attr("style","display:block");
         }
 
         $("[role=tablist]").keydown(function (e) {
@@ -46,9 +44,7 @@ function codeTabs() {
             }
         });
 
-
     }
-
 }
 
 window.codeTabs = codeTabs;
