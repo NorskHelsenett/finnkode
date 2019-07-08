@@ -1,0 +1,13 @@
+---
+page-resource: true
+layout: search
+page-name: global-search
+title: 'Alle kodeverk: "kreft" søkeresultater'
+toc-title: Global search (autocomplete)
+---
+{% include global-search-banner.html autocomplete="true" %}
+
+<div class="layout-container" id="search-container" tabindex="-1">
+    {% include search-refiners.html %}
+    {% include search-results.html %}
+</div>
