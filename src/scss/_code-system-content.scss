@@ -189,151 +189,71 @@
     .notes {
         border: 1px solid $light-grey;
         border-width: 0 1px;
+    }
+}
 
-        .tabs {
-            ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-                display: flex;
-                align-content: stretch;
-                border-bottom: 1px solid $light-grey;
-            }
+.code.expired .note {
+    .expander {
+        color: $dark-grey;
 
-            li {
-                display: flex;
-            }
+        &::after {
+            background-image: url($chevron-down-dark-grey);
+        }
 
-            a {
-                display: flex;
-                text-decoration: none;
-                color: $blue;
-                padding: .75rem 2.5rem .75rem 1rem;
-                position: relative;
-                transition: .1s;
-                outline: 1px solid $light-grey;
-                font-weight: 600;
-                margin-right: .5rem;
-
-                &::after {
-                    content: "";
-                    position: absolute;
-                    height: 100%;
-                    right: 0;
-                    top: 0;
-                    width: 2.5rem;
-                    background: url($chevron-down-blue) right 1rem center / .85rem no-repeat;
-                    transform: scaleY(1);
-                    transition: transform .15s;
-                }
-
-                &:hover, &:focus {
-                    background-color: $light-green;
-            }
-
-                &.selected {
-                    background-color: $blue;
-                    color: #fff;
-                    outline: 1px solid $blue;
-
-                    &::after {
-                        background-image: url($chevron-down-white);
-                        transform: scaleY(-1);
-                    }
-                }
-            }
-                }
-
-
-        [role=tabpanel] {
-            animation: fadein .4s;
-
-            &.unselected {
-                display: none;
-                    }
-                    }
-
-            }
-
-        //a {
-        //
-        //
-        //    //&.selected {
-        //    //    background-color: $blue;
-        //    //    color: #fff;
-        //    //    outline: 1px solid $blue;
-        //    //
-        //    //    &::after {
-        //    //        background-image: url($chevron-down-white);
-        //    //
-        //    //        transform: scaleY(- 1);
-        //    //    }
-        //    //}
-        //}
+        &:hover, &:focus {
+            background-color: $lighter-grey;
+        }
     }
 
-    .code.expired .note {
+    &.expanded {
         .expander {
-            color: $dark-grey;
-
-            &::after {
-                background-image: url($chevron-down-dark-grey);
-            }
+            background-color: $lightest-grey;
 
             &:hover, &:focus {
                 background-color: $lighter-grey;
             }
-        }
 
-        &.expanded {
-            .expander {
-                background-color: $lightest-grey;
-
-                &:hover, &:focus {
-                    background-color: $lighter-grey;
-                }
-
-            }
-        }
-
-    }
-
-    .note-content {
-        background-color: #fff;
-        padding: 1rem;
-
-        p {
-            margin: .5rem 0;
         }
     }
 
-    .list-codes {
+}
+
+.note-content {
+    background-color: #fff;
+    padding: 1rem;
+
+    p {
+        margin: .5rem 0;
+    }
+}
+
+.list-codes {
+    tr {
+        padding: 0 .325rem;
+    }
+
+    tbody {
         tr {
-            padding: 0 .325rem;
-        }
+            &:hover {
+                background-color: $light-green;
 
-        tbody {
-            tr {
-                &:hover {
-                    background-color: $light-green;
-
-                    a {
-                        color: $purple;
-                    }
+                a {
+                    color: $purple;
                 }
             }
         }
-
-        td:first-child {
-            padding-right: 1rem;
-        }
-
-        th, td {
-            vertical-align: top;
-        }
-
-
     }
+
+    td:first-child {
+        padding-right: 1rem;
+    }
+
+    th, td {
+        vertical-align: top;
+    }
+
+
+
 }
 
 @media only screen and (min-width: $two-to-three-col) {
@@ -381,7 +301,7 @@
             [role=tab] {
                 background-color: green;
 
-               &[aria-selected=true] {
+                &[aria-selected=true] {
                     background-color: red;
                 }
             }
@@ -396,7 +316,6 @@
             [role=tablist] {
 
             }
-
 
 
             //.notes {

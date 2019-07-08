@@ -8,22 +8,9 @@
     {% include code-system-header.html %}
 </div>
 
-<div class="panel-container layout-container js-tree-expand">
+<div class="panel-container layout-container ">
 
-    {% if page.code-system-tree-expanded == true%}
 
-    {% include code-system-tree-expanded.html %}
-
-    {% else %}
-
-    {% include code-system-tree-collapsed.html %}
-
-    {% endif %}
-
-    <div class="splitter js-tree-expander">
-        <div class="splitter-name">{{page.code-system}}</div>
-        <div class="splitter-instructions">Trekk for å utvide</div>
-    </div>
 
     {{content}}
 
