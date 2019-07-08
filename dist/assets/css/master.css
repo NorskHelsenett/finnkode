@@ -1066,6 +1066,106 @@ h1 {
   border-width: 0 1px;
 }
 
+.code-system-content .notes .expand {
+  border-top: 1px solid #c0c0c0;
+}
+
+.code-system-content .notes .expand .tab-title {
+  position: relative;
+  color: #642461;
+}
+
+.code-system-content .notes .expand .tab-title::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  right: 0;
+  top: 0;
+  width: 2.5rem;
+  background: url("/assets/images/chevron-down-blue.svg") right 1rem center/0.85rem no-repeat;
+  -webkit-transform: scaleY(1);
+          transform: scaleY(1);
+  -webkit-transition: -webkit-transform .15s;
+  transition: -webkit-transform .15s;
+  transition: transform .15s;
+  transition: transform .15s, -webkit-transform .15s;
+}
+
+.code-system-content .notes .expand.expanded .tab-title::after {
+  -webkit-transform: scaleY(-1);
+          transform: scaleY(-1);
+}
+
+.code-system-content .notes .expand .expander {
+  position: relative;
+  z-index: 2;
+  -webkit-transition: .15s;
+  transition: .15s;
+  display: block;
+  text-decoration: none;
+  padding: .75rem 2.5rem .75rem 1rem;
+  font-weight: 600;
+}
+
+.code-system-content .notes .expand .expander:hover, .code-system-content .notes .expand .expander:focus {
+  background-color: rgba(153, 238, 178, 0.1);
+}
+
+.code-system-content .notes .expand .expander:focus {
+  outline: 0;
+}
+
+.code-system-content .notes .expand .expander:focus::before, .code-system-content .notes .expand .expander:focus::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  left: 0;
+  right: 0;
+  background-color: #767676;
+  z-index: 1;
+}
+
+.code-system-content .notes .expand .expander:focus::before {
+  top: -1px;
+}
+
+.code-system-content .notes .expand .expander:focus::after {
+  bottom: -1px;
+}
+
+.code-system-content .notes a.selected {
+  background-color: #0f2d5e;
+  color: #fff;
+  outline: 1px solid #0f2d5e;
+}
+
+.code-system-content .notes a.selected::after {
+  background-image: url("/assets/images/chevron-down-white.svg");
+  -webkit-transform: scaleY(-1);
+          transform: scaleY(-1);
+}
+
+.code-system-content .notes .code.expired .note .expander {
+  color: #5c5c5c;
+}
+
+.code-system-content .notes .code.expired .note .expander::after {
+  background-image: url("/assets/images/chevron-down-dark-grey.svg");
+}
+
+.code-system-content .notes .code.expired .note .expander:hover, .code-system-content .notes .code.expired .note .expander:focus {
+  background-color: #f7f7f7;
+}
+
+.code-system-content .notes .code.expired .note.expanded .expander {
+  background-color: #fbfeff;
+}
+
+.code-system-content .notes .code.expired .note.expanded .expander:hover, .code-system-content .notes .code.expired .note.expanded .expander:focus {
+  background-color: #f7f7f7;
+}
+
 .code.expired .note .expander {
   color: #5c5c5c;
 }
@@ -1152,6 +1252,86 @@ h1 {
   }
   .code-system-content .notes [role=tabpanel][aria-hidden=true] {
     display: none;
+  }
+  .code-system-content .notes .notes {
+    border: 1px solid #c0c0c0;
+    border-width: 0 1px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .code-system-content .notes .notes .expand {
+    border-top: 1px solid #c0c0c0;
+  }
+  .code-system-content .notes .notes .expand .tab-title {
+    position: relative;
+    color: #642461;
+  }
+  .code-system-content .notes .notes .expand .tab-title::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    right: 0;
+    top: 0;
+    width: 2.5rem;
+    background: url("/assets/images/chevron-down-blue.svg") right 1rem center/0.85rem no-repeat;
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+    -webkit-transition: -webkit-transform .15s;
+    transition: -webkit-transform .15s;
+    transition: transform .15s;
+    transition: transform .15s, -webkit-transform .15s;
+  }
+  .code-system-content .notes .notes .expand.expanded .tab-title::after {
+    -webkit-transform: scaleY(-1);
+            transform: scaleY(-1);
+  }
+  .code-system-content .notes .notes .expand .expander {
+    position: relative;
+    z-index: 2;
+    -webkit-transition: .15s;
+    transition: .15s;
+    display: block;
+    text-decoration: none;
+    padding: .75rem 2.5rem .75rem 1rem;
+    font-weight: 600;
+  }
+  .code-system-content .notes .notes .expand .expander:hover, .code-system-content .notes .notes .expand .expander:focus {
+    background-color: rgba(153, 238, 178, 0.1);
+  }
+  .code-system-content .notes .notes .expand .expander:focus {
+    outline: 0;
+  }
+  .code-system-content .notes .notes .expand .expander:focus::before, .code-system-content .notes .notes .expand .expander:focus::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    left: 0;
+    right: 0;
+    background-color: #767676;
+    z-index: 1;
+  }
+  .code-system-content .notes .notes .expand .expander:focus::before {
+    top: -1px;
+  }
+  .code-system-content .notes .notes .expand .expander:focus::after {
+    bottom: -1px;
+  }
+  .code-system-content .notes .code.expired .note .expander {
+    color: #5c5c5c;
+  }
+  .code-system-content .notes .code.expired .note .expander::after {
+    background-image: url("/assets/images/chevron-down-dark-grey.svg");
+  }
+  .code-system-content .notes .code.expired .note .expander:hover, .code-system-content .notes .code.expired .note .expander:focus {
+    background-color: #f7f7f7;
+  }
+  .code-system-content .notes .code.expired .note.expanded .expander {
+    background-color: #fbfeff;
+  }
+  .code-system-content .notes .code.expired .note.expanded .expander:hover, .code-system-content .notes .code.expired .note.expanded .expander:focus {
+    background-color: #f7f7f7;
   }
 }
 
