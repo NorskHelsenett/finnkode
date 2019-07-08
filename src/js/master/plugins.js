@@ -135,6 +135,7 @@
 
         tablists.addClass("tablist");
         tablists.attr("role", "tablist");
+        tablists.attr("aria-orientation", "horizontal");
 
         tabtitles.addClass("tabtitle");
 
@@ -172,7 +173,6 @@
             otherTabpanels.removeClass("selected");
         });
 
-
         // Set up the keyboard nav
         tablists.on("keydown.makeTabs", function (e) {
 
@@ -206,6 +206,7 @@
 
         tablists.removeClass("tablist");
         tablists.removeAttr("role");
+        tablists.removeAttr("aria-orientation");
         tablists.off("keydown.makeTabs");
 
         tabtitles.removeClass("tabtitle selected");
