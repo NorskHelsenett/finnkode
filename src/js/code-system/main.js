@@ -2,7 +2,7 @@
 
 // "ready" triggers as soon as the dom is in place.  Use this for things
 // that are not affected by a change in layout or window size.
-$(function() {
+$(window).on("ready", function () {
     //console.log('ready - code-system.js');
 });
 
@@ -12,8 +12,10 @@ $(function() {
 // order to work correctly, e.g. stuff affected by height.
 $(window).on("load", function () {
     //console.log('load - code-system.js');
-    navTreeExpand();
+    codeSystemTree();
+    resizableSplitter();
 });
+
 
 // "layoutchange" triggers only when the layout changes, as opposed to
 // triggering on every resize.  Since the layout also changes on document
@@ -22,8 +24,9 @@ $(window).on("load", function () {
 $(window).on("layoutchange", function () {
     //console.log("layoutchange - code-system.js");
     stickyHeader();
-    navTreeExpand();
+    codeSystemTreeExpand();
     codeTabs();
+    stickyCodeSystemTree();
 });
 
 // "conditionalresize" does stuff does stuff on debounced resize when the layout is 1-col.

@@ -1,0 +1,134 @@
+.search-field {
+    position: relative;
+
+    .search-input, .search-button {
+        font-size: $font-m;
+    }
+
+    .search-input {
+        font-style: italic;
+        border: 2px solid $blue;
+        border-radius: 2.25rem;
+        line-height: 2.25rem;
+        height: 2.25rem;
+        width: 100%;
+        padding: 0 3.125rem 0 1rem;
+        transition: border-color .15s;
+
+        &:focus, &:hover {
+            outline: 0;
+        }
+    }
+
+    .search-button {
+        background: $blue .85em center / 1.1rem no-repeat;
+        background-image: url($search-green), url($search-blue);
+        height: 0;
+        padding: 2rem 0 0 0;
+        border-radius: 0 2.25rem 2.25rem 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 3rem;
+        overflow: hidden;
+        border-color: $blue;
+        border-style: solid;
+        border-width: 2px 2px 2px 0;
+        transition: border-color .15s, background .15s;
+        cursor: pointer;
+
+        &:focus, &:hover {
+            background-color: $green;
+            background-image: url($search-blue);
+            outline: 0;
+        }
+    }
+
+    #autocomplete {
+        position: absolute;
+        z-index: 99;
+        top: 100%;
+        left: 0;
+        right: 0;
+        border: 2px solid $light-grey;
+        border-radius: 1.125rem;
+        line-height: 2.25rem;
+        transition: .15s;
+        font-size: $font-s;
+        margin-top: .5rem;
+        background-color: #fff;
+
+        .option {
+            cursor: pointer;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 2;
+            transition: .1s;
+            border: 1px solid transparent;
+            border-width: 1px 0;
+            background-color: #fff;
+
+            &:hover, &:focus {
+                background-color: $light-green;
+                border-color: $light-grey;
+
+            }
+
+            &:first-child {
+                border-radius: 1.125rem 1.125rem 0 0;
+                padding-top: .125rem;
+                border-top: 0;
+            }
+
+            &:last-child {
+                border-radius: 0 0 1.125rem 1.125rem;
+                padding-bottom: .125rem;
+                border-bottom: 0;
+            }
+        }
+
+    }
+}
+
+@media only screen and (min-width: $two-to-three-col) {
+    .search-field {
+
+        .search-input {
+            border-radius: 1.5rem;
+            line-height: 3.25rem;
+            height: 3.25rem;
+            padding: 0 4rem 0 1.25rem;
+            font-size: $font-m;
+        }
+
+        .search-button {
+            background-size: 1.5rem;
+            background-position: 1rem center;
+            padding: 3rem 0 0 0;
+            border-radius: 0 1.5rem 1.5rem 0;
+            width: 3.875rem;
+        }
+
+        #autocomplete {
+            border-radius: 1.5rem;
+            line-height: 2.5rem;
+
+            .option {
+                padding: 0 1.5rem;
+
+                &:first-child {
+                    border-radius: 1.5rem 1.5rem 0 0;
+                    padding-top: .325rem;
+                }
+
+                &:last-child {
+                    border-radius: 0 0 1.5rem 1.5rem;
+                    padding-bottom: .325rem;
+                }
+            }
+
+        }
+
+    }
+}
+

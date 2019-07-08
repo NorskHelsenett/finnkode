@@ -1,3 +1,5 @@
+// Sticks the header to the top of the viewport on code system pages
+
 function stickyHeader() {
 
     var header = $(".js-sticky-header");

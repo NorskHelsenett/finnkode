@@ -32,22 +32,19 @@ kramdown:
 
 # Site source folder
 source: src/jekyll/
+
 # Bundle/build folder
 destination: dist/
 
-keep_files: [js, css, maps]
+keep_files: [assets/js, assets/css, maps]
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+exclude:
+   - Gemfile
+   - Gemfile.lock
+   - node_modules
+   - gulpfile.js
 
-
-# sass -I src/scss --watch src/scss/master.scss:dist/css/main.css
+# sass -I src/scss --watch src/scss/master.scss:dist/assets/css/master.css

@@ -1,35 +1,24 @@
 {
+  "author": "Sarah Brodwall",
   "name": "finnkode",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/ehelse/finnkode.git",
-  "author": "Steffen Lien <steffen.lien@ehelse.no>",
-  "license": "MIT",
-  "scripts": {
-    "build": "yarn clean && yarn sass:build && yarn webpack:build && bundle exec jekyll build",
-    "clean": "rimraf dist",
-    "jekyll:serve": "bundle exec jekyll serve --watch",
-    "postcss:build": "postcss dist/css/main.css --use autoprefixer -d dist/css/",
-    "postcss:watch": "postcss dist/css/main.css --use autoprefixer -d dist/css/",
-    "sass:build": "node-sass src/scss/master.scss dist/css/main.css --source-map true && yarn postcss:build",
-    "sass:watch": "sass -I src/scss src/scss/master.scss:dist/css/main.css --watch",
-    "start": "yarn clean && concurrently -k \"yarn sass:watch\" \"yarn webpack:watch\" \"yarn jekyll:serve\"",
-    "webpack:build": "webpack --progress",
-    "webpack:watch": "webpack --watch  --progress -d"
-  },
   "devDependencies": {
-    "autoprefixer": "^9.5.1",
-    "concurrently": "^4.1.0",
-    "node-sass": "^4.12.0",
-    "postcss-cli": "^6.1.2",
-    "rimraf": "^2.6.3",
-    "sass-loader": "^7.1.0",
-    "webpack": "^4.32.2",
-    "webpack-cli": "^3.3.2"
-  },
-  "dependencies": {
-    "guard": "^0.1.2",
-    "jquery": "^3.4.1",
-    "jquery-ui": "^1.12.1"
+    "autoprefixer": "^9.6.0",
+    "browser-sync": "^2.26.7",
+    "child_process": "^1.0.2",
+    "del": "^4.1.1",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-newer": "^1.4.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-shell": "^0.7.1",
+    "gulp-sourcemaps": "^2.6.5",
+    "npm-update-all": "^1.0.1",
+    "postcss-scss": "^2.0.0",
+    "shell": "^0.5.0",
+    "webpack": "^4.35.2",
+    "webpack-stream": "^5.2.1",
+    "win-spawn": "^2.0.0"
   }
 }

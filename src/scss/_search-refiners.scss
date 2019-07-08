@@ -1,0 +1,385 @@
+.search-refiners {
+    color: $blue;
+    text-align: center;
+    margin: 1.5rem 1rem;
+
+    .skip-link {
+        &, &:focus {
+            display: none;
+        }
+    }
+
+    .filters {
+        text-align: left;
+    }
+
+    .expander {
+        padding-right: 1.5em;
+        margin-left: 1rem;
+        display: inline-block;
+        position: relative;
+        font-weight: 600;
+        font-size: $font-s;
+
+        &::before {
+            content: "Vis filtre"
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            height: 100%;
+            width: 1em;
+            background: url($chevron-down-blue) right center / contain no-repeat;
+            transform: scaleY(1);
+            transition: transform .2s;
+        }
+
+        &:focus {
+            outline: 0;
+        }
+    }
+
+    &.expanded {
+        .expander {
+            &::before {
+                content: "Skjul filtre"
+            }
+
+            &::after {
+                transform: scaleY(-1);
+            }
+        }
+    }
+
+    .date {
+        margin: 1rem 0 1.5rem;
+        font-size: $font-s;
+    }
+
+    .offscreen {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        clip: rect(1px 1px 1px 1px);
+        clip: rect(1px, 1px, 1px, 1px);
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+
+    #datepickerLabel {
+        font-weight: 600;
+        color: $blue;
+        display: block;
+        margin: .25rem 0 .5rem 1rem;
+    }
+
+    #datepicker {
+        font-style: italic;
+        border: 2px solid $blue;
+        border-radius: 2.25rem;
+        line-height: 2.25rem;
+        height: 2.25rem;
+        width: 100%;
+        padding: 0 3.125rem 0 1rem;
+        transition: .1s;
+        font-size: $font-xs;
+
+        &:focus, &:hover {
+            outline: 0;
+        }
+    }
+
+    .ui-datepicker-trigger {
+        @include button-reset;
+        background: $blue 12px 5px/ 1.125rem no-repeat;
+        background-image: url($calendar-green), url($calendar-blue);
+        height: 0;
+        padding: 2rem 0 0 0;
+        border-radius: 0 2.25rem 2.25rem 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 3rem;
+        overflow: hidden;
+        border-color: $blue;
+        border-style: solid;
+        border-width: 2px 2px 2px 0;
+        transition: .1s;
+        cursor: pointer;
+        outline: none;
+
+        &:focus, &:hover {
+            background-color: $green;
+            background-image: url($calendar-blue);
+            outline: none;
+        }
+    }
+
+    .date-field, .expired-codes {
+        display: inline-block;
+    }
+
+    .date-field {
+        position: relative;
+        width: 50%;
+
+        img {
+            display: none;
+        }
+    }
+
+    .expired-codes {
+        line-height: 2.5rem;
+        height: 2.5rem;
+        margin: .75rem 0 1.5rem 2rem;
+
+        span {
+            display: block;
+            padding-left: 2rem;
+            background: .5rem center / .9rem no-repeat;
+            background-image: url($checkbox-unchecked), url($checkbox-unchecked-hover), url($checkbox-checked), url($checkbox-checked-hover);
+        }
+
+        input {
+            @extend .visuallyhidden;
+
+            & + span {
+                background-image: url($checkbox-unchecked);
+            }
+
+            &:hover, &:focus {
+                & + span {
+                    background-image: url($checkbox-unchecked-hover);
+                }
+            }
+
+            &:checked {
+                & + span {
+                    background-image: url($checkbox-checked);
+                }
+
+                &:hover, &:focus {
+                    & + span {
+                        background-image: url($checkbox-checked-hover);
+                    }
+                }
+            }
+        }
+    }
+
+    .code-system-list {
+        background: $green;
+        padding: .75rem 1rem;
+        margin: .5rem 0 0;
+        list-style: none;
+        font-size: $font-s;
+    }
+
+    li {
+        margin: .125rem 0;
+
+        a {
+            text-decoration: none;
+            color: $blue;
+            display: inline-block;
+            border-bottom: 1px solid transparent;
+        }
+
+        &.current {
+
+            a {
+                font-weight: 600;
+                border-bottom: 1px solid $blue;
+            }
+        }
+    }
+}
+
+
+
+
+@media only screen and (min-width: $one-to-two-col) {
+    .search-refiners {
+        white-space: nowrap;
+
+        .expander {
+            margin-top: .5rem;
+            padding-right: 1.5em;
+            margin-left: 0;
+        }
+
+        .filters {
+            display: flex;
+            flex-flow: row nowrap;
+        }
+
+        .date {
+            padding: 0 1rem 0 0;
+            margin-top: 0;
+        }
+
+        .date, .code-system-list {
+            width: $one-col;
+        }
+
+        #datepickerLabel {
+            padding: .75rem 1rem;
+            margin: .5rem 0 1.5rem;
+            border-bottom: 1px solid $blue;
+        }
+
+        .date-field {
+            display: block;
+            width: 100%;
+        }
+
+        .expired-codes {
+            height: auto;
+            line-height: unset;
+            margin: 1.5rem 0;
+
+            span {
+                margin-left: .5rem;
+            }
+        }
+
+        .code-system-list {
+            background: transparent;
+            padding: 0 0 0 1rem;
+        }
+
+        li {
+            margin: 0;
+            padding: 0;
+            border-bottom: 1px solid $blue;
+
+            a {
+                display: block;
+                padding: .75rem 1rem;
+                position: relative;
+                z-index: 2;
+                border-bottom: 0;
+                transition: background-color .2s;
+
+                &:hover, &:focus {
+                    background-color: $light-green;
+                }
+
+                // The wider lines above and below the focused element
+                &:focus {
+                    outline: 0;
+
+                    &::before, &::after {
+                        content: "";
+                        position: absolute;
+                        bottom: 0;
+                        height: 2px;
+                        left: 0;
+                        right: 0;
+                        background-color: $grey;
+                    }
+
+                    &::before {
+                        top: -1px;
+                    }
+
+                    &::after {
+                        bottom: -1px;
+                    }
+                }
+            }
+
+            &.current {
+                a {
+                    border-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: $two-to-three-col) {
+    .search-refiners {
+        padding-bottom: 3rem;
+        margin-bottom: 0;
+
+        .skip-link {
+            &, &:focus {
+                display: table-caption;
+            }
+        }
+
+        .refiners-expander {
+            display: none;
+        }
+
+        &.expand.collapsed .expandable {
+            max-height: unset;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .filters {
+            display: block;
+        }
+
+        .date, .code-system-list {
+            padding: 0;
+            width: auto;
+        }
+
+        .date {
+            padding-left: 0;
+            font-size: $font-m;
+        }
+
+        #datepickerLabel {
+            margin-top: 0;
+            font-size: $font-xl;
+        }
+
+        #datepicker {
+            border-radius: 2.75rem;
+            line-height: 2.75rem;
+            height: 2.75rem;
+            padding: 0 1.5rem 0 1rem;
+            font-size: $font-m;
+        }
+
+        .ui-datepicker-trigger {
+            height: 2.75rem;
+            width: 3.625rem;
+            padding: 0 1rem 0 .5rem;
+            background-position: 16px 7px;
+            background-size: 21px;
+        }
+
+        .date-field {
+            width: auto;
+        }
+
+        .expired-codes {
+            span {
+                background-size: 1rem;
+                padding-left: 2.25rem;
+            }
+        }
+
+        .code-system-list {
+            padding-left: 0;
+            margin-top: 5rem;
+            font-size: $font-xl;
+        }
+    }
+}
+
+@media only screen and (min-width: $three-to-four-col) {
+    .search-refiners {
+        .date, .code-system-list {
+            width: $one-col;
+        }
+    }
+}
