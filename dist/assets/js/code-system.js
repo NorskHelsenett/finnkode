@@ -125,47 +125,64 @@ __webpack_require__(/*! ./code-system/main */ "./src/js/code-system/main.js");
 
 function codeTabs() {
 
-    var tabs = $("[role=tab]");
+    var tabgroups = $(".js-tabgroup");
 
-    if (tabs.length !== 0) {
+    if (tabgroups.length !== 0) {
 
-        tabs.on("click", showTabPanel);
+        // Make/reset tabs
 
-        function showTabPanel(el) { //runs when tab is clicked
-            var clickTabs = tabs = $("[role=tab]"),
-            clickedTab = $(el.target);
+        $(".js-tabtitle").removeClass("selected");
+        $(".js-tabtitle:first-child").addClass("selected");
 
-            clickTabs.attr("aria-selected", "false");
-            clickTabs.attr("style", "font-weight:normal");
+        $(".js-tab").attr("aria-selected", "false");
+        $(".js-tabtitle:first-child .js-tab").attr("aria-selected", "true");
+
+        $(".js-tabpanel").removeClass("selected").attr("style","display:none");
+        $(".js-tabpanel:nth-child(2)").addClass("selected").attr("style","display:block");
+
+        $(".js-tab").on("click", showTabPanel);
+
+        function showTabPanel() {
+            var clickedTab = $(this),
+                clickedTabpanel = $("#" + clickedTab.attr("aria-controls")),
+
+                tabgroup = clickedTab.closest(".js-tabgroup"),
+                tabs = tabgroup.find(".js-tab"),
+                tabpanels = tabgroup.find(".js-tabpanel"),
+
+                otherTabs = tabs.not(clickedTab),
+                otherTabpanels = tabpanels.not(clickedTabpanel);
+
             clickedTab.attr("aria-selected", "true");
-            clickedTab.attr("style", "font-weight:bold");
+            clickedTab.closest("js-tabtitle").addClass("selected");
 
-            var tabPanelToOpen = $("#" + clickedTab.attr("aria-controls")),
-                tabPanels = $("[role=tabpanel]");
+            otherTabs.attr("aria-selected", "false");
+            otherTabs.closest("js-tabtitle").removeClass("selected");
 
-            tabPanels.attr("style","display:none");
-            tabPanelToOpen.attr("style","display:block");
+            clickedTabpanel.addClass("selected").attr("style","display:block");
+            otherTabpanels.removeClass("selected").attr("style","display:none");
         }
 
         $("[role=tablist]").keydown(function (e) {
+
             if (e.keyCode == 37) {
-                $("[aria-selected=true]").prev().click().focus();
+
+                $(".js-tab:focus").closest(".js-tabtitle").prev().find(".js-tab").click().focus();
                 e.preventDefault();
             }
             if (e.keyCode == 38) {
-                $("[aria-selected=true]").prev().click().focus();
+                $(".js-tab:focus").closest(".js-tabtitle").prev().find(".js-tab").click().focus();
                 e.preventDefault();
             }
             if (e.keyCode == 39) {
-                $("[aria-selected=true]").next().click().focus();
+                $(".js-tab:focus").closest(".js-tabtitle").next().find(".js-tab").click().focus();
                 e.preventDefault();
             }
             if (e.keyCode == 40) {
-                $("[aria-selected=true]").next().click().focus();
+                $(".js-tab:focus").closest(".js-tabtitle").next().find(".js-tab").click().focus();
                 e.preventDefault();
             }
         });
-
     }
 }
 
