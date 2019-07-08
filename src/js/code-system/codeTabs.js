@@ -3,82 +3,50 @@
 function codeTabs() {
 
 
-    var tabList = $('.js-tab-list'),
-        tabPanelContainer = $('.js-tab-panels');
+    var tabList = $("[role=tab]");
 
-    if (tabPanelContainer.length !== 0 && tabList.length !== 0) {
+    if (tabList.length !== 0) {
 
-        var tabs = tabList.find($('[role=tab]')),
-            panels = tabPanelContainer.find($('[role=tabpanel]'));
+        var tabs = document.querySelectorAll("[role=tab]"); //get all role=tab elements as a variable
+        for (i = 0; i < tabs.length; i++) {
+            tabs[i].addEventListener("click", showTabPanel);
+        } //add click event to each tab to run the showTabPanel function
+        function showTabPanel(el) { //runs when tab is clicked
+            var tabs2 = document.querySelectorAll("[role=tab]"); //get tabs again as a different variable
+            for (i = 0; i < tabs2.length; i++) {
+                tabs2[i].setAttribute("aria-selected", "false");
+                tabs2[i].setAttribute("style", "font-weight:normal");
+            } //reset all tabs to aria-selected=false and normal font weight
+            el.target.setAttribute("aria-selected", "true"); //set aria-selected=true for clicked tab
+            el.target.setAttribute("style", "font-weight:bold"); //make clicked tab have bold font
+            var tabPanelToOpen = el.target.getAttribute("aria-controls"); //get the aria-controls value of the tab that was clicked
+            var tabPanels = document.querySelectorAll("[role=tabpanel]"); //get all tabpanels as a variable
+            for (i = 0; i < tabPanels.length; i++) {
+                tabPanels[i].style.display = "none";
+            } //hide all tabpanels
+            document.getElementById(tabPanelToOpen).style.display = "block"; //show tabpanel who's tab was clicked
+        }
 
-        // Reset all tabs
-        tabs.removeAttr('aria-selected');
-        tabs.attr("tabindex","0");
-        tabs.removeClass('selected unselected');
-        panels.removeClass('selected unselected');
-
-        //if (layoutQ().number[0] >= 3) {
-            var selectedTab;
-
-            function showTabPanel(event) {
-                var currentTabs = tabList.find($('[role=tab]')),
-                    panels = tabPanelContainer.find($('[role=tabpanel]'));
-
-                if (typeof selectedTab === 'undefined') {
-                    selectedTab = currentTabs.first();
-                } else {
-                    selectedTab = $(event.target);
-                }
-
-                // Reset all tabs
-                currentTabs.removeAttr('aria-selected');
-                currentTabs.removeClass('selected unselected');
-                panels.removeClass('selected unselected');
-
-                // Select the clicked tab, unselect the others
-                currentTabs.not(selectedTab).attr('aria-selected', 'false');
-                currentTabs.not(selectedTab).addClass('unselected');
-
-                selectedTab.attr('aria-selected', 'true');
-                selectedTab.addClass('selected');
-
-                // Show the associated panel
-                var panelToOpenID = selectedTab.attr('aria-controls'),
-                    panelToOpen = $('#' + panelToOpenID);
-
-                panels.not(panelToOpen).addClass('unselected');
-                panelToOpen.addClass('selected');
+        $("[role=tablist]").keydown(function (e) {
+            if (e.keyCode == 37) {
+                $("[aria-selected=true]").prev().click().focus();
+                e.preventDefault();
             }
+            if (e.keyCode == 38) {
+                $("[aria-selected=true]").prev().click().focus();
+                e.preventDefault();
+            }
+            if (e.keyCode == 39) {
+                $("[aria-selected=true]").next().click().focus();
+                e.preventDefault();
+            }
+            if (e.keyCode == 40) {
+                $("[aria-selected=true]").next().click().focus();
+                e.preventDefault();
+            }
+        });
 
-            showTabPanel();
 
-            tabs.off('codeTabs').on('click', function (event) {
-                var selectedTab = $(event.target),
-                    panelToOpenID = selectedTab.attr('aria-controls'),
-                    panelToOpen = $('#' + panelToOpenID);
-
-                showTabPanel(event);
-
-                //
-                // if (selectedTab.hasClass('selected')) {
-                //     panelToOpen.focusWithoutScrolling();
-                // }
-
-            });
-
-            tabList.off('codeTabs').on('keydown', function (event) {
-
-                // Left arrow
-                if (event.keyCode === 37) {
-                    $(event.target).prev().focus();
-                }
-
-                // Right arrow
-                if (event.keyCode === 39) {
-                    $(event.target).next().focus();
-                }
-            });
-        //}
     }
 
 }

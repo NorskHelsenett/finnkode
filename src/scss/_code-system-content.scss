@@ -191,89 +191,108 @@
         border-width: 0 1px;
 
 
-            .expand {
-                border-top: 1px solid $light-grey;
+        /* for responsive expanders
+        .expand {
+            border-top: 1px solid $light-grey;
 
+            .tab-title {
+                position: relative;
+                color: $purple;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    height: 100%;
+                    right: 0;
+                    top: 0;
+                    width: 2.5rem;
+                    background: url($chevron-down-blue) right 1rem center / .85rem no-repeat;
+                    transform: scaleY(1);
+                    transition: transform .15s;
+                }
+            }
+
+            &.expanded {
                 .tab-title {
-                    position: relative;
-                    color: $purple;
-
                     &::after {
+                        transform: scaleY(-1);
+                    }
+                }
+            }
+
+            .expander {
+                position: relative;
+                z-index: 2;
+                transition: .15s;
+                display: block;
+                text-decoration: none;
+                padding: .75rem 2.5rem .75rem 1rem;
+                font-weight: 600;
+
+                &:hover, &:focus {
+                    background-color: $light-green;
+                }
+
+                // The wider lines above and below the focused element
+                &:focus {
+                    outline: 0;
+
+                    &::before, &::after {
                         content: "";
                         position: absolute;
-                        height: 100%;
+                        bottom: 0;
+                        height: 2px;
+                        left: 0;
                         right: 0;
-                        top: 0;
-                        width: 2.5rem;
-                        background: url($chevron-down-blue) right 1rem center / .85rem no-repeat;
-                        transform: scaleY(1);
-                        transition: transform .15s;
-                    }
-                }
-
-                &.expanded {
-                    .tab-title {
-                        &::after {
-                            transform: scaleY(-1);
-                        }
-                    }
-                }
-
-                .expander {
-                    position: relative;
-                    z-index: 2;
-                    transition: .15s;
-                    display: block;
-                    text-decoration: none;
-                    padding: .75rem 2.5rem .75rem 1rem;
-                    font-weight: 600;
-
-                    &:hover, &:focus {
-                        background-color: $light-green;
+                        background-color: $grey;
+                        z-index: 1;
                     }
 
-                    // The wider lines above and below the focused element
-                    &:focus {
-                        outline: 0;
-
-                        &::before, &::after {
-                            content: "";
-                            position: absolute;
-                            bottom: 0;
-                            height: 2px;
-                            left: 0;
-                            right: 0;
-                            background-color: $grey;
-                            z-index: 1;
-                        }
-
-                        &::before {
-                            top: -1px;
-                        }
-
-                        &::after {
-                            bottom: -1px;
-                        }
+                    &::before {
+                        top: -1px;
                     }
-
-                }
-            }
-
-            a {
-
-
-                &.selected {
-                    background-color: $blue;
-                    color: #fff;
-                    outline: 1px solid $blue;
 
                     &::after {
-                        background-image: url($chevron-down-white);
-
-                        transform: scaleY(- 1);
+                        bottom: -1px;
                     }
                 }
+
             }
+        }
+
+        a {
+
+
+            &.selected {
+                background-color: $blue;
+                color: #fff;
+                outline: 1px solid $blue;
+
+                &::after {
+                    background-image: url($chevron-down-white);
+
+                    transform: scaleY(- 1);
+                }
+            }
+        }
+        */
+
+
+        [role=tabpanel] {
+            border-top: 1px solid black;
+            padding: .5em 0;
+        }
+
+        [role=tablist] {
+            padding: .2em 0;
+        }
+
+        #tabbed-interface {
+            border: 1px solid black;
+            text-align: center;
+            margin: 0 10%;
+        }
+
 
         .code.expired .note {
             .expander {
@@ -363,7 +382,6 @@
     th, td {
         vertical-align: top;
     }
-
 
 
 }

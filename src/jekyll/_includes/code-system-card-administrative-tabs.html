@@ -56,6 +56,7 @@
 
             <div class="notes">
 
+<!--
                 <div class="js-tab-group" id="group">
 
                     <div class="js-responsive-expand">
@@ -71,7 +72,7 @@
 
                                 <p>Here's some content including a <a href="#">link</a> to allow for testing of focus etc.</p>
 
-                                <!-- Table here -->
+                                &lt;!&ndash; Table here &ndash;&gt;
 
                             </div>
                         </div>
@@ -105,7 +106,6 @@
 
                 </div>
 
-<!--
                 <div class="js-tab-group" id="group1">
 
                     <div role="tablist" class="js-tablist" aria-orientation="horizontal">
@@ -180,6 +180,27 @@
                     </div>
                 </div>
 -->
+
+
+                <div role="tablist" aria-orientation="horizontal">
+                    <button role="tab" aria-selected="true" id="apples-tab" aria-controls="apples-content-panel" style="font-weight:bold">Apples</button>
+                    <button role="tab" aria-selected="false" id="bananas-tab" aria-controls="bananas-content-panel">Bananas</button>
+                    <button role="tab" aria-selected="false" id="peaches-tab" aria-controls="peaches-content-panel">Peaches</button>
+                </div>
+                <div id="apples-content-panel" role="tabpanel" aria-labelledby="apples-tab">
+                    <h2>Apples</h2>
+                    <p>Apples are amazing!</p>
+                </div>
+                <div id="bananas-content-panel" role="tabpanel" aria-labelledby="bananas-tab" style="display:none">
+                    <h2>Bananas</h2>
+                    <p>Don't slip on your banana peel! </p>
+                </div>
+                <div id="peaches-content-panel" role="tabpanel" aria-labelledby="peaches-tab" style="display:none">
+                    <h2>Peaches</h2>
+                    <p>Peaches keep peaching! </p>
+                </div>
+            </div>
+
 
 
             </div>

@@ -1,7 +1,14 @@
 // Scripts that are used solely on the code system page
 
+/*
 require('./code-system/codeSystemTree');
 require('./code-system/codeSystemTreeExpand');
+*/
+/*
+require('./code-system/treeLinks');
+require('./code-system/treeItemLinks');
+*/
+
 require('./code-system/codeTabs');
 require('./code-system/resizableSplitter');
 require('./code-system/stickyCodeSystemTree');
