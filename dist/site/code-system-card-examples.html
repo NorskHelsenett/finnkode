@@ -369,49 +369,68 @@
 
             <div class="notes">
 
-                <div class="js-tabgroup" id="group">
+                <div class="js-tabgroup tabgroup" id="group">
 
-                    <div class="js-tablist">
+                    <div class="js-tablist" role="tablist" aria-orientation="horizontal">
 
-                        <div class="js-tabtitle">
-                            <button class="js-tab" aria-selected="true" id="apples-tab" aria-controls="apples-content-panel">Apples</button>
+                        <div class="js-tabtitle tabtitle">
+                            <button class="js-tab js-responsive-expander" role="tab" aria-selected="true"
+                                    id="apples-tab" aria-controls="apples-content-panel">Apples
+                            </button>
                         </div>
 
-                        <div class="js-tabtitle">
-                            <button class="js-tab" aria-selected="false" id="bananas-tab" aria-controls="bananas-content-panel">Bananas</button>
+                        <div class="js-tabtitle tabtitle">
+                            <button class="js-tab js-responsive-expander" aria-selected="false" id="bananas-tab"
+                                    aria-controls="bananas-content-panel">Bananas
+                            </button>
                         </div>
 
-                        <div class="js-tabtitle">
-                            <button class="js-tab" aria-selected="false" id="peaches-tab" aria-controls="peaches-content-panel">Peaches</button>
+                        <div class="js-tabtitle tabtitle">
+                            <button class="js-tab js-responsive-expander" role="tab" aria-selected="false"
+                                    id="peaches-tab" aria-controls="peaches-content-panel">Peaches
+                            </button>
                         </div>
 
                     </div>
 
-
-                    <div id="apples-content-panel" class="js-tabpanel" aria-labelledby="apples-tab">
-                        <div class="note-content">
-                            <h2>Apples</h2>
-                            <p>Apples are amazing!</p>
+                    <div class="js-responsive-expand">
+                        <div id="apples-content-panel" class="js-tabpanel js-responsive-expandable" role="tabpanel"
+                                aria-labelledby="apples-tab">
+                            <div class="note-content">
+                                <h2>Apples</h2>
+                                <p>Apples are amazing!</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div id="bananas-content-panel" class="js-tabpanel" aria-labelledby="bananas-tab">
-                        <div class="note-content">
-                            <h2>Bananas</h2>
-                            <p>Don't slip on your banana peel! </p>
+                    <div class="js-responsive-expand">
+                        <div id="bananas-content-panel" class="js-tabpanel js-responsive-expandable" role="tabpanel"
+                                aria-labelledby="bananas-tab">
+                            <div class="note-content">
+                                <h2>Bananas</h2>
+                                <p>Don't slip on your banana peel! </p>
+                            </div>
                         </div>
                     </div>
 
-                    <div id="peaches-content-panel" class="js-tabpanel" aria-labelledby="peaches-tab">
-                        <div class="note-content">
-                            <h2>Peaches</h2>
-                            <p>Peaches keep peaching! </p>
+                    <div class="js-responsive-expand">
+                        <div id="peaches-content-panel" class="js-tabpanel js-responsive-expandable" role="tabpanel"
+                                aria-labelledby="peaches-tab">
+                            <div class="note-content">
+                                <h2>Peaches</h2>
+                                <p>Peaches keep peaching! </p>
+                            </div>
                         </div>
                     </div>
+
 
                 </div>
+            </div>
+        </li>
+    </ul>
+</div>
 
-
+<!--
                 <div class="js-tabgroup tabgroup" id="group1">
                     <div class="js-tablist tablist">
 
@@ -471,12 +490,7 @@
                         <p>Peaches keep peaching! </p>
                     </div>
                 </div>
-
-            </div>
-
-        </li>
-    </ul>
-</div>
+-->
 
 <!--    <table class="list-codes">
 

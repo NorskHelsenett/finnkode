@@ -6,9 +6,10 @@ function codeTabs() {
 
     if (tabgroups.length !== 0) {
         if (layoutQ().number[0] !== 1) {
-            tabgroups.makeTabs();
+            tabgroups.makeTabgroups();
+
         } else {
-            tabgroups.resetTabs();
+            tabgroups.resetTabgroups();
         }
     }
 }

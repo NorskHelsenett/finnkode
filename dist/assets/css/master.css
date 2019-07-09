@@ -1151,21 +1151,6 @@ h1 {
         */
 }
 
-.code-system-content .notes [role=tabpanel] {
-  border-top: 1px solid black;
-  padding: .5em 0;
-}
-
-.code-system-content .notes [role=tablist] {
-  padding: .2em 0;
-}
-
-.code-system-content .notes #tabbed-interface {
-  border: 1px solid black;
-  text-align: center;
-  margin: 0 10%;
-}
-
 .code-system-content .notes .code.expired .note .expander {
   color: #5c5c5c;
 }
@@ -1236,11 +1221,27 @@ h1 {
 }
 
 @media only screen and (min-width: 624px) {
-  .code-system-content .notes .tabtitle.selected .tab {
-    font-weight: bold;
+  .code-system-content .notes .tabtitle {
+    outline: 1px dashed blue;
+    display: inline-block;
   }
-  .code-system-content .notes .tabpanel:not(.selected) {
+  .code-system-content .notes .tabtitle.selected {
+    outline: 1px dashed red;
+  }
+  .code-system-content .notes [role="tab"] {
+    color: blue;
+  }
+  .code-system-content .notes [role="tab"][aria-selected="true"] {
+    color: red;
+  }
+  .code-system-content .notes [role="tabpanel"] {
+    background: red;
+  }
+  .code-system-content .notes [role="tabpanel"]:not(.selected) {
     display: none;
+  }
+  .code-system-content .notes [role="tablist"] {
+    background: green;
   }
 }
 

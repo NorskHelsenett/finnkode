@@ -112,7 +112,7 @@
         return $(this);
     };
 
-    $.fn.focusWithoutScrolling = function(){
+    $.fn.focusWithoutScrolling = function () {
         var x = window.scrollX, y = window.scrollY;
         this.focus();
         window.scrollTo(x, y);
@@ -132,24 +132,17 @@
 
         // Set up tab roles and properties
         tabgroups.addClass("tabgroup");
-
-        tablists.addClass("tablist");
-        tablists.attr("role", "tablist");
-        tablists.attr("aria-orientation", "horizontal");
-
         tabtitles.addClass("tabtitle");
 
-        tabs.addClass("tab");
+        tablists.attr("role", "tablist");
+        tablists.attr("aria-orientation", "horizontal");
         tabs.attr("role", "tab");
-
-        tabpanels.addClass("tabpanel");
         tabpanels.attr("role", "tabpanel");
 
         // Select the first tab in each group
         tabtitles.filter(":first-child").addClass("selected");
         tabtitles.filter(":first-child").find(".js-tab").attr("aria-selected", "true");
         tabpanels.filter(":nth-child(2)").addClass("selected");
-
 
         // Make the clicking functionality
         tabs.on("click.makeTabs", function () {
@@ -190,6 +183,7 @@
 
         });
 
+
         return this;
     };
 
@@ -204,14 +198,12 @@
 
         tabgroups.removeClass("tabgroup");
 
-        tablists.removeClass("tablist");
         tablists.removeAttr("role");
         tablists.removeAttr("aria-orientation");
         tablists.off("keydown.makeTabs");
 
         tabtitles.removeClass("tabtitle selected");
 
-        tabs.removeClass("tab");
         tabs.removeAttr("role aria-selected");
         tabs.off("click.makeTabs");
 
@@ -220,5 +212,67 @@
 
         return this;
     };
+
+    $.fn.resetTabgroups = function () {
+        // Starting from a series of tabgroups, make expandable blocks
+
+        var tabgroups = $(this);
+
+        tabgroups.resetTabs();
+
+        tabgroups.each(function () {
+            var tabgroup = $(this),
+                expandBlocks = tabgroup.find(".js-responsive-expand"),
+                tablist = tabgroup.find(".js-tablist");
+
+            // For each expand block
+            expandBlocks.each(function () {
+                var expandBlock = $(this),
+                    tabpanelExpandable = expandBlock.find(".js-tabpanel"),
+                    tabtitleExpander = $("#" + tabpanelExpandable.attr("aria-labelledby")).closest(".js-tabtitle");
+
+
+                // Move the expander/tabtitle first inside the expand block
+                expandBlock.prepend(tabtitleExpander);
+            });
+
+            // Delete the tablist element
+            tablist.remove();
+
+        });
+
+        return this;
+    };
+
+    $.fn.makeTabgroups = function () {
+        // Starting from a series of expandable blocks, make a tab group
+
+        var tabgroups = $(this);
+
+        tabgroups.each(function () {
+
+            // Create the tablist element first inside the tabgroup
+            $(this).prepend("<div class=\"js-tablist\" role=\"tablist\" aria-orientation=\"horizontal\"></div>");
+
+            var tabgroup = $(this),
+                expandBlocks = tabgroup.find(".js-responsive-expand"),
+                tablist = tabgroup.find(".js-tablist");
+
+            // For each expand block
+            expandBlocks.each(function () {
+                var expandBlock = $(this),
+                    tabpanelExpandable = expandBlock.find(".js-tabpanel"),
+                    tabtitleExpander = $("#" + tabpanelExpandable.attr("aria-labelledby")).closest(".js-tabtitle");
+
+                // Move the expander/tabtitle into the tablist
+                tablist.append(tabtitleExpander);
+            });
+        });
+
+        tabgroups.makeTabs();
+
+        return this;
+    };
+
 
 })(jQuery);
