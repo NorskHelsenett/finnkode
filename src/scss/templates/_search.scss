@@ -4,6 +4,18 @@
         font-size: 1rem;
     }
 
+
+    [aria-busy="true"], [aria-busy="false"] {
+        @keyframes fadein {
+            from { opacity:0; }
+            to { opacity:1; }
+        }
+
+        p, a {
+            animation: fadein .2s;
+        }
+    }
+
     [aria-busy="true"] {
         [aria-hidden="true"] {
 
@@ -40,16 +52,6 @@
         }
     }
 
-    [aria-busy="true"], [aria-busy="false"] {
-        @keyframes fadein {
-            from { opacity:0; }
-            to { opacity:1; }
-        }
-
-        p, a {
-            animation: fadein .2s;
-        }
-    }
 }
 
 @media only screen and (min-width: $two-to-three-col) {
@@ -69,19 +71,9 @@
             }
         }
 
-        .search-refiners {
-            //width: $one-col;
-        }
-
         .results {
             flex-grow: 1;
         }
-
-    }
-}
-
-@media only screen and (min-width: $three-to-four-col) {
-    .search {
 
     }
 }

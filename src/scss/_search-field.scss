@@ -45,12 +45,15 @@
     }
 
     #autocomplete {
+        &:not(:empty) {
+            border: 2px solid $light-grey;
+        }
+
         position: absolute;
         z-index: 99;
         top: 100%;
         left: 0;
         right: 0;
-        border: 2px solid $light-grey;
         border-radius: 1.125rem;
         line-height: 2.25rem;
         transition: .15s;
@@ -84,6 +87,14 @@
                 border-radius: 0 0 1.125rem 1.125rem;
                 padding-bottom: .125rem;
                 border-bottom: 0;
+            }
+
+            &:first-child:last-child {
+                border-radius: 1.125rem;
+                padding-bottom: .125rem;
+                padding-top: .125rem;
+                border-bottom: 0;
+                border-top: 0;
             }
         }
 
@@ -124,6 +135,12 @@
                 &:last-child {
                     border-radius: 0 0 1.5rem 1.5rem;
                     padding-bottom: .325rem;
+                }
+
+                &:first-child:last-child {
+                    border-radius: 1.5rem;
+                    padding-bottom: .325rem;
+                    padding-top: .325rem;
                 }
             }
 
