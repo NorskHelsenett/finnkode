@@ -3,7 +3,20 @@
     {% if page.loading == true %}
 
     <div class="hits" aria-busy="true" aria-live="polite">
-        <p>Laster søkeresultater<span aria-hidden="true"><span>.</span><span>.</span><span>.</span></span></p>
+        <p>Laster søkeresultater
+
+            {% if page.loading-animation == "elipsis" %}
+                <span aria-hidden="true" class="elipsis">
+                    <span>.</span><span>.</span><span>.</span>
+                </span>
+
+            {% else %}
+                <span aria-hidden="true" class="wheel"></span>
+            {% endif %}
+
+
+
+        </p>
     </div>
 
     {% else %}

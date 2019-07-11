@@ -67,7 +67,6 @@
     }
 }
 
-
 @mixin input-button($type) {
     @include button-reset;
     overflow: hidden;
@@ -246,5 +245,61 @@
             }
 
         }
+    }
+}
+
+@mixin wheel-animation() {
+    display: inline-block;
+    position: relative;
+    border: .1em solid rgba(15, 45, 94, .2);
+    border-left-color: $blue;
+    transform: translateZ(0);
+    animation: spin 1s infinite linear;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    vertical-align: -.15em;
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}
+
+@mixin elipsis-animation() {
+    // https://codepen.io/xwildeyes/pen/KpqVzN
+
+    @keyframes blink {
+        0% {
+            opacity: .2;
+        }
+
+        20% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: .2;
+        }
+    }
+
+    span {
+        animation-name: blink;
+        animation-duration: 1.4s;
+        animation-iteration-count: infinite;
+        animation-fill-mode: both;
+    }
+
+    span:nth-child(2) {
+        animation-delay: .2s;
+    }
+
+    span:nth-child(3) {
+        animation-delay: .4s;
     }
 }
