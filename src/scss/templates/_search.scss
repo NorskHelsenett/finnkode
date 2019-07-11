@@ -22,8 +22,9 @@
 
     [aria-busy="true"] {
         [aria-hidden="true"] {
+            left: .325rem;
+
             &.elipsis {
-                left: .25em;
                 @include elipsis-animation;
             }
 
