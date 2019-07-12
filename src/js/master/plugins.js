@@ -202,12 +202,12 @@
         tablists.removeAttr("aria-orientation");
         tablists.off("keydown.makeTabs");
 
-        tabtitles.removeClass("tabtitle selected");
+        tabtitles.removeClass("selected");
 
         tabs.removeAttr("role aria-selected");
         tabs.off("click.makeTabs");
 
-        tabpanels.removeClass("tabpanel selected");
+        tabpanels.removeClass("selected");
         tabpanels.removeAttr("role");
 
         return this;

@@ -111,6 +111,63 @@ body.code-system {
         display: none;
     }
 
+    .code-system-content {
+        padding: 1.5rem 1rem;
+
+        .general-info {
+            max-width: 45rem;
+        }
+
+        h2 {
+            font-size: $font-2xl;
+            color: $blue;
+            line-height: 1.2;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-weight: normal;
+        }
+
+        .chapter-number, .chapter-title {
+            display: block;
+        }
+
+        .chapter-title {
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: $font-l;
+            font-weight: 600;
+        }
+
+        .inclusions-exclusions {
+            margin-bottom: 1rem;
+
+            h3 {
+                font-size: $font-l;
+                margin: 2rem 0 0;
+            }
+
+            ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            li {
+                margin: .25rem 0;
+            }
+
+        }
+
+        .code-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    }
+
+
 }
 
 @media only screen and (min-width: $one-to-two-col) {
@@ -166,6 +223,14 @@ body.code-system {
         .code-system-content {
             flex: 1 1 auto;
             min-height: 200px;
+
+            article {
+                padding-top: 1.5rem;
+            }
+
+            h2 {
+                font-size: $font-4xl;
+            }
         }
 
         .splitter {
@@ -206,7 +271,6 @@ body.code-system {
 @media only screen and (min-width: $three-to-four-col) {
     body.code-system {
 
-
         #framework-header > .layout-container,
         .main-choices,
         .code-system-header .layout-container {
@@ -216,6 +280,11 @@ body.code-system {
 
         .code-system-content {
             padding-right: 6vw;
+
+            h2 {
+                font-size: $font-5xl;
+                letter-spacing: -1px;
+            }
         }
 
         .panel-container.layout-container {
