@@ -988,6 +988,10 @@ h1 {
   margin-right: 0;
 }
 
+.code .validity p span {
+  display: block;
+}
+
 .code .validity a {
   color: #767676;
 }
@@ -1085,28 +1089,17 @@ h1 {
           transform: scaleY(-1);
 }
 
-.code.expired .notes .expander {
-  color: #5c5c5c;
-}
-
-.code.expired .notes .expander::after {
+.code.expired .notes .expand .tabtitle::after {
   background-image: url("/assets/images/chevron-down-dark-grey.svg");
 }
 
-.code.expired .notes .expander:hover, .code.expired .notes .expander:focus {
-  background-color: #f7f7f7;
-}
-
-.code.expired .notes.selected .expander {
+.code.expired .notes .expand .expander {
   color: #5c5c5c;
 }
 
-.code.expired .notes.selected .expander::after {
-  background-image: url("/assets/images/chevron-down-dark-grey.svg");
-}
-
-.code.expired .notes.selected .expander:hover, .code.expired .notes.selected .expander:focus {
+.code.expired .notes .expand .expander:hover, .code.expired .notes .expand .expander:focus {
   background-color: #f7f7f7;
+  outline: 0;
 }
 
 .code .note-content {

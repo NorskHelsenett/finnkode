@@ -109,11 +109,16 @@
             &:last-child {
                 margin-right: 0;
             }
+
+            span {
+                display: block;
+            }
         }
 
         a {
             color: $grey;
         }
+
     }
 
     .subcodes {
@@ -207,31 +212,23 @@
 
     &.expired {
         .notes {
-            .expander {
-                color: $dark-grey;
 
-                &::after {
-                    background-image: url($chevron-down-dark-grey);
+            .expand {
+
+                .tabtitle {
+                    &::after {
+                        background-image: url($chevron-down-dark-grey)
+                    }
                 }
 
-                &:hover, &:focus {
-                    background-color: $lighter-grey;
-                }
-            }
-
-            &.selected {
                 .expander {
                     color: $dark-grey;
 
-                    &::after {
-                        background-image: url($chevron-down-dark-grey);
-                    }
-
                     &:hover, &:focus {
                         background-color: $lighter-grey;
+                        outline: 0;
                     }
                 }
-
             }
         }
     }
