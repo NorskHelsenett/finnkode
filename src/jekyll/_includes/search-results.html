@@ -2,28 +2,11 @@
 
     {% if page.loading == true %}
 
-    <div class="hits" aria-busy="true" aria-live="polite">
-        <p>Laster søkeresultater
-
-            {% if page.loading-animation == "elipsis" %}
-                <span aria-hidden="true" class="elipsis">
-                    <span>.</span><span>.</span><span>.</span>
-                </span>
-
-            {% else %}
-                <span aria-hidden="true" class="wheel"></span>
-            {% endif %}
-
-
-
-        </p>
-    </div>
+    <div class="hits" aria-busy="true" aria-live="polite">Laster søkeresultater</div>
 
     {% else %}
 
-    <div class="hits" aria-busy="false" aria-live="polite">
-        <p>197 resultater for "underleppe" i alle kodeverk.</p>
-    </div>
+    <div class="hits" aria-busy="false" aria-live="polite">197 resultater for "underleppe" i alle kodeverk.</div>
 
     <ul>
         <li class="code">

@@ -57,8 +57,15 @@
     .filter-type {
         font-weight: 700;
         display: block;
-        margin: 0;
+        margin-bottom: 1rem;
         font-size: $font-m;
+    }
+
+    [aria-busy="true"] {
+        .filter-type {
+            left: .325rem;
+            @include wheel-animation;
+        }
     }
 
     .date {
@@ -103,10 +110,9 @@
     }
 
     .expired-codes {
-        line-height: 2.5rem;
-        height: 2.5rem;
-        margin: .75rem 0 1.5rem 2rem;
+        line-height: 2.25rem;
         font-size: $font-s;
+        overflow: hidden;
 
         span {
             display: block;
@@ -144,11 +150,11 @@
     }
 
     .ui-datepicker-trigger {
-        @include input-button($type:"datepicker");
+        @include input-button($type: "datepicker");
     }
 
     #datepicker {
-        @include input-field($type:"datepicker");
+        @include input-field($type: "datepicker");
     }
 
     .date-field, .expired-codes {
@@ -157,7 +163,8 @@
 
     .date-field {
         position: relative;
-        width: 50%;
+        overflow: hidden;
+        margin-right: 1rem;
 
         img {
             display: none;
@@ -348,7 +355,6 @@
             }
 
         }
-
 
 
     }

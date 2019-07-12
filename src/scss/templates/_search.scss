@@ -3,36 +3,6 @@
     h2 {
         font-size: 1rem;
     }
-
-
-    [aria-busy="true"], [aria-busy="false"] {
-        @keyframes fadein {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        p, a {
-            animation: fadein .2s;
-        }
-    }
-
-    [aria-busy="true"] {
-        [aria-hidden="true"] {
-            left: .325rem;
-
-            &.elipsis {
-                @include elipsis-animation;
-            }
-
-            &.wheel {
-                @include wheel-animation;
-            }
-        }
-    }
 }
 
 @media only screen and (min-width: $two-to-three-col) {
@@ -55,6 +25,5 @@
         .results {
             flex-grow: 1;
         }
-
     }
 }

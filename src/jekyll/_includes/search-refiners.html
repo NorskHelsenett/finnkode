@@ -19,25 +19,10 @@
 
             </div>
 
-
             {% if page.loading == true %}
 
             <div class="code-system filter" aria-busy="true" aria-live="polite">
-
-                <div class="filter-type">
-                    Kodeverk
-
-                    {% if page.loading-animation == "elipsis" %}
-                    <span aria-hidden="true" class="elipsis">
-                        <span>.</span><span>.</span><span>.</span>
-                    </span>
-
-                    {% else %}
-                        <span aria-hidden="true" class="wheel"></span>
-                    {% endif %}
-
-                </div>
-
+                <div class="filter-type">Kodeverk</div>
             </div>
 
             {% else %}
