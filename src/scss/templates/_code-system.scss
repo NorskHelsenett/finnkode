@@ -1,4 +1,4 @@
-.code-system {
+body.code-system {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -114,7 +114,7 @@
 }
 
 @media only screen and (min-width: $one-to-two-col) {
-    .code-system {
+    body.code-system {
 
         // Override from head.html
         #framework-header .code-system-menu.expandable {
@@ -130,7 +130,7 @@
 }
 
 @media only screen and (min-width: $two-to-three-col) {
-    .code-system {
+    body.code-system {
 
         #framework-header > .layout-container,
         .main-choices,
@@ -204,7 +204,7 @@
 }
 
 @media only screen and (min-width: $three-to-four-col) {
-    .code-system {
+    body.code-system {
 
 
         #framework-header > .layout-container,

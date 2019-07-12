@@ -4,9 +4,9 @@
         <div class="filters">
             <a class="skip-link" href="#search-results">Hopp over filterne til resultatene</a>
 
-            <div class="date">
+            <div class="date filter">
 
-                <label id="datepickerLabel" for="datepicker">Endret siden</label>
+                <label class="filter-type" id="datepickerLabel" for="datepicker">Endret siden</label>
 
                 <div class="date-field">
                     <input type="text" id="datepicker" placeholder="DD.MM.ÅÅÅÅ">
@@ -18,43 +18,29 @@
                 </label>
 
             </div>
+
             {% if page.loading == true %}
 
-            <ul class="code-system-list" aria-busy="true" aria-live="polite">
-                <li>
-                    <a href="#">Alle kodeverk
-                        <span aria-hidden="true">
-                            <span>.</span><span>.</span><span>.</span>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">ICD-10</a>
-                </li>
-                <li>
-                    <a href="#">NCMP-NCSP-NCRP</a>
-                </li>
-                <li>
-                    <a href="#">BUP</a>
-                </li>
-                <li>
-                    <a href="#">ICPC-2</a>
-                </li>
-                <li>
-                    <a href="#">ICF-CY</a>
-                </li>
-            </ul>
+            <div class="code-system filter" aria-busy="true" aria-live="polite">
+                <div class="filter-type">Kodeverk</div>
+            </div>
 
             {% else %}
 
-            <ul class="code-system-list" aria-busy="false" aria-live="polite">
-                <li><a href="#">Alle kodeverk (387)</a></li>
-                <li><a href="#">ICD-10 (129)</a></li>
-                <li class="current"><a href="#">NCMP-NCSP-NCRP (219)</a></li>
-                <li><a href="#">BUP (1)</a></li>
-                <li><a href="#">ICPC-2 (34)</a></li>
-                <li><a href="#">ICF-CY (4)</a></li>
-            </ul>
+            <div class="code-system filter" aria-busy="false" aria-live="polite">
+
+                <div class="filter-type">Kodeverk</div>
+
+                <ul>
+                    <li class="all-code-systems"><a href="#">Alle kodeverk (387)</a></li>
+                    <li><a href="#">ICD-10 (129)</a></li>
+                    <li class="current"><a href="#">NCMP-NCSP-NCRP (219)</a></li>
+                    <li><a href="#">BUP (1)</a></li>
+                    <li><a href="#">ICPC-2 (34)</a></li>
+                    <li><a href="#">ICF-CY (4)</a></li>
+                </ul>
+            </div>
+
             {% endif %}
 
         </div>

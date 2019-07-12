@@ -146,7 +146,11 @@
         <label class="global-search-label" for="global-search">Søk i alle kodeverk</label>
 
         <div action="https://url-to-search.finnkode.no/global-search" method="get" role="search" class="search-field">
-            <input autofocus name="global-search" id="global-search" type="search" class="search-input" placeholder="f.eks. kreft, bevissthetssilstand, fødsel..." value="res">
+            <input autofocus name="global-search" id="global-search" type="search" class="search-input" placeholder="f.eks. kreft, bevissthetssilstand, fødsel..."
+
+                
+
+            >
             <button class="search-button" type="submit">Søk i alle kodeverk</button>
 
             
@@ -164,9 +168,9 @@
         <div class="filters">
             <a class="skip-link" href="#search-results">Hopp over filterne til resultatene</a>
 
-            <div class="date">
+            <div class="date filter">
 
-                <label id="datepickerLabel" for="datepicker">Endret siden</label>
+                <label class="filter-type" id="datepickerLabel" for="datepicker">Endret siden</label>
 
                 <div class="date-field">
                     <input type="text" id="datepicker" placeholder="DD.MM.ÅÅÅÅ">
@@ -178,16 +182,23 @@
                 </label>
 
             </div>
+
             
 
-            <ul class="code-system-list" aria-busy="false" aria-live="polite">
-                <li><a href="#">Alle kodeverk (387)</a></li>
-                <li><a href="#">ICD-10 (129)</a></li>
-                <li class="current"><a href="#">NCMP-NCSP-NCRP (219)</a></li>
-                <li><a href="#">BUP (1)</a></li>
-                <li><a href="#">ICPC-2 (34)</a></li>
-                <li><a href="#">ICF-CY (4)</a></li>
-            </ul>
+            <div class="code-system filter" aria-busy="false" aria-live="polite">
+
+                <div class="filter-type">Kodeverk</div>
+
+                <ul>
+                    <li class="all-code-systems"><a href="#">Alle kodeverk (387)</a></li>
+                    <li><a href="#">ICD-10 (129)</a></li>
+                    <li class="current"><a href="#">NCMP-NCSP-NCRP (219)</a></li>
+                    <li><a href="#">BUP (1)</a></li>
+                    <li><a href="#">ICPC-2 (34)</a></li>
+                    <li><a href="#">ICF-CY (4)</a></li>
+                </ul>
+            </div>
+
             
 
         </div>
@@ -197,9 +208,7 @@
 
     
 
-    <div class="hits" aria-busy="false" aria-live="polite">
-        <p>197 resultater for "underleppe" i alle kodeverk.</p>
-    </div>
+    <div class="hits" aria-busy="false" aria-live="polite">197 resultater for "underleppe" i alle kodeverk.</div>
 
     <ul>
         <li class="code">
