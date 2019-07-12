@@ -208,6 +208,7 @@
             }
 
         }
+
     }
 
     &.expired {
@@ -275,35 +276,32 @@
 @media only screen and (min-width: $one-to-two-col) {
     .code {
         .notes {
+
             .tabtitle {
-                outline: 1px dashed blue;
                 display: inline-block;
 
+                .tab {
+
+                }
+
                 &.selected {
-                    outline: 1px dashed red;
+                    .tab {
+
+                    }
+
                 }
             }
 
-            [role="tab"] {
-                color: blue;
-
-                &[aria-selected="true"] {
-                    color: red;
-                }
-            }
-
-            [role="tabpanel"] {
-                background: red;
+            .tabpanel-container {
+                outline: 2px solid red;
 
                 &:not(.selected) {
-                    display: none;
+                    //display: none;
+
+                    outline: 2px dashed green;
+
                 }
             }
-
-            [role="tablist"] {
-                background: green;
-            }
-
 
         }
     }
@@ -537,10 +535,6 @@
 }
 
 
-a {
-
-
-}
 
 //[role=tabpanel] {
 //    animation: fadein .4s;
@@ -555,7 +549,7 @@ a {
     .code-system-content {
         .notes {
 
-            [role=tab] {
+/*            [role=tab] {
                 background-color: green;
 
                 &[aria-selected=true] {
@@ -572,7 +566,7 @@ a {
 
             [role=tablist] {
 
-            }
+            }*/
 
             .notes {
                 border: 1px solid $light-grey;
@@ -648,22 +642,6 @@ a {
 
                     }
                 }
-
-                //a {
-                //
-                //
-                //    //&.selected {
-                //    //    background-color: $blue;
-                //    //    color: #fff;
-                //    //    outline: 1px solid $blue;
-                //    //
-                //    //    &::after {
-                //    //        background-image: url($chevron-down-white);
-                //    //
-                //    //        transform: scaleY(- 1);
-                //    //    }
-                //    //}
-                //}
             }
 
             .code.expired .note {
@@ -691,7 +669,6 @@ a {
                 }
 
             }
-
 
         }
     }

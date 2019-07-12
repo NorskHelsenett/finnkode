@@ -1132,26 +1132,13 @@ h1 {
 
 @media only screen and (min-width: 624px) {
   .code .notes .tabtitle {
-    outline: 1px dashed blue;
     display: inline-block;
   }
-  .code .notes .tabtitle.selected {
-    outline: 1px dashed red;
+  .code .notes .tabpanel-container {
+    outline: 2px solid red;
   }
-  .code .notes [role="tab"] {
-    color: blue;
-  }
-  .code .notes [role="tab"][aria-selected="true"] {
-    color: red;
-  }
-  .code .notes [role="tabpanel"] {
-    background: red;
-  }
-  .code .notes [role="tabpanel"]:not(.selected) {
-    display: none;
-  }
-  .code .notes [role="tablist"] {
-    background: green;
+  .code .notes .tabpanel-container:not(.selected) {
+    outline: 2px dashed green;
   }
 }
 
@@ -1223,14 +1210,25 @@ h1 {
 }
 
 @media only screen and (min-width: 624px) {
-  .code-system-content .notes [role=tab] {
-    background-color: green;
-  }
-  .code-system-content .notes [role=tab][aria-selected=true] {
-    background-color: red;
-  }
-  .code-system-content .notes [role=tabpanel][aria-hidden=true] {
-    display: none;
+  .code-system-content .notes {
+    /*            [role=tab] {
+                background-color: green;
+
+                &[aria-selected=true] {
+                    background-color: red;
+                }
+            }
+
+            [role=tabpanel] {
+
+                &[aria-hidden=true] {
+                    display: none;
+                }
+            }
+
+            [role=tablist] {
+
+            }*/
   }
   .code-system-content .notes .notes {
     border: 1px solid #c0c0c0;
