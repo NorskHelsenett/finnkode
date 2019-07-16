@@ -40,7 +40,7 @@ function clean() {
 
 // CSS task
 function css() {
-    return gulp.src("./src/scss/**/*.scss")
+    return gulp.src("./src/scss/*.scss")
         .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: "expanded"}))
