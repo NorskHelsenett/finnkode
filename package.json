@@ -5,23 +5,19 @@
     "autoprefixer": "^9.6.1",
     "browser-sync": "^2.26.7",
     "child_process": "^1.0.2",
-    "del": "^4.1.1",
+    "del": "^5.0.0",
     "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^6.1.0",
     "gulp-newer": "^1.4.0",
     "gulp-plumber": "^1.2.1",
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^4.0.2",
-    "gulp-shell": "^0.7.1",
     "gulp-sourcemaps": "^2.6.5",
-    "npm-update-all": "^1.0.1",
-    "postcss-scss": "^2.0.0",
-    "shell": "^0.5.0",
+    "path": "^0.12.7",
     "webpack": "^4.35.3",
     "webpack-stream": "^5.2.1",
     "win-spawn": "^2.0.0"
   },
-  "dependencies": {
-    "path": "^0.12.7"
-  }
+  "browserslist": [
+    "cover 98% in NO"
+  ]
 }
