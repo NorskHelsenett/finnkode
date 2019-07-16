@@ -11,10 +11,10 @@ const plumber = require("gulp-plumber");
 const postcss = require("gulp-postcss");
 const sass = require("gulp-sass");
 const sourcemaps = require("gulp-sourcemaps");
+const spawn = process.platform === "win32" ? require("win-spawn") : require("child_process").spawn;
 const webpack = require("webpack");
 const webpackconfig = require("./webpack.config.js");
 const webpackstream = require("webpack-stream");
-const spawn = process.platform === "win32" ? require("win-spawn") : require("child_process").spawn;
 
 // BrowserSync
 function browserSync(done) {
