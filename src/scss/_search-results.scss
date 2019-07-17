@@ -10,9 +10,68 @@
         margin: .5rem 0 0;
         border-bottom: 1px solid $blue;
         position: relative;
+    }
 
+    .hits, .load-more {
         &[aria-busy="true"] {
             @include wheel-animation;
+        }
+    }
+
+    .load-more {
+        margin: 2rem 1rem;
+    }
+
+    .pagination {
+        text-align: center;
+
+        li {
+            display: inline-block;
+            margin: 0 .5em;
+
+            &:first-child, &:last-child {
+                button {
+                    height: 0;
+                    padding-top: 2.25em;
+                    background: url($chevron-right-blue) .95em center /.625em no-repeat;
+                }
+            }
+
+            &:first-child {
+                transform: rotateY(180deg);
+            }
+
+            &.active {
+                button {
+                    background-color: $blue;
+                    color: $green;
+                    border: 2px solid $blue;
+
+                    &:hover, &:focus {
+                        background-color: $green;
+                        color: $blue;
+                        border: 2px solid $blue;
+                    }
+                }
+            }
+
+            button {
+                @include button-reset;
+                width: 2.5em;
+                height: 2.5em;
+                overflow: hidden;
+                vertical-align: top;
+                color: $blue;
+                font-size: $font-l;
+                border-radius: 1.25em;
+                border: 2px solid #fff;
+                transition: .1s;
+
+                &:hover, &:focus {
+                    background-color: $green;
+                    border-color: $blue;
+                }
+            }
         }
     }
 

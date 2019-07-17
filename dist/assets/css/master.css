@@ -1,5 +1,4 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin-ext");
 .visuallyhidden, .skip-link, .search-refiners .expired-codes input {
   position: absolute;
   overflow: hidden;
@@ -2124,7 +2123,7 @@ h1 {
   position: relative;
 }
 
-#search-results .hits[aria-busy="true"]::after {
+#search-results .hits[aria-busy="true"]::after, #search-results .load-more[aria-busy="true"]::after {
   content: "";
   display: inline-block;
   position: relative;
@@ -2156,6 +2155,70 @@ h1 {
        -moz-transform: rotate(360deg);
             transform: rotate(360deg);
   }
+}
+
+#search-results .load-more {
+  margin: 2rem 1rem;
+}
+
+#search-results .pagination {
+  text-align: center;
+}
+
+#search-results .pagination li {
+  display: inline-block;
+  margin: 0 .5em;
+}
+
+#search-results .pagination li:first-child button, #search-results .pagination li:last-child button {
+  height: 0;
+  padding-top: 2.25em;
+  background: url("/assets/images/chevron-right-blue.svg") 0.95em center/0.625em no-repeat;
+}
+
+#search-results .pagination li:first-child {
+  -webkit-transform: rotateY(180deg);
+     -moz-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+#search-results .pagination li.active button {
+  background-color: #0f2d5e;
+  color: #99eeb2;
+  border: 2px solid #0f2d5e;
+}
+
+#search-results .pagination li.active button:hover, #search-results .pagination li.active button:focus {
+  background-color: #99eeb2;
+  color: #0f2d5e;
+  border: 2px solid #0f2d5e;
+}
+
+#search-results .pagination li button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  width: 2.5em;
+  height: 2.5em;
+  overflow: hidden;
+  vertical-align: top;
+  color: #0f2d5e;
+  font-size: 1.125rem;
+  -webkit-border-radius: 1.25em;
+     -moz-border-radius: 1.25em;
+          border-radius: 1.25em;
+  border: 2px solid #fff;
+  -webkit-transition: .1s;
+  -moz-transition: .1s;
+  transition: .1s;
+}
+
+#search-results .pagination li button:hover, #search-results .pagination li button:focus {
+  background-color: #99eeb2;
+  border-color: #0f2d5e;
 }
 
 #search-results ul {
