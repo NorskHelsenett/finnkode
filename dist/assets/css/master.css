@@ -2088,6 +2088,7 @@ h1 {
 
 @media only screen and (min-width: 960px) {
   .search-refiners {
+    padding-top: 6px;
     padding-bottom: 3rem;
     margin-bottom: 0;
   }
@@ -2167,16 +2168,6 @@ h1 {
   padding: .75rem 1rem;
   margin: .5rem 0 0;
   border-bottom: 1px solid #0f2d5e;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-     -moz-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
 }
 
 #search-results .no-results {
@@ -2185,6 +2176,7 @@ h1 {
 
 #search-results .hits {
   position: relative;
+  margin-bottom: .5rem;
 }
 
 #search-results .hits[aria-busy="true"]::after, #search-results .load-more[aria-busy="true"]::after {
@@ -2398,11 +2390,51 @@ h1 {
   padding-bottom: .25rem;
 }
 
+@media only screen and (min-width: 624px) {
+  #search-results .results-header {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+       -moz-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+       -moz-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    line-height: 1.4em;
+  }
+  #search-results .hits {
+    margin-bottom: 0;
+    padding-right: 1.5em;
+  }
+  #search-results .sort {
+    -webkit-flex-shrink: 0;
+        -ms-flex-negative: 0;
+            flex-shrink: 0;
+    height: 1.4em;
+  }
+  #search-results .sort label {
+    white-space: nowrap;
+    vertical-align: top;
+  }
+  #search-results .sort select {
+    top: -4px;
+  }
+}
+
 @media only screen and (min-width: 960px) {
   #search-results .results-header {
-    margin-top: 0;
-    padding: 1rem 1rem .75rem;
-    line-height: 1.5rem;
+    padding-top: 17px;
+    padding-bottom: 13px;
+  }
+  #search-results .results-header .sort select {
+    top: -5px;
   }
 }
 

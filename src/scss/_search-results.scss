@@ -9,8 +9,6 @@
         padding: .75rem 1rem;
         margin: .5rem 0 0;
         border-bottom: 1px solid $blue;
-        display: flex;
-        justify-content: space-between;
     }
 
     .no-results {
@@ -19,6 +17,7 @@
 
     .hits {
         position: relative;
+        margin-bottom: .5rem;
     }
 
     .hits, .load-more {
@@ -170,15 +169,53 @@
 
 }
 
-@media only screen and (min-width: $two-to-three-col) {
+@media only screen and (min-width: $one-to-two-col) {
     #search-results {
         .results-header {
-            margin-top: 0;
-            padding: 1rem 1rem .75rem;
-            line-height: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            line-height: 1.4em;
+        }
+
+        .hits {
+            margin-bottom: 0;
+            padding-right: 1.5em;
+        }
+
+        .sort {
+            flex-shrink: 0;
+            height: 1.4em;
+
+            label {
+                white-space: nowrap;
+                vertical-align: top;
+            }
+
+            select {
+                top: -4px;
+            }
+
         }
     }
 }
+
+@media only screen and (min-width: $two-to-three-col) {
+    #search-results {
+        .results-header {
+            padding-top: 17px;
+            padding-bottom: 13px;
+
+            .sort {
+                select {
+                    top: -5px;
+                }
+            }
+
+        }
+    }
+}
+
 
 @media only screen and (min-width: $three-to-four-col) {
     #search-results {
