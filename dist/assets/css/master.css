@@ -969,6 +969,7 @@ h1 {
     margin-bottom: 0;
     -webkit-align-self: unset;
         -ms-flex-item-align: unset;
+                -ms-grid-row-align: unset;
             align-self: unset;
     -webkit-box-flex: unset;
     -webkit-flex: unset;
@@ -1365,8 +1366,9 @@ h1 {
   }
   .code-system-content .title {
     font-size: 1.5rem;
+    display: -ms-grid;
     display: grid;
-    grid-template-areas: "number status" "name status";
+        grid-template-areas: "number status" "name status";
   }
   .code-system-content .number {
     grid-area: number;
@@ -1381,6 +1383,22 @@ h1 {
   }
   .code-system-content .validity, .code-system-content .description, .code-system-content .notes {
     font-size: 1rem;
+  }
+}
+
+@media only screen and (min-width: 960px){
+  .code-system-content .number {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+  }
+  .code-system-content .name {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+  }
+  .code-system-content .status {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 2;
+    -ms-grid-column: 2;
   }
 }
 
@@ -2098,12 +2116,6 @@ h1 {
   }
 }
 
-@media only screen and (min-width: 1264px) {
-  .search-refiners .date, .search-refiners .code-system-list {
-    width: 304px;
-  }
-}
-
 #search-results {
   margin: 1.5rem 1rem 0;
   padding-bottom: 3rem;
@@ -2233,6 +2245,16 @@ h1 {
   border-bottom: 1px solid #0f2d5e;
 }
 
+#search-results .code.expired .status {
+  background-color: #5c5c5c;
+  color: #fff;
+}
+
+#search-results .code.expiring-soon .status {
+  background-color: #bff4ff;
+  color: #0f2d5e;
+}
+
 #search-results a {
   color: #0f2d5e;
   display: -webkit-box;
@@ -2240,13 +2262,18 @@ h1 {
   display: -moz-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+     -moz-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -webkit-flex-flow: row wrap;
-     -moz-box-orient: horizontal;
+  -webkit-flex-flow: column nowrap;
+     -moz-box-orient: vertical;
      -moz-box-direction: normal;
-      -ms-flex-flow: row wrap;
-          flex-flow: row wrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
   text-decoration: none;
   padding: 1rem 3rem 1rem 1rem;
   position: relative;
@@ -2283,21 +2310,13 @@ h1 {
   bottom: -1px;
 }
 
-#search-results .number, #search-results .name {
-  font-weight: 600;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -moz-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
+#search-results .system {
+  font-size: 0.875rem;
+  padding-bottom: .25rem;
 }
 
 #search-results .number {
-  -webkit-box-ordinal-group: 3;
-  -webkit-order: 2;
-     -moz-box-ordinal-group: 3;
-      -ms-flex-order: 2;
-          order: 2;
+  font-weight: 600;
 }
 
 #search-results .number::after {
@@ -2307,31 +2326,18 @@ h1 {
 
 #search-results .name {
   font-weight: 600;
-  -webkit-box-ordinal-group: 4;
-  -webkit-order: 3;
-     -moz-box-ordinal-group: 4;
-      -ms-flex-order: 3;
-          order: 3;
+  padding-right: .25em;
+}
+
+#search-results .status {
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  padding: 0 .5em;
 }
 
 #search-results .description {
-  -webkit-box-ordinal-group: 5;
-  -webkit-order: 4;
-     -moz-box-ordinal-group: 5;
-      -ms-flex-order: 4;
-          order: 4;
   padding-top: .25rem;
-}
-
-#search-results .system {
-  font-size: .85rem;
-  -webkit-box-ordinal-group: 2;
-  -webkit-order: 1;
-     -moz-box-ordinal-group: 2;
-      -ms-flex-order: 1;
-          order: 1;
-  width: 100%;
-  padding-bottom: .25rem;
+  display: block;
 }
 
 @media only screen and (min-width: 960px) {
@@ -2347,38 +2353,45 @@ h1 {
     background-position: right 1rem top 1.325rem;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
-    padding-right: 5rem;
+    padding-right: 4rem;
     font-size: 1.25rem;
-    display: grid;
-    grid-template-columns: 4em 1fr 9rem;
-    grid-template-rows: 1fr -webkit-min-content;
-    grid-template-rows: 1fr min-content;
-    grid-template-areas: "number name system" "number description system";
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-flow: row nowrap;
+       -moz-box-orient: horizontal;
+       -moz-box-direction: normal;
+        -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
   }
-  #search-results a .system {
-    grid-area: system;
+  #search-results .system {
     font-size: 1.25rem;
-    width: unset;
-    text-align: right;
     padding-bottom: 0;
+    -webkit-box-ordinal-group: 3;
+    -webkit-order: 2;
+       -moz-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
   }
-  #search-results a .name, #search-results a .description {
-    padding: 0 2rem;
+  #search-results .info {
+    -webkit-box-ordinal-group: 2;
+    -webkit-order: 1;
+       -moz-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
   }
-  #search-results a .name {
-    grid-area: name;
-  }
-  #search-results a .description {
-    grid-area: description;
-    font-size: 1.125rem;
-    padding-top: .5rem;
-  }
-  #search-results a .number {
-    grid-area: number;
-    display: unset;
-  }
-  #search-results a .number::after {
+  #search-results .number::after {
     display: none;
+  }
+  #search-results .status {
+    font-size: 1rem;
+  }
+  #search-results .description {
+    font-size: 1.125rem;
   }
 }
 
@@ -2666,10 +2679,6 @@ h1 {
   .simple main .layout-container {
     padding-right: 624px;
   }
-}
-
-.search h2 {
-  font-size: 1rem;
 }
 
 @media only screen and (min-width: 960px) {

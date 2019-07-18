@@ -85,12 +85,27 @@
         margin: 0;
         padding: 0;
         border-bottom: 1px solid $blue;
+
+        &.expired {
+            .status {
+                background-color: $dark-grey;
+                color: #fff;
+            }
+        }
+
+        &.expiring-soon {
+            .status {
+                background-color: $light-blue;
+                color: $blue;
+            }
+        }
     }
 
     a {
         color: $blue;
         display: flex;
-        flex-flow: row wrap;
+        align-items: stretch;
+        flex-flow: column nowrap;
         text-decoration: none;
         padding: 1rem 3rem 1rem 1rem;
         position: relative;
@@ -126,35 +141,35 @@
         }
     }
 
-    .number, .name {
-        font-weight: 600;
-        display: inline-flex;
+    .system {
+        font-size: $font-s;
+        padding-bottom: .25rem;
     }
 
     .number {
-        order: 2;
+        font-weight: 600;
 
         &::after {
             content: "—";
             padding: 0 .25em;
         }
+
     }
 
     .name {
         font-weight: 600;
-        order: 3;
+        padding-right: .25em;
+    }
+
+    .status {
+        text-transform: uppercase;
+        font-size: $font-s;
+        padding: 0 .5em;
     }
 
     .description {
-        order: 4;
-        padding-top: .25rem
-    }
-
-    .system {
-        font-size: .85rem;
-        order: 1;
-        width: 100%;
-        padding-bottom: .25rem;
+        padding-top: .25rem;
+        display: block;
     }
 
 }
@@ -176,45 +191,56 @@
             background-position: right 1rem top 1.325rem;
             padding-top: 1.5rem;
             padding-bottom: 1.5rem;
-            padding-right: 5rem;
+            padding-right: 4rem;
             font-size: $font-xl;
-            display: grid;
-            grid-template-columns: 4em 1fr 9rem;
-            grid-template-rows: 1fr min-content;
-
-            grid-template-areas: "number name system" "number description system";
-
-            .system {
-                grid-area: system;
-                font-size: $font-xl;
-                width: unset;
-                text-align: right;
-                padding-bottom: 0;
-            }
-
-            .name, .description {
-                padding: 0 2rem;
-            }
-
-            .name {
-                grid-area: name;
-            }
-
-            .description {
-                grid-area: description;
-                font-size: $font-l;
-                padding-top: .5rem;
-            }
-
-            .number {
-                grid-area: number;
-                display: unset;
-
-                &::after {
-                    display: none;
-                }
-            }
-
+            flex-flow: row nowrap;
         }
+
+        .system {
+            font-size: $font-xl;
+            padding-bottom: 0;
+            order: 2;
+        }
+
+        .info {
+            order: 1;
+            display: flex;
+        }
+
+        // Grid stuff from here
+
+        .number {
+            &::after {
+                display: none;
+            }
+        }
+
+        .status {
+            font-size: $font-m;
+        }
+
+        .description {
+            font-size: $font-l;
+        }
+
+        //.g-details {
+        //    display: grid;
+        //    grid-template-columns: auto;
+        //    grid-template-rows: auto;
+        //    grid-template-areas: "g-name g-status" "g-description g-status";
+        //}
+        //
+        //.g-name {
+        //    grid-area: g-name;
+        //}
+        //
+        //.g-status {
+        //    grid-area: g-status;
+        //}
+        //
+        //.g-description {
+        //    grid-area: g-description;
+        //}
     }
+
 }

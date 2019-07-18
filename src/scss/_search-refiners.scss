@@ -359,11 +359,3 @@
 
     }
 }
-
-@media only screen and (min-width: $three-to-four-col) {
-    .search-refiners {
-        .date, .code-system-list {
-            width: $one-col;
-        }
-    }
-}
