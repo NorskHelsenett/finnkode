@@ -1,8 +1,15 @@
 ---
-resource: false
+resource: true
 layout: search
 page-name: global-search
 title: 'Alle kodeverk: "sdfgdsfg" søkeresultater'
-xtoc-title: Global search (no results)
+toc-title: Global search (no results)
+no-results: true
 ---
-Global search with no results
+
+{% include global-search-banner.html %}
+
+<div class="layout-container" id="search-container" tabindex="-1">
+    {% include search-refiners.html %}
+    {% include search-results.html %}
+</div>

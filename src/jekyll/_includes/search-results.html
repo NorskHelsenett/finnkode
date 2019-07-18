@@ -6,6 +6,12 @@
         <div class="hits" aria-busy="true" aria-live="polite">Laster søkeresultater</div>
     </div>
 
+    {% elsif page.no-results == true%}
+
+    <div class="results-header">
+        <div class="hits" aria-busy="false" aria-live="polite">0 resultater for "sdfgdsfg" i alle kodeverk.</div>
+    </div>
+
     {% else %}
 
     <div class="results-header">
@@ -31,88 +37,104 @@
 
     </div>
 
-    <ul>
-        <li class="code">
-            <a href="/site/code-system.html#C00_4">
-                <span class="number">C00.4</span>
-                <span class="name">Innside av underleppe (facies internus labii inferius oris)</span>
-                <div class="description">
-                    Here's a description. Not sure if this will ever exist in the final result, or if's it's just an artifact of the sample design.
-                </div>
-                <div class="system">ICD-10</div>
-            </a>
-        </li>
-        <li class="code">
-            <a href="">
-                <span class="number">b55502</span>
-                <span class="name">Utvikling av penis, testikler og scrotum</span>
-                <div class="system">ICF-CY</div>
+    <div class="results">
+        <ul>
+            <li class="code">
+                <a href="/site/code-system.html#C00_4">
+                    <span class="number">C00.4</span>
+                    <span class="name">Innside av underleppe (facies internus labii inferius oris)</span>
+                    <div class="description">
+                        Here's a description. Not sure if this will ever exist in the final result, or if's it's just an artifact of the sample design.
+                    </div>
+                    <div class="system">ICD-10</div>
+                </a>
+            </li>
+            <li class="code">
+                <a href="">
+                    <span class="number">b55502</span>
+                    <span class="name">Utvikling av penis, testikler og scrotum</span>
+                    <div class="system">ICF-CY</div>
 
-            </a>
-        </li>
-        <li class="code">
-            <a href="">
-                <span class="number">T99</span>
-                <span class="name">Endokrin/metabolsk/ernæringssykdom IKA</span>
-                <div class="system">ICPC-2</div>
-            </a>
-        </li>
-        <li class="code">
-            <a href="">
-                <span class="number">1 - 100</span>
-                <span class="name">Kodes med ett av alle heltallene fra og med 1 til og med 100 i tråd med CGAS-instruksjonen</span>
-                <div class="system">BUP</div>
+                </a>
+            </li>
+            <li class="code">
+                <a href="">
+                    <span class="number">T99</span>
+                    <span class="name">Endokrin/metabolsk/ernæringssykdom IKA</span>
+                    <div class="system">ICPC-2</div>
+                </a>
+            </li>
+            <li class="code">
+                <a href="">
+                    <span class="number">1 - 100</span>
+                    <span class="name">Kodes med ett av alle heltallene fra og med 1 til og med 100 i tråd med CGAS-instruksjonen</span>
+                    <div class="system">BUP</div>
 
-            </a>
-        </li>
-        <li class="code">
-            <a href="">
-                <span class="number">WGFX10 </span>
-                <div class="system">NCMP-NCSP-NCRP</div>
-                <div class="name">Prikktest - eget testmateriale fra hjemmemiljø eller arbeidsplass</div>
-            </a>
-        </li>
-        <li class="code">
-            <a href="">
-                <span class="number">FYFX05</span>
-                <div class="name">Fysisk belastningstest (6 min gange eller tilsvarende)</div>
-                <div class="system">NCMP-NCSP-NCRP</div>
-            </a>
-        </li>
-        <li class="code">
-            <a href="">
-                <span class="number">I46.9</span>
-                <div class="name">Uspesifisert hjertestans</div>
-                <div class="system">ICD-10</div>
-            </a>
-        </li>
-        <li class="code">
-            <a href="">
-                <span class="number">I46.9</span>
-                <div class="name">Uspesifisert hjertestans</div>
-                <div class="description">Fysisk belastningstest (6 min gange eller tilsvarende) Fysisk belastningstest (6 min gange eller tilsvarende) Fysisk belastningstest (6 min gange eller tilsvarende)</div>
-                <div class="system">ICD-10</div>
-            </a>
-        </li>
-        <li class="code">
-            <a href="">
-                <span class="number">FYFX05</span>
-                <div class="name">Fysisk belastningstest (6 min gange eller tilsvarende)</div>
-                <div class="description">Fysisk belastningstest (6 min gange eller tilsvarende) Fysisk belastningstest (6 min gange eller tilsvarende) Fysisk belastningstest (6 min gange eller tilsvarende)</div>
-                <div class="system">NCMP-NCSP-NCRP</div>
-            </a>
-        </li>
-        <li class="code">
-            <a href="">
-                <span class="number">C03</span>
-                <div class="name">Ondartet svulst i tannkjøtt (neoplasma malignum gingivae)</div>
-                <div class="system">ICD-10</div>
-            </a>
-        </li>
-
-    </ul>
+                </a>
+            </li>
+            <li class="code">
+                <a href="">
+                    <span class="number">WGFX10 </span>
+                    <div class="system">NCMP-NCSP-NCRP</div>
+                    <div class="name">Prikktest - eget testmateriale fra hjemmemiljø eller arbeidsplass</div>
+                </a>
+            </li>
+            <li class="code">
+                <a href="">
+                    <span class="number">FYFX05</span>
+                    <div class="name">Fysisk belastningstest (6 min gange eller tilsvarende)</div>
+                    <div class="system">NCMP-NCSP-NCRP</div>
+                </a>
+            </li>
+            <li class="code">
+                <a href="">
+                    <span class="number">I46.9</span>
+                    <div class="name">Uspesifisert hjertestans</div>
+                    <div class="system">ICD-10</div>
+                </a>
+            </li>
+            <li class="code">
+                <a href="">
+                    <span class="number">I46.9</span>
+                    <div class="name">Uspesifisert hjertestans</div>
+                    <div class="description">Fysisk belastningstest (6 min gange eller tilsvarende) Fysisk belastningstest (6 min gange eller tilsvarende) Fysisk belastningstest (6 min gange eller tilsvarende)</div>
+                    <div class="system">ICD-10</div>
+                </a>
+            </li>
+            <li class="code">
+                <a href="">
+                    <span class="number">FYFX05</span>
+                    <div class="name">Fysisk belastningstest (6 min gange eller tilsvarende)</div>
+                    <div class="description">Fysisk belastningstest (6 min gange eller tilsvarende) Fysisk belastningstest (6 min gange eller tilsvarende) Fysisk belastningstest (6 min gange eller tilsvarende)</div>
+                    <div class="system">NCMP-NCSP-NCRP</div>
+                </a>
+            </li>
+            <li class="code">
+                <a href="">
+                    <span class="number">C03</span>
+                    <div class="name">Ondartet svulst i tannkjøtt (neoplasma malignum gingivae)</div>
+                    <div class="system">ICD-10</div>
+                </a>
+            </li>
+        </ul>
+    </div>
 
     {% endif %}
+
+
+    {% if page.no-results == true%}
+
+    <div class="no-results">
+        <p>Vi fant ingen resultater for "sdfgsdfgsdfg".</p>
+
+        <ul>
+            <li>Sjekk om du har stavet søkeordene riktig.</li>
+            <li>Sjekk om filtrene du har valgt er riktig.</li>
+        </ul>
+    </div>
+
+    {% endif %}
+
 
     {% if page.infinite-scroll == true %}
 

@@ -13,154 +13,160 @@
         justify-content: space-between;
     }
 
-.hits {
-    position: relative;
-}
-
-.hits, .load-more {
-    &[aria-busy="true"] {
-        @include wheel-animation;
+    .no-results {
+        margin: 1rem;
     }
-}
 
-.load-more {
-    margin: 2rem 1rem;
-}
+    .hits {
+        position: relative;
+    }
 
-.pagination {
-    text-align: center;
+    .hits, .load-more {
+        &[aria-busy="true"] {
+            @include wheel-animation;
+        }
+    }
 
-    li {
-        display: inline-block;
-        margin: 0 .5em;
+    .load-more {
+        margin: 2rem 1rem;
+    }
 
-        &:first-child, &:last-child {
-            button {
-                height: 0;
-                padding-top: 2.25em;
-                background: url($chevron-right-blue) .95em center /.625em no-repeat;
+    .pagination {
+        text-align: center;
+
+        li {
+            display: inline-block;
+            margin: 0 .5em;
+
+            &:first-child, &:last-child {
+                button {
+                    height: 0;
+                    padding-top: 2.25em;
+                    background: url($chevron-right-blue) .95em center /.625em no-repeat;
+                }
             }
-        }
 
-        &:first-child {
-            transform: rotateY(180deg);
-        }
+            &:first-child {
+                transform: rotateY(180deg);
+            }
 
-        &.active {
+            &.active {
+                button {
+                    background-color: $blue;
+                    color: $green;
+                    border: 2px solid $blue;
+
+                    &:hover, &:focus {
+                        background-color: $green;
+                        color: $blue;
+                        border: 2px solid $blue;
+                    }
+                }
+            }
+
             button {
-                background-color: $blue;
-                color: $green;
-                border: 2px solid $blue;
+                @include button-reset;
+                width: 2.5em;
+                height: 2.5em;
+                overflow: hidden;
+                vertical-align: top;
+                color: $blue;
+                font-size: $font-l;
+                border-radius: 1.25em;
+                border: 2px solid #fff;
+                transition: .1s;
 
                 &:hover, &:focus {
                     background-color: $green;
-                    color: $blue;
-                    border: 2px solid $blue;
+                    border-color: $blue;
                 }
             }
         }
+    }
 
-        button {
-            @include button-reset;
-            width: 2.5em;
-            height: 2.5em;
-            overflow: hidden;
-            vertical-align: top;
-            color: $blue;
-            font-size: $font-l;
-            border-radius: 1.25em;
-            border: 2px solid #fff;
-            transition: .1s;
+    .results {
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+    }
 
-            &:hover, &:focus {
-                background-color: $green;
-                border-color: $blue;
+    .code {
+        margin: 0;
+        padding: 0;
+        border-bottom: 1px solid $blue;
+    }
+
+    a {
+        color: $blue;
+        display: flex;
+        flex-flow: row wrap;
+        text-decoration: none;
+        padding: 1rem 3rem 1rem 1rem;
+        position: relative;
+        z-index: 2;
+        transition: background-color .2s;
+        background: url($chevron-right-grey) right 1rem center / 1rem 2rem no-repeat;
+
+        &:hover, &:focus {
+            background-color: $light-green;
+        }
+
+        // The wider lines above and below the focused element
+        &:focus {
+            outline: 0;
+
+            &::before, &::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                height: 2px;
+                left: 0;
+                right: 0;
+                background-color: $grey;
+            }
+
+            &::before {
+                top: -1px;
+            }
+
+            &::after {
+                bottom: -1px;
             }
         }
     }
-}
 
-ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.code {
-    margin: 0;
-    padding: 0;
-    border-bottom: 1px solid $blue;
-}
-
-a {
-    color: $blue;
-    display: flex;
-    flex-flow: row wrap;
-    text-decoration: none;
-    padding: 1rem 3rem 1rem 1rem;
-    position: relative;
-    z-index: 2;
-    transition: background-color .2s;
-    background: url($chevron-right-grey) right 1rem center / 1rem 2rem no-repeat;
-
-    &:hover, &:focus {
-        background-color: $light-green;
+    .number, .name {
+        font-weight: 600;
+        display: inline-flex;
     }
 
-    // The wider lines above and below the focused element
-    &:focus {
-        outline: 0;
-
-        &::before, &::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            height: 2px;
-            left: 0;
-            right: 0;
-            background-color: $grey;
-        }
-
-        &::before {
-            top: -1px;
-        }
+    .number {
+        order: 2;
 
         &::after {
-            bottom: -1px;
+            content: "—";
+            padding: 0 .25em;
         }
     }
-}
 
-.number, .name {
-    font-weight: 600;
-    display: inline-flex;
-}
-
-.number {
-    order: 2;
-
-    &::after {
-        content: "—";
-        padding: 0 .25em;
+    .name {
+        font-weight: 600;
+        order: 3;
     }
-}
 
-.name {
-    font-weight: 600;
-    order: 3;
-}
+    .description {
+        order: 4;
+        padding-top: .25rem
+    }
 
-.description {
-    order: 4;
-    padding-top: .25rem
-}
-
-.system {
-    font-size: .85rem;
-    order: 1;
-    width: 100%;
-    padding-bottom: .25rem;
-}
+    .system {
+        font-size: .85rem;
+        order: 1;
+        width: 100%;
+        padding-bottom: .25rem;
+    }
 
 }
 

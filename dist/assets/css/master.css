@@ -2179,6 +2179,10 @@ h1 {
           justify-content: space-between;
 }
 
+#search-results .no-results {
+  margin: 1rem;
+}
+
 #search-results .hits {
   position: relative;
 }
@@ -2281,7 +2285,7 @@ h1 {
   border-color: #0f2d5e;
 }
 
-#search-results ul {
+#search-results .results ul {
   list-style: none;
   margin: 0;
   padding: 0;
