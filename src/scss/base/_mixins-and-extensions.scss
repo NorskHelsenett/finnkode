@@ -34,15 +34,17 @@
 }
 
 @mixin input-field($type) {
+    appearance: none;
     display: block;
     border: 2px solid $blue;
     border-radius: 1.125rem;
     height: 2.25rem;
+    line-height: 2.25rem;
+    min-height: 2.25rem;
     width: 100%;
     padding: 0 3.125rem 0 1rem;
     transition: .1s;
     font-size: $font-s;
-    line-height: 1;
 
     &:focus, &:hover {
         outline: 0;
@@ -50,8 +52,9 @@
 
     @media only screen and (min-width: $one-to-two-col) {
         border-radius: 2.5rem;
-        line-height: 2.5rem;
         height: 2.5rem;
+        min-height: 2.5rem;
+        line-height: 2.5rem;
         padding: 0 1.625rem 0 1rem;
     }
 
@@ -60,6 +63,7 @@
         @if ($type == "search") {
             border-radius: 1.625rem;
             line-height: 3.25rem;
+            min-height: 3.25rem;
             height: 3.25rem;
             padding: 0 4rem 0 1.25rem;
             font-size: $font-m;

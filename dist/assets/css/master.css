@@ -1936,19 +1936,23 @@ h1 {
 }
 
 .search-refiners #datepicker {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   display: block;
   border: 2px solid #0f2d5e;
   -webkit-border-radius: 1.125rem;
      -moz-border-radius: 1.125rem;
           border-radius: 1.125rem;
   height: 2.25rem;
+  line-height: 2.25rem;
+  min-height: 2.25rem;
   width: 100%;
   padding: 0 3.125rem 0 1rem;
   -webkit-transition: .1s;
   -moz-transition: .1s;
   transition: .1s;
   font-size: 0.875rem;
-  line-height: 1;
 }
 
 .search-refiners #datepicker:focus, .search-refiners #datepicker:hover {
@@ -1960,8 +1964,9 @@ h1 {
     -webkit-border-radius: 2.5rem;
        -moz-border-radius: 2.5rem;
             border-radius: 2.5rem;
-    line-height: 2.5rem;
     height: 2.5rem;
+    min-height: 2.5rem;
+    line-height: 2.5rem;
     padding: 0 1.625rem 0 1rem;
   }
 }
@@ -2483,19 +2488,23 @@ h1 {
 }
 
 .search-field .search-input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   display: block;
   border: 2px solid #0f2d5e;
   -webkit-border-radius: 1.125rem;
      -moz-border-radius: 1.125rem;
           border-radius: 1.125rem;
   height: 2.25rem;
+  line-height: 2.25rem;
+  min-height: 2.25rem;
   width: 100%;
   padding: 0 3.125rem 0 1rem;
   -webkit-transition: .1s;
   -moz-transition: .1s;
   transition: .1s;
   font-size: 0.875rem;
-  line-height: 1;
 }
 
 .search-field .search-input:focus, .search-field .search-input:hover {
@@ -2507,8 +2516,9 @@ h1 {
     -webkit-border-radius: 2.5rem;
        -moz-border-radius: 2.5rem;
             border-radius: 2.5rem;
-    line-height: 2.5rem;
     height: 2.5rem;
+    min-height: 2.5rem;
+    line-height: 2.5rem;
     padding: 0 1.625rem 0 1rem;
   }
 }
@@ -2519,6 +2529,7 @@ h1 {
        -moz-border-radius: 1.625rem;
             border-radius: 1.625rem;
     line-height: 3.25rem;
+    min-height: 3.25rem;
     height: 3.25rem;
     padding: 0 4rem 0 1.25rem;
     font-size: 1rem;
