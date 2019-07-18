@@ -3,165 +3,170 @@
     padding-bottom: 3rem;
     flex: 1;
 
-    .hits {
+    .results-header {
         font-size: $font-s;
         color: $blue;
         padding: .75rem 1rem;
         margin: .5rem 0 0;
         border-bottom: 1px solid $blue;
-        position: relative;
+        display: flex;
+        justify-content: space-between;
     }
 
-    .hits, .load-more {
-        &[aria-busy="true"] {
-            @include wheel-animation;
-        }
+.hits {
+    position: relative;
+}
+
+.hits, .load-more {
+    &[aria-busy="true"] {
+        @include wheel-animation;
     }
+}
 
-    .load-more {
-        margin: 2rem 1rem;
-    }
+.load-more {
+    margin: 2rem 1rem;
+}
 
-    .pagination {
-        text-align: center;
+.pagination {
+    text-align: center;
 
-        li {
-            display: inline-block;
-            margin: 0 .5em;
+    li {
+        display: inline-block;
+        margin: 0 .5em;
 
-            &:first-child, &:last-child {
-                button {
-                    height: 0;
-                    padding-top: 2.25em;
-                    background: url($chevron-right-blue) .95em center /.625em no-repeat;
-                }
-            }
-
-            &:first-child {
-                transform: rotateY(180deg);
-            }
-
-            &.active {
-                button {
-                    background-color: $blue;
-                    color: $green;
-                    border: 2px solid $blue;
-
-                    &:hover, &:focus {
-                        background-color: $green;
-                        color: $blue;
-                        border: 2px solid $blue;
-                    }
-                }
-            }
-
+        &:first-child, &:last-child {
             button {
-                @include button-reset;
-                width: 2.5em;
-                height: 2.5em;
-                overflow: hidden;
-                vertical-align: top;
-                color: $blue;
-                font-size: $font-l;
-                border-radius: 1.25em;
-                border: 2px solid #fff;
-                transition: .1s;
+                height: 0;
+                padding-top: 2.25em;
+                background: url($chevron-right-blue) .95em center /.625em no-repeat;
+            }
+        }
+
+        &:first-child {
+            transform: rotateY(180deg);
+        }
+
+        &.active {
+            button {
+                background-color: $blue;
+                color: $green;
+                border: 2px solid $blue;
 
                 &:hover, &:focus {
                     background-color: $green;
-                    border-color: $blue;
+                    color: $blue;
+                    border: 2px solid $blue;
                 }
             }
         }
-    }
 
-    ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
+        button {
+            @include button-reset;
+            width: 2.5em;
+            height: 2.5em;
+            overflow: hidden;
+            vertical-align: top;
+            color: $blue;
+            font-size: $font-l;
+            border-radius: 1.25em;
+            border: 2px solid #fff;
+            transition: .1s;
 
-    .code {
-        margin: 0;
-        padding: 0;
-        border-bottom: 1px solid $blue;
-    }
-
-    a {
-        color: $blue;
-        display: flex;
-        flex-flow: row wrap;
-        text-decoration: none;
-        padding: 1rem 3rem 1rem 1rem;
-        position: relative;
-        z-index: 2;
-        transition: background-color .2s;
-        background: url($chevron-right-grey) right 1rem center / 1rem 2rem no-repeat;
-
-        &:hover, &:focus {
-            background-color: $light-green;
-        }
-
-        // The wider lines above and below the focused element
-        &:focus {
-            outline: 0;
-
-            &::before, &::after {
-                content: "";
-                position: absolute;
-                bottom: 0;
-                height: 2px;
-                left: 0;
-                right: 0;
-                background-color: $grey;
-            }
-
-            &::before {
-                top: -1px;
-            }
-
-            &::after {
-                bottom: -1px;
+            &:hover, &:focus {
+                background-color: $green;
+                border-color: $blue;
             }
         }
     }
+}
 
-    .number, .name {
-        font-weight: 600;
-        display: inline-flex;
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.code {
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid $blue;
+}
+
+a {
+    color: $blue;
+    display: flex;
+    flex-flow: row wrap;
+    text-decoration: none;
+    padding: 1rem 3rem 1rem 1rem;
+    position: relative;
+    z-index: 2;
+    transition: background-color .2s;
+    background: url($chevron-right-grey) right 1rem center / 1rem 2rem no-repeat;
+
+    &:hover, &:focus {
+        background-color: $light-green;
     }
 
-    .number {
-        order: 2;
+    // The wider lines above and below the focused element
+    &:focus {
+        outline: 0;
+
+        &::before, &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            height: 2px;
+            left: 0;
+            right: 0;
+            background-color: $grey;
+        }
+
+        &::before {
+            top: -1px;
+        }
 
         &::after {
-            content: "—";
-            padding: 0 .25em;
+            bottom: -1px;
         }
     }
+}
 
-    .name {
-        font-weight: 600;
-        order: 3;
-    }
+.number, .name {
+    font-weight: 600;
+    display: inline-flex;
+}
 
-    .description {
-        order: 4;
-        padding-top: .25rem
-    }
+.number {
+    order: 2;
 
-    .system {
-        font-size: .85rem;
-        order: 1;
-        width: 100%;
-        padding-bottom: .25rem;
+    &::after {
+        content: "—";
+        padding: 0 .25em;
     }
+}
+
+.name {
+    font-weight: 600;
+    order: 3;
+}
+
+.description {
+    order: 4;
+    padding-top: .25rem
+}
+
+.system {
+    font-size: .85rem;
+    order: 1;
+    width: 100%;
+    padding-bottom: .25rem;
+}
 
 }
 
 @media only screen and (min-width: $two-to-three-col) {
     #search-results {
-        .hits {
+        .results-header {
             margin-top: 0;
             padding: 1rem 1rem .75rem;
             line-height: 1.5rem;
@@ -171,7 +176,6 @@
 
 @media only screen and (min-width: $three-to-four-col) {
     #search-results {
-
         a {
             background-position: right 1rem top 1.325rem;
             padding-top: 1.5rem;
@@ -214,7 +218,6 @@
                     display: none;
                 }
             }
-
         }
     }
 }
