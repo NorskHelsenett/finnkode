@@ -1686,6 +1686,38 @@ h1 {
   }
 }
 
+.message {
+  color: #000;
+  max-width: 608px;
+  padding: 1.25rem 1rem 0;
+}
+
+.message .title {
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin-bottom: .5rem;
+  display: block;
+}
+
+.message.error, .message.warning {
+  background-position: 1rem 1.125rem;
+  -webkit-background-size: 2.5rem 2.5rem;
+     -moz-background-size: 2.5rem;
+          background-size: 2.5rem;
+  background-repeat: no-repeat;
+  padding: 1.25rem 1rem 1.325rem 4.5rem;
+}
+
+.message.error {
+  background-color: #ffe7e7;
+  background-image: url("/assets/images/error.svg");
+}
+
+.message.warning {
+  background-color: #fff7d5;
+  background-image: url("/assets/images/warning.svg");
+}
+
 .search-refiners {
   color: #0f2d5e;
   text-align: center;
@@ -2159,7 +2191,6 @@ h1 {
 
 #search-results {
   margin: 1.5rem 1rem 0;
-  padding-bottom: 3rem;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
      -moz-box-flex: 1;
@@ -2219,11 +2250,16 @@ h1 {
 }
 
 #search-results .load-more {
-  margin: 2rem 1rem;
+  margin: 2rem 1rem 0;
 }
 
 #search-results .pagination {
   text-align: center;
+}
+
+#search-results .pagination ul {
+  padding: 0;
+  margin: 0;
 }
 
 #search-results .pagination li {
@@ -2775,8 +2811,8 @@ h1 {
   }
 }
 
-.search h2 {
-  font-size: 1rem;
+.search #search-container {
+  padding-bottom: 2rem;
 }
 
 @media only screen and (min-width: 960px) {

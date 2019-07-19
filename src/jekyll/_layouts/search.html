@@ -9,7 +9,10 @@
     {% include global-search-banner.html %}
 
     <div class="layout-container" id="search-container" tabindex="-1">
-        {% include search-refiners.html %}
+
+        {% if page.hide-filters != true %}
+            {% include search-refiners.html %}
+        {% endif %}
 
         <div id="search-results" tabindex="-1">
 
