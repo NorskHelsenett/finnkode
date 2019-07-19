@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Alle kodeverk: "sdfgdsfg" søkeresultater - FinnKode</title>
+    <title>Alle kodeverk: "kreft" søkeresultater - FinnKode</title>
 
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -145,12 +145,17 @@
 
         <label class="global-search-label" for="global-search">Søk i alle kodeverk</label>
 
-        <div action="https://url-to-search.finnkode.no/global-search" method="get" role="search" class="search-field">
-            <input autofocus name="global-search" id="global-search" type="search" class="search-input" placeholder="f.eks. kreft, bevissthetssilstand, fødsel..."
-
+        <div role="search" class="search-field">
+            <input
+                autofocus
+                name="global-search"
+                id="global-search"
+                type="search"
+                class="search-input"
+                placeholder="f.eks. kreft, bevissthetssilstand, fødsel..."
                 
-
             >
+
             <button class="search-button" type="submit">Søk i alle kodeverk</button>
 
             
@@ -161,8 +166,8 @@
 
 
 
-<div class="layout-container" id="search-container" tabindex="-1">
-    <div class="search-refiners js-expand">
+    <div class="layout-container" id="search-container" tabindex="-1">
+        <div class="search-refiners js-expand">
     <div class="js-expander refiners-expander" aria-label="Vis/skjul filtre"></div>
     <div class="js-expandable">
         <div class="filters">
@@ -204,36 +209,16 @@
         </div>
     </div>
 </div>
-    <div id="search-results" tabindex="-1">
 
-    
+        <div id="search-results" tabindex="-1">
 
-    <div class="results-header">
-        <div class="hits" aria-busy="false" aria-live="polite">0 resultater for "sdfgdsfg" i alle kodeverk.</div>
-    </div>
-
-    
-
-
-    
-
-    <div class="no-results">
-        <p>Vi fant ingen resultater for "sdfgsdfgsdfg".</p>
-
-        <ul>
-            <li>Sjekk om du har stavet søkeordene riktig.</li>
-            <li>Sjekk om filtrene du har valgt er riktig.</li>
-        </ul>
-    </div>
-
-    
-
-
-    
+            <div class="message error">
+error message
 </div>
 
-</div>
+        </div>
 
+    </div>
 </main>
 
 <footer id="framework-footer">

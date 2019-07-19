@@ -88,4 +88,4 @@ exports.jekyll = jekyll;
 exports.clean = clean;
 exports.build = build;
 exports.watch = watch;
-exports.default = build;
+exports.default = watch;
