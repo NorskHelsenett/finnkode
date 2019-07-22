@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Alle kodeverk: "sdfgdsfg" søkeresultater - FinnKode</title>
+    <title>Alle kodeverk: Søk - FinnKode</title>
 
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -140,7 +140,48 @@
 </header>
 
 <main id="page-content">
-    Global search with no results
+    <div class="global-search-banner">
+    <div class="layout-container">
+
+        <label class="global-search-label" for="global-search">Søk i alle kodeverk</label>
+
+        <div role="search" class="search-field">
+            <input
+                autofocus
+                name="global-search"
+                id="global-search"
+                type="search"
+                class="search-input"
+                placeholder="f.eks. kreft, bevissthetssilstand, fødsel..."
+                
+            >
+
+            <button class="search-button" type="submit">Søk i alle kodeverk</button>
+
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+    <div class="layout-container" id="search-container" tabindex="-1">
+
+        
+
+        <div id="search-results" tabindex="-1">
+
+            <div class="message">
+    <strong class="title">Søk gjennom alle kodeverkene på finnkode.no.</strong>
+    <div class="details">
+        <p>Her kan være noe informasjon/eksempler om hvordan du søker?</p>
+    </div>
+</div>
+
+        </div>
+
+    </div>
 </main>
 
 <footer id="framework-footer">

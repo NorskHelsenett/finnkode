@@ -140,7 +140,86 @@
 </header>
 
 <main id="page-content">
-    Code system search with no results
+    <div class="global-search-banner">
+    <div class="layout-container">
+
+        <label class="global-search-label" for="global-search">Søk i alle kodeverk</label>
+
+        <div role="search" class="search-field">
+            <input
+                autofocus
+                name="global-search"
+                id="global-search"
+                type="search"
+                class="search-input"
+                placeholder="f.eks. kreft, bevissthetssilstand, fødsel..."
+                
+            >
+
+            <button class="search-button" type="submit">Søk i alle kodeverk</button>
+
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+    <div class="layout-container" id="search-container" tabindex="-1">
+
+        
+            <div class="search-refiners js-expand">
+    <div class="js-expander refiners-expander" aria-label="Vis/skjul filtre"></div>
+    <div class="js-expandable">
+        <div class="filters">
+            <a class="skip-link" href="#search-results">Hopp over filterne til resultatene</a>
+
+            <div class="date filter">
+
+                <label class="filter-type" id="datepickerLabel" for="datepicker">Endret siden</label>
+
+                <div class="date-field">
+                    <input type="text" id="datepicker" placeholder="DD.MM.ÅÅÅÅ">
+                </div>
+
+                <label class="expired-codes">
+                    <input type="checkbox">
+                    <span>Vis utgåtte koder</span>
+                </label>
+
+            </div>
+
+            
+
+            <div class="code-system filter" aria-busy="false" aria-live="polite">
+
+                <div class="filter-type">Kodeverk</div>
+
+                <ul>
+                    <li class="all-code-systems"><a href="#">Alle kodeverk (387)</a></li>
+                    <li><a href="#">ICD-10 (129)</a></li>
+                    <li class="current"><a href="#">NCMP-NCSP-NCRP (219)</a></li>
+                    <li><a href="#">BUP (1)</a></li>
+                    <li><a href="#">ICPC-2 (34)</a></li>
+                    <li><a href="#">ICF-CY (4)</a></li>
+                </ul>
+            </div>
+
+            
+
+        </div>
+    </div>
+</div>
+        
+
+        <div id="search-results" tabindex="-1">
+
+            Code system search with no results
+
+        </div>
+
+    </div>
 </main>
 
 <footer id="framework-footer">

@@ -43,7 +43,7 @@ function css() {
     return gulp.src("./src/scss/*.scss")
         .pipe(plumber())
         .pipe(sourcemaps.init())
-        .pipe(sass({outputStyle: "expanded"}))
+        .pipe(sass({outputStyle: "expanded"}).on('error', sass.logError))
         .pipe(gulp.dest("./dist/assets/css/"))
         .pipe(postcss([autoprefixer({grid:"autoplace"})]))
         .pipe(sourcemaps.write("./maps"))
@@ -88,4 +88,4 @@ exports.jekyll = jekyll;
 exports.clean = clean;
 exports.build = build;
 exports.watch = watch;
-exports.default = build;
+exports.default = watch;

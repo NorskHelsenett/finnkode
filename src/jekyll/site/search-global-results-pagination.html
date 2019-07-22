@@ -4,12 +4,38 @@ layout: search
 page-name: global-search
 title: 'Alle kodeverk: "kreft" søkeresultater'
 toc-title: Global search (pagination)
-pagination: true
+toc-comment: Pagination er et bedre paradigme enn "infinite scrolling" for denne type innhold. Den gir bedre brukeroppelvelse, feks at folk kan bedre skjønne antall resultater og kan forholde seg til resultatene i grupper av fordøyelig størrelse). Den gir også mye bedre tilgjengelighet.
 ---
+<div class="results-header">
 
-{% include global-search-banner.html %}
+    <div class="hits" aria-busy="false" aria-live="polite">Viser 21 - 30 av 197 resultater for "underleppe" i alle kodeverk.</div>
 
-<div class="layout-container" id="search-container" tabindex="-1">
-    {% include search-refiners.html %}
-    {% include search-results.html %}
+    {% include search-sorter.html %}
+
+</div>
+
+{% include global-results.html %}
+
+<div class="load-more pagination">
+    <nav aria-label="Bla gjennom resultatene">
+        <ul>
+            <li>
+                <button>Forrige resultater</button>
+            </li>
+            <li>
+                <button>2</button>
+            </li>
+            <li class="active">
+                <button>3</button>
+            </li>
+            <li>
+                <button>4</button>
+            </li>
+            <li>
+                <button>Neste resultater</button>
+            </li>
+        </ul>
+    </nav>
+
+
 </div>

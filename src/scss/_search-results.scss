@@ -1,15 +1,22 @@
 #search-results {
     margin: 1.5rem 1rem 0;
-    padding-bottom: 3rem;
     flex: 1;
 
-    .hits {
+    .results-header {
         font-size: $font-s;
         color: $blue;
         padding: .75rem 1rem;
         margin: .5rem 0 0;
         border-bottom: 1px solid $blue;
+    }
+
+    .no-results {
+        margin: 1rem;
+    }
+
+    .hits {
         position: relative;
+        margin-bottom: .5rem;
     }
 
     .hits, .load-more {
@@ -19,11 +26,16 @@
     }
 
     .load-more {
-        margin: 2rem 1rem;
+        margin: 2rem 1rem 0;
     }
 
     .pagination {
         text-align: center;
+
+        ul {
+            padding: 0;
+            margin: 0;
+        }
 
         li {
             display: inline-block;
@@ -75,37 +87,24 @@
         }
     }
 
-    ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
+    .results {
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
     }
 
     .code {
         margin: 0;
         padding: 0;
         border-bottom: 1px solid $blue;
-
-        &.expired {
-            .status {
-                background-color: $dark-grey;
-                color: #fff;
-            }
-        }
-
-        &.expiring-soon {
-            .status {
-                background-color: $light-blue;
-                color: $blue;
-            }
-        }
     }
 
     a {
         color: $blue;
         display: flex;
-        align-items: stretch;
-        flex-flow: column nowrap;
+        flex-flow: row wrap;
         text-decoration: none;
         padding: 1rem 3rem 1rem 1rem;
         position: relative;
@@ -141,106 +140,131 @@
         }
     }
 
-    .system {
-        font-size: $font-s;
-        padding-bottom: .25rem;
+    .number, .name {
+        font-weight: 600;
+        display: inline-flex;
     }
 
     .number {
-        font-weight: 600;
+        order: 2;
 
         &::after {
             content: "—";
             padding: 0 .25em;
         }
-
     }
 
     .name {
         font-weight: 600;
-        padding-right: .25em;
-    }
-
-    .status {
-        text-transform: uppercase;
-        font-size: $font-s;
-        padding: 0 .5em;
+        order: 3;
     }
 
     .description {
-        padding-top: .25rem;
-        display: block;
+        order: 4;
+        padding-top: .25rem
     }
 
+    .system {
+        font-size: .85rem;
+        order: 1;
+        width: 100%;
+        padding-bottom: .25rem;
+    }
+
+}
+
+@media only screen and (min-width: $one-to-two-col) {
+    #search-results {
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            line-height: 1.4em;
+        }
+
+        .hits {
+            margin-bottom: 0;
+            padding-right: 1.5em;
+        }
+
+        .sort {
+            flex-shrink: 0;
+            height: 1.4em;
+
+            label {
+                white-space: nowrap;
+                vertical-align: top;
+            }
+
+            select {
+                top: -4px;
+            }
+
+        }
+    }
 }
 
 @media only screen and (min-width: $two-to-three-col) {
     #search-results {
-        .hits {
-            margin-top: 0;
-            padding: 1rem 1rem .75rem;
-            line-height: 1.5rem;
+        .results-header {
+            padding-top: 17px;
+            padding-bottom: 13px;
+
+            .sort {
+                select {
+                    top: -5px;
+                }
+            }
+
         }
     }
 }
 
+
 @media only screen and (min-width: $three-to-four-col) {
     #search-results {
-
         a {
             background-position: right 1rem top 1.325rem;
             padding-top: 1.5rem;
             padding-bottom: 1.5rem;
-            padding-right: 4rem;
+            padding-right: 5rem;
             font-size: $font-xl;
-            flex-flow: row nowrap;
-        }
+            display: grid;
+            grid-template-columns: 4em 1fr 9rem;
+            grid-template-rows: 1fr min-content;
 
-        .system {
-            font-size: $font-xl;
-            padding-bottom: 0;
-            order: 2;
-        }
+            grid-template-areas: "number name system" "number description system";
 
-        .info {
-            order: 1;
-            display: flex;
-        }
+            .system {
+                grid-area: system;
+                font-size: $font-xl;
+                width: unset;
+                text-align: right;
+                padding-bottom: 0;
+            }
 
-        // Grid stuff from here
+            .name, .description {
+                padding: 0 2rem;
+            }
 
-        .number {
-            &::after {
-                display: none;
+            .name {
+                grid-area: name;
+            }
+
+            .description {
+                grid-area: description;
+                font-size: $font-l;
+                padding-top: .5rem;
+            }
+
+            .number {
+                grid-area: number;
+                display: unset;
+
+                &::after {
+                    display: none;
+                }
             }
         }
-
-        .status {
-            font-size: $font-m;
-        }
-
-        .description {
-            font-size: $font-l;
-        }
-
-        //.g-details {
-        //    display: grid;
-        //    grid-template-columns: auto;
-        //    grid-template-rows: auto;
-        //    grid-template-areas: "g-name g-status" "g-description g-status";
-        //}
-        //
-        //.g-name {
-        //    grid-area: g-name;
-        //}
-        //
-        //.g-status {
-        //    grid-area: g-status;
-        //}
-        //
-        //.g-description {
-        //    grid-area: g-description;
-        //}
     }
-
 }
