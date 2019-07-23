@@ -19,13 +19,12 @@ const webpackstream = require("webpack-stream");
 // BrowserSync
 function browserSync(done) {
     browsersync.init({
-        server: {
-            baseDir: "./dist/"
-        },
-        port: 4000
+        server: "./dist",
+        port: "4000"
     });
     done();
 }
+
 
 // BrowserSync Reload
 function browserSyncReload(done) {
@@ -35,7 +34,7 @@ function browserSyncReload(done) {
 
 // Clean assets
 function clean() {
-    return del(["./dist/assets/"]);
+    return del(["./dist/"]);
 }
 
 // CSS task
@@ -45,7 +44,7 @@ function css() {
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: "expanded"}).on('error', sass.logError))
         .pipe(gulp.dest("./dist/assets/css/"))
-        .pipe(postcss([autoprefixer({grid:"autoplace"})]))
+        .pipe(postcss([autoprefixer()]))
         .pipe(sourcemaps.write("./maps"))
         .pipe(gulp.dest("./dist/assets/css/"))
         .pipe(browsersync.stream());
@@ -66,7 +65,7 @@ function scripts() {
 
 // Jekyll
 function jekyll() {
-    return cp.spawn("jekyll.bat", ["build", "--watch", "--incremental"], {stdio: "inherit"});
+    return cp.spawn("jekyll.bat", ["build", "-I"], {stdio: "inherit"});
 }
 
 
@@ -77,15 +76,12 @@ function watchFiles() {
     gulp.watch("./src/jekyll/**/*", gulp.series(jekyll, browserSyncReload));
 }
 
-const build = gulp.series(clean, gulp.parallel(css, jekyll, scripts));
-
-const watch = gulp.parallel(watchFiles, browserSync);
+const watch = gulp.series(clean, gulp.parallel(css, scripts, jekyll), gulp.parallel(watchFiles, browserSync));
 
 // export tasks
 exports.css = css;
 exports.scripts = scripts;
 exports.jekyll = jekyll;
 exports.clean = clean;
-exports.build = build;
 exports.watch = watch;
 exports.default = watch;

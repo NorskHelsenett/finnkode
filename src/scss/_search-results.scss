@@ -99,12 +99,26 @@
         margin: 0;
         padding: 0;
         border-bottom: 1px solid $blue;
+
+        &.expired {
+            background-color: $lighter-grey;
+            .status {
+                color: $dark-grey;
+            }
+        }
+
+        &.expiring-soon {
+            .status {
+
+            }
+        }
+
     }
 
     a {
         color: $blue;
         display: flex;
-        flex-flow: row wrap;
+        flex-flow: column nowrap;
         text-decoration: none;
         padding: 1rem 3rem 1rem 1rem;
         position: relative;
@@ -140,36 +154,21 @@
         }
     }
 
-    .number, .name {
+    .main-info {
         font-weight: 600;
-        display: inline-flex;
-    }
-
-    .number {
         order: 2;
-
-        &::after {
-            content: "—";
-            padding: 0 .25em;
-        }
-    }
-
-    .name {
-        font-weight: 600;
-        order: 3;
     }
 
     .description {
-        order: 4;
+        order: 3;
         padding-top: .25rem
     }
 
     .system {
         font-size: .85rem;
         order: 1;
-        width: 100%;
-        padding-bottom: .25rem;
     }
+
 
 }
 

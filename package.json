@@ -13,7 +13,7 @@
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
     "path": "^0.12.7",
-    "webpack": "^4.35.3",
+    "webpack": "^4.37.0",
     "webpack-stream": "^5.2.1",
     "win-spawn": "^2.0.0"
   },

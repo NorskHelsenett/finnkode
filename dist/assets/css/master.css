@@ -1,4 +1,3 @@
-@charset "UTF-8";
 .visuallyhidden, .skip-link, .search-refiners .expired-codes input {
   position: absolute;
   overflow: hidden;
@@ -2183,12 +2182,6 @@ h1 {
   }
 }
 
-@media only screen and (min-width: 1264px) {
-  .search-refiners .date, .search-refiners .code-system-list {
-    width: 304px;
-  }
-}
-
 #search-results {
   margin: 1.5rem 1rem 0;
   -webkit-box-flex: 1;
@@ -2330,6 +2323,14 @@ h1 {
   border-bottom: 1px solid #0f2d5e;
 }
 
+#search-results .code.expired {
+  background-color: #f7f7f7;
+}
+
+#search-results .code.expired .status {
+  color: #5c5c5c;
+}
+
 #search-results a {
   color: #0f2d5e;
   display: -webkit-box;
@@ -2337,13 +2338,13 @@ h1 {
   display: -moz-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -webkit-flex-flow: row wrap;
-     -moz-box-orient: horizontal;
+  -webkit-flex-flow: column nowrap;
+     -moz-box-orient: vertical;
      -moz-box-direction: normal;
-      -ms-flex-flow: row wrap;
-          flex-flow: row wrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
   text-decoration: none;
   padding: 1rem 3rem 1rem 1rem;
   position: relative;
@@ -2380,16 +2381,8 @@ h1 {
   bottom: -1px;
 }
 
-#search-results .number, #search-results .name {
+#search-results .main-info {
   font-weight: 600;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -moz-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-}
-
-#search-results .number {
   -webkit-box-ordinal-group: 3;
   -webkit-order: 2;
      -moz-box-ordinal-group: 3;
@@ -2397,26 +2390,12 @@ h1 {
           order: 2;
 }
 
-#search-results .number::after {
-  content: "—";
-  padding: 0 .25em;
-}
-
-#search-results .name {
-  font-weight: 600;
+#search-results .description {
   -webkit-box-ordinal-group: 4;
   -webkit-order: 3;
      -moz-box-ordinal-group: 4;
       -ms-flex-order: 3;
           order: 3;
-}
-
-#search-results .description {
-  -webkit-box-ordinal-group: 5;
-  -webkit-order: 4;
-     -moz-box-ordinal-group: 5;
-      -ms-flex-order: 4;
-          order: 4;
   padding-top: .25rem;
 }
 
@@ -2427,8 +2406,6 @@ h1 {
      -moz-box-ordinal-group: 2;
       -ms-flex-order: 1;
           order: 1;
-  width: 100%;
-  padding-bottom: .25rem;
 }
 
 @media only screen and (min-width: 624px) {
