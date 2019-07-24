@@ -1,0 +1,72 @@
+[
+  {
+    "number": "C00.4",
+    "name": "Innside av underleppe (facies internus labii inferius oris)",
+    "system": "ICD-10",
+    "description": "Here is a description. Not sure if this will ever exist in the final result, or if's it's just an artifact of the sample design.",
+    "url": "/site/code-system.html#C00_4"
+  },
+  {
+    "number": "1 - 100",
+    "name": "Kodes med ett av alle heltallene fra og med 1 til og med 100 i tråd med CGAS-instruksjonen",
+    "system": "BUP",
+    "url": "#"
+  },
+  {
+    "number": "b55502",
+    "name": "Utvikling av penis, testikler og scrotum",
+    "system": "ICF-CY",
+    "url": "#"
+  },
+  {
+    "number": "T99",
+    "name": "Endokrin/metabolsk/ernæringssykdom IKA",
+    "system": "ICPC-2",
+    "url": "#"
+  },
+  {
+    "number": "WGFX10",
+    "name": "Prikktest - eget testmateriale fra hjemmemiljø eller arbeidsplass",
+    "system": "NCMP-NCSP-NCRP",
+    "url": "#"
+  },
+  {
+    "number": "FYFX05",
+    "name": "Fysisk belastningstest (6 min gange eller tilsvarende)",
+    "system": "NCMP-NCSP-NCRP",
+    "url": "#"
+  },
+  {
+    "number": "I46.9",
+    "name": "Uspesifisert hjertestans",
+    "system": "ICD-10",
+    "url": "#"
+  },
+  {
+    "number": "I46.9",
+    "name": "Uspesifisert hjertestans",
+    "status": "expired",
+    "system": "ICD-10",
+    "description": "Fysisk belastningstest (6 min gange eller tilsvarende) Fysisk belastningstest (6 min gange eller tilsvarende) Fysisk belastningstest (6 min gange eller tilsvarende)",
+    "url": "#"
+  },
+  {
+    "number": "FYFX05",
+    "name": "Fysisk belastningstest (6 min gange eller tilsvarende)",
+    "status": "expiring-soon",
+    "system": "NCMP-NCSP-NCRP",
+    "url": "#"
+  },
+  {
+    "number": "C03",
+    "name": "Ondartet svulst i tannkjøtt (neoplasma malignum gingivae)",
+    "system": "ICD-10",
+    "url": "#"
+  },
+  {
+    "number": "IAAD00",
+    "name": "Strukturert kartlegging av bruk/misbruk/avhengighet av rusmidler, medikamenter og/eller spill ved bruk av standardiserte verktøy",
+    "system": "NCMP-NCSP-NCRP",
+    "url": "#"
+  }
+]
