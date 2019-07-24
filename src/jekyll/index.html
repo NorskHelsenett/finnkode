@@ -1,6 +1,7 @@
 ---
 layout: toc
 title: Prototype Table of Contents
+regenerate: true
 ---
 <style>
     body {
@@ -33,16 +34,30 @@ title: Prototype Table of Contents
 
 <nav>
     <h1>{{ page.title }}</h1>
+
+    <script type="text/javascript">
+        document.write("<p><em>Sist oppdatert: " + document.lastModified + "</em></p>");
+    </script>
+
+    {% for category in site.category-list %}
+
+    <h2>{{category}}</h2>
+
     <ul>
         {% for page in site.pages %}
-        {% if page.toc-title %}
-
+        {% if page.resource == true %}
+        {% for pc in page.category %}
+        {% if pc == category %}
         <li>
             <a href="{{ page.url }}">{{ page.toc-title }}</a>
             <div class="page-title">{{ page.title }}</div>
         </li>
-
+        {% endif %}
+        {% endfor %}
         {% endif %}
         {% endfor %}
     </ul>
+
+    {% endfor %}
+
 </nav>

@@ -1,6 +1,7 @@
 ---
-page-resource: true
+resource: true
 layout: search
+category: Search
 page-name: global-search
 title: 'Alle kodeverk: "kreft" søkeresultater'
 toc-title: Global search (infinite scroll spinner)
@@ -14,6 +15,6 @@ toc-comment: '"Infinite scroll" gir store problemer med tilgjengelighet. Den lar
 
 </div>
 
-{% include search-results.html %}
+{% include search-results.html data=site.data.search-results.global %}
 
 <div class="load-more infinite-scroll" aria-busy="true" aria-live="polite">Laster flere søkeresultater...</div>

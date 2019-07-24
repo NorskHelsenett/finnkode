@@ -1,6 +1,7 @@
 ---
 resource: false
 layout: search
+category: Search
 page-name: global-search
 title: 'Alle kodeverk: "kreft" søkeresultater'
 toc-title: Global search ("Last flere resultater"-knapp)
@@ -14,7 +15,7 @@ toc-comment: Om man bestemmer å gå for å laste inn flere og flere resultater 
 
 </div>
 
-{% include search-results.html %}
+{% include search-results.html data=site.data.search-results.global %}
 
 <div class="load-more button" aria-busy="false" aria-live="polite">
     <button>Last flere søkeresultater</button>

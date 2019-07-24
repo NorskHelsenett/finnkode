@@ -35,6 +35,9 @@ source: src/jekyll/
 
 incremental: true
 
+category-list: ["Search", "General", "Code system"]
+
+
 # Bundle/build folder
 destination: dist/
 
