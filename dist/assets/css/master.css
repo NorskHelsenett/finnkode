@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .visuallyhidden, .skip-link, .search-refiners .expired-codes input {
   position: absolute;
   overflow: hidden;
@@ -1366,7 +1367,7 @@ h1 {
 }
 
 .code-system-content .code.expired .note.expanded .expander {
-  background-color: #fbfeff;
+  background-color: #eee;
 }
 
 .code-system-content .code.expired .note.expanded .expander:hover, .code-system-content .code.expired .note.expanded .expander:focus {
@@ -2324,11 +2325,29 @@ h1 {
 }
 
 #search-results .code.expired {
-  background-color: #f7f7f7;
+  background-color: #eee;
+}
+
+#search-results .code.expired, #search-results .code.expired a {
+  color: #4c4c4c;
 }
 
 #search-results .code.expired .status {
-  color: #5c5c5c;
+  background-color: #767676;
+  color: #fff;
+}
+
+#search-results .code.expiring-soon {
+  background-color: #e9fbfb;
+}
+
+#search-results .code.expiring-soon, #search-results .code.expiring-soon a {
+  color: #3c5969;
+}
+
+#search-results .code.expiring-soon .status {
+  background-color: #4b7b8b;
+  color: #fff;
 }
 
 #search-results a {
@@ -2382,21 +2401,11 @@ h1 {
 }
 
 #search-results .main-info {
-  font-weight: 600;
   -webkit-box-ordinal-group: 3;
   -webkit-order: 2;
      -moz-box-ordinal-group: 3;
       -ms-flex-order: 2;
           order: 2;
-}
-
-#search-results .description {
-  -webkit-box-ordinal-group: 4;
-  -webkit-order: 3;
-     -moz-box-ordinal-group: 4;
-      -ms-flex-order: 3;
-          order: 3;
-  padding-top: .25rem;
 }
 
 #search-results .system {
@@ -2406,6 +2415,31 @@ h1 {
      -moz-box-ordinal-group: 2;
       -ms-flex-order: 1;
           order: 1;
+}
+
+#search-results .number, #search-results .name {
+  display: inline;
+  font-weight: 600;
+}
+
+#search-results .number::after {
+  content: " —";
+}
+
+#search-results .name {
+  padding-right: .325em;
+}
+
+#search-results .status {
+  text-transform: uppercase;
+  font-weight: normal;
+  padding: 0 .25em;
+  font-size: .85em;
+  display: inline-block;
+}
+
+#search-results .description {
+  padding-top: .25rem;
 }
 
 @media only screen and (min-width: 624px) {
@@ -2461,38 +2495,84 @@ h1 {
     background-position: right 1rem top 1.325rem;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
-    padding-right: 5rem;
+    padding-right: 4rem;
     font-size: 1.25rem;
-    display: grid;
-    grid-template-columns: 4em 1fr 9rem;
-    grid-template-rows: 1fr -webkit-min-content;
-    grid-template-rows: 1fr min-content;
-    grid-template-areas: "number name system" "number description system";
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-flow: row nowrap;
+       -moz-box-orient: horizontal;
+       -moz-box-direction: normal;
+        -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+       -moz-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  #search-results a .main-info {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+       -moz-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-flow: row wrap;
+       -moz-box-orient: horizontal;
+       -moz-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+       -moz-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
   }
   #search-results a .system {
-    grid-area: system;
     font-size: 1.25rem;
-    width: unset;
     text-align: right;
-    padding-bottom: 0;
-  }
-  #search-results a .name, #search-results a .description {
-    padding: 0 2rem;
-  }
-  #search-results a .name {
-    grid-area: name;
-  }
-  #search-results a .description {
-    grid-area: description;
-    font-size: 1.125rem;
-    padding-top: .5rem;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 11rem;
+       -moz-box-flex: 0;
+        -ms-flex: 0 0 11rem;
+            flex: 0 0 11rem;
+    -webkit-box-ordinal-group: 3;
+    -webkit-order: 2;
+       -moz-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
   }
   #search-results a .number {
-    grid-area: number;
-    display: unset;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 5rem;
+       -moz-box-flex: 0;
+        -ms-flex: 0 0 5rem;
+            flex: 0 0 5rem;
+    white-space: nowrap;
   }
   #search-results a .number::after {
     display: none;
+  }
+  #search-results a .name, #search-results a .description {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 34.5rem;
+       -moz-box-flex: 0;
+        -ms-flex: 0 0 34.5rem;
+            flex: 0 0 34.5rem;
+  }
+  #search-results a .status {
+    font-size: .7em;
+  }
+  #search-results a .description {
+    font-size: 1.125rem;
+    padding-top: .5rem;
+    margin-left: auto;
   }
 }
 

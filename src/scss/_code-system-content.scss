@@ -264,16 +264,16 @@
             }
 
             &:hover, &:focus {
-                background-color: $lighter-grey;
+                background-color: $lightest-grey;
             }
         }
 
         &.expanded {
             .expander {
-                background-color: $lightest-grey;
+                background-color: $lighter-grey;
 
                 &:hover, &:focus {
-                    background-color: $lighter-grey;
+                    background-color: $lightest-grey;
                 }
 
             }

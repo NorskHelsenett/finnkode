@@ -102,14 +102,27 @@
 
         &.expired {
             background-color: $lighter-grey;
+
+            &, a {
+                color: $darkest-grey;
+            }
+
             .status {
-                color: $dark-grey;
+                background-color: $grey;
+                color: #fff;
             }
         }
 
         &.expiring-soon {
-            .status {
+            background-color: $lighter-blue;
 
+            &, a {
+                color: $dark-blue;
+            }
+
+            .status {
+                background-color: $medium-blue;
+                color: #fff;
             }
         }
 
@@ -155,13 +168,7 @@
     }
 
     .main-info {
-        font-weight: 600;
         order: 2;
-    }
-
-    .description {
-        order: 3;
-        padding-top: .25rem
     }
 
     .system {
@@ -169,6 +176,32 @@
         order: 1;
     }
 
+    .number, .name {
+        display: inline;
+        font-weight: 600;
+    }
+
+    .number {
+        &::after {
+            content: " —";
+        }
+    }
+
+    .name {
+        padding-right: .325em;
+    }
+
+    .status {
+        text-transform: uppercase;
+        font-weight: normal;
+        padding: 0 .25em;
+        font-size: .85em;
+        display: inline-block;
+    }
+
+    .description {
+        padding-top: .25rem
+    }
 
 }
 
@@ -219,51 +252,55 @@
     }
 }
 
-
 @media only screen and (min-width: $three-to-four-col) {
     #search-results {
         a {
             background-position: right 1rem top 1.325rem;
             padding-top: 1.5rem;
             padding-bottom: 1.5rem;
-            padding-right: 5rem;
+            padding-right: 4rem;
             font-size: $font-xl;
-            display: grid;
-            grid-template-columns: 4em 1fr 9rem;
-            grid-template-rows: 1fr min-content;
+            flex-flow: row nowrap;
+            justify-content: space-between;
 
-            grid-template-areas: "number name system" "number description system";
+            .main-info {
+                flex-grow: 1;
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-between;
+            }
 
             .system {
-                grid-area: system;
                 font-size: $font-xl;
-                width: unset;
                 text-align: right;
-                padding-bottom: 0;
-            }
-
-            .name, .description {
-                padding: 0 2rem;
-            }
-
-            .name {
-                grid-area: name;
-            }
-
-            .description {
-                grid-area: description;
-                font-size: $font-l;
-                padding-top: .5rem;
+                flex: 0 0 11rem;
+                order: 2;
             }
 
             .number {
-                grid-area: number;
-                display: unset;
+                flex: 0 0 5rem;
+                white-space: nowrap;
 
                 &::after {
                     display: none;
                 }
             }
+
+            .name, .description {
+                flex: 0 0 34.5rem;
+            }
+
+            .status {
+                font-size: .7em;
+            }
+
+            .description {
+                font-size: $font-l;
+                padding-top: .5rem;
+                margin-left: auto;
+            }
         }
     }
 }
+
+
