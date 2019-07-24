@@ -2,11 +2,14 @@
 resource: true
 layout: simple
 category: General
-page-name: ikke-funnet
-title: Siden ikke funnet
-toc-title: 404 (enkel side)
-ingress:  Vi fant ikke siden. <a href="index.html">Gå til forsiden</a> eller navigér en side tilbake.
+title:  Vi fant ikke siden du leter etter.
+toc-title: 404
+ingress:  Siden "<script>document.write(location.href)</script>" finnes ikke på denne websiden.
 ---
-<p>Her er litt tekst for å vise hvordan layout ser ut med mer innhold.</p>
+<p><a href="index.html">Gå til forsiden</a> eller <script>document.write('<a href="' + document.referrer + '">navigér en side tilbake</a>');</script>.</p>
 
-{% include lipsum.html %}
+<p>Dersom du fortsatt ikke finner frem kan du <a href="mailto:brukernavn@domene.no?subject=FinnKode: feilmelding XXX&body=[sub] ble ikke funnet på finnkode.no." onclick="this.href = this.href.replace('[sub]',window.location)">kontakte oss</a> for hjelp.</p>
+
+
+
+
