@@ -2565,6 +2565,7 @@ h1 {
        -moz-box-flex: 0;
         -ms-flex: 0 0 34.5rem;
             flex: 0 0 34.5rem;
+    padding-right: 1rem;
   }
   #search-results a .status {
     font-size: .7em;
