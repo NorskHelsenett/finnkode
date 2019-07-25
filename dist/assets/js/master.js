@@ -218,12 +218,12 @@ window.makeLayoutQ = makeLayoutQ;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿//console.log("start - master/master.js");
+﻿//console.log("start - main.js");
 
 // "ready" triggers as soon as the dom is in place.  Use this for things
 // that are not affected by a change in layout or window size.
-$(function() {
-    //console.log('ready - master/master.js');
+$(window).on("ready", function () {
+    //console.log('ready - main.js');
     layoutQ();
 });
 
@@ -238,6 +238,7 @@ $(window).on("load", function () {
     expandableBlocks();
     textSizeExpander();
 });
+
 
 // "layoutchange" triggers only when the layout changes, as opposed to
 // triggering on every resize.  Since the layout also changes on document
@@ -604,10 +605,15 @@ window.responsiveExpandableBlocks = responsiveExpandableBlocks;
 /***/ (function(module, exports) {
 
 ﻿// Used to fix issues with expand/collapse on text size button when using keyboard
-
 function textSizeExpander() {
-    $('.text-size button').focusout(function() {
-        $(this).click();
+    let isActive = false;
+    $('.text-size button').on('click', function() {
+        isActive = !isActive;
+    });
+    $('.text-size button').focusout(function(e) {
+        if(isActive) {
+            $(this).trigger('click');
+        }
     });
 }
 
