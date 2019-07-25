@@ -4,24 +4,27 @@
 @import "base/layout";
 @import "base/base";
 
+@import "full-width-template";
+@import "simple-template";
+
+@import "front-page";
+
 @import "framework-header";
 @import "framework-footer";
-@import "code-system-header";
-@import "code-system-menu";
-@import "code-system-tree";
-@import "code-system-cards";
-@import "global-search-banner";
-@import "search-message";
-@import "search-refiners";
-@import "search-results";
-@import "search-field";
-@import "datepicker";
-@import "loading";
 
-@import "templates/full-width";
-@import "templates/simple";
-@import "templates/search";
-@import "templates/code-system";
+@import "search/search-template";
+@import "search/global-search-banner";
+@import "search/search-field";
+@import "search/search-refiners";
+@import "search/datepicker";
+@import "search/search-results";
+@import "search/search-message";
+@import "search/loading";
 
-@import "pages/front-page";
+@import "code-system/code-system-template";
+@import "code-system/code-system-cards";
+@import "code-system/code-system-header";
+@import "code-system/code-system-menu";
+@import "code-system/code-system-tree";
+
 // @import "print";

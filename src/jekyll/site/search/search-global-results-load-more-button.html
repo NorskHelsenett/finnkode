@@ -1,0 +1,22 @@
+---
+resource: false
+layout: search
+category: Search
+page-name: global-search
+title: 'Alle kodeverk: "kreft" søkeresultater'
+toc-title: Global search ("Last flere resultater"-knapp)
+toc-comment: Om man bestemmer å gå for å laste inn flere og flere resultater på samme side, det å tilby en knapp der brukeren velger selv å laste inn flere resultater løser flere av problemene med "infinite scrolling", blant annet tilgjengelighet og tastaturnavigasjon.
+---
+<div class="results-header">
+
+    <div class="hits" aria-busy="false" aria-live="polite">197 resultater for "underleppe" i alle kodeverk.</div>
+
+    {% include search/search-sorter.html %}
+
+</div>
+
+{% include search/search-results.html data=site.data.search-results.global %}
+
+<div class="load-more button" aria-busy="false" aria-live="polite">
+    <button>Last flere søkeresultater</button>
+</div>

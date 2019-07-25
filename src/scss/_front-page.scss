@@ -1,0 +1,59 @@
+.front-page {
+    .intro, .directorate-link {
+        margin: 1.5em 1rem 0;
+    }
+
+    .intro {
+        color: $blue;
+        font-size: $font-m;
+        line-height: 1.5;
+    }
+
+    .directorate-link {
+        font-size: $font-s;
+
+        a {
+            text-decoration: none;
+            color: $blue;
+            border-bottom: 1px solid $blue;
+
+            &:hover {
+                color: $purple;
+            }
+
+
+        }
+    }
+
+    main {
+        .code-system-menu {
+            margin-top: 3rem;
+        }
+    }
+}
+
+@media only screen and (min-width: $one-to-two-col) {
+    .front-page {
+
+        main {
+            .code-system-menu {
+                padding-bottom: 1.5rem;
+            }
+        }
+    }
+
+}
+
+
+@media only screen and (min-width: $two-to-three-col) {
+    .front-page {
+        .intro {
+            font-size: $font-2xl;
+            max-width: $three-col;
+        }
+
+        .directorate-link {
+            font-size: $font-l
+        }
+    }
+}

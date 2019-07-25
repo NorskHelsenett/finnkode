@@ -5,14 +5,29 @@
 
 <div class="headers js-sticky-header">
     {% include framework-header.html %}
-    {% include code-system-header.html %}
+    {% include code-system/code-system-header.html %}
 </div>
 
-<div class="panel-container layout-container ">
+<div class="panel-container layout-container js-panel-container">
 
+    <div class="js-tree-expand tree-expand-block">
 
+        {% include code-system/code-system-tree.html %}
 
-    {{content}}
+        <div class="expander-splitter js-tree-expander">
+            <div class="splitter-title">Innholdsfortegnelse</div>
+            <div class="splitter-instructions">Trekk for å utvide</div>
+        </div>
+
+    </div>
+
+    <div class="code-system-content-container js-code-system-content-container">
+        <div class="code-system-content">
+
+            {{ content }}
+
+        </div>
+    </div>
 
 </div>
 

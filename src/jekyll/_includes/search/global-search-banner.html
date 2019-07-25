@@ -1,0 +1,68 @@
+<div class="global-search-banner">
+    <div class="layout-container">
+
+        <label class="global-search-label" for="global-search">Søk i alle kodeverk</label>
+
+        <div role="search" class="search-field">
+            <input
+                autofocus
+                name="global-search"
+                id="global-search"
+                type="search"
+                class="search-input"
+                placeholder="f.eks. kreft, bevissthetssilstand, fødsel..."
+                {% if page.autocomplete == true %} value="res"{% endif %}
+            >
+
+            <button class="search-button" type="submit">Søk i alle kodeverk</button>
+
+            {% if page.autocomplete == true %}
+                <div id="autocomplete">
+                    <div class="option">
+                        <strong>res</strong>t
+                        <input type="hidden" value="test">
+                    </div>
+                    <div class="option">
+                        <strong>res</strong>tless legs
+                        <input type="hidden" value="test">
+                    </div>
+                    <div class="option">
+                        <strong>res</strong>triktiv lungesykdom
+                        <input type="hidden" value="test">
+                    </div>
+                    <div class="option">
+                        <strong>rest</strong>tless legs svangerskap
+                        <input type="hidden" value="test">
+                    </div>
+                    <div class="option">
+                        <strong>res</strong>ter etter fødsel
+                        <input type="hidden" value="test">
+                    </div>
+                    <div class="option">
+                        <strong>res</strong>tless
+                        <input type="hidden" value="test">
+                    </div>
+                    <div class="option">
+                        <strong>rest</strong>ter etter abort
+                        <input type="hidden" value="test">
+                    </div>
+                    <div class="option">
+                        <strong>res</strong>t urin
+                        <input type="hidden" value="test">
+                    </div>
+                    <div class="option">
+                        <strong>res</strong>triktiv
+                        <input type="hidden" value="test">
+                    </div>
+                    <div class="option">
+                    <strong>rest</strong>er
+                    <input type="hidden" value="test">
+                </div>
+            </div>
+
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,145 @@
+.code-system-tree {
+
+    & > ul[role="tree"] { // Chapter titles
+
+        & > li > span > a[role="treeitem"] {
+            font-weight: 600;
+        }
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        position: relative;
+    }
+
+    a {
+        text-decoration: none;
+        color: $blue;
+        padding: .25em 1.5em .25em .25em;
+        margin-left: 2.5em;
+    }
+
+    :focus {
+        outline: 0;
+    }
+
+    .focus, a:hover, a:focus, span:hover, span:focus, a.active {
+        background-color: $blue;
+        color: $green;
+        a {
+            color: $green;
+            &:hover {
+                background-color: $blue;
+            }
+        }
+    }
+
+
+    span:hover a {
+        color: $green;
+    }
+
+    li {
+        padding-top: .25em;
+        padding-bottom: .25rem;
+        position: relative;
+
+        &:first-child {
+            margin-top: .25em;
+        }
+
+        &:last-child {
+            padding-bottom: 0;
+        }
+
+        &[role="none"] {
+            padding-left: 1.75em;
+
+            a {
+                margin-left: .75em;
+            }
+        }
+
+        &:not(:last-child), &[role="none"]:last-child {
+            &::before {
+                content: "";
+                position: absolute;
+                left: 1.5em;
+                top: .75em;
+                width: 0;
+                bottom: -1em;
+                border-left: 1px dashed $medium-grey;
+            }
+        }
+
+        &[role="none"]:last-child {
+            &::before {
+                bottom: .5em;
+            }
+        }
+    }
+
+    ul[role="group"] {
+        margin-left: 1.5em;
+    }
+
+    [role="treeitem"],
+    [role="treeitem"] span {
+        display: block;
+    }
+
+    [role="treeitem"] {
+        position: relative;
+
+        & > span {
+            position: relative;
+
+            &::before {
+                content: "";
+                position: absolute;
+                background: url($tree-minus-blue) center / 1em no-repeat;
+                width: 1em;
+                height: 1em;
+                top: .45em;
+                left: 1em;
+            }
+        }
+
+        &.focus {
+            & > span {
+                &::before {
+                    background-image: url($tree-minus-green);
+                }
+            }
+        }
+
+        &[aria-expanded="false"] {
+            &.focus {
+                & > span {
+                    &::before {
+                        background-image: url($tree-plus-green);
+                    }
+                }
+            }
+
+            & > ul {
+                display: none;
+            }
+
+            & > span {
+                &::before {
+                    background-image: url($tree-plus-blue);
+                }
+            }
+        }
+
+        &[aria-expanded="true"] {
+            & > ul {
+                display: block;
+            }
+        }
+
+    }
+}
