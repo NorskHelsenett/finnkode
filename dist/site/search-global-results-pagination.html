@@ -1,0 +1,522 @@
+<!-- Used for search pages -->
+<!doctype html>
+<html lang="no">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Alle kodeverk: "kreft" søkeresultater - FinnKode</title>
+
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <script src="/assets/js/master.js"></script>
+    <link rel="stylesheet" href="/assets/css/master.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin-ext">
+
+    
+    <!-- Styles to fix the menu jump on page load -->
+    <style class="js-remove-menu-jump">
+        #framework-header .code-system-menu {
+            display: none;
+        }
+
+        #framework-header .code-system-menu.expandable {
+            display: block;
+        }
+
+        @media only screen and (min-width: 39rem) {
+            #framework-header .code-system-menu.expandable {
+                display: flex;
+            }
+        }
+    </style>
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script
+            src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"
+            integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="
+            crossorigin="anonymous"></script>
+    <script src="/assets/js/search.js"></script>
+    
+
+</head>
+
+<body class="search global-search">
+<a class="skip-link" href="#page-content">Hopp til innholdet</a>
+<!-- ********************************************************************** -->
+
+
+<header id="framework-header">
+
+    <div class="layout-container">
+        <a class="directorate-logo" href="/">Direktoratet for e-helse</a>
+    </div>
+
+    <div class="main-header-content js-expand">
+        <div class="layout-container">
+
+            <div class="main-choices">
+                <a class="finnkode-logo" href="/site/index.html">FinnKode</a>
+                <nav>
+                    <ul class="main-menu">
+                        <li><a class="home" href="/site/index.html">Hjem</a></li>
+                        <li>
+                            <a role="button" href="#" class="code-systems js-expander">Kodeverk</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <nav class="code-system-menu js-expandable">
+
+    <div class="category all">
+        <h2>Velg kodeverk</h2>
+        <ul>
+            <li><a href="global-search-initial.html">Alle kodeverk</a></li>
+        </ul>
+    </div>
+
+    <div class="category js-responsive-expand">
+        <h2>
+            <span class="js-responsive-expander">
+                Kliniske kodeverk
+            </span>
+        </h2>
+        <div class="js-responsive-expandable">
+            <ul>
+                <li><a href="">ICPC-2</a></li>
+                <li><a href="/site/code-system-front-page.html">ICD-10</a></li>
+                <li><a href="">BUP</a></li>
+                <li><a href="">Prosedyre</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="category js-responsive-expand">
+        <h2>
+            <span class="js-responsive-expander">
+                Lab kodeverk
+            </span>
+        </h2>
+        <div class="js-responsive-expandable">
+            <ul>
+                <li><a href="">Labotatorie</a></li>
+                <li><a href="">NORPAT</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="category js-responsive-expand">
+        <h2>
+            <span class="js-responsive-expander">
+                Andre kodeverk
+            </span>
+        </h2>
+        <div class="js-responsive-expandable">
+            <ul>
+                <li><a href="">SNOMED CT</a></li>
+                <li><a href="">Administrative kodeverk</a></li>
+                <li><a href="">ATC</a></li>
+                <li><a href="">Begrepskatalog</a></li>
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+        </div>
+    </div>
+</header>
+
+<main id="page-content">
+    <div class="global-search-banner">
+    <div class="layout-container">
+
+        <label class="global-search-label" for="global-search">Søk i alle kodeverk</label>
+
+        <div role="search" class="search-field">
+            <input
+                autofocus
+                name="global-search"
+                id="global-search"
+                type="search"
+                class="search-input"
+                placeholder="f.eks. kreft, bevissthetssilstand, fødsel..."
+                
+            >
+
+            <button class="search-button" type="submit">Søk i alle kodeverk</button>
+
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+    <div class="layout-container" id="search-container" tabindex="-1">
+
+        
+            <div class="search-refiners js-expand">
+    <div class="js-expander refiners-expander" aria-label="Vis/skjul filtre"></div>
+    <div class="js-expandable">
+        <div class="filters">
+            <a class="skip-link" href="#search-results">Hopp over filterne til resultatene</a>
+
+            <div class="date filter">
+
+                <label class="filter-type" id="datepickerLabel" for="datepicker">Endret siden</label>
+
+                <div class="date-field">
+                    <input type="text" id="datepicker" placeholder="DD.MM.ÅÅÅÅ">
+                </div>
+
+                <label class="expired-codes">
+                    <input type="checkbox">
+                    <span>Vis utgåtte koder</span>
+                </label>
+
+            </div>
+
+            
+
+            <div class="code-system filter" aria-busy="false" aria-live="polite">
+
+                <div class="filter-type">Kodeverk</div>
+
+                <ul>
+                    <li class="all-code-systems"><a href="#">Alle kodeverk (387)</a></li>
+                    <li><a href="#">ICD-10 (129)</a></li>
+                    <li class="current"><a href="#">NCMP-NCSP-NCRP (219)</a></li>
+                    <li><a href="#">BUP (1)</a></li>
+                    <li><a href="#">ICPC-2 (34)</a></li>
+                    <li><a href="#">ICF-CY (4)</a></li>
+                </ul>
+            </div>
+
+            
+
+        </div>
+    </div>
+</div>
+        
+
+        <div id="search-results" tabindex="-1">
+
+            <div class="results-header">
+
+    <div class="hits" aria-busy="false" aria-live="polite">Viser 21 - 30 av 197 resultater for "underleppe" i alle kodeverk.</div>
+
+    <div class="sort">
+    <label for="results-sorter">Sorter på</label>
+    <select id="results-sorter" name="results-sorter">
+        <option value="relevance">relevans</option>
+        <option value="name">navn</option>
+        <option value="code">kode</option>
+    </select>
+</div>
+
+</div>
+
+<div class="results">
+    <ul>
+        
+
+            <li class="code ">
+                <a href="/site/code-system.html#C00_4">
+                    <div class="main-info">
+                        <div class="number">C00.4</div>
+                        <div class="name">
+                            Innside av underleppe (facies internus labii inferius oris)
+
+                            
+
+                        </div>
+
+                        
+                            <div class="description">Here is a description. Not sure if this will ever exist in the final result, or if's it's just an artifact of the sample design.</div>
+                        
+
+                    </div>
+                    <div class="system">ICD-10</div>
+                </a>
+            </li>
+
+        
+
+            <li class="code ">
+                <a href="#">
+                    <div class="main-info">
+                        <div class="number">1 - 100</div>
+                        <div class="name">
+                            Kodes med ett av alle heltallene fra og med 1 til og med 100 i tråd med CGAS-instruksjonen
+
+                            
+
+                        </div>
+
+                        
+
+                    </div>
+                    <div class="system">BUP</div>
+                </a>
+            </li>
+
+        
+
+            <li class="code ">
+                <a href="#">
+                    <div class="main-info">
+                        <div class="number">b55502</div>
+                        <div class="name">
+                            Utvikling av penis, testikler og scrotum
+
+                            
+
+                        </div>
+
+                        
+
+                    </div>
+                    <div class="system">ICF-CY</div>
+                </a>
+            </li>
+
+        
+
+            <li class="code ">
+                <a href="#">
+                    <div class="main-info">
+                        <div class="number">T99</div>
+                        <div class="name">
+                            Endokrin/metabolsk/ernæringssykdom IKA
+
+                            
+
+                        </div>
+
+                        
+
+                    </div>
+                    <div class="system">ICPC-2</div>
+                </a>
+            </li>
+
+        
+
+            <li class="code ">
+                <a href="#">
+                    <div class="main-info">
+                        <div class="number">WGFX10</div>
+                        <div class="name">
+                            Prikktest - eget testmateriale fra hjemmemiljø eller arbeidsplass
+
+                            
+
+                        </div>
+
+                        
+
+                    </div>
+                    <div class="system">NCMP-NCSP-NCRP</div>
+                </a>
+            </li>
+
+        
+
+            <li class="code ">
+                <a href="#">
+                    <div class="main-info">
+                        <div class="number">FYFX05</div>
+                        <div class="name">
+                            Fysisk belastningstest (6 min gange eller tilsvarende)
+
+                            
+
+                        </div>
+
+                        
+
+                    </div>
+                    <div class="system">NCMP-NCSP-NCRP</div>
+                </a>
+            </li>
+
+        
+
+            <li class="code ">
+                <a href="#">
+                    <div class="main-info">
+                        <div class="number">I46.9</div>
+                        <div class="name">
+                            Uspesifisert hjertestans
+
+                            
+
+                        </div>
+
+                        
+
+                    </div>
+                    <div class="system">ICD-10</div>
+                </a>
+            </li>
+
+        
+
+            <li class="code expired">
+                <a href="#">
+                    <div class="main-info">
+                        <div class="number">I46.9</div>
+                        <div class="name">
+                            Uspesifisert hjertestans
+
+                            
+                            <span class="status">Utgått</span>
+                            
+
+                        </div>
+
+                        
+                            <div class="description">Fysisk belastningstest (6 min gange eller tilsvarende) Fysisk belastningstest (6 min gange eller tilsvarende) Fysisk belastningstest (6 min gange eller tilsvarende)</div>
+                        
+
+                    </div>
+                    <div class="system">ICD-10</div>
+                </a>
+            </li>
+
+        
+
+            <li class="code expiring-soon">
+                <a href="#">
+                    <div class="main-info">
+                        <div class="number">FYFX05</div>
+                        <div class="name">
+                            Fysisk belastningstest (6 min gange eller tilsvarende)
+
+                            
+                            <span class="status">Utgår</span>
+                            
+
+                        </div>
+
+                        
+
+                    </div>
+                    <div class="system">NCMP-NCSP-NCRP</div>
+                </a>
+            </li>
+
+        
+
+            <li class="code ">
+                <a href="#">
+                    <div class="main-info">
+                        <div class="number">C03</div>
+                        <div class="name">
+                            Ondartet svulst i tannkjøtt (neoplasma malignum gingivae)
+
+                            
+
+                        </div>
+
+                        
+
+                    </div>
+                    <div class="system">ICD-10</div>
+                </a>
+            </li>
+
+        
+
+            <li class="code ">
+                <a href="#">
+                    <div class="main-info">
+                        <div class="number">IAAD00</div>
+                        <div class="name">
+                            Strukturert kartlegging av bruk/misbruk/avhengighet av rusmidler, medikamenter og/eller spill ved bruk av standardiserte verktøy
+
+                            
+
+                        </div>
+
+                        
+
+                    </div>
+                    <div class="system">NCMP-NCSP-NCRP</div>
+                </a>
+            </li>
+
+        
+    </ul>
+</div>
+
+<div class="load-more pagination">
+    <nav aria-label="Bla gjennom resultatene">
+        <ul>
+            <li>
+                <button>Forrige resultater</button>
+            </li>
+            <li>
+                <button>2</button>
+            </li>
+            <li class="active">
+                <button>3</button>
+            </li>
+            <li>
+                <button>4</button>
+            </li>
+            <li>
+                <button>Neste resultater</button>
+            </li>
+        </ul>
+    </nav>
+
+</div>
+
+        </div>
+
+    </div>
+</main>
+
+<footer id="framework-footer">
+    <div class="layout-container">
+        <nav>
+            <ul>
+                <li><a href="/site/index.html">Hjem</a></li>
+                <li><a href="/site/404.html">Kontakt oss</a></li>
+                <li><a href="https://ehelse.no/standarder-kodeverk-og-referansekatalog/helsefaglige-kodeverk/finnkode-online-sokeverktoy">Om finnkode.no</a></li>
+            </ul>
+        </nav>
+
+        <div class="text-size">
+            <div class="js-expand">
+                <button class="js-expander">Tekststørrelse</button>
+                <div class="js-expandable">
+                    Hold inn Ctrl-tasten (Cmd-tasten på Mac). Trykk samtidig på + for å forstørre eller - for å forminske.
+                </div>
+            </div>
+
+        </div>
+
+        <a class="directorate-logo" href="http://ehelse.no">Direktoratet for e-helse</a>
+    </div>
+</footer>
+
+
+<!-- ********************************************************************** -->
+</body>
+</html>

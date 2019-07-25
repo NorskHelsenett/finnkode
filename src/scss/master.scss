@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin-ext');
-
 @import "base/variables";
 @import "base/svgdata";
 @import "base/mixins-and-extensions";
@@ -13,6 +11,7 @@
 @import "code-system-tree";
 @import "code-system-cards";
 @import "global-search-banner";
+@import "search-message";
 @import "search-refiners";
 @import "search-results";
 @import "search-field";

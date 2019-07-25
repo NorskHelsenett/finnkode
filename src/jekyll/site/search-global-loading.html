@@ -1,15 +1,12 @@
 ---
-page-resource: true
+resource: true
 layout: search
+category: Search
 page-name: global-search
 title: 'Alle kodeverk: "kreft" søkeresultater'
 toc-title: Global search (loading)
 loading: true
 ---
-
-{% include global-search-banner.html %}
-
-<div class="layout-container" id="search-container" tabindex="-1">
-    {% include search-refiners.html %}
-    {% include search-results.html %}
+<div class="results-header">
+    <div class="hits" aria-busy="true" aria-live="polite">Laster søkeresultater</div>
 </div>

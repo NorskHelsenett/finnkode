@@ -1,13 +1,18 @@
 ---
-page-resource: true
+resource: true
 layout: search
+category: Search
 page-name: global-search
 title: 'Alle kodeverk: "kreft" søkeresultater'
 toc-title: Global search (autocomplete)
+autocomplete: true
 ---
-{% include global-search-banner.html autocomplete="true" %}
+<div class="results-header">
 
-<div class="layout-container" id="search-container" tabindex="-1">
-    {% include search-refiners.html %}
-    {% include search-results.html %}
+    <div class="hits" aria-busy="false" aria-live="polite">197 resultater for "underleppe" i alle kodeverk.</div>
+
+    {% include search-sorter.html %}
+
 </div>
+
+{% include search-results.html data=site.data.search-results.global %}

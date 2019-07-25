@@ -6,8 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Siden ikke funnet - FinnKode</title>
-<!--    <script src="http://localhost:35729/livereload.js"></script> -->
+    <title>Vi fant ikke siden du leter etter. - FinnKode</title>
 
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -16,6 +15,7 @@
     <script src="/assets/js/master.js"></script>
     <link rel="stylesheet" href="/assets/css/master.css">
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin-ext">
 
     
     <!-- Styles to fix the menu jump on page load -->
@@ -43,7 +43,7 @@
 
 </head>
 
-<body class="simple ikke-funnet">
+<body class="simple ">
 <a class="skip-link" href="#page-content">Hopp til innholdet</a>
 <!-- ********************************************************************** -->
 
@@ -135,11 +135,16 @@
 <main id="page-content">
     <div class="layout-container">
 
-        <h1>Siden ikke funnet</h1>
+        <h1>Vi fant ikke siden du leter etter.</h1>
 
-        <p class="ingress">Vi fant ikke siden. <a href="index.html">Gå til forsiden</a> eller navigér en side tilbake.</p>
+        <p class="ingress">Siden "<script>document.write(location.href)</script>" finnes ikke på denne websiden.</p>
 
-        <p>Her er litt tekst for å vise hvordan layout ser ut med mer innhold.</p>
+        <p><a href="index.html">Gå til forsiden</a> eller <script>document.write('<a href="' + document.referrer + '">navigér en side tilbake</a>');</script>.</p>
+
+<p>Dersom du fortsatt ikke finner frem kan du <a href="mailto:brukernavn@domene.no?subject=FinnKode: feilmelding XXX&body=[sub] ble ikke funnet på finnkode.no." onclick="this.href = this.href.replace('[sub]',window.location)">kontakte oss</a> for hjelp.</p>
+
+
+
 
 <div class="notes">
 
@@ -190,21 +195,6 @@
 </div>
 
 
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien ut ligula consectetur molestie vel non nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus arcu sapien, pharetra quis consequat vitae, lacinia sit amet tortor. Maecenas in nunc in elit finibus varius. Ut nec pellentesque purus, sit amet volutpat urna. Morbi vulputate felis at arcu commodo interdum. Ut ullamcorper faucibus placerat. Mauris sapien quam, feugiat sit amet euismod eu, posuere mattis risus. Sed a pretium leo, in suscipit orci. Morbi vitae ex eu nisl feugiat aliquet vitae sit amet enim. Morbi in diam lacus.
-</p>
-<p>
-    Pellentesque laoreet ligula quis ultricies viverra. Donec id augue ut massa scelerisque sagittis et at dolor. Aliquam eget mauris ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum ac ante erat. Proin placerat non tellus vitae tempor. Pellentesque cursus nisl sit amet enim imperdiet, accumsan pellentesque lacus sollicitudin. Integer ut luctus ipsum. Pellentesque id molestie arcu. Donec quis euismod justo. Curabitur augue nulla, rutrum commodo fermentum commodo, sollicitudin in augue. Ut quam nisl, tempus et ligula quis, tincidunt ultrices lectus. In viverra molestie nibh nec imperdiet. Nam egestas libero in rutrum ornare. Suspendisse facilisis ex ac lacinia pellentesque. Ut nec est non quam tristique fermentum a at arcu.
-</p>
-<p>
-    Donec vehicula vel tortor quis euismod. Vivamus sagittis lacinia massa, at tempus ipsum aliquam quis. Suspendisse eu laoreet risus. Etiam auctor ut ante nec viverra. Cras diam urna, dapibus at dictum lacinia, dictum at nisi. Sed interdum, nisl tincidunt cursus sollicitudin, lacus est facilisis lectus, in ultrices lacus risus vitae massa. Aliquam fermentum ipsum nec eros pretium vehicula. Nunc laoreet lacinia euismod. Vestibulum lacus justo, sollicitudin id pellentesque nec, pharetra mattis augue. Sed quis mi tincidunt, facilisis erat at, tristique sem. Duis vel magna quis metus sagittis pretium eget sed nibh. Nullam finibus vulputate efficitur.
-</p>
-<p>
-    Nulla condimentum blandit vulputate. Mauris fermentum dapibus turpis sit amet pellentesque. Ut fringilla ex ipsum, at pretium turpis aliquam in. Ut id nulla finibus, fringilla odio eget, tincidunt purus. Nunc sagittis elementum urna ac pulvinar. Aliquam vulputate semper nulla ac pretium. Duis orci lectus, suscipit id posuere sed, hendrerit quis diam.
-</p>
-<p>
-    Morbi sed auctor purus, a euismod velit. Praesent in tellus commodo, pharetra augue non, cursus ipsum. Aliquam eu cursus diam. Morbi maximus, orci faucibus porta semper, ipsum sem semper tellus, sit amet pretium purus ipsum vel neque. Praesent sed nunc sem. Nunc non erat pellentesque, rhoncus magna sed, semper augue. Cras sed neque justo. Cras blandit nec eros nec sagittis. Suspendisse pharetra nisl posuere molestie dignissim.
-</p>
 
     </div>
 </main>

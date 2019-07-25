@@ -6,7 +6,21 @@
 {% include framework-header.html %}
 
 <main id="page-content">
-    {{ content }}
+    {% include global-search-banner.html %}
+
+    <div class="layout-container" id="search-container" tabindex="-1">
+
+        {% if page.hide-filters != true %}
+            {% include search-refiners.html %}
+        {% endif %}
+
+        <div id="search-results" tabindex="-1">
+
+            {{ content }}
+
+        </div>
+
+    </div>
 </main>
 
 {% include framework-footer.html %}

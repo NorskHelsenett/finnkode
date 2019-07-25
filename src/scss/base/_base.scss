@@ -65,6 +65,41 @@ input {
     font-family: "Open Sans", sans-serif;
 }
 
+select {
+    appearance: none;
+    position: relative;
+    display: inline-block;
+    font-family: "Open Sans", sans-serif;
+    font-size: inherit;
+    color: $blue;
+    margin-left: .25em;
+    padding: 0 2.5em 0 .5em;
+    background: url($chevron-down-white) right .65em top 55%/ .85em no-repeat, linear-gradient(to left, $blue 2.125em, #fff 2em);
+    border: 1px solid $blue;
+    height: 2em;
+    border-radius: 1em;
+    transition: .1s;
+    z-index: 1;
+
+    &::-ms-expand {
+        display: none;
+    }
+
+    &:hover, &:focus {
+        background-image: url($chevron-down-blue), linear-gradient(to left, $green 2.125em, #fff 2em);
+        outline: 0;
+    }
+
+    &:disabled, &[aria-disabled=true] {
+        color: $dark-grey;
+        background-image: url($chevron-down-dark-grey);
+    }
+
+    option {
+        font-weight: normal;
+    }
+}
+
 ::placeholder {
     color: $grey-blue;
     font-style: italic;

@@ -1,89 +1,31 @@
-<div id="search-results" tabindex="-1">
-
-    {% if page.loading == true %}
-
-    <div class="hits" aria-busy="true" aria-live="polite">Laster søkeresultater</div>
-
-    {% else %}
-
-    <div class="hits" aria-busy="false" aria-live="polite">197 resultater for "underleppe" i alle kodeverk.</div>
-
+<div class="results">
     <ul>
-        <li class="code">
-            <a href="/site/code-system.html#C00_4">
-                <span class="number">C00.4</span>
-                <span class="name">Innside av underleppe (facies internus labii inferius oris)</span>
-                <div class="description">
-                    Here's a description. Not sure if this will ever exist in the final result, or if's it's just an artifact of the sample design.
-                </div>
-                <div class="system">ICD-10</div>
-            </a>
-        </li>
-        <li class="code">
-            <a href="">
-                <span class="number">b55502</span>
-                <span class="name">Utvikling av penis, testikler og scrotum</span>
-                <div class="system">ICF-CY</div>
+        {% for item in include.data %}
 
-            </a>
-        </li>
-        <li class="code">
-            <a href="">
-                <span class="number">T99</span>
-                <span class="name">Endokrin/metabolsk/ernæringssykdom IKA</span>
-                <div class="system">ICPC-2</div>
-            </a>
-        </li>
+            <li class="code {{item.status}}">
+                <a href="{{item.url}}">
+                    <div class="main-info">
+                        <div class="number">{{item.number}}</div>
+                        <div class="name">
+                            {{item.name}}
 
-        <li class="code">
-            <a href="">
-                <span class="number">1 - 100</span>
-                <span class="name">Kodes med ett av alle heltallene fra og med 1 til og med 100 i tråd med CGAS-instruksjonen</span>
-                <div class="system">BUP</div>
+                            {% if item.status == "expired" %}
+                            <span class="status">Utgått</span>
+                            {% elsif item.status == "expiring-soon" %}
+                            <span class="status">Utgår</span>
+                            {% endif %}
 
-            </a>
-        </li>
-        <li class="code">
-            <a href="">
-                <span class="number">WGFX10 </span>
-                <div class="system">NCMP-NCSP-NCRP</div>
-                <div class="name">Prikktest - eget testmateriale fra hjemmemiljø eller arbeidsplass</div>
-            </a>
-        </li>
-        <li class="code">
-            <a href="">
-                <span class="number">FYFX05</span>
-                <div class="name">Fysisk belastningstest (6 min gange eller tilsvarende)</div>
-                <div class="system">NCMP-NCSP-NCRP</div>
-            </a>
-        </li>
-        <li class="code">
-            <a href="">
-                <span class="number">I46.9</span>
-                <div class="name">Uspesifisert hjertestans</div>
-                <div class="system">ICD-10</div>
-            </a>
-        </li>
+                        </div>
 
-        <li class="code">
-            <a href="">
-                <span class="number">I46.9</span>
-                <div class="name">Uspesifisert hjertestans</div>
-                <div class="description">Fysisk belastningstest (6 min gange eller tilsvarende) Fysisk belastningstest (6 min gange eller tilsvarende) Fysisk belastningstest (6 min gange eller tilsvarende)</div>
-                <div class="system">ICD-10</div>
-            </a>
-        </li>
-        <li class="code">
-            <a href="">
-                <span class="number">FYFX05</span>
-                <div class="name">Fysisk belastningstest (6 min gange eller tilsvarende)</div>
-                <div class="description">Fysisk belastningstest (6 min gange eller tilsvarende) Fysisk belastningstest (6 min gange eller tilsvarende) Fysisk belastningstest (6 min gange eller tilsvarende)</div>
-                <div class="system">NCMP-NCSP-NCRP</div>
-            </a>
-        </li>
+                        {% if item.description %}
+                            <div class="description">{{item.description}}</div>
+                        {% endif %}
 
+                    </div>
+                    <div class="system">{{item.system}}</div>
+                </a>
+            </li>
+
+        {% endfor %}
     </ul>
-
-    {% endif %}
-
 </div>

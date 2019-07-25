@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Prototype Table of Contents - FinnKode</title>
-<!--    <script src="http://localhost:35729/livereload.js"></script> -->
 
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -16,6 +15,7 @@
     <script src="/assets/js/master.js"></script>
     <link rel="stylesheet" href="/assets/css/master.css">
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin-ext">
 
     
     <!-- Styles for the prototype ToC -->
@@ -65,7 +65,6 @@
     }
 
     .page-title {
-        color: #666;
         font-style: italic;
     }
 
@@ -77,66 +76,29 @@
         color: blue;
     }
 
+    p {
+        margin-left: 3rem;
+        color: #666;
+        max-width: 600px;
+        margin-top: 4px;
+    }
+
 </style>
 
 <nav>
     <h1>Prototype Table of Contents</h1>
+
+    <script type="text/javascript">
+        document.write("<p><em>Sist oppdatert: " + document.lastModified + "</em></p>");
+    </script>
+
+    
+
+    <h2>Search</h2>
+
     <ul>
         
         
-
-        <li>
-            <a href="/site/404.html">404 (enkel side)</a>
-            <div class="page-title">Siden ikke funnet</div>
-        </li>
-
-        
-        
-        
-
-        <li>
-            <a href="/site/code-system-card-examples.html">Code system card examples</a>
-            <div class="page-title">Example code cards</div>
-        </li>
-
-        
-        
-        
-
-        <li>
-            <a href="/site/code-system-front-page.html">Code system front page</a>
-            <div class="page-title">ICD-10</div>
-        </li>
-
-        
-        
-        
-        
-        
-
-        <li>
-            <a href="/site/code-system.html">Code system</a>
-            <div class="page-title">ICD-10</div>
-        </li>
-
-        
-        
-        
-
-        <li>
-            <a href="/site/contact-us.html">Contact Form (simple layout)</a>
-            <div class="page-title">Kontakt oss</div>
-        </li>
-
-        
-        
-        
-
-        <li>
-            <a href="/site/">Front page</a>
-            <div class="page-title">FinnKode</div>
-        </li>
-
         
         
         
@@ -150,39 +112,366 @@
         
         
         
-
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         <li>
             <a href="/site/search-global-autocomplete.html">Global search (autocomplete)</a>
             <div class="page-title">Alle kodeverk: "kreft" søkeresultater</div>
         </li>
-
         
         
         
         
         
-
+        
+        
         <li>
             <a href="/site/search-global-loading.html">Global search (loading)</a>
             <div class="page-title">Alle kodeverk: "kreft" søkeresultater</div>
         </li>
-
         
         
         
         
         
-
+        
+        
         <li>
-            <a href="/site/search-global-results.html">Global search (results)</a>
+            <a href="/site/search-global-message-error.html">Global search (error message)</a>
             <div class="page-title">Alle kodeverk: "kreft" søkeresultater</div>
         </li>
-
+        
+        
+        
+        
+        
+        
+        
+        <li>
+            <a href="/site/search-global-message-initial.html">Global search (initial)</a>
+            <div class="page-title">Alle kodeverk: Søk</div>
+        </li>
+        
+        
+        
+        
+        
+        
+        
+        <li>
+            <a href="/site/search-global-message-no-results.html">Global search (no results)</a>
+            <div class="page-title">Alle kodeverk: "sdfgdsfg" søkeresultater</div>
+        </li>
+        
+        
+        
+        
+        
+        
+        
+        <li>
+            <a href="/site/search-global-message-warning.html">Global search (warning message)</a>
+            <div class="page-title">Alle kodeverk: "kreft" søkeresultater</div>
+        </li>
+        
+        
+        
+        
+        
+        
+        
+        <li>
+            <a href="/site/search-global-results-infinite-scroll.html">Global search (infinite scroll spinner)</a>
+            <div class="page-title">Alle kodeverk: "kreft" søkeresultater</div>
+        </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li>
+            <a href="/site/search-global-results-pagination.html">Global search (pagination)</a>
+            <div class="page-title">Alle kodeverk: "kreft" søkeresultater</div>
+        </li>
+        
+        
+        
+        
         
         
     </ul>
-</nav>
 
+    
+
+    <h2>General</h2>
+
+    <ul>
+        
+        
+        
+        
+        <li>
+            <a href="/site/404.html">404</a>
+            <div class="page-title">Vi fant ikke siden du leter etter.</div>
+        </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li>
+            <a href="/site/error.html">Generic error page</a>
+            <div class="page-title">Det har oppstått en feil.</div>
+        </li>
+        
+        
+        
+        
+        
+        
+        
+        <li>
+            <a href="/site/">Front page</a>
+            <div class="page-title">FinnKode</div>
+        </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </ul>
+
+    
+
+    <h2>Code system</h2>
+
+    <ul>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li>
+            <a href="/site/code-system-front-page.html">Code system front page</a>
+            <div class="page-title">ICD-10</div>
+        </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li>
+            <a href="/site/code-system.html">Code system</a>
+            <div class="page-title">ICD-10</div>
+        </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </ul>
+
+    
+
+</nav>
 
 
 
