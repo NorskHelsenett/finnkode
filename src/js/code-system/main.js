@@ -12,8 +12,6 @@ $(window).on("ready", function () {
 // order to work correctly, e.g. stuff affected by height.
 $(window).on("load", function () {
     //console.log('load - code-system.js');
-    stickyCodeSystemTree();
-    resizableSplitter();
 });
 
 
@@ -24,9 +22,8 @@ $(window).on("load", function () {
 $(window).on("layoutchange", function () {
     //console.log("layoutchange - code-system.js");
     stickyHeader();
-    codeSystemTreeExpand();
-    // codeTabs();
-    stickyCodeSystemTree();
+    codeTabs();
+    codeSystemTreeLayout();
 });
 
 // "conditionalresize" does stuff does stuff on debounced resize when the layout is 1-col.
@@ -44,6 +41,5 @@ $(window).on(
     "resize orientationchange",
     debounce(function () {
         //console.log("resize orientationchange - code-system.js");
-        resizableSplitter();
     }, 25)
 );

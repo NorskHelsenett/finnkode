@@ -11,11 +11,11 @@ toc-comment: Pagination er et bedre paradigme enn "infinite scrolling" for denne
 
     <div class="hits" aria-busy="false" aria-live="polite">Viser 21 - 30 av 197 resultater for "underleppe" i alle kodeverk.</div>
 
-    {% include search-sorter.html %}
+    {% include search/search-sorter.html %}
 
 </div>
 
-{% include search-results.html data=site.data.search-results.global %}
+{% include search/search-results.html data=site.data.search-results.global %}
 
 <div class="load-more pagination">
     <nav aria-label="Bla gjennom resultatene">

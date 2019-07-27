@@ -27,6 +27,15 @@
     color: inherit;
     background-color: transparent;
     cursor: pointer;
+    text-align: left;
+
+    &:focus {
+        outline: none;
+    }
+
+    &::-moz-focus-inner {
+        border: 0;
+    }
 }
 
 %box-shadow {

@@ -6,12 +6,12 @@
 {% include framework-header.html %}
 
 <main id="page-content">
-    {% include global-search-banner.html %}
+    {% include search/global-search-banner.html %}
 
     <div class="layout-container" id="search-container" tabindex="-1">
 
         {% if page.hide-filters != true %}
-            {% include search-refiners.html %}
+            {% include search/search-refiners.html %}
         {% endif %}
 
         <div id="search-results" tabindex="-1">

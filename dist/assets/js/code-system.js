@@ -95,42 +95,135 @@
 
 // Scripts that are used solely on the code system page
 
-// require('./code-system/codeTabs');
-
+__webpack_require__(/*! ./code-system/codeTabs */ "./src/js/code-system/codeTabs.js");
 __webpack_require__(/*! ./code-system/treeLinks */ "./src/js/code-system/treeLinks.js");
 __webpack_require__(/*! ./code-system/treeItemLinks */ "./src/js/code-system/treeItemLinks.js");
-__webpack_require__(/*! ./code-system/codeSystemTreeExpand */ "./src/js/code-system/codeSystemTreeExpand.js");
-__webpack_require__(/*! ./code-system/resizableSplitter */ "./src/js/code-system/resizableSplitter.js");
-__webpack_require__(/*! ./code-system/stickyCodeSystemTree */ "./src/js/code-system/stickyCodeSystemTree.js");
+
+__webpack_require__(/*! ./code-system/codeSystemTreeLayout */ "./src/js/code-system/codeSystemTreeLayout.js");
+
 __webpack_require__(/*! ./code-system/stickyHeader */ "./src/js/code-system/stickyHeader.js");
+__webpack_require__(/*! ./code-system/plugins */ "./src/js/code-system/plugins.js");
 __webpack_require__(/*! ./code-system/main */ "./src/js/code-system/main.js");
 
 /***/ }),
 
-/***/ "./src/js/code-system/codeSystemTreeExpand.js":
+/***/ "./src/js/code-system/codeSystemTreeLayout.js":
 /*!****************************************************!*\
-  !*** ./src/js/code-system/codeSystemTreeExpand.js ***!
+  !*** ./src/js/code-system/codeSystemTreeLayout.js ***!
   \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
 // Makes the code system tree expand and collapse in 1- and 2-col layouts
 
-function codeSystemTreeExpand () {
-    var treeContainer = $(".js-tree-expand");
+function codeSystemTreeLayout() {
+    var panelContainer = $(".js-panel-container");
 
-    if (treeContainer.length > 0) {
-        var treeExpandBlocks = $(".js-tree-expand").getExpandableBlocks();
+    if (panelContainer.length > 0) {
+
+        var treeExpandBlock = $(".js-tree-expand"),
+            expanderSplitter = $(".js-tree-expander"),
+            tree = $(".js-tree-expandable"),
+            content = $(".js-code-system-content-container");
 
         if (layoutQ().number[0] > 2) {
-            treeExpandBlocks.removeExpandability();
+
+            // Splitter layout
+
+            // remove the expand block behavior
+            treeExpandBlock
+                .getExpandableBlocks()
+                .removeExpandability();
+
+            // Move the elements in the correct order to make a splitter
+            panelContainer.prepend(tree, expanderSplitter, content);
+
+            // Make the tree sticky
+            tree.makeStickyCodeSystemTree();
+
+            // Remove the empty expand block
+            treeExpandBlock.remove();
+
+            // Make the splitter behavior
+            tree.resizable({
+                handleSelector: ".js-tree-expander",
+                resizeHeight: false
+            });
+
         } else {
-            treeExpandBlocks.addExpandability();
+            // Expand block layout
+
+            // Remove the sticky tree
+            tree.resetStickyCodeSystemTree();
+
+            // Remove the resizability from the tree
+            tree.resizable("destroy");
+
+            // move content so it works as an expander
+            if (treeExpandBlock.length === 0) {
+                panelContainer.prepend($("<div>", {class: "js-tree-expand tree-expand-block"}));
+            }
+
+            $(".js-tree-expand")
+                .prepend(tree, expanderSplitter)
+                .after(content);
+
+            $(".js-tree-expand")
+                .getExpandableBlocks()
+                .addExpandability();
         }
     }
 }
 
-window.codeSystemTreeExpand = codeSystemTreeExpand;
+window.codeSystemTreeLayout = codeSystemTreeLayout;
+
+/***/ }),
+
+/***/ "./src/js/code-system/codeTabs.js":
+/*!****************************************!*\
+  !*** ./src/js/code-system/codeTabs.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// This ensures the correct ARIA-attributes and keyboard nav for the tabs at the bottom of the code cards.
+// https://www.deque.com/blog/a11y-support-series-part-1-aria-tab-panel-accessibility/
+
+function codeTabs() {
+    var tabgroups = $(".js-tabgroup");
+
+    if (tabgroups.length !== 0) {
+
+        if (layoutQ().number[1] === 0) {
+            console.log("first load");
+
+            if (layoutQ().number[0] == 1) {
+                console.log("1 col. Removing tab groups, make responsive expanders since it's first load but the HTML has changed.");
+                tabgroups.resetTabgroups();
+                responsiveExpandableBlocks();
+            } else {
+                console.log("2+ col. Make tab groups.");
+                tabgroups.makeTabgroups();
+            }
+
+        } else {
+            console.log("not first load--layout changed");
+
+            if (layoutQ().number[0] == 1) {
+                console.log("Layout changed to one col. Removing tab groups, make responsive expanders since the HTML changes.");
+                tabgroups.resetTabgroups();
+            } else if (layoutQ().number[1] == 1) {
+                console.log("Layout changed, moving from 1-col to 2+ col. Making tab groups, removing responsive expanders.");
+                tabgroups.makeTabgroups();
+            }
+
+            responsiveExpandableBlocks();
+        }
+
+    }
+}
+
+window.codeTabs = codeTabs;
 
 /***/ }),
 
@@ -155,8 +248,6 @@ $(window).on("ready", function () {
 // order to work correctly, e.g. stuff affected by height.
 $(window).on("load", function () {
     //console.log('load - code-system.js');
-    stickyCodeSystemTree();
-    resizableSplitter();
 });
 
 
@@ -167,9 +258,8 @@ $(window).on("load", function () {
 $(window).on("layoutchange", function () {
     //console.log("layoutchange - code-system.js");
     stickyHeader();
-    codeSystemTreeExpand();
-    // codeTabs();
-    stickyCodeSystemTree();
+    codeTabs();
+    codeSystemTreeLayout();
 });
 
 // "conditionalresize" does stuff does stuff on debounced resize when the layout is 1-col.
@@ -187,58 +277,35 @@ $(window).on(
     "resize orientationchange",
     debounce(function () {
         //console.log("resize orientationchange - code-system.js");
-        resizableSplitter();
     }, 25)
 );
 
 
 /***/ }),
 
-/***/ "./src/js/code-system/resizableSplitter.js":
-/*!*************************************************!*\
-  !*** ./src/js/code-system/resizableSplitter.js ***!
-  \*************************************************/
+/***/ "./src/js/code-system/plugins.js":
+/*!***************************************!*\
+  !*** ./src/js/code-system/plugins.js ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// The vertical splitter on code system pages in 3- and 4-col layouts
+(function ($) {
 
-function resizableSplitter() {
-
-    var resizablePanel = $(".js-resizable-splitter");
-
-    if (resizablePanel.length !== 0) {
-        if (layoutQ().number[0] <= 2) {
-            console.log("destroy splitter");
-            resizablePanel.resizable("destroy");
-        } else {
-            console.log("create splitter");
-            resizablePanel.resizable({
-                handleSelector: ".splitter",
-                resizeHeight: false
-            });
-        }
-    }
-}
-
-window.resizableSplitter = resizableSplitter;
-
-
-/*
-jquery-resizable
-Version 0.32 - 5/5/2018
-© 2015-2018 Rick Strahl, West Wind Technologies
-www.west-wind.com
-Licensed under MIT License
-*/
-(function ($, undefined) {
-
-    console.log("jquery-resizable");
-
-    if ($.fn.resizable)
-        return;
+    $.fn.focusWithoutScrolling = function () {
+        var x = window.scrollX, y = window.scrollY;
+        this.focus();
+        window.scrollTo(x, y);
+        return this;
+    };
 
     $.fn.resizable = function fnResizable(options) {
+        // jquery-resizable
+        // Version 0.32 - 5/5/2018
+        // © 2015-2018 Rick Strahl, West Wind Technologies
+        // www.west-wind.com
+        // Licensed under MIT License
+
         var defaultOptions = {
             // selector for handle that starts dragging
             handleSelector: null,
@@ -408,39 +475,182 @@ Licensed under MIT License
             }
         });
     };
-})(jQuery);
 
-/***/ }),
+    // $.fn.resetTabs = function () {
+    //     console.log("resetting tabs");
+    //
+    //     var tabgroups = $(this);
+    //
+    //     var tablists = $(".js-tablist"),
+    //         tabtitles = $(".js-tabtitle"),
+    //         tabs = $(".js-tab"),
+    //         tabpanels = $(".js-tabpanel");
+    //
+    //     tablists.removeAttr("role");
+    //     tablists.removeAttr("aria-orientation");
+    //     tablists.off("keydown.makeTabs");
+    //
+    //     tabtitles.removeClass("selected");
+    //
+    //     tabs.removeAttr("role aria-selected");
+    //     tabs.off("click.makeTabs");
+    //
+    //     tabpanels.removeClass("selected");
+    //     tabpanels.removeAttr("role");
+    //
+    //     return this;
+    // };
 
-/***/ "./src/js/code-system/stickyCodeSystemTree.js":
-/*!****************************************************!*\
-  !*** ./src/js/code-system/stickyCodeSystemTree.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+    $.fn.resetTabgroups = function () {
+        // Starting from a series of tabgroups, make expandable blocks
 
-// Sticks the code system tree to the left side
-// of the viewport in 3+ col layout
+        var tabgroups = $(this);
 
-function stickyCodeSystemTree() {
+        var tablists = $(".js-tablist"),
+            tabtitles = $(".js-tabtitle"),
+            tabs = $(".js-tab"),
+            tabpanels = $(".js-tabpanel");
 
-    var tree = $(".js-sticky-tree");
+        tablists.removeAttr("role");
+        tablists.removeAttr("aria-orientation");
+        tablists.off("keydown.makeTabgroups");
 
-    if (tree.length !== 0) {
-        tree.makeStickyCodeSystemTree();
-    }
-}
+        tabtitles.removeClass("selected");
 
-window.stickyCodeSystemTree = stickyCodeSystemTree;
+        tabs.removeAttr("role aria-selected");
+        tabs.off("click.makeTabgroups");
 
-/*!============================================================
-// Based on
- * jquery.sticky-nav.js
- * Copyright (c) Federico Cargnelutti <fedecarg@gmail.com>
- * http://www.fedecarg.com/
- ============================================================*/
+        tabpanels.removeClass("selected");
+        tabpanels.removeAttr("role");
 
-(function ($) {
+        tabgroups = $(".js-tabgroup");
+        tabgroups.each(function () {
+
+            var tabgroup = $(this),
+                tabpanels = tabgroup.find(".js-tabpanel"),
+                tablist = tabgroup.find(".js-tablist");
+
+            // For each expand block
+            tabpanels.each(function () {
+                var tabpanel = $(this),
+                    tabtitle = $("#" + tabpanel.attr("aria-labelledby")).closest(".js-tabtitle");
+
+                // Move the expander/tabtitle first inside the expand block
+                tabpanel.prepend(tabtitle);
+            });
+
+
+            // Delete the tablist element
+            tablist.remove();
+
+        });
+
+        return this;
+    };
+
+    $.fn.makeTabgroups = function () {
+        var tabgroups = $(this);
+
+        tabgroups.resetTabgroups();
+
+        var tabgroups = $(".js-tabgroup"),
+            tablists = $(".js-tablist"),
+            tabtitles = $(".js-tabtitle"),
+            tabs = $(".js-tab"),
+            tabpanels = $(".js-tabpanel");
+
+        tablists.attr("role", "tablist");
+        tablists.attr("aria-orientation", "horizontal");
+        tabs.attr("role", "tab");
+        tabpanels.attr("role", "tabpanel");
+
+        // Make the clicking functionality
+        tabs.on("click.makeTabgroups", function () {
+            var clickedTab = $(this),
+                clickedTabpanel = $("#" + clickedTab.attr("aria-controls")),
+
+                tabgroup = clickedTab.closest(".js-tabgroup"),
+                tabs = tabgroup.find(".js-tab"),
+                tabpanels = tabgroup.find(".js-tabpanel"),
+
+                otherTabs = tabs.not(clickedTab),
+                otherTabpanels = tabpanels.not(clickedTabpanel);
+
+            clickedTab.attr("aria-selected", "true");
+            clickedTab.closest(".js-tabtitle").addClass("selected");
+
+            otherTabs.attr("aria-selected", "false");
+            otherTabs.closest(".js-tabtitle").removeClass("selected");
+
+            clickedTabpanel.addClass("selected");
+            otherTabpanels.removeClass("selected");
+        });
+
+        // Set up the keyboard nav
+        tablists.on("keydown.makeTabgroups", function (e) {
+
+            // Left arrow and up arrow select the previous tab
+            if (e.keyCode == 37 || e.keyCode == 38) {
+                $(".js-tab:focus").closest(".js-tabtitle").prev().find(".js-tab").click().focus();
+                e.preventDefault();
+            }
+
+            // Right arrow and down arrow select the next tab
+            if (e.keyCode == 39 || e.keyCode == 40) {
+                $(".js-tab:focus").closest(".js-tabtitle").next().find(".js-tab").click().focus();
+                e.preventDefault();
+            }
+
+        });
+
+        tabgroups = $(".js-tabgroup");
+
+        tabgroups.each(function () {
+            // Create the tablist element first inside the tabgroup
+            $(this).prepend($("<div>", {
+                "class": "js-tablist",
+                "role": "tablist",
+                "aria-orientation": "horizontal"
+            }));
+
+            var tabgroup = $(this),
+                expandBlocks = tabgroup.find(".js-responsive-expand"),
+                tablist = tabgroup.find(".js-tablist"),
+                tabpanels = tabgroup.find(".js-tabpanel");
+
+            // For each expand block/tab
+            expandBlocks.each(function () {
+                var expandBlock = $(this),
+                    tabpanelExpandable = expandBlock.find(".js-tabpanel"),
+                    tabtitleExpander = expandBlock.find(".js-tabtitle"),
+                    tab = expandBlock.find(".js-tab");
+
+                tab.attr("aria-selected", "false");
+
+                // Move the expander/tabtitle into the tablist
+                tablist.append(tabtitleExpander);
+            });
+
+            // Select the first tab in each group
+            var tablist = tabgroup.find(".js-tablist"),
+                firstTabtitle = tablist.find(".js-tabtitle").filter(":first-child"),
+                firstTab = firstTabtitle.find(".js-tab"),
+                firstTabpanelContainer = $("#" + firstTab.attr("aria-controls"));
+
+            firstTabtitle.addClass("selected");
+            firstTab.attr("aria-selected", "true");
+            firstTabpanelContainer.addClass("selected");
+        });
+
+        return this;
+    };
+
+    /*!============================================================
+     * Based on
+     * jquery.sticky-nav.js
+     * Copyright (c) Federico Cargnelutti <fedecarg@gmail.com>
+     * http://www.fedecarg.com/
+     ============================================================*/
 
     $.fn.makeStickyCodeSystemTree = function () {
 
@@ -458,7 +668,6 @@ window.stickyCodeSystemTree = stickyCodeSystemTree;
 
         function initialise() {
             $nav.resetStickyCodeSystemTree();
-
             calculateOffsets();
             bindEvents();
         }
@@ -470,9 +679,11 @@ window.stickyCodeSystemTree = stickyCodeSystemTree;
 
         function onClick(e) {
             const targetEl = $(this).attr("href");
-
             if ($(targetEl).length) {
+
                 selectNavItem(this);
+
+                console.log($(targetEl));
 
                 $(targetEl).fadeOut(0).fadeIn(400);
             }
@@ -563,8 +774,7 @@ window.stickyCodeSystemTree = stickyCodeSystemTree;
     };
 
 
-}(jQuery))
-;
+})(jQuery);
 
 /***/ }),
 

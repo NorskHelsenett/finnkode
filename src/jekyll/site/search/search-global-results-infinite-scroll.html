@@ -11,10 +11,10 @@ toc-comment: '"Infinite scroll" gir store problemer med tilgjengelighet. Den lar
 
     <div class="hits" aria-busy="false" aria-live="polite">197 resultater for "underleppe" i alle kodeverk.</div>
 
-    {% include search-sorter.html %}
+    {% include search/search-sorter.html %}
 
 </div>
 
-{% include search-results.html data=site.data.search-results.global %}
+{% include search/search-results.html data=site.data.search-results.global %}
 
 <div class="load-more infinite-scroll" aria-busy="true" aria-live="polite">Laster flere søkeresultater...</div>
