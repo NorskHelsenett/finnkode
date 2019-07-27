@@ -69,6 +69,7 @@
 
             button {
                 @include button-reset;
+                text-align: center;
                 width: 2.5em;
                 height: 2.5em;
                 overflow: hidden;

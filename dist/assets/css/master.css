@@ -1774,6 +1774,7 @@ body.search #search-container {
   background-color: transparent;
   cursor: pointer;
   text-align: left;
+  text-align: center;
   width: 2.5em;
   height: 2.5em;
   overflow: hidden;
