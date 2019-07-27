@@ -7,10 +7,11 @@
 @import "full-width-template";
 @import "simple-template";
 
-@import "front-page";
-
 @import "framework-header";
+@import "code-system-menu";
 @import "framework-footer";
+
+@import "front-page";
 
 @import "search/search-template";
 @import "search/global-search-banner";
@@ -24,7 +25,6 @@
 @import "code-system/code-system-template";
 @import "code-system/code-system-cards";
 @import "code-system/code-system-header";
-@import "code-system/code-system-menu";
 @import "code-system/code-system-tree";
 
 // @import "print";
