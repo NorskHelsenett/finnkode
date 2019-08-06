@@ -44,7 +44,7 @@ function css() {
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: "expanded"}).on('error', sass.logError))
         .pipe(gulp.dest("./dist/assets/css/"))
-        .pipe(postcss([autoprefixer()]))
+        //.pipe(postcss([autoprefixer()]))
         .pipe(sourcemaps.write("./maps"))
         .pipe(gulp.dest("./dist/assets/css/"))
         .pipe(browsersync.stream());
