@@ -261,22 +261,29 @@
     }
 }
 
-@mixin wheel-animation() {
+@mixin wheel-animation($color:$blue) {
+
+    $border-color:rgba(15, 45, 94, .2);
+
+    @if ($color == white) {
+        $border-color:rgba(255, 255, 255, .2);
+    }
 
     &::after {
         content: "";
         display: inline-block;
         position: relative;
-        border: .1em solid rgba(15, 45, 94, .2);
-        border-left-color: $blue;
+        border: .1em solid $border-color;
+        border-left-color: $color;
         transform: translateZ(0);
         animation: spin 1s infinite linear;
         width: 1em;
         height: 1em;
         border-radius: 50%;
-        vertical-align: -.15em;
-        margin-left: .325em;
+        vertical-align: -.125em;
+        margin-left: .5em;
     }
+
 
     @keyframes spin {
         0% {

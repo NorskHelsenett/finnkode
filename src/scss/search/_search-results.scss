@@ -17,9 +17,7 @@
     .hits {
         position: relative;
         margin-bottom: .5rem;
-    }
 
-    .hits, .load-more {
         &[aria-busy="true"] {
             @include wheel-animation;
         }
@@ -27,63 +25,50 @@
 
     .load-more {
         margin: 2rem 1rem 0;
-    }
-
-    .pagination {
         text-align: center;
+        line-height: 2.5em;
 
-        ul {
-            padding: 0;
-            margin: 0;
+        button {
+            @include button-reset;
+            display: inline-block;
+            text-align: center;
+            height: 2.75em;
+            line-height: 2.5em;
+            padding: 0 1.25em;
+            border-radius: 1.375em;
+            color: #fff;
+            background-color: $blue;
+            border: 2px solid $blue;
+            transition: .1s;
         }
 
-        li {
-            display: inline-block;
-            margin: 0 .5em;
+        div {
+            white-space: nowrap;
+        }
 
-            &:first-child, &:last-child {
-                button {
-                    height: 0;
-                    padding-top: 2.25em;
-                    background: url($chevron-right-blue) .95em center /.625em no-repeat;
-                }
-            }
-
-            &:first-child {
-                transform: rotateY(180deg);
-            }
-
-            &.active {
-                button {
-                    background-color: $blue;
-                    color: $green;
-                    border: 2px solid $blue;
-
-                    &:hover, &:focus {
-                        background-color: $green;
-                        color: $blue;
-                        border: 2px solid $blue;
-                    }
-                }
-            }
-
+        &[aria-busy="false"] {
             button {
-                @include button-reset;
-                text-align: center;
-                width: 2.5em;
-                height: 2.5em;
-                overflow: hidden;
-                vertical-align: top;
-                color: $blue;
-                font-size: $font-l;
-                border-radius: 1.25em;
-                border: 2px solid #fff;
-                transition: .1s;
-
                 &:hover, &:focus {
                     background-color: $green;
-                    border-color: $blue;
+                    color: $blue;
                 }
+            }
+        }
+
+        &[aria-busy="true"] {
+            button {
+                cursor: wait;
+            }
+
+            div {
+                @include wheel-animation(white);
+            }
+        }
+
+        a {
+            &::before {
+                content: "";
+                display: table;
             }
         }
     }
@@ -94,6 +79,46 @@
             margin: 0;
             padding: 0;
         }
+
+        a {
+            color: $blue;
+            display: flex;
+            flex-flow: column nowrap;
+            text-decoration: none;
+            padding: 1rem 3rem 1rem 1rem;
+            position: relative;
+            z-index: 2;
+            transition: background-color .2s;
+            background: url($chevron-right-grey) right 1rem center / 1rem 2rem no-repeat;
+
+            &:hover, &:focus {
+                background-color: $light-green;
+            }
+
+            // The wider lines above and below the focused element
+            &:focus {
+                outline: 0;
+
+                &::before, &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    height: 2px;
+                    left: 0;
+                    right: 0;
+                    background-color: $grey;
+                }
+
+                &::before {
+                    top: -1px;
+                }
+
+                &::after {
+                    bottom: -1px;
+                }
+            }
+        }
+
     }
 
     .code {
@@ -127,45 +152,6 @@
             }
         }
 
-    }
-
-    a {
-        color: $blue;
-        display: flex;
-        flex-flow: column nowrap;
-        text-decoration: none;
-        padding: 1rem 3rem 1rem 1rem;
-        position: relative;
-        z-index: 2;
-        transition: background-color .2s;
-        background: url($chevron-right-grey) right 1rem center / 1rem 2rem no-repeat;
-
-        &:hover, &:focus {
-            background-color: $light-green;
-        }
-
-        // The wider lines above and below the focused element
-        &:focus {
-            outline: 0;
-
-            &::before, &::after {
-                content: "";
-                position: absolute;
-                bottom: 0;
-                height: 2px;
-                left: 0;
-                right: 0;
-                background-color: $grey;
-            }
-
-            &::before {
-                top: -1px;
-            }
-
-            &::after {
-                bottom: -1px;
-            }
-        }
     }
 
     .main-info {
@@ -255,51 +241,53 @@
 
 @media only screen and (min-width: $three-to-four-col) {
     #search-results {
-        a {
-            background-position: right 1rem top 1.325rem;
-            padding-top: 1.5rem;
-            padding-bottom: 1.5rem;
-            padding-right: 4rem;
-            font-size: $font-xl;
-            flex-flow: row nowrap;
-            justify-content: space-between;
-
-            .main-info {
-                flex-grow: 1;
-                display: flex;
-                flex-flow: row wrap;
-                justify-content: space-between;
-            }
-
-            .system {
+        .results {
+            a {
+                background-position: right 1rem top 1.325rem;
+                padding-top: 1.5rem;
+                padding-bottom: 1.5rem;
+                padding-right: 4rem;
                 font-size: $font-xl;
-                text-align: right;
-                flex: 0 0 11rem;
-                order: 2;
-            }
+                flex-flow: row nowrap;
+                justify-content: space-between;
 
-            .number {
-                flex: 0 0 5rem;
-                white-space: nowrap;
-
-                &::after {
-                    display: none;
+                .main-info {
+                    flex-grow: 1;
+                    display: flex;
+                    flex-flow: row wrap;
+                    justify-content: space-between;
                 }
-            }
 
-            .name, .description {
-                flex: 0 0 34.5rem;
-                padding-right: 1rem;
-            }
+                .system {
+                    font-size: $font-xl;
+                    text-align: right;
+                    flex: 0 0 11rem;
+                    order: 2;
+                }
 
-            .status {
-                font-size: .7em;
-            }
+                .number {
+                    flex: 0 0 5rem;
+                    white-space: nowrap;
 
-            .description {
-                font-size: $font-l;
-                padding-top: .5rem;
-                margin-left: auto;
+                    &::after {
+                        display: none;
+                    }
+                }
+
+                .name, .description {
+                    flex: 0 0 34.5rem;
+                    padding-right: 1rem;
+                }
+
+                .status {
+                    font-size: .7em;
+                }
+
+                .description {
+                    font-size: $font-l;
+                    padding-top: .5rem;
+                    margin-left: auto;
+                }
             }
         }
     }

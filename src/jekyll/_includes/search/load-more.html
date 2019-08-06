@@ -1,0 +1,15 @@
+{% if page.loading %}
+
+<div class="load-more" aria-live="polite" aria-busy="true">
+    <button disabled><div>Vis flere søkeresultater</div></button>
+    <a href="#search-container">Tilbake til toppen</a>
+</div>
+
+{% else %}
+
+<div class="load-more" aria-live="polite" aria-busy="false">
+    <button><div>Vis flere søkeresultater</div></button>
+    <a href="#search-container">Tilbake til toppen</a>
+</div>
+
+{% endif %}

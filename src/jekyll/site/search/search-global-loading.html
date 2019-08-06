@@ -8,5 +8,13 @@ toc-title: Global search (loading)
 loading: true
 ---
 <div class="results-header">
+
     <div class="hits" aria-busy="true" aria-live="polite">Laster søkeresultater</div>
+
+    {% include search/search-sorter.html %}
+
 </div>
+
+{% include search/search-results.html data=site.data.search-results.global %}
+
+{% include search/load-more.html %}

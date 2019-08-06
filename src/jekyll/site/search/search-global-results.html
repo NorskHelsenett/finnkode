@@ -1,5 +1,5 @@
 ---
-resource: false
+resource: true
 layout: search
 category: Search
 page-name: global-search
@@ -15,3 +15,5 @@ toc-title: Global search (results)
 </div>
 
 {% include search/search-results.html data=site.data.search-results.global %}
+
+{% include search/load-more.html %}
