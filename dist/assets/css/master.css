@@ -2104,6 +2104,12 @@ body.code-system {
   position: absolute;
   height: 100%;
   width: 100%;
+}
+
+body.code-system #main-content {
+  position: absolute;
+  height: 100%;
+  width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;

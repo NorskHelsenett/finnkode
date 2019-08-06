@@ -2,8 +2,14 @@ body.code-system {
     position: absolute;
     height: 100%;
     width: 100%;
-    display: flex;
-    flex-flow: column nowrap;
+
+    #main-content {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-flow: column nowrap;
+    }
 
     .code-system-header, .panel-container {
         background-color: #fff;
