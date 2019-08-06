@@ -2,8 +2,12 @@
     color: #fff;
     padding: 1.5rem 0;
 
+    nav {
+        margin: 0 1rem;
+    }
+
     ul {
-        padding: 0 1rem 1.5rem;
+        padding: 0 0 1.5rem;
         margin: 0;
         list-style: none;
         line-height: 1.5;
@@ -11,34 +15,76 @@
         a {
             display: inline-block;
             text-decoration: none;
-            border-bottom: 1px solid transparent;
-            margin-bottom: .25rem;
-            transition: border-bottom-color .15s;
-
-            &:hover {
-                border-bottom-color: #fff;
-            }
+            margin-top: .25rem;
         }
     }
 
     .text-size {
         display: none;
+        margin: 0 1rem;
+        flex-grow: 1;
+
+        .expander {
+            @include button-reset();
+            display: block;
+            width: 3rem;
+            height: 0;
+            padding: 2rem 0 0 0;
+            overflow: hidden;
+            background: url($text-size) no-repeat top left / 3rem;
+            border-bottom: 1px solid transparent;
+
+            &:hover {
+                border-bottom-color: #fff;
+            }
+
+            &:focus {
+                outline: 2px dashed $green;
+                border-bottom-color: transparent;
+            }
+        }
+
+        .expandable {
+            position: absolute;
+            bottom: 3.25rem;
+            left: 0;
+            padding: 1rem;
+            color: #000;
+            background: #fff;
+            outline: .5rem solid #070;
+            font-size: 3rem;
+            z-index: 1000;
+        }
     }
 
     .directorate-logo {
         justify-self: flex-end;
-        background: url($directorate-logo) center/contain no-repeat;
+        background: url($directorate-logo) top left / contain no-repeat;
         height: 0;
         overflow: hidden;
         width: 13rem;
-        padding-top: 2rem;
+        padding-top: 1.325rem;
         display: inline-block;
         margin: 0 1rem;
     }
 
     a {
+        border-bottom: 1px solid transparent;
         color: #fff;
+        transition: .1s;
+
+        &:hover {
+            border-bottom-color: #fff;
+            background-color: transparent;
+        }
+
+        &:focus {
+            outline: 2px dashed $green;
+            background-color: transparent;
+            border-bottom-color: transparent;
+        }
     }
+
 }
 
 @media only screen and (min-width: $two-to-three-col) {
@@ -49,48 +95,42 @@
             display: flex;
             flex-flow: row nowrap;
             align-items: flex-end;
-            justify-content: flex-start;
+            justify-content: space-between;
             position: relative;
+
+            > * {
+                flex-grow: 0;
+                flex-shrink: 0;
+            }
+        }
+
+        nav, .directorate-logo {
+            width: 17rem;
+        }
+
+        .text-size {
+            display: block;
+            width: 8rem;
+        }
+
+        .directorate-logo {
+            padding-top: 1.625rem;
         }
 
         ul {
             padding-bottom: 0;
             line-height: 1.5;
             font-size: $font-xl;
-            width: $one-col;
         }
+    }
+}
+
+@media only screen and (min-width: $three-to-four-col) {
+    #framework-footer {
 
         .text-size {
-            display: block;
-            margin: 0 1rem;
+            width: auto;
             flex-grow: 1;
-
-            .expander {
-                @include button-reset();
-                display: block;
-                width: 3rem;
-                height: 0;
-                padding: 3rem 0 0 0;
-                overflow: hidden;
-                background: transparent url($text-size) no-repeat center / 3rem;
-            }
-
-            .expandable {
-                position: absolute;
-                bottom: 3.25rem;
-                left: 0;
-                padding: 1rem;
-                color: #000;
-                background: #fff;
-                outline: .5rem solid #070;
-                font-size: 3rem;
-
-            }
-        }
-
-        .directorate-logo {
-            padding-top: 44px;
-            width: 273px;
         }
     }
 }

@@ -225,6 +225,7 @@
 
 @media only screen and (min-width: $two-to-three-col) {
     #search-results {
+        margin-left: 0;
         .results-header {
             padding-top: 17px;
             padding-bottom: 13px;
@@ -286,7 +287,6 @@
                 .description {
                     font-size: $font-l;
                     padding-top: .5rem;
-                    margin-left: auto;
                 }
             }
         }

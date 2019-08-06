@@ -1,1 +1,105 @@
-#ui-datepicker-div {    z-index: 1000!important;    background-color: #fff;}.ui-datepicker {    a, button {        &:hover, &:focus {            outline: 2px dashed purple!important;        }        &:focus:hover {            outline: 2px dashed red!important;        }    }    table {    }    .ui-datepicker-header {    }    .ui-datepicker-title {    }    .ui-datepicker-prev, .ui-datepicker-next {    }    .ui-datepicker-prev {    }    .ui-datepicker-next {    }    thead {    }    th {        td {            &:last-child {            }        }        tr {            &:last-child {            }        }    }    td {        span, a {        }    }    .ui-datepicker-calendar {        .ui-state-default {        }        .ui-state-hover {        }        .ui-state-active {        }        .ui-datepicker-today {        }        td:first-child .ui-state-active {        }        td:last-child .ui-state-active {        }        tr:last-child .ui-state-active {        }    }    .ui-datepicker-unselectable .ui-state-default {    }}
+#ui-datepicker-div {
+    z-index: 1000!important;
+    background-color: #fff;
+}
+
+.ui-datepicker {
+
+    a, button {
+        &:hover, &:focus {
+            outline: 2px dashed purple!important;
+        }
+
+        &:focus:hover {
+            outline: 2px dashed red!important;
+        }
+    }
+
+    table {
+
+    }
+
+    .ui-datepicker-header {
+
+    }
+
+    .ui-datepicker-title {
+    }
+
+    .ui-datepicker-prev, .ui-datepicker-next {
+    }
+
+    .ui-datepicker-prev {
+    }
+
+    .ui-datepicker-next {
+
+    }
+
+    thead {
+    }
+
+    th {
+
+        td {
+            &:last-child {
+
+            }
+        }
+
+        tr {
+            &:last-child {
+
+            }
+        }
+
+
+    }
+
+
+    td {
+
+        span, a {
+
+        }
+
+    }
+
+
+    .ui-datepicker-calendar {
+
+        .ui-state-default {
+
+        }
+
+        .ui-state-hover {
+
+        }
+
+        .ui-state-active {
+
+        }
+
+        .ui-datepicker-today {
+
+        }
+
+        td:first-child .ui-state-active {
+        }
+
+        td:last-child .ui-state-active {
+        }
+
+        tr:last-child .ui-state-active {
+        }
+
+
+    }
+
+
+    .ui-datepicker-unselectable .ui-state-default {
+    }
+
+
+}
+
