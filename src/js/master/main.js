@@ -17,6 +17,7 @@ $(window).on("load", function () {
     responsiveExpandableBlocks();
     expandableBlocks();
     textSizeExpander();
+    startAutocomplete();
 });
 
 
