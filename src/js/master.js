@@ -2,6 +2,7 @@ require('./master/debounce');
 require('./master/layoutQ');
 require('./master/plugins');
 
+require('./master/startAutocomplete');
 require('./master/unhideMenu');
 require('./master/expandableBlocks');
 require('./master/responsiveExpandableBlocks');

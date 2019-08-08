@@ -8,10 +8,11 @@
 
     <title>Alle kodeverk: "kreft" søkeresultater - FinnKode</title>
 
-    <script
-        src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous"></script>
+    <script src="/assets/js/jquery/jquery-3.4.1.min.js"></script>
+    <script src="/assets/js/jquery/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/jquery/jquery-ui.structure.css">
+    <link rel="stylesheet" href="/assets/css/jquery/jquery-ui.theme.css">
+
     <script src="/assets/js/master.js"></script>
     <link rel="stylesheet" href="/assets/css/master.css">
 
@@ -40,11 +41,6 @@
     
 
     
-    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script
-            src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"
-            integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="
-            crossorigin="anonymous"></script>
     <script src="/assets/js/search.js"></script>
     
 
@@ -144,29 +140,33 @@
 <main id="page-content">
     <div class="global-search-banner">
     <div class="layout-container">
+        <form class="search-field" role="search">
 
-        <label class="global-search-label" for="global-search">Søk i alle kodeverk</label>
+            <label class="global-search-label" for="autocomplete">Søk i alle kodeverk</label>
 
-        <div role="search" class="search-field">
-            <input
-                autofocus
-                name="global-search"
-                id="global-search"
-                type="search"
-                class="search-input"
-                placeholder="f.eks. kreft, bevissthetssilstand, fødsel..."
-                
-            >
+            <div class="search-field-container">
+                <input
+                        autofocus
+                        type="search"
+                        class="search-input"
+                        placeholder="f.eks. kreft, bevissthetssilstand, fødsel..."
+                        role="combobox"
+                        aria-controls="listbox-container"
+                        aria-owns="listbox-container"
+                        aria-expanded="false"
+                        aria-autocomplete="list"
+                        autocomplete="off"
+                        id="autocomplete"
+                >
 
-            <button class="search-button" type="submit">Søk i alle kodeverk</button>
+                <button class="search-button" type="submit">Søk i alle kodeverk</button>
+            </div>
 
-            
-        </div>
+            <div id="listbox-wrapper"></div>
+
+        </form>
     </div>
 </div>
-
-
-
 
     <div class="layout-container" id="search-container" tabindex="-1">
 

@@ -109,6 +109,14 @@ select {
     outline: 0;
 }
 
+#framework-footer :focus {
+    outline: 2px dashed $green;
+}
+
+.ui-helper-hidden-accessible {
+    @extend .visuallyhidden;
+}
+
 h1 {
     font-size: $font-4xl;
     font-weight: normal;

@@ -7,10 +7,11 @@
 
     <title>{{ page.title }} - FinnKode</title>
 
-    <script
-        src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous"></script>
+    <script src="/assets/js/jquery/jquery-3.4.1.min.js"></script>
+    <script src="/assets/js/jquery/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/jquery/jquery-ui.structure.css">
+    <link rel="stylesheet" href="/assets/css/jquery/jquery-ui.theme.css">
+
     <script src="/assets/js/master.js"></script>
     <link rel="stylesheet" href="/assets/css/master.css">
 
@@ -66,11 +67,6 @@
     {% endif %}
 
     {% if page.layout == "search" %}
-    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script
-            src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"
-            integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="
-            crossorigin="anonymous"></script>
     <script src="/assets/js/search.js"></script>
     {% endif %}
 

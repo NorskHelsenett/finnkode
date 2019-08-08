@@ -1,15 +1,155 @@
 .search-field {
     position: relative;
 
+    .search-field-container {
+        position: relative;
+    }
+
     .search-input {
-        @include input-field($type:"search");
+        @include input-field($type: "search");
     }
 
     .search-button {
-        @include input-button($type:"search");
+        @include input-button($type: "search");
     }
 
-    #autocomplete {
-        @include input-autocomplete;
+    .ui-autocomplete {
+        position: absolute;
+        border: 0;
+        background-color: transparent;
+        color: #000;
+        z-index: 99;
+        top: 100%;
+        left: 0;
+        right: 0;
+        font-size: $font-s;
+        margin: 0;
+        padding: .5em 0 0;
+        list-style: none;
+    }
+
+    .ui-menu-item-wrapper {
+        cursor: pointer;
+        display: block;
+        padding: .5em 1em;
+        position: relative;
+        z-index: 2;
+        transition: .1s;
+        background-color: #fff;
+        text-decoration: none;
+        color: #000;
+        border: 2px solid $light-grey;
+        border-width: 0 2px;
+        position: relative;
+        line-height: 1.6;
+
+        // jQuery UI overrides
+        margin: 0!important;
+
+
+        &::before, &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: transparent;
+            transition: .1s;
+        }
+
+        &::before {
+            top: 0;
+        }
+
+        &::after {
+            bottom: 0;
+        }
+
+        &:hover, &:focus, &.ui-state-active {
+            background-color: $light-green-opaque!important;
+
+            &::before, &::after {
+                background-color: $light-grey;
+            }
+        }
+    }
+
+    .ui-menu-item {
+
+        &:first-child {
+            .ui-menu-item-wrapper {
+                border-top-left-radius: 1.125em;
+                border-top-right-radius: 1.125em;
+                padding-top: .625em;
+                border-top: 2px solid $light-grey;
+
+                &::before {
+                    display: none;
+                }
+            }
+        }
+
+        &:last-child {
+            .ui-menu-item-wrapper {
+                border-bottom-right-radius: 1.125em;
+                border-bottom-left-radius: 1.125em;
+                padding-bottom: .625em;
+                border-bottom: 2px solid $light-grey;
+
+                &::after {
+                    display: none;
+                }
+            }
+        }
     }
 }
+
+    @media only screen and (min-width: $one-to-two-col) {
+        .search-field {
+            .ui-menu-item {
+
+                &:first-child {
+                    .ui-menu-item-wrapper {
+                        border-top-left-radius: 1.25em;
+                        border-top-right-radius: 1.25em;
+                    }
+                }
+
+                &:last-child {
+                    .ui-menu-item-wrapper {
+                        border-bottom-right-radius: 1.25em;
+                        border-bottom-left-radius: 1.25em;
+                    }
+                }
+            }
+        }
+    }
+
+
+    @media only screen and (min-width: $two-to-three-col) {
+        .search-field {
+
+            .ui-autocomplete {
+                font-size: $font-m;
+            }
+
+            .ui-menu-item {
+
+                &:first-child {
+                    .ui-menu-item-wrapper {
+                        border-top-left-radius: 1.625em;
+                        border-top-right-radius: 1.625em;
+                        padding-top: .75rem;
+                    }
+                }
+
+                &:last-child {
+                    .ui-menu-item-wrapper {
+                        border-bottom-right-radius: 1.625em;
+                        border-bottom-left-radius: 1.625em;
+                        padding-bottom: .75rem;
+                    }
+                }
+            }
+        }
+    }
