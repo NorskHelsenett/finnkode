@@ -2,6 +2,10 @@
     color: #fff;
     padding: 1.5rem 0;
 
+    :focus {
+        outline: 2px dashed $green;
+    }
+
     nav {
         margin: 0 1rem;
     }

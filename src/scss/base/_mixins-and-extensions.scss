@@ -32,14 +32,14 @@
     &:focus {
         outline: none;
     }
-
-    &::-moz-focus-inner {
-        border: 0;
-    }
 }
 
 %box-shadow {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+}
+
+%focus-box-shadow {
+    box-shadow: 0 0 2px 2px $grey-blue;
 }
 
 @mixin input-field($type) {
@@ -57,6 +57,7 @@
 
     &:focus, &:hover {
         outline: 0;
+        @extend %focus-box-shadow;
     }
 
     @media only screen and (min-width: $one-to-two-col) {
@@ -153,10 +154,10 @@
 
 @mixin wheel-animation($color:$blue) {
 
-    $border-color:rgba(15, 45, 94, .2);
+    $border-color: rgba(15, 45, 94, .2);
 
     @if ($color == white) {
-        $border-color:rgba(255, 255, 255, .2);
+        $border-color: rgba(255, 255, 255, .2);
     }
 
     &::after {

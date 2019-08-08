@@ -49,6 +49,10 @@
         }
     }
 
+    .expandable {
+        overflow: visible; // So the box shadow focus will show on the date field
+    }
+
     .filter {
         text-align: left;
         margin: 1rem 0 1.5rem;
@@ -112,40 +116,35 @@
     .expired-codes {
         line-height: 2.25rem;
         font-size: $font-s;
-        overflow: hidden;
 
         span {
             cursor: pointer;
             position: relative;
-            padding-left: 1.5rem;
-            background-image: url($checkbox-unchecked), url($checkbox-unchecked-hover), url($checkbox-checked), url($checkbox-checked-hover);
-            background-position: left center;
-            background-size: 1rem 1rem;
-            background-repeat: no-repeat;
+
+            &::before {
+                content: "";
+                display: inline-block;
+                height: 1em;
+                width: 1em;
+                border: 2px solid $blue;
+                border-radius: 2px;
+                vertical-align: -2px;
+                margin-right: .5em;
+            }
         }
 
         input {
             @extend .visuallyhidden;
 
-            & + span {
-                background-image: url($checkbox-unchecked);
-            }
-
             &:hover, &:focus {
-                & + span {
-                    background-image: url($checkbox-unchecked-hover);
+                & + span::before {
+                    @extend %focus-box-shadow;
                 }
             }
 
             &:checked {
-                & + span {
-                    background-image: url($checkbox-checked);
-                }
-
-                &:hover, &:focus {
-                    & + span {
-                        background-image: url($checkbox-checked-hover);
-                    }
+                & + span::before {
+                    background: url($check) center / 1em no-repeat;
                 }
             }
         }
@@ -165,8 +164,8 @@
 
     .date-field {
         position: relative;
-        overflow: hidden;
         margin-right: 1rem;
+        vertical-align: top;
 
         img {
             display: none;

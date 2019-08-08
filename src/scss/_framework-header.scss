@@ -11,6 +11,10 @@
         overflow: hidden;
         display: block;
 
+        &:focus {
+            outline: 2px dashed $light-green-opaque;
+        }
+
     }
 
     .main-header-content {
@@ -41,6 +45,11 @@
         background: url($finnkode-logo) center left / contain no-repeat;
         width: 9rem;
         margin-right: 1.5rem;
+
+
+        &:focus {
+            outline: 2px dashed $blue;
+        }
     }
 
     .main-menu {
@@ -88,6 +97,7 @@
             }
 
             &:hover, &:focus {
+                background-color: unset;
                 &::after {
                     border-bottom-color: $purple;
                 }

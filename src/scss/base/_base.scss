@@ -21,12 +21,10 @@ body {
     &:focus {
         @extend .visuallypresent;
         background-color: #fff;
-        font-size: $font-l;
         font-weight: 600;
         display: inline-block;
         padding: 1rem;
         white-space: nowrap;
-        border: 2px dashed $green;
     }
 }
 
@@ -43,22 +41,19 @@ a {
     color: $purple;
 
     &:focus {
-        background-color: $green;
-        outline: 0;
-
-        &:hover {
-            background-color: $green;
-        }
+        outline: 2px dashed $purple;
     }
 
     &:hover {
-        background-color: $light-green;
-        color: $purple;
+        background-color: $lighter-grey;
+        color: $blue;
     }
 
     &:active {
-        color: $medium-purple;
+        outline: 0;
+        color: $purple;
     }
+
 }
 
 input {
@@ -75,7 +70,7 @@ select {
     margin-left: .25em;
     padding: 0 2.5em 0 .5em;
     background: url($chevron-down-white) right .65em top 55%/ .85em .85em no-repeat, linear-gradient(to left, $blue 2.125em, #fff 2em);
-    border: 1px solid $blue;
+    border: 2px solid $blue;
     height: 2em;
     border-radius: 1em;
     transition: .1s;
@@ -88,6 +83,7 @@ select {
     &:hover, &:focus {
         background-image: url($chevron-down-blue), linear-gradient(to left, $green 2.125em, #fff 2em);
         outline: 0;
+        @extend %focus-box-shadow;
     }
 
     &:disabled, &[aria-disabled=true] {
@@ -105,12 +101,14 @@ select {
     font-style: italic;
 }
 
-:focus, ::-moz-focus-inner {
-    outline: 0;
+:focus {
+    outline: none;
 }
 
-#framework-footer :focus {
-    outline: 2px dashed $green;
+::-moz-focus-inner {
+    outline: none!important;
+    border: 0!important;
+    padding: 0!important;
 }
 
 .ui-helper-hidden-accessible {
