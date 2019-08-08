@@ -202,6 +202,10 @@ select option {
   outline: 0;
 }
 
+#framework-footer :focus {
+  outline: 2px dashed #99eeb2;
+}
+
 h1 {
   font-size: 2rem;
   font-weight: normal;
