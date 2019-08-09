@@ -190,20 +190,20 @@ window.codeSystemTreeLayout = codeSystemTreeLayout;
 // https://www.deque.com/blog/a11y-support-series-part-1-aria-tab-panel-accessibility/
 
 function codeTabs() {
-    var tabgroups = $(".js-tabgroup");
+    console.log("code tabs")
 
-    if (tabgroups.length !== 0) {
+    if ($(".js-tabgroup").length !== 0) {
 
         if (layoutQ().number[1] === 0) {
-            console.log("first load");
+            console.log("First load. Default, existing markup is tabs.");
 
             if (layoutQ().number[0] == 1) {
                 console.log("1 col. Removing tab groups, make responsive expanders since it's first load but the HTML has changed.");
-                tabgroups.resetTabgroups();
-                responsiveExpandableBlocks();
+                tabsToExpandableBlocks();
+
             } else {
-                console.log("2+ col. Make tab groups.");
-                tabgroups.makeTabgroups();
+                console.log("2+ col. Markup exists. Add functionality to tab groups.");
+                addTabFunctionality();
             }
 
         } else {
@@ -211,17 +211,158 @@ function codeTabs() {
 
             if (layoutQ().number[0] == 1) {
                 console.log("Layout changed to one col. Removing tab groups, make responsive expanders since the HTML changes.");
-                tabgroups.resetTabgroups();
+                tabsToExpandableBlocks();
+
             } else if (layoutQ().number[1] == 1) {
                 console.log("Layout changed, moving from 1-col to 2+ col. Making tab groups, removing responsive expanders.");
-                tabgroups.makeTabgroups();
+                expandableBlocksToTabs();
             }
-
-            responsiveExpandableBlocks();
         }
-
     }
 }
+
+function removeTabFunctionality() {
+
+    var tablists = $(".js-tablist"),
+        tabtitles = $(".js-tabtitle"),
+        tabs = $(".js-tab"),
+        tabpanels = $(".js-tabpanel");
+
+    // Remove events, attributes and classes
+    tablists.removeAttr("role aria-orientation");
+    tablists.off(".makeTabgroupFunctionality");
+
+    tabtitles.removeClass("selected");
+
+    tabs.removeAttr("role aria-selected");
+    tabs.off(".makeTabgroupFunctionality");
+
+    tabpanels.removeClass("selected");
+    tabpanels.removeAttr("role");
+}
+
+function addTabFunctionality() {
+
+    // Add events, attributes and classes for tabs
+    // Assumes markup for tabs exists
+
+    var tabgroups = $(".js-tabgroup"),
+        tablists = $(".js-tablist"),
+        tabtitles = $(".js-tabtitle"),
+        tabs = $(".js-tab"),
+        tabpanels = $(".js-tabpanel");
+
+    tablists.attr("role", "tablist");
+    tablists.attr("aria-orientation", "horizontal");
+
+    tabs.attr("role", "tab");
+
+    tabpanels.attr("role", "tabpanel");
+
+    // Set up click functionality
+    $(".js-tab").on("click.makeTabgroupFunctionality", function () {
+        var clickedTab = $(this),
+            clickedTabpanel = $("#" + clickedTab.attr("aria-controls")),
+
+            tabgroup = clickedTab.closest(".js-tabgroup"),
+            tabs = tabgroup.find(".js-tab"),
+            tabpanels = tabgroup.find(".js-tabpanel"),
+
+            otherTabs = tabs.not(clickedTab),
+            otherTabpanels = tabpanels.not(clickedTabpanel);
+
+        clickedTab.attr("aria-selected", "true");
+        clickedTab.closest(".js-tabtitle").addClass("selected");
+
+        otherTabs.attr("aria-selected", "false");
+        otherTabs.closest(".js-tabtitle").removeClass("selected");
+
+        clickedTabpanel.addClass("selected");
+        otherTabpanels.removeClass("selected");
+    });
+
+    // Set up the keyboard nav
+    $(".js-tablist").on("keydown.makeTabgroupFunctionality", function (e) {
+
+        // Left arrow and up arrow select the previous tab
+        if (e.keyCode == 37 || e.keyCode == 38) {
+            $(".js-tab:focus").closest(".js-tabtitle").prev().find(".js-tab").click().focus();
+            e.preventDefault();
+        }
+
+        // Right arrow and down arrow select the next tab
+        if (e.keyCode == 39 || e.keyCode == 40) {
+            $(".js-tab:focus").closest(".js-tabtitle").next().find(".js-tab").click().focus();
+            e.preventDefault();
+        }
+
+    });
+};
+
+function tabsToExpandableBlocks() {
+    removeTabFunctionality();
+
+    $(".js-tabgroup").each(function () {
+
+        var tabgroup = $(this),
+            tabpanels = tabgroup.find(".js-tabpanel"),
+            tablist = tabgroup.find(".js-tablist");
+
+        tabpanels.each(function () {
+            var tabpanel = $(this),
+                tabtitle = $("#" + tabpanel.attr("aria-labelledby")).closest(".js-tabtitle");
+
+            // Move the expander/tabtitle first inside the expand block
+            tabpanel.prepend(tabtitle);
+        });
+
+        // Delete the tablist element
+        tablist.remove();
+    });
+
+    responsiveExpandableBlocks();
+};
+
+function expandableBlocksToTabs() {
+    responsiveExpandableBlocks();
+
+    $(".js-tabgroup").each(function () {
+
+        var tabgroup = $(this),
+            tabpanels = tabgroup.find($(".js-tabpanel"));
+
+        // Create the tablist element first inside the tabgroup
+        tabgroup.prepend($("<div>", {
+            "class": "js-tablist",
+            "role": "tablist",
+            "aria-orientation": "horizontal"
+        }));
+
+        // Grab the tablist
+        var tablist = tabgroup.find(".js-tablist");
+
+        // Move the tabtitles into the tablist
+        tabpanels.each(function () {
+            var tabtitle = $(this).find(".js-tabtitle");
+
+            // Move the expander/tabtitle into the tablist
+            tablist.append(tabtitle);
+        });
+
+        // Select the first tab in each group
+        var tablist = tabgroup.find(".js-tablist"),
+            firstTabtitle = tablist.find(".js-tabtitle").filter(":first-child"),
+            firstTab = firstTabtitle.find(".js-tab"),
+            firstTabpanelContainer = $("#" + firstTab.attr("aria-controls"));
+
+        firstTabtitle.addClass("selected");
+        firstTab.attr("aria-selected", "true");
+        firstTabpanelContainer.addClass("selected");
+    });
+
+    addTabFunctionality();
+};
+
 
 window.codeTabs = codeTabs;
 
@@ -234,24 +375,7 @@ window.codeTabs = codeTabs;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿//console.log("start - code-system.js");
-
-// "ready" triggers as soon as the dom is in place.  Use this for things
-// that are not affected by a change in layout or window size.
-$(window).on("ready", function () {
-    //console.log('ready - code-system.js');
-});
-
-
-// "load" triggers when all the content on the page has finished loading.
-// Use this for things that need to have their content fully loaded in
-// order to work correctly, e.g. stuff affected by height.
-$(window).on("load", function () {
-    //console.log('load - code-system.js');
-});
-
-
-// "layoutchange" triggers only when the layout changes, as opposed to
+﻿// "layoutchange" triggers only when the layout changes, as opposed to
 // triggering on every resize.  Since the layout also changes on document
 // ready--we're going from no layout to one layout--you don't have to call
 // the function on document ready when you call it here.
@@ -261,24 +385,6 @@ $(window).on("layoutchange", function () {
     codeTabs();
     codeSystemTreeLayout();
 });
-
-// "conditionalresize" does stuff does stuff on debounced resize when the layout is 1-col.
-$(window).on(
-    'conditionalresize',
-    debounce(function () {
-        //console.log("conditionalresize - code-system.js");
-    }, 25)
-);
-
-// "resize orientationchange" triggers every time the browser window resizes
-// or the device's orientation changes. You almost certainly want to put your
-// function call in "layoutchange" or "conditionalresize" and not here.
-$(window).on(
-    "resize orientationchange",
-    debounce(function () {
-        //console.log("resize orientationchange - code-system.js");
-    }, 25)
-);
 
 
 /***/ }),
@@ -300,7 +406,7 @@ $(window).on(
     };
 
     $.fn.resizable = function fnResizable(options) {
-        // jquery-resizable
+        // Adapted from jquery-resizable
         // Version 0.32 - 5/5/2018
         // © 2015-2018 Rick Strahl, West Wind Technologies
         // www.west-wind.com
@@ -476,174 +582,6 @@ $(window).on(
         });
     };
 
-    // $.fn.resetTabs = function () {
-    //     console.log("resetting tabs");
-    //
-    //     var tabgroups = $(this);
-    //
-    //     var tablists = $(".js-tablist"),
-    //         tabtitles = $(".js-tabtitle"),
-    //         tabs = $(".js-tab"),
-    //         tabpanels = $(".js-tabpanel");
-    //
-    //     tablists.removeAttr("role");
-    //     tablists.removeAttr("aria-orientation");
-    //     tablists.off("keydown.makeTabs");
-    //
-    //     tabtitles.removeClass("selected");
-    //
-    //     tabs.removeAttr("role aria-selected");
-    //     tabs.off("click.makeTabs");
-    //
-    //     tabpanels.removeClass("selected");
-    //     tabpanels.removeAttr("role");
-    //
-    //     return this;
-    // };
-
-    $.fn.resetTabgroups = function () {
-        // Starting from a series of tabgroups, make expandable blocks
-
-        var tabgroups = $(this);
-
-        var tablists = $(".js-tablist"),
-            tabtitles = $(".js-tabtitle"),
-            tabs = $(".js-tab"),
-            tabpanels = $(".js-tabpanel");
-
-        tablists.removeAttr("role");
-        tablists.removeAttr("aria-orientation");
-        tablists.off("keydown.makeTabgroups");
-
-        tabtitles.removeClass("selected");
-
-        tabs.removeAttr("role aria-selected");
-        tabs.off("click.makeTabgroups");
-
-        tabpanels.removeClass("selected");
-        tabpanels.removeAttr("role");
-
-        tabgroups = $(".js-tabgroup");
-        tabgroups.each(function () {
-
-            var tabgroup = $(this),
-                tabpanels = tabgroup.find(".js-tabpanel"),
-                tablist = tabgroup.find(".js-tablist");
-
-            // For each expand block
-            tabpanels.each(function () {
-                var tabpanel = $(this),
-                    tabtitle = $("#" + tabpanel.attr("aria-labelledby")).closest(".js-tabtitle");
-
-                // Move the expander/tabtitle first inside the expand block
-                tabpanel.prepend(tabtitle);
-            });
-
-
-            // Delete the tablist element
-            tablist.remove();
-
-        });
-
-        return this;
-    };
-
-    $.fn.makeTabgroups = function () {
-        var tabgroups = $(this);
-
-        tabgroups.resetTabgroups();
-
-        var tabgroups = $(".js-tabgroup"),
-            tablists = $(".js-tablist"),
-            tabtitles = $(".js-tabtitle"),
-            tabs = $(".js-tab"),
-            tabpanels = $(".js-tabpanel");
-
-        tablists.attr("role", "tablist");
-        tablists.attr("aria-orientation", "horizontal");
-        tabs.attr("role", "tab");
-        tabpanels.attr("role", "tabpanel");
-
-        // Make the clicking functionality
-        tabs.on("click.makeTabgroups", function () {
-            var clickedTab = $(this),
-                clickedTabpanel = $("#" + clickedTab.attr("aria-controls")),
-
-                tabgroup = clickedTab.closest(".js-tabgroup"),
-                tabs = tabgroup.find(".js-tab"),
-                tabpanels = tabgroup.find(".js-tabpanel"),
-
-                otherTabs = tabs.not(clickedTab),
-                otherTabpanels = tabpanels.not(clickedTabpanel);
-
-            clickedTab.attr("aria-selected", "true");
-            clickedTab.closest(".js-tabtitle").addClass("selected");
-
-            otherTabs.attr("aria-selected", "false");
-            otherTabs.closest(".js-tabtitle").removeClass("selected");
-
-            clickedTabpanel.addClass("selected");
-            otherTabpanels.removeClass("selected");
-        });
-
-        // Set up the keyboard nav
-        tablists.on("keydown.makeTabgroups", function (e) {
-
-            // Left arrow and up arrow select the previous tab
-            if (e.keyCode == 37 || e.keyCode == 38) {
-                $(".js-tab:focus").closest(".js-tabtitle").prev().find(".js-tab").click().focus();
-                e.preventDefault();
-            }
-
-            // Right arrow and down arrow select the next tab
-            if (e.keyCode == 39 || e.keyCode == 40) {
-                $(".js-tab:focus").closest(".js-tabtitle").next().find(".js-tab").click().focus();
-                e.preventDefault();
-            }
-
-        });
-
-        tabgroups = $(".js-tabgroup");
-
-        tabgroups.each(function () {
-            // Create the tablist element first inside the tabgroup
-            $(this).prepend($("<div>", {
-                "class": "js-tablist",
-                "role": "tablist",
-                "aria-orientation": "horizontal"
-            }));
-
-            var tabgroup = $(this),
-                expandBlocks = tabgroup.find(".js-responsive-expand"),
-                tablist = tabgroup.find(".js-tablist"),
-                tabpanels = tabgroup.find(".js-tabpanel");
-
-            // For each expand block/tab
-            expandBlocks.each(function () {
-                var expandBlock = $(this),
-                    tabpanelExpandable = expandBlock.find(".js-tabpanel"),
-                    tabtitleExpander = expandBlock.find(".js-tabtitle"),
-                    tab = expandBlock.find(".js-tab");
-
-                tab.attr("aria-selected", "false");
-
-                // Move the expander/tabtitle into the tablist
-                tablist.append(tabtitleExpander);
-            });
-
-            // Select the first tab in each group
-            var tablist = tabgroup.find(".js-tablist"),
-                firstTabtitle = tablist.find(".js-tabtitle").filter(":first-child"),
-                firstTab = firstTabtitle.find(".js-tab"),
-                firstTabpanelContainer = $("#" + firstTab.attr("aria-controls"));
-
-            firstTabtitle.addClass("selected");
-            firstTab.attr("aria-selected", "true");
-            firstTabpanelContainer.addClass("selected");
-        });
-
-        return this;
-    };
 
     /*!============================================================
      * Based on
