@@ -1,12 +1,20 @@
 #framework-header {
 
+    .directorate-banner {
+        height: 1.5rem;
+    }
+
+    .directorate-banner, .main-choices {
+        transition: .2s;
+    }
+
     .directorate-logo {
         margin: .75rem 1rem;
         background: url($directorate-logo) no-repeat;
         background-size: contain;
         color: #fff;
-        height: 11px;
-        padding-top: 11px;
+        height: .75rem;
+        padding-top: .75rem;
         width: 150px;
         overflow: hidden;
         display: block;
@@ -29,27 +37,27 @@
             right: 0;
             height: 1px;
         }
-
-        .main-choices {
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: space-between;
-            padding: .75rem 1rem;
-        }
     }
 
     .finnkode-logo {
         height: 0;
-        padding-top: 3rem;
+        padding-top: 2.5rem;
         overflow: hidden;
         background: url($finnkode-logo) center left / contain no-repeat;
         width: 9rem;
         margin-right: 1.5rem;
 
-
         &:focus {
             outline: 2px dashed $blue;
         }
+    }
+
+    .main-choices {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        padding: .75rem 1rem;
+        height: 4rem;
     }
 
     .main-menu {
@@ -58,8 +66,7 @@
         list-style: none;
         font-size: $font-xs;
         font-weight: 600;
-        line-height: 3rem;
-
+        line-height: 2.5rem;
 
         li {
             display: inline-block;
@@ -90,7 +97,7 @@
                 content: "";
                 display: block;
                 position: absolute;
-                height: 3rem;
+                height: 2.5rem;
                 width: 1.25rem;
                 left: -1.5rem;
                 background: left center/1rem no-repeat;
@@ -98,6 +105,7 @@
 
             &:hover, &:focus {
                 background-color: unset;
+
                 &::after {
                     border-bottom-color: $purple;
                 }
@@ -133,11 +141,46 @@
             background-color: $grey;
         }
     }
+
+}
+
+.minimal #framework-header {
+
+    .directorate-banner {
+        height: 0;
+        overflow: hidden;
+    }
+
+    .finnkode-logo {
+        padding-top: 1rem;
+        margin-top: .625rem;
+    }
+
+    .main-choices {
+        padding-top: 0;
+        height: 2.25rem;
+    }
+
+    .main-menu {
+        line-height: unset;
+        margin-top: .75rem;
+        height: 1rem;
+
+        a {
+            &::after {
+                bottom: 0;
+            }
+
+            &::before {
+                height: 1rem;
+            }
+        }
+    }
+
 }
 
 @media only screen and (min-width: $one-to-two-col) {
     #framework-header {
-
         .code-system-menu {
             .category, .category.all {
                 margin-bottom: 1.5rem;
@@ -153,10 +196,13 @@
 
 @media only screen and (min-width: $two-to-three-col) {
     #framework-header {
-        .main-header-content {
-            .main-choices {
-                padding: 1.625rem 1rem;
-            }
+        .main-choices {
+            padding: 1.625rem 1rem;
+            height: auto;
+        }
+
+        .directorate-banner, .main-choices {
+            transition: none;
         }
 
         .finnkode-logo {

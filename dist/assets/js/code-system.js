@@ -190,31 +190,29 @@ window.codeSystemTreeLayout = codeSystemTreeLayout;
 // https://www.deque.com/blog/a11y-support-series-part-1-aria-tab-panel-accessibility/
 
 function codeTabs() {
-    console.log("code tabs")
-
     if ($(".js-tabgroup").length !== 0) {
 
         if (layoutQ().number[1] === 0) {
-            console.log("First load. Default, existing markup is tabs.");
+            //console.log("First load. Default, existing markup is tabs.");
 
             if (layoutQ().number[0] == 1) {
-                console.log("1 col. Removing tab groups, make responsive expanders since it's first load but the HTML has changed.");
+                //console.log("1 col. Removing tab groups, make responsive expanders since it's first load but the HTML has changed.");
                 tabsToExpandableBlocks();
 
             } else {
-                console.log("2+ col. Markup exists. Add functionality to tab groups.");
+                //console.log("2+ col. Markup exists. Add functionality to tab groups.");
                 addTabFunctionality();
             }
 
         } else {
-            console.log("not first load--layout changed");
+            //console.log("not first load--layout changed");
 
             if (layoutQ().number[0] == 1) {
-                console.log("Layout changed to one col. Removing tab groups, make responsive expanders since the HTML changes.");
+                //console.log("Layout changed to one col. Removing tab groups, make responsive expanders since the HTML changes.");
                 tabsToExpandableBlocks();
 
             } else if (layoutQ().number[1] == 1) {
-                console.log("Layout changed, moving from 1-col to 2+ col. Making tab groups, removing responsive expanders.");
+                //console.log("Layout changed, moving from 1-col to 2+ col. Making tab groups, removing responsive expanders.");
                 expandableBlocksToTabs();
             }
         }
@@ -730,11 +728,61 @@ function stickyHeader() {
     var header = $(".js-sticky-header");
 
     if (header.length > 0) {
-        if (layoutQ().number[0] <= 3) {
-            header.addClass("sticky");
+        header.removeClass("minimal");
+        $(".js-code-system-content-container").off("scroll.stickyHeader");
 
-        } else {
-            header.removeClass("sticky");
+        if (layoutQ().number[0] <= 2) {
+
+            var headerHeight = header.height(),
+                scrollQ = {direction: ["down", "down"], changed: false},
+                previousScrollTop = 0,
+                minScroll = 10,
+                currentDirection = "down",
+                previousDirection = "down";
+
+            $(".js-code-system-content-container").on("scroll.stickyHeader", debounce(function () {
+
+                        scrollQ.changed = false;
+
+                        try {
+                            var currentScrollTop = $(this).scrollTop();
+
+                            if (Math.abs(previousScrollTop - currentScrollTop) <= minScroll)
+                                return;
+
+                            if (currentScrollTop > previousScrollTop) {
+                                currentDirection = "down";
+                                header.addClass("minimal");
+                            } else if (currentScrollTop <= previousScrollTop) {
+                                currentDirection = "up";
+                            }
+
+                            previousScrollTop = currentScrollTop;
+                            previousDirection = currentDirection;
+
+                        } catch (e) {
+                            console.log(e);
+                        }
+
+                        if (scrollQ.direction[0] !== currentDirection) {
+                            scrollQ.direction.unshift(currentDirection);
+                        }
+
+                        if (scrollQ.direction.length > 2) {
+                            scrollQ.changed = true;
+                            scrollQ.direction.pop();
+                        }
+
+                        if (scrollQ.changed) {
+                            if (currentDirection == "down") {
+                                header.addClass("minimal");
+                            } else {
+                                header.removeClass("minimal");
+                            }
+                        }
+                    }, 25)
+            );
+
         }
     }
 }

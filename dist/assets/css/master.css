@@ -274,13 +274,21 @@ h1 {
   }
 }
 
+#framework-header .directorate-banner {
+  height: 1.5rem;
+}
+
+#framework-header .directorate-banner, #framework-header .main-choices {
+  transition: .2s;
+}
+
 #framework-header .directorate-logo {
   margin: .75rem 1rem;
   background: url("/assets/images/directorate-logo.svg") no-repeat;
   background-size: contain;
   color: #fff;
-  height: 11px;
-  padding-top: 11px;
+  height: .75rem;
+  padding-top: .75rem;
   width: 150px;
   overflow: hidden;
   display: block;
@@ -303,16 +311,9 @@ h1 {
   height: 1px;
 }
 
-#framework-header .main-header-content .main-choices {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  padding: .75rem 1rem;
-}
-
 #framework-header .finnkode-logo {
   height: 0;
-  padding-top: 3rem;
+  padding-top: 2.5rem;
   overflow: hidden;
   background: url("/assets/images/finnkode-logo.svg") center left/contain no-repeat;
   width: 9rem;
@@ -323,13 +324,21 @@ h1 {
   outline: 2px dashed #0f2d5e;
 }
 
+#framework-header .main-choices {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: .75rem 1rem;
+  height: 4rem;
+}
+
 #framework-header .main-menu {
   margin: 0;
   padding: 0 0 0 1.5rem;
   list-style: none;
   font-size: 0.75rem;
   font-weight: 600;
-  line-height: 3rem;
+  line-height: 2.5rem;
 }
 
 #framework-header .main-menu li {
@@ -362,7 +371,7 @@ h1 {
   content: "";
   display: block;
   position: absolute;
-  height: 3rem;
+  height: 2.5rem;
   width: 1.25rem;
   left: -1.5rem;
   background: left center/1rem no-repeat;
@@ -397,6 +406,35 @@ h1 {
   background-color: #767676;
 }
 
+.minimal #framework-header .directorate-banner {
+  height: 0;
+  overflow: hidden;
+}
+
+.minimal #framework-header .finnkode-logo {
+  padding-top: 1rem;
+  margin-top: .625rem;
+}
+
+.minimal #framework-header .main-choices {
+  padding-top: 0;
+  height: 2.25rem;
+}
+
+.minimal #framework-header .main-menu {
+  line-height: unset;
+  margin-top: .75rem;
+  height: 1rem;
+}
+
+.minimal #framework-header .main-menu a::after {
+  bottom: 0;
+}
+
+.minimal #framework-header .main-menu a::before {
+  height: 1rem;
+}
+
 @media only screen and (min-width: 624px) {
   #framework-header .code-system-menu .category, #framework-header .code-system-menu .category.all {
     margin-bottom: 1.5rem;
@@ -408,8 +446,12 @@ h1 {
 }
 
 @media only screen and (min-width: 960px) {
-  #framework-header .main-header-content .main-choices {
+  #framework-header .main-choices {
     padding: 1.625rem 1rem;
+    height: auto;
+  }
+  #framework-header .directorate-banner, #framework-header .main-choices {
+    transition: none;
   }
   #framework-header .finnkode-logo {
     width: 15rem;
@@ -2019,6 +2061,7 @@ body.code-system .code-system-content .code-list {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+  width: 100%;
 }
 
 .code-card .status-info {
@@ -2243,13 +2286,13 @@ body.code-system .code-system-content .code-list {
     display: grid;
     grid-template-areas: "number status" "name status";
   }
-  .code-card .number {
+  .code-card .title .number {
     grid-area: number;
   }
-  .code-card .name {
+  .code-card .title .name {
     grid-area: name;
   }
-  .code-card .status {
+  .code-card .title .status {
     grid-area: status;
     padding-left: 2em;
     padding-top: .5em;
@@ -2328,8 +2371,12 @@ body.code-system .code-system-content .code-list {
   background-color: #fff;
 }
 
+.code-system-header * {
+  transition: .3s;
+}
+
 .code-system-header .layout-container {
-  padding: 1rem 1rem 1.5rem;
+  padding: .5rem 0;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
@@ -2338,9 +2385,8 @@ body.code-system .code-system-content .code-list {
 
 .code-system-header h1 {
   font-size: 2rem;
-  margin: 0;
-  padding: 0 2rem .25rem 0;
-  line-height: 1;
+  margin: .5rem 1rem;
+  line-height: 1.2;
 }
 
 .code-system-header h1 a {
@@ -2349,8 +2395,8 @@ body.code-system .code-system-content .code-list {
 }
 
 .code-system-header ul {
-  margin: 0;
-  padding: 0 2rem 0 0;
+  margin: .5rem 1rem;
+  padding: 0;
   list-style: none;
 }
 
@@ -2362,74 +2408,44 @@ body.code-system .code-system-content .code-list {
   margin-right: 1rem;
 }
 
-.code-system-header .main-menu a {
-  white-space: nowrap;
-  height: 2rem;
-  line-height: 2rem;
-  color: #0f2d5e;
-  display: block;
-  padding-top: .125rem;
-}
-
 .code-system-header .search-field {
-  flex: 1 0 100%;
-  margin-top: 1rem;
+  flex: 1 0 auto;
+  margin: .5rem 1rem;
+  min-width: 336px;
 }
 
-@media only screen and (min-width: 624px) {
-  .code-system-header .layout-container {
-    padding: 1rem;
-    flex-flow: column wrap;
-    align-content: space-between;
-    justify-content: flex-end;
-    height: 6.875rem;
-  }
-  .code-system-header h1 {
-    flex: 0 0 auto;
-    padding-bottom: .5rem;
-  }
-  .code-system-header ul {
-    flex: 1 1 auto;
-    padding-bottom: 0;
-  }
-  .code-system-header h1, .code-system-header ul {
-    width: 288px;
-  }
-  .code-system-header .search-field {
-    width: 304px;
-    flex: 0 0 auto;
-    margin-bottom: .5rem;
-    margin-top: 0;
-    align-self: flex-end;
-  }
+.minimal .code-system-header .layout-container {
+  flex-wrap: wrap;
+}
+
+.minimal .code-system-header h1 {
+  font-size: 1.5rem;
+}
+
+.minimal .code-system-header ul {
+  display: none;
 }
 
 @media only screen and (min-width: 960px) {
+  .code-system-header * {
+    transition: none;
+  }
   .code-system-header .layout-container {
     flex-flow: row nowrap;
-    height: auto;
     justify-content: flex-start;
-    padding: 1.5rem 1rem;
+    padding: 1.5rem 0;
   }
   .code-system-header h1 {
-    flex: unset;
-    padding-bottom: 0;
-    width: unset;
     font-size: 3.125rem;
   }
-  .code-system-header h1 a {
-    display: table-caption;
-  }
   .code-system-header ul {
-    width: unset;
-    flex: unset;
     flex-grow: 1;
   }
+  .code-system-header li {
+    margin: .25rem 0;
+  }
   .code-system-header .search-field {
-    width: 25rem;
-    margin-bottom: 0;
-    align-self: unset;
-    flex: unset;
+    min-width: 389px;
   }
 }
 

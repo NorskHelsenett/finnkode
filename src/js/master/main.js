@@ -6,7 +6,7 @@
 // Use this for things that need to have their content fully loaded in
 // order to work correctly, e.g. stuff affected by height.
 $(window).on("load", function () {
-    console.log('load - master/master.js');
+    //console.log('load - master/master.js');
     unhideMenu();
     expandableBlocks();
     textSizeExpander();
@@ -18,7 +18,7 @@ $(window).on("load", function () {
 // ready--we're going from no layout to one layout--you don't have to call
 // the function on document ready when you call it here.
 $(window).on("layoutchange", function () {
-    console.log("layoutchange - master/master.js");
+    //console.log("layoutchange - master/master.js");
     responsiveExpandableBlocks();
 });
 

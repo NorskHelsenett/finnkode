@@ -85,6 +85,7 @@
         display: flex;
         flex-flow: row nowrap;
         justify-content: space-between;
+        width: 100%;
     }
 
     .status-info {
@@ -366,7 +367,6 @@
             }
         }
 
-
     }
 }
 
@@ -377,20 +377,20 @@
             font-size: $font-2xl;
             display: grid;
             grid-template-areas: "number status" "name status";
-        }
 
-        .number {
-            grid-area: number;
-        }
+            .number {
+                grid-area: number;
+            }
 
-        .name {
-            grid-area: name;
-        }
+            .name {
+                grid-area: name;
+            }
 
-        .status {
-            grid-area: status;
-            padding-left: 2em;
-            padding-top: .5em;
+            .status {
+                grid-area: status;
+                padding-left: 2em;
+                padding-top: .5em;
+            }
         }
 
         .validity, .description, .notes {

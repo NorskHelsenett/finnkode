@@ -4,8 +4,12 @@
     color: $blue;
     background-color: #fff;
 
+    * {
+        transition: .3s;
+    }
+
     .layout-container {
-        padding: 1rem 1rem 1.5rem;
+        padding: .5rem 0;
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
@@ -14,9 +18,8 @@
 
     h1 {
         font-size: $font-4xl;
-        margin: 0;
-        padding: 0 2rem .25rem 0;
-        line-height: 1;
+        margin: .5rem 1rem;
+        line-height: 1.2;
 
         a {
             text-decoration: none;
@@ -25,8 +28,8 @@
     }
 
     ul {
-        margin: 0;
-        padding: 0 2rem 0 0;
+        margin: .5rem 1rem;
+        padding: 0;
         list-style: none;
     }
 
@@ -38,92 +41,55 @@
         }
     }
 
-    .main-menu {
-        a {
-            white-space: nowrap;
-            height: 2rem;
-            line-height: 2rem;
-            color: $blue;
-            display: block;
-            padding-top: .125rem;
-        }
-    }
-
-
-
     .search-field {
-        flex: 1 0 100%;
-        margin-top: 1rem;
+        flex: 1 0 auto;
+        margin: .5rem 1rem;
+        min-width: 336px;
     }
 }
 
-@media only screen and (min-width: $one-to-two-col) {
-    .code-system-header {
+.minimal .code-system-header {
 
-        .layout-container {
-            padding: 1rem;
-            flex-flow: column wrap;
-            align-content: space-between;
-            justify-content: flex-end;
-            height: 6.875rem;
-        }
+    .layout-container {
+        flex-wrap: wrap;
+    }
 
-        h1 {
-            flex: 0 0 auto;
-            padding-bottom: .5rem;
-        }
+    h1 {
+        font-size: $font-2xl;
+    }
 
-        ul {
-            flex: 1 1 auto;
-            padding-bottom: 0;
-        }
-
-        h1, ul {
-            width: $one-col-content;
-        }
-
-        .search-field {
-            width: $one-col;
-            flex: 0 0 auto;
-            margin-bottom: .5rem;
-            margin-top: 0;
-            align-self: flex-end;
-        }
+    ul {
+        display: none;
     }
 }
 
 @media only screen and (min-width: $two-to-three-col) {
     .code-system-header {
 
+        * {
+            transition: none;
+        }
+
         .layout-container {
             flex-flow: row nowrap;
-            height: auto;
             justify-content: flex-start;
-            padding: 1.5rem 1rem;
+            padding: 1.5rem 0;
         }
 
         h1 {
-            flex: unset;
-            padding-bottom: 0;
-            width: unset;
             font-size: $font-5xl;
-
-            a {
-                display: table-caption;
-            }
         }
 
         ul {
-            width: unset;
-            flex: unset;
             flex-grow: 1;
         }
 
+        li {
+            margin: .25rem 0;
+        }
+
         .search-field {
-            width: 25rem;
-            margin-bottom: 0;
-            align-self: unset;
-            flex: unset;
+            min-width: 389px;
         }
     }
 }
