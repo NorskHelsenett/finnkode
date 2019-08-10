@@ -151,102 +151,131 @@
         border-width: 0 1px;
     }
 
-    .tabtitle {
-        position: relative;
-        transition: .3s;
-
-        &::before {
-            content: "";
-            position: absolute;
-            height: 100%;
-            right: 0;
-            top: 0;
-            width: 2.5rem;
-            background: url($chevron-down-blue) right 1rem center / .85rem no-repeat;
-            transform: scaleY(1);
-            transition: .1s;
-        }
+    .tabpanel {
+        border-top: 1px solid $light-grey;
     }
 
     .tab {
         @include button-reset;
-        display: block;
         color: $blue;
-        width: 100%;
         position: relative;
-        padding: .75rem 2.5rem .75rem 1rem;
-
-        @extend %menu-list-design;
     }
 
-    .tabpanel {
-        border-top: 1px solid $light-grey;
+    .expand {
+        .tabtitle {
+            position: relative;
+            transition: .3s;
 
-        &.expanded {
-            .tabtitle {
-                background-color: $blue;
+            &::before {
+                content: "";
+                position: absolute;
+                height: 100%;
+                right: 0;
+                top: 0;
+                width: 2.5rem;
+                background: url($chevron-down-blue) right 1rem center / .85rem no-repeat;
+                transform: scaleY(1);
+                transition: .1s;
+            }
+        }
 
-                &::before {
-                    background-image: url($chevron-down-white);
-                    transform: scaleY(-1);
-                }
+        .tab {
+            display: block;
+            width: 100%;
+            padding: .75rem 2.5rem .75rem 1rem;
+            @extend %menu-list-design;
+        }
+
+    }
+
+    .expanded .tabtitle, .selected.tabtitle {
+        background-color: $blue;
+
+        .tab {
+            font-weight: 600;
+            color: #fff;
+        }
+    }
+
+    .expanded {
+        .tabtitle {
+            &::before {
+                background-image: url($chevron-down-white);
+                transform: scaleY(-1);
             }
 
             .tab {
-                font-weight: 600;
-                color: #fff;
+                &:hover, &:focus {
+                    background-color: unset;
+                }
+
+                &:focus {
+                    &::before, &::after {
+                        background-color: $blue;
+                    }
+                }
             }
         }
     }
 
     &.expired {
-        .tabtitle {
-            &::before {
-                background-image: url($chevron-down-dark-grey)
-            }
-        }
-
         .tab {
             color: $dark-grey;
+        }
 
-            &:hover, &:focus {
-
+        .expand:not(.expanded) {
+            .tabtitle {
+                &::before {
+                    background-image: url($chevron-down-dark-grey);
+                }
             }
         }
 
-        .tabpanel {
-            &.expanded {
-                .tabtitle {
-                    background-color: $dark-grey;
+        .expanded .tabtitle, .selected.tabtitle {
+            background-color: $dark-grey;
+        }
+
+        .expanded {
+            .tabtitle {
+                .tab {
+                    &:focus {
+                        &::before, &::after {
+                            background-color: $dark-grey;
+                        }
+                    }
                 }
             }
         }
     }
 
-
     &.expiring-soon {
-        .tabtitle {
-            &::before {
-                background-image: url($chevron-down-dark-blue)
-            }
-        }
-
         .tab {
             color: $dark-blue;
-
-            &:hover, &:focus {
-
-            }
         }
 
-        .tabpanel {
-            &.expanded {
-                .tabtitle {
-                    background-color: $dark-blue;
+        .expand:not(.expanded) {
+            .tabtitle {
+                &::before {
+                    background-image: url($chevron-down-dark-blue);
                 }
             }
         }
 
+        .expanded .tabtitle, .selected.tabtitle {
+            background-color: $dark-blue;
+        }
+
+        .expanded {
+            .tabtitle {
+                .tab {
+                    &:focus {
+                        &::before, &::after {
+                            background-color: $dark-blue;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .note-content {
@@ -290,37 +319,53 @@
 @media only screen and (min-width: $one-to-two-col) {
     .code-card {
 
+        .tabpanel:not(.selected) {
+            display: none;
+        }
+
         .tabtitle {
             display: inline-block;
+            margin-right: 1px;
+
+            &:hover {
+                outline: 1px solid $light-grey;
+            }
+
+            .tab {
+                padding: .5em 1em;
+
+                &:focus {
+                    outline: 1px solid $light-grey;
+                }
+            }
 
             &.selected {
-                font-weight: 600;
-                position: relative;
-                outline: 1px solid $light-grey;
-
-                &::after {
-                    content: "";
-                    position: absolute;
-                    bottom: -1px;
-                    left: 0;
-                    right: 0;
-                    border-bottom: 1px solid #fff;
+                &, .tab:focus {
+                    outline: 1px solid $blue;
                 }
             }
         }
 
-        .tab {
-            @include button-reset;
-            padding: .75rem 1rem;
-        }
-
-        .tabpanel {
-            border-top: 1px solid $light-grey;
-
-            &:not(.selected) {
-                display: none;
+        &.expired {
+            .tabtitle {
+                &.selected {
+                    &, .tab:focus {
+                        outline: 1px solid $dark-grey;
+                    }
+                }
             }
         }
+
+        &.expiring-soon {
+            .tabtitle {
+                &.selected {
+                    &, .tab:focus {
+                        outline: 1px solid $dark-blue;
+                    }
+                }
+            }
+        }
+
 
     }
 }

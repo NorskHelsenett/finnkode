@@ -21,26 +21,26 @@
   border: unset;
 }
 
-.code-system-menu .expander, .code-system-menu a, .search-refiners .code-system li a, #search-results .results a, .code-card .tab {
+.code-system-menu .expander, .code-system-menu a, .search-refiners .code-system li a, #search-results .results a, .code-card .expand .tab {
   color: #0f2d5e;
   text-decoration: none;
   position: relative;
   z-index: 2;
   transition: .15s;
   display: block;
-  padding-top: .75em;
-  padding-bottom: .75em;
+  width: 100%;
+  padding: .75rem 1rem;
 }
 
-.code-system-menu .expander:hover, .code-system-menu a:hover, .search-refiners .code-system li a:hover, #search-results .results a:hover, .code-card .tab:hover, .code-system-menu .expander:focus, .code-system-menu a:focus, .search-refiners .code-system li a:focus, #search-results .results a:focus, .code-card .tab:focus {
+.code-system-menu .expander:hover, .code-system-menu a:hover, .search-refiners .code-system li a:hover, #search-results .results a:hover, .code-card .expand .tab:hover, .code-system-menu .expander:focus, .code-system-menu a:focus, .search-refiners .code-system li a:focus, #search-results .results a:focus, .code-card .expand .tab:focus {
   background-color: rgba(153, 238, 178, 0.1);
 }
 
-.code-system-menu .expander:focus, .code-system-menu a:focus, .search-refiners .code-system li a:focus, #search-results .results a:focus, .code-card .tab:focus {
+.code-system-menu .expander:focus, .code-system-menu a:focus, .search-refiners .code-system li a:focus, #search-results .results a:focus, .code-card .expand .tab:focus {
   outline: 0;
 }
 
-.code-system-menu .expander:focus::before, .code-system-menu a:focus::before, .search-refiners .code-system li a:focus::before, #search-results .results a:focus::before, .code-card .tab:focus::before, .code-system-menu .expander:focus::after, .code-system-menu a:focus::after, .search-refiners .code-system li a:focus::after, #search-results .results a:focus::after, .code-card .tab:focus::after {
+.code-system-menu .expander:focus::before, .code-system-menu a:focus::before, .search-refiners .code-system li a:focus::before, #search-results .results a:focus::before, .code-card .expand .tab:focus::before, .code-system-menu .expander:focus::after, .code-system-menu a:focus::after, .search-refiners .code-system li a:focus::after, #search-results .results a:focus::after, .code-card .expand .tab:focus::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -51,11 +51,11 @@
   z-index: 1;
 }
 
-.code-system-menu .expander:focus::before, .code-system-menu a:focus::before, .search-refiners .code-system li a:focus::before, #search-results .results a:focus::before, .code-card .tab:focus::before {
+.code-system-menu .expander:focus::before, .code-system-menu a:focus::before, .search-refiners .code-system li a:focus::before, #search-results .results a:focus::before, .code-card .expand .tab:focus::before {
   top: -1px;
 }
 
-.code-system-menu .expander:focus::after, .code-system-menu a:focus::after, .search-refiners .code-system li a:focus::after, #search-results .results a:focus::after, .code-card .tab:focus::after {
+.code-system-menu .expander:focus::after, .code-system-menu a:focus::after, .search-refiners .code-system li a:focus::after, #search-results .results a:focus::after, .code-card .expand .tab:focus::after {
   bottom: -1px;
 }
 
@@ -2084,12 +2084,32 @@ body.code-system .code-system-content .code-list {
   border-width: 0 1px;
 }
 
-.code-card .tabtitle {
+.code-card .tabpanel {
+  border-top: 1px solid #c0c0c0;
+}
+
+.code-card .tab {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  text-align: left;
+  color: #0f2d5e;
+  position: relative;
+}
+
+.code-card .tab:focus {
+  outline: none;
+}
+
+.code-card .expand .tabtitle {
   position: relative;
   transition: .3s;
 }
 
-.code-card .tabtitle::before {
+.code-card .expand .tabtitle::before {
   content: "";
   position: absolute;
   height: 100%;
@@ -2101,64 +2121,63 @@ body.code-system .code-system-content .code-list {
   transition: .1s;
 }
 
-.code-card .tab {
-  padding: 0;
-  border: none;
-  font: inherit;
-  color: inherit;
-  background-color: transparent;
-  cursor: pointer;
-  text-align: left;
+.code-card .expand .tab {
   display: block;
-  color: #0f2d5e;
   width: 100%;
-  position: relative;
   padding: .75rem 2.5rem .75rem 1rem;
 }
 
-.code-card .tab:focus {
-  outline: none;
-}
-
-.code-card .tabpanel {
-  border-top: 1px solid #c0c0c0;
-}
-
-.code-card .tabpanel.expanded .tabtitle {
+.code-card .expanded .tabtitle, .code-card .selected.tabtitle {
   background-color: #0f2d5e;
 }
 
-.code-card .tabpanel.expanded .tabtitle::before {
-  background-image: url("/assets/images/chevron-down-white.svg");
-  transform: scaleY(-1);
-}
-
-.code-card .tabpanel.expanded .tab {
+.code-card .expanded .tabtitle .tab, .code-card .selected.tabtitle .tab {
   font-weight: 600;
   color: #fff;
 }
 
-.code-card.expired .tabtitle::before {
-  background-image: url("/assets/images/chevron-down-dark-grey.svg");
+.code-card .expanded .tabtitle::before {
+  background-image: url("/assets/images/chevron-down-white.svg");
+  transform: scaleY(-1);
+}
+
+.code-card .expanded .tabtitle .tab:hover, .code-card .expanded .tabtitle .tab:focus {
+  background-color: unset;
+}
+
+.code-card .expanded .tabtitle .tab:focus::before, .code-card .expanded .tabtitle .tab:focus::after {
+  background-color: #0f2d5e;
 }
 
 .code-card.expired .tab {
   color: #5c5c5c;
 }
 
-.code-card.expired .tabpanel.expanded .tabtitle {
+.code-card.expired .expand:not(.expanded) .tabtitle::before {
+  background-image: url("/assets/images/chevron-down-dark-grey.svg");
+}
+
+.code-card.expired .expanded .tabtitle, .code-card.expired .selected.tabtitle {
   background-color: #5c5c5c;
 }
 
-.code-card.expiring-soon .tabtitle::before {
-  background-image: url("/assets/images/chevron-down-dark-blue.svg");
+.code-card.expired .expanded .tabtitle .tab:focus::before, .code-card.expired .expanded .tabtitle .tab:focus::after {
+  background-color: #5c5c5c;
 }
 
 .code-card.expiring-soon .tab {
   color: #3c5969;
 }
 
-.code-card.expiring-soon .tabpanel.expanded .tabtitle {
+.code-card.expiring-soon .expand:not(.expanded) .tabtitle::before {
+  background-image: url("/assets/images/chevron-down-dark-blue.svg");
+}
+
+.code-card.expiring-soon .expanded .tabtitle, .code-card.expiring-soon .selected.tabtitle {
+  background-color: #3c5969;
+}
+
+.code-card.expiring-soon .expanded .tabtitle .tab:focus::before, .code-card.expiring-soon .expanded .tabtitle .tab:focus::after {
   background-color: #3c5969;
 }
 
@@ -2191,40 +2210,30 @@ body.code-system .code-system-content .code-list {
 }
 
 @media only screen and (min-width: 624px) {
-  .code-card .tabtitle {
-    display: inline-block;
-  }
-  .code-card .tabtitle.selected {
-    font-weight: 600;
-    position: relative;
-    outline: 1px solid #c0c0c0;
-  }
-  .code-card .tabtitle.selected::after {
-    content: "";
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    border-bottom: 1px solid #fff;
-  }
-  .code-card .tab {
-    padding: 0;
-    border: none;
-    font: inherit;
-    color: inherit;
-    background-color: transparent;
-    cursor: pointer;
-    text-align: left;
-    padding: .75rem 1rem;
-  }
-  .code-card .tab:focus {
-    outline: none;
-  }
-  .code-card .tabpanel {
-    border-top: 1px solid #c0c0c0;
-  }
   .code-card .tabpanel:not(.selected) {
     display: none;
+  }
+  .code-card .tabtitle {
+    display: inline-block;
+    margin-right: 1px;
+  }
+  .code-card .tabtitle:hover {
+    outline: 1px solid #c0c0c0;
+  }
+  .code-card .tabtitle .tab {
+    padding: .5em 1em;
+  }
+  .code-card .tabtitle .tab:focus {
+    outline: 1px solid #c0c0c0;
+  }
+  .code-card .tabtitle.selected, .code-card .tabtitle.selected .tab:focus {
+    outline: 1px solid #0f2d5e;
+  }
+  .code-card.expired .tabtitle.selected, .code-card.expired .tabtitle.selected .tab:focus {
+    outline: 1px solid #5c5c5c;
+  }
+  .code-card.expiring-soon .tabtitle.selected, .code-card.expiring-soon .tabtitle.selected .tab:focus {
+    outline: 1px solid #3c5969;
   }
 }
 
