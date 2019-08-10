@@ -34,6 +34,44 @@
     }
 }
 
+%menu-list-design {
+    color: $blue;
+    text-decoration: none;
+    position: relative;
+    z-index: 2;
+    transition: .15s;
+    display: block;
+    padding-top: .75em;
+    padding-bottom: .75em;
+
+    &:hover, &:focus {
+        background-color: $light-green;
+    }
+
+    &:focus {
+        outline: 0;
+
+        &::before, &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            height: 2px;
+            left: 0;
+            right: 0;
+            background-color: $grey;
+            z-index: 1;
+        }
+
+        &::before {
+            top: -1px;
+        }
+
+        &::after {
+            bottom: -1px;
+        }
+    }
+}
+
 %box-shadow {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
 }

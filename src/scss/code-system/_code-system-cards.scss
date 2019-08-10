@@ -33,6 +33,23 @@
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
+
+        .number {
+            font-weight: 600;
+            padding-right: 1em;
+        }
+
+        .name {
+            flex: 0 0 100%;
+            order: 3;
+        }
+
+        .status {
+            text-transform: uppercase;
+            order: 2;
+            font-size: $font-m;
+            padding-top: .25rem;
+        }
     }
 
     &.expired {
@@ -41,21 +58,10 @@
         }
     }
 
-    .number {
-        font-weight: 600;
-        padding-right: 1em;
-    }
-
-    .name {
-        flex: 0 0 100%;
-        order: 3;
-    }
-
-    .status {
-        text-transform: uppercase;
-        order: 2;
-        font-size: $font-m;
-        padding-top: .25rem;
+    &.expiring-soon {
+        .title {
+            background-color: $dark-blue;
+        }
     }
 
     .code-details {
@@ -70,6 +76,15 @@
         p + ul {
             margin-top: -.75rem;
         }
+    }
+
+    .nb {
+        background-color: $light-blue;
+        padding: .75em 1rem;
+        color: $blue;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
     }
 
     .status-info {
@@ -136,39 +151,24 @@
         border-width: 0 1px;
     }
 
-    .expand.tabpanel {
-        border-top: 1px solid $light-grey;
+    .tabtitle {
+        position: relative;
+        transition: .3s;
 
-        .tabtitle {
-            position: relative;
-
-            &::before {
-                content: "";
-                position: absolute;
-                height: 100%;
-                right: 0;
-                top: 0;
-                width: 2.5rem;
-                background: url($chevron-down-blue) right 1rem center / .85rem no-repeat;
-                transform: scaleY(1);
-                transition: .1s;
-            }
-        }
-
-        &.expanded {
-            background-color: $lightest-grey;
-
-            .tabtitle {
-                font-weight: 600;
-
-                &::before {
-                    transform: scaleY(-1);
-                }
-            }
+        &::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            right: 0;
+            top: 0;
+            width: 2.5rem;
+            background: url($chevron-down-blue) right 1rem center / .85rem no-repeat;
+            transform: scaleY(1);
+            transition: .1s;
         }
     }
 
-    .expander.tab {
+    .tab {
         @include button-reset;
         display: block;
         color: $blue;
@@ -176,51 +176,77 @@
         position: relative;
         padding: .75rem 2.5rem .75rem 1rem;
 
-        &:hover, &:focus {
-            background-color: $light-green;
-            outline: 0;
-        }
+        @extend %menu-list-design;
+    }
 
-        &:focus {
-            outline: 0;
+    .tabpanel {
+        border-top: 1px solid $light-grey;
 
-            &::before, &::after {
-                content: "";
-                position: absolute;
-                bottom: 0;
-                height: 2px;
-                left: 0;
-                right: 0;
-                background-color: $grey;
-                z-index: 1;
+        &.expanded {
+            .tabtitle {
+                background-color: $blue;
+
+                &::before {
+                    background-image: url($chevron-down-white);
+                    transform: scaleY(-1);
+                }
             }
 
-            &::before {
-                top: -1px;
-            }
-
-            &::after {
-                bottom: -1px;
+            .tab {
+                font-weight: 600;
+                color: #fff;
             }
         }
     }
 
     &.expired {
-
         .tabtitle {
             &::before {
                 background-image: url($chevron-down-dark-grey)
             }
         }
 
-        .expander.tab {
+        .tab {
             color: $dark-grey;
 
             &:hover, &:focus {
-                background-color: $lighter-grey;
-                outline: 0;
+
             }
         }
+
+        .tabpanel {
+            &.expanded {
+                .tabtitle {
+                    background-color: $dark-grey;
+                }
+            }
+        }
+    }
+
+
+    &.expiring-soon {
+        .tabtitle {
+            &::before {
+                background-image: url($chevron-down-dark-blue)
+            }
+        }
+
+        .tab {
+            color: $dark-blue;
+
+            &:hover, &:focus {
+
+            }
+        }
+
+        .tabpanel {
+            &.expanded {
+                .tabtitle {
+                    background-color: $dark-blue;
+                }
+            }
+        }
+
     }
 
     .note-content {
@@ -298,7 +324,6 @@
 
     }
 }
-
 
 @media only screen and (min-width: $two-to-three-col) {
     .code-card {

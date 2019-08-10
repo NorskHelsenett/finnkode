@@ -81,7 +81,6 @@
         }
 
         a {
-            color: $blue;
             display: flex;
             flex-flow: column nowrap;
             text-decoration: none;
@@ -91,32 +90,8 @@
             transition: background-color .2s;
             background: url($chevron-right-grey) right 1rem center / 1rem 2rem no-repeat;
 
-            &:hover, &:focus {
-                background-color: $light-green;
-            }
+            @extend %menu-list-design;
 
-            // The wider lines above and below the focused element
-            &:focus {
-                outline: 0;
-
-                &::before, &::after {
-                    content: "";
-                    position: absolute;
-                    bottom: 0;
-                    height: 2px;
-                    left: 0;
-                    right: 0;
-                    background-color: $grey;
-                }
-
-                &::before {
-                    top: -1px;
-                }
-
-                &::after {
-                    bottom: -1px;
-                }
-            }
         }
 
     }
@@ -226,6 +201,7 @@
 @media only screen and (min-width: $two-to-three-col) {
     #search-results {
         margin-left: 0;
+
         .results-header {
             padding-top: 17px;
             padding-bottom: 13px;
