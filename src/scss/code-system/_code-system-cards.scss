@@ -125,11 +125,21 @@
 
             .download {
                 color: $grey;
+                background-image: url($download-grey);
+
+                &:focus {
+                    background-image: url($download-purple);
+                    color: $purple
+                }
             }
         }
 
         a {
             color: $grey;
+
+            &:focus {
+                color: $purple;
+            }
         }
     }
 
@@ -532,6 +542,14 @@
 
                 .download, a {
                     color: $blue;
+
+                    &:focus {
+                        color: $purple;
+                    }
+                }
+
+                .download {
+                    background-image: url($download-blue);
                 }
             }
         }

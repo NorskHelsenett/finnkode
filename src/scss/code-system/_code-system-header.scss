@@ -73,7 +73,7 @@
         .layout-container {
             flex-flow: row nowrap;
             justify-content: flex-start;
-            padding: 1.5rem 0;
+            padding: 1rem 0;
         }
 
         h1 {
@@ -82,6 +82,8 @@
 
         ul {
             flex-grow: 1;
+            margin-right: 2rem;
+            flex-basis: 33%;
         }
 
         li {
@@ -90,6 +92,7 @@
 
         .search-field {
             min-width: 389px;
+            margin-left: auto;
         }
     }
 }

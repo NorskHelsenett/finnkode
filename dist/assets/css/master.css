@@ -219,7 +219,7 @@ h1 {
   cursor: pointer;
   text-align: left;
   padding-left: 1.5em;
-  background: url("/assets/images/download.svg") left 3px/1em no-repeat;
+  background: url("/assets/images/download-blue.svg") left 0.125em/1em no-repeat;
   color: #0f2d5e;
   font-size: inherit;
   transition: .1s color, .1s background-color;
@@ -231,6 +231,8 @@ h1 {
 
 .download:focus {
   outline: 2px dashed #642461;
+  color: #642461;
+  background-image: url("/assets/images/download-purple.svg");
 }
 
 .download:hover {
@@ -239,7 +241,6 @@ h1 {
 
 .download:active {
   outline: 0;
-  color: #642461;
 }
 
 .expand {
@@ -1434,7 +1435,7 @@ body.search #search-container {
 }
 
 .ui-datepicker a:hover, .ui-datepicker a:focus, .ui-datepicker button:hover, .ui-datepicker button:focus {
-  outline: 2px dashed purple !important;
+  outline: 2px dashed #642461 !important;
 }
 
 .ui-datepicker a:focus:hover, .ui-datepicker button:focus:hover {
@@ -2130,10 +2131,20 @@ body.code-system .code-system-content .code-list {
 
 .code-card .additional-info div .download {
   color: #767676;
+  background-image: url("/assets/images/download-grey.svg");
+}
+
+.code-card .additional-info div .download:focus {
+  background-image: url("/assets/images/download-purple.svg");
+  color: #642461;
 }
 
 .code-card .additional-info a {
   color: #767676;
+}
+
+.code-card .additional-info a:focus {
+  color: #642461;
 }
 
 .code-card .code-details ul, .code-card .notes ul {
@@ -2438,6 +2449,12 @@ body.code-system .code-system-content .code-list {
   .code-card .code-details .additional-info .download, .code-card .code-details .additional-info a {
     color: #0f2d5e;
   }
+  .code-card .code-details .additional-info .download:focus, .code-card .code-details .additional-info a:focus {
+    color: #642461;
+  }
+  .code-card .code-details .additional-info .download {
+    background-image: url("/assets/images/download-blue.svg");
+  }
 }
 
 @media all and (-ms-high-contrast: none) {
@@ -2535,19 +2552,22 @@ body.code-system .code-system-content .code-list {
   .code-system-header .layout-container {
     flex-flow: row nowrap;
     justify-content: flex-start;
-    padding: 1.5rem 0;
+    padding: 1rem 0;
   }
   .code-system-header h1 {
     font-size: 3.125rem;
   }
   .code-system-header ul {
     flex-grow: 1;
+    margin-right: 2rem;
+    flex-basis: 33%;
   }
   .code-system-header li {
     margin: .25rem 0;
   }
   .code-system-header .search-field {
     min-width: 389px;
+    margin-left: auto;
   }
 }
 

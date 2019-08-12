@@ -123,13 +123,15 @@ h1 {
 .download {
     @include button-reset;
     padding-left: 1.5em;
-    background: url($download) left 3px / 1em no-repeat;
+    background: url($download-blue) left .125em / 1em no-repeat;
     color: $blue;
     font-size: inherit;
     transition: .1s color, .1s background-color;
 
     &:focus {
         outline: 2px dashed $purple;
+        color: $purple;
+        background-image: url($download-purple);
     }
 
     &:hover {
@@ -138,7 +140,6 @@ h1 {
 
     &:active {
         outline: 0;
-        color: $purple;
     }
 }
 
