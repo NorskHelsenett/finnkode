@@ -134,7 +134,7 @@ a {
   transition: .1s color, .1s background-color;
   text-decoration: underline;
   text-decoration-skip-ink: auto;
-  color: #642461;
+  color: #0f2d5e;
 }
 
 a:focus {
@@ -143,7 +143,6 @@ a:focus {
 
 a:hover {
   background-color: #eee;
-  color: #0f2d5e;
 }
 
 a:active {
@@ -209,6 +208,38 @@ h1 {
   font-size: 2rem;
   font-weight: normal;
   margin: 1rem 0;
+}
+
+.download {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  text-align: left;
+  padding-left: 1.5em;
+  background: url("/assets/images/download.svg") left 3px/1em no-repeat;
+  color: #0f2d5e;
+  font-size: inherit;
+  transition: .1s color, .1s background-color;
+}
+
+.download:focus {
+  outline: none;
+}
+
+.download:focus {
+  outline: 2px dashed #642461;
+}
+
+.download:hover {
+  background-color: #eee;
+}
+
+.download:active {
+  outline: 0;
+  color: #642461;
 }
 
 .expand {
@@ -1917,7 +1948,7 @@ body.code-system .code-system-content .code-list {
     flex: 0 0 auto;
     width: 40%;
     min-height: 200px;
-    min-width: 152px;
+    min-width: 304px !important;
     overflow: auto;
   }
   body.code-system .code-system-content-container {
@@ -1929,6 +1960,9 @@ body.code-system .code-system-content .code-list {
   }
   body.code-system .code-system-content-container h2 {
     font-size: 2rem;
+  }
+  body.code-system .code-system-content {
+    padding-right: 0;
   }
   body.code-system .expander-splitter {
     flex: 0 0 auto;
@@ -2042,74 +2076,7 @@ body.code-system .code-system-content .code-list {
 
 .code-card .code-details {
   overflow: hidden;
-  padding-bottom: .5rem;
-}
-
-.code-card .code-details ul {
-  list-style-type: disc;
-  margin: 0;
-}
-
-.code-card .code-details p + ul {
-  margin-top: -.75rem;
-}
-
-.code-card .nb {
-  background-color: #bff4ff;
-  padding: .75em 1rem;
-  color: #0f2d5e;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.code-card .status-info {
-  background-color: #bff4ff;
-  color: #0f2d5e;
-  padding: .875rem 1rem;
-  display: flex;
-  justify-content: space-between;
-}
-
-.code-card .status-info strong {
-  order: 2;
-  font-weight: normal;
-  text-transform: uppercase;
-  padding-left: 2em;
-}
-
-.code-card .validity, .code-card .description {
-  margin: 1rem;
-}
-
-.code-card .description, .code-card .notes {
-  font-size: 0.875rem;
-}
-
-.code-card .validity {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  color: #767676;
-  font-size: 0.75rem;
-}
-
-.code-card .validity p {
-  margin: 0 1.5rem 0 0;
-  line-height: 1.2;
-}
-
-.code-card .validity p:last-child {
-  margin-right: 0;
-}
-
-.code-card .validity p span {
-  display: block;
-}
-
-.code-card .validity a {
-  color: #767676;
+  padding-bottom: 1rem;
 }
 
 .code-card .subcodes {
@@ -2120,6 +2087,148 @@ body.code-system .code-system-content .code-list {
 
 .code-card .code-details + .subcodes {
   margin-top: -1rem;
+}
+
+.code-card .nb {
+  background-color: #bff4ff;
+  color: #0f2d5e;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.code-card .additional-info, .code-card .description, .code-card .nb {
+  padding: .75em 1rem;
+}
+
+.code-card .description, .code-card .notes {
+  font-size: 0.875rem;
+}
+
+.code-card .additional-info {
+  font-size: 0.75rem;
+  display: flex;
+  flex-flow: row nowrap;
+  color: #767676;
+  justify-content: flex-start;
+}
+
+.code-card .additional-info div {
+  padding-right: 2rem;
+  line-height: 1.2;
+}
+
+.code-card .additional-info div:last-child {
+  padding-right: 0;
+  margin-left: auto;
+}
+
+.code-card .additional-info div span::after {
+  content: ":";
+}
+
+.code-card .additional-info div .download {
+  color: #767676;
+}
+
+.code-card .additional-info a {
+  color: #767676;
+}
+
+.code-card .code-details ul, .code-card .notes ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.code-card .code-details li, .code-card .notes li {
+  margin-bottom: .5rem;
+}
+
+.code-card .code-details li:last-child, .code-card .notes li:last-child {
+  margin-bottom: 0;
+}
+
+.code-card .code-details p, .code-card .notes p {
+  margin-top: 0;
+}
+
+.code-card .code-details p + ul, .code-card .notes p + ul {
+  margin-top: -.75rem;
+}
+
+.code-card .code-details .link-list, .code-card .notes .link-list {
+  display: inline-block;
+  max-width: 608px;
+}
+
+.code-card .code-details .link-list li, .code-card .notes .link-list li {
+  padding: .5em 1em;
+  margin: 0;
+}
+
+.code-card .code-details .link-list li:nth-child(odd), .code-card .notes .link-list li:nth-child(odd) {
+  background-color: #eee;
+}
+
+.code-card .code-details .link-list li:nth-child(even), .code-card .notes .link-list li:nth-child(even) {
+  background-color: #f7f7f7;
+}
+
+.code-card .code-details .link-list li:hover, .code-card .notes .link-list li:hover {
+  background-color: rgba(153, 238, 178, 0.1);
+}
+
+.code-card .code-details .link-list li a:hover, .code-card .notes .link-list li a:hover {
+  background-color: transparent;
+}
+
+.code-card .code-details table, .code-card .notes table {
+  border-collapse: collapse;
+}
+
+.code-card .code-details table.vertical th, .code-card .notes table.vertical th {
+  padding-right: 1.5em;
+}
+
+.code-card .code-details table.vertical th, .code-card .code-details table.vertical td, .code-card .notes table.vertical th, .code-card .notes table.vertical td {
+  padding-bottom: .5em;
+  vertical-align: top;
+}
+
+.code-card .code-details table.vertical tr:last-child th, .code-card .code-details table.vertical tr:last-child td, .code-card .notes table.vertical tr:last-child th, .code-card .notes table.vertical tr:last-child td {
+  padding-bottom: 0;
+}
+
+.code-card .code-details .horizontal, .code-card .notes .horizontal {
+  margin: 1em 0;
+}
+
+.code-card .code-details .horizontal th, .code-card .code-details .horizontal td, .code-card .notes .horizontal th, .code-card .notes .horizontal td {
+  padding: .5em 1em;
+  vertical-align: top;
+}
+
+.code-card .code-details .horizontal th, .code-card .notes .horizontal th {
+  background-color: #c0c0c0;
+  font-weight: 600;
+}
+
+.code-card .code-details .horizontal tr:nth-child(odd), .code-card .notes .horizontal tr:nth-child(odd) {
+  background-color: #eee;
+}
+
+.code-card .code-details .horizontal tr:nth-child(even), .code-card .notes .horizontal tr:nth-child(even) {
+  background-color: #f7f7f7;
+}
+
+.code-card .code-details .horizontal tr:hover, .code-card .notes .horizontal tr:hover {
+  background-color: rgba(153, 238, 178, 0.1);
+}
+
+.code-card .code-details .horizontal a:hover, .code-card .notes .horizontal a:hover {
+  background-color: transparent;
 }
 
 .code-card .notes {
@@ -2232,26 +2341,6 @@ body.code-system .code-system-content .code-list {
   margin: .5rem 0;
 }
 
-.code-card .list-codes tr {
-  padding: 0 .325rem;
-}
-
-.code-card .list-codes tbody tr:hover {
-  background-color: rgba(153, 238, 178, 0.1);
-}
-
-.code-card .list-codes tbody tr:hover a {
-  color: #642461;
-}
-
-.code-card .list-codes td:first-child {
-  padding-right: 1rem;
-}
-
-.code-card .list-codes th, .code-card .list-codes td {
-  vertical-align: top;
-}
-
 @media only screen and (min-width: 624px) {
   .code-card .tabpanel:not(.selected) {
     display: none;
@@ -2297,44 +2386,57 @@ body.code-system .code-system-content .code-list {
     padding-left: 2em;
     padding-top: .5em;
   }
-  .code-card .validity, .code-card .description, .code-card .notes {
+  .code-card .description, .code-card .notes {
     font-size: 1rem;
   }
 }
 
 @media only screen and (min-width: 1264px) {
-  .code-card h2 {
-    font-size: 3.125rem;
-    letter-spacing: -1px;
-  }
   .code-card .code-details {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
+    align-items: stretch;
   }
-  .code-card .code-details p {
-    margin: 0 0 1rem;
-  }
-  .code-card .code-details .status-info {
+  .code-card .code-details .nb, .code-card .code-details .actions {
     flex: 0 0 100%;
+  }
+  .code-card .code-details .nb {
     order: 1;
   }
-  .code-card .code-details .validity {
-    order: 3;
-    display: block;
-    color: #0f2d5e;
+  .code-card .code-details .description {
+    flex: 1 1 70%;
+    order: 2;
+    padding-right: 2rem;
   }
-  .code-card .code-details .validity span {
+  .code-card .code-details .description > :last-child {
+    margin-bottom: 0;
+  }
+  .code-card .code-details .additional-info {
+    flex: 1 1 15%;
+    order: 3;
+    color: #0f2d5e;
+    font-size: 0.875rem;
+    flex-flow: column nowrap;
+  }
+  .code-card .code-details .additional-info div {
+    display: inline-block;
+    margin-bottom: 1.25rem;
+    margin-right: 0;
+    width: 100%;
+  }
+  .code-card .code-details .additional-info div:last-child {
+    margin-bottom: 0;
+    flex: 0 0 auto;
+    margin-top: auto;
+  }
+  .code-card .code-details .additional-info span {
     display: block;
     font-size: 0.75rem;
     margin-bottom: .25rem;
   }
-  .code-card .code-details .validity a {
+  .code-card .code-details .additional-info .download, .code-card .code-details .additional-info a {
     color: #0f2d5e;
-  }
-  .code-card .code-details .description {
-    order: 2;
-    flex: 1 1 auto;
   }
 }
 

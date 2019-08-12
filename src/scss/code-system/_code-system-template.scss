@@ -222,7 +222,7 @@ body.code-system {
             flex: 0 0 auto;
             width: 40%;
             min-height: 200px;
-            min-width: $one-col / 2;
+            min-width: $one-col!important;
             overflow: auto;
         }
 
@@ -237,6 +237,10 @@ body.code-system {
             h2 {
                 font-size: $font-4xl;
             }
+        }
+
+        .code-system-content {
+            padding-right: 0;
         }
 
         .expander-splitter {

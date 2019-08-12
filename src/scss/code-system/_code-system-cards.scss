@@ -1,4 +1,6 @@
 .code-card {
+
+    // General layout ------------------------------------
     padding-top: 1rem;
     position: relative;
     z-index: 2;
@@ -66,75 +68,7 @@
 
     .code-details {
         overflow: hidden;
-        padding-bottom: .5rem;
-
-        ul {
-            list-style-type: disc;
-            margin: 0;
-        }
-
-        p + ul {
-            margin-top: -.75rem;
-        }
-    }
-
-    .nb {
-        background-color: $light-blue;
-        padding: .75em 1rem;
-        color: $blue;
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    .status-info {
-        background-color: $light-blue;
-        color: $blue;
-        padding: .875rem 1rem;
-        display: flex;
-        justify-content: space-between;
-
-        strong {
-            order: 2;
-            font-weight: normal;
-            text-transform: uppercase;
-            padding-left: 2em;
-        }
-    }
-
-    .validity, .description {
-        margin: 1rem;
-    }
-
-    .description, .notes {
-        font-size: $font-s;
-    }
-
-    .validity {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
-        color: $grey;
-        font-size: $font-xs;
-
-        p {
-            margin: 0 1.5rem 0 0;
-            line-height: 1.2;
-
-            &:last-child {
-                margin-right: 0;
-            }
-
-            span {
-                display: block;
-            }
-        }
-
-        a {
-            color: $grey;
-        }
-
+        padding-bottom: 1rem;
     }
 
     .subcodes {
@@ -146,6 +80,178 @@
     .code-details + .subcodes {
         margin-top: -1rem;
     }
+
+
+    // Card layout -------------------------------
+
+    .nb {
+        background-color: $light-blue;
+        color: $blue;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .additional-info, .description, .nb {
+        padding: .75em 1rem;
+    }
+
+    .description, .notes {
+        font-size: $font-s;
+    }
+
+    .additional-info {
+        font-size: $font-xs;
+        display: flex;
+        flex-flow: row nowrap;
+        color: $grey;
+        justify-content: flex-start;
+
+        div {
+            padding-right: 2rem;
+            line-height: 1.2;
+
+            &:last-child {
+                padding-right: 0;
+                margin-left: auto;
+            }
+
+            span {
+                &::after {
+                    content: ":"
+                }
+            }
+
+            .download {
+                color: $grey;
+            }
+        }
+
+        a {
+            color: $grey;
+        }
+    }
+
+
+    // Content inside description/tab --------------------------------------
+
+    .code-details, .notes {
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: .5rem;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        p {
+            margin-top: 0;
+        }
+
+        p + ul {
+            margin-top: -.75rem;
+        }
+
+        .link-list {
+            display: inline-block;
+            max-width: $two-col;
+
+            li {
+                padding: .5em 1em;
+                margin: 0;
+
+
+                &:nth-child(odd) {
+                    background-color: $lighter-grey;
+                }
+
+                &:nth-child(even) {
+                    background-color: $lightest-grey;
+                }
+
+                &:hover {
+                    background-color: $light-green;
+                }
+
+                a {
+                    &:hover {
+                        background-color: transparent;
+                    }
+                }
+
+
+            }
+
+
+        }
+
+        table {
+            border-collapse: collapse;
+
+            &.vertical {
+                th {
+                    padding-right: 1.5em;
+                }
+
+                th, td {
+                    padding-bottom: .5em;
+                    vertical-align: top;
+                }
+
+                tr:last-child {
+                    th, td {
+                        padding-bottom: 0;
+                    }
+                }
+            }
+
+        }
+
+        .horizontal {
+            margin: 1em 0;
+
+            th, td {
+                padding: .5em 1em;
+                vertical-align: top;
+            }
+
+            th {
+                background-color: $light-grey;
+                font-weight: 600;
+            }
+
+            tr {
+                &:nth-child(odd) {
+                    background-color: $lighter-grey;
+                }
+
+                &:nth-child(even) {
+                    background-color: $lightest-grey;
+                }
+
+                &:hover {
+                    background-color: $light-green;
+                }
+            }
+
+            a {
+                &:hover {
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+
+
+    // Tab/expander setup ----------------------------
 
     .notes {
         border: 1px solid $light-grey;
@@ -286,35 +392,6 @@
             margin: .5rem 0;
         }
     }
-
-    .list-codes {
-        tr {
-            padding: 0 .325rem;
-        }
-
-        tbody {
-            tr {
-                &:hover {
-                    background-color: $light-green;
-
-                    a {
-                        color: $purple;
-                    }
-                }
-            }
-        }
-
-        td:first-child {
-            padding-right: 1rem;
-        }
-
-        th, td {
-            vertical-align: top;
-        }
-
-
-    }
-
 }
 
 @media only screen and (min-width: $one-to-two-col) {
@@ -366,13 +443,11 @@
                 }
             }
         }
-
     }
 }
 
 @media only screen and (min-width: $two-to-three-col) {
     .code-card {
-
         .title {
             font-size: $font-2xl;
             display: grid;
@@ -393,7 +468,7 @@
             }
         }
 
-        .validity, .description, .notes {
+        .description, .notes {
             font-size: $font-m;
         }
     }
@@ -401,30 +476,53 @@
 
 @media only screen and (min-width: $three-to-four-col) {
     .code-card {
-        h2 {
-            font-size: $font-5xl;
-            letter-spacing: -1px;
-        }
-
-
         .code-details {
             display: flex;
             flex-flow: row wrap;
             justify-content: space-between;
+            align-items: stretch;
 
-            p {
-                margin: 0 0 1rem;
-            }
-
-            .status-info {
+            .nb, .actions {
                 flex: 0 0 100%;
-                order: 1;
             }
 
-            .validity {
+            .nb {
+                order: 1; // Always first
+            }
+
+            .additional-info, .description {
+            }
+
+            .description {
+                flex: 1 1 70%;
+                order: 2;
+                padding-right: 2rem;
+
+                > :last-child {
+                    margin-bottom: 0;
+                }
+            }
+
+            .additional-info {
+                flex: 1 1 15%;
                 order: 3;
-                display: block;
+
                 color: $blue;
+                font-size: $font-s;
+                flex-flow: column nowrap;
+
+                div {
+                    display: inline-block;
+                    margin-bottom: 1.25rem;
+                    margin-right: 0;
+                    width: 100%;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                        flex: 0 0 auto;
+                        margin-top: auto;
+                    }
+                }
 
                 span {
                     display: block;
@@ -432,17 +530,10 @@
                     margin-bottom: .25rem;
                 }
 
-                a {
+                .download, a {
                     color: $blue;
                 }
             }
-
-            .description {
-                order: 2;
-                flex: 1 1 auto;
-            }
-
-
         }
     }
 }

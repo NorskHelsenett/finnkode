@@ -38,7 +38,7 @@ a {
     transition: .1s color, .1s background-color;
     text-decoration: underline;
     text-decoration-skip-ink: auto;
-    color: $purple;
+    color: $blue;
 
     &:focus {
         outline: 2px dashed $purple;
@@ -46,7 +46,6 @@ a {
 
     &:hover {
         background-color: $lighter-grey;
-        color: $blue;
     }
 
     &:active {
@@ -119,6 +118,28 @@ h1 {
     font-size: $font-4xl;
     font-weight: normal;
     margin: 1rem 0;
+}
+
+.download {
+    @include button-reset;
+    padding-left: 1.5em;
+    background: url($download) left 3px / 1em no-repeat;
+    color: $blue;
+    font-size: inherit;
+    transition: .1s color, .1s background-color;
+
+    &:focus {
+        outline: 2px dashed $purple;
+    }
+
+    &:hover {
+        background-color: $lighter-grey;
+    }
+
+    &:active {
+        outline: 0;
+        color: $purple;
+    }
 }
 
 

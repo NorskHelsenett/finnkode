@@ -222,9 +222,6 @@
             if ($(targetEl).length) {
 
                 selectNavItem(this);
-
-                console.log($(targetEl));
-
                 $(targetEl).fadeOut(0).fadeIn(400);
             }
         }
