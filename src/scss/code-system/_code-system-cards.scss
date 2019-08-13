@@ -68,7 +68,6 @@
 
     .code-details {
         overflow: hidden;
-        padding-bottom: 1rem;
     }
 
     .subcodes {
@@ -97,6 +96,10 @@
         padding: .75em 1rem;
     }
 
+    .description {
+        padding: .25rem 1rem;
+    }
+
     .description, .notes {
         font-size: $font-s;
     }
@@ -114,7 +117,10 @@
 
             &:last-child {
                 padding-right: 0;
-                margin-left: auto;
+
+                &.actions {
+                    margin-left: auto;
+                }
             }
 
             span {
@@ -149,30 +155,19 @@
     .code-details, .notes {
 
         ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
+            list-style-type: square;
+            margin: 1rem 0;
         }
 
         li {
-            margin-bottom: .5rem;
-
-            &:last-child {
-                margin-bottom: 0;
-            }
-        }
-
-        p {
-            margin-top: 0;
-        }
-
-        p + ul {
-            margin-top: -.75rem;
+            margin: .325rem 0;
         }
 
         .link-list {
             display: inline-block;
             max-width: $two-col;
+            list-style: none;
+            padding: 0;
 
             li {
                 padding: .5em 1em;
@@ -196,15 +191,12 @@
                         background-color: transparent;
                     }
                 }
-
-
             }
-
-
         }
 
         table {
             border-collapse: collapse;
+            margin: 1rem 0;
 
             &.vertical {
                 th {
@@ -226,7 +218,6 @@
         }
 
         .horizontal {
-            margin: 1em 0;
 
             th, td {
                 padding: .5em 1em;
@@ -255,6 +246,12 @@
             a {
                 &:hover {
                     background-color: transparent;
+                }
+            }
+
+            tr:last-child {
+                td {
+                    padding-bottom: 0;
                 }
             }
         }
@@ -407,6 +404,10 @@
 @media only screen and (min-width: $one-to-two-col) {
     .code-card {
 
+        .notes {
+            padding-top: 1rem;
+        }
+
         .tabpanel:not(.selected) {
             display: none;
         }
@@ -492,15 +493,9 @@
             justify-content: space-between;
             align-items: stretch;
 
-            .nb, .actions {
-                flex: 0 0 100%;
-            }
-
             .nb {
-                order: 1; // Always first
-            }
-
-            .additional-info, .description {
+                flex: 0 0 100%;
+                order: 1;
             }
 
             .description {
@@ -529,8 +524,11 @@
 
                     &:last-child {
                         margin-bottom: 0;
-                        flex: 0 0 auto;
-                        margin-top: auto;
+
+                        &.actions {
+                            flex: 0 0 auto;
+                            margin-top: auto;
+                        }
                     }
                 }
 
