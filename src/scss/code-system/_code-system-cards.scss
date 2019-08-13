@@ -27,7 +27,7 @@
         }
     }
 
-    .title {
+    div.title {
         font-size: $font-xl;
         background-color: $blue;
         padding: .75rem 1rem;
@@ -55,13 +55,13 @@
     }
 
     &.expired {
-        .title {
+        div.title {
             background-color: $dark-grey;
         }
     }
 
     &.expiring-soon {
-        .title {
+        div.title {
             background-color: $dark-blue;
         }
     }
@@ -459,7 +459,7 @@
 
 @media only screen and (min-width: $two-to-three-col) {
     .code-card {
-        .title {
+        div.title {
             font-size: $font-2xl;
             display: grid;
             grid-template-areas: "number status" "name status";
@@ -555,7 +555,7 @@
 }
 
 @media all and (-ms-high-contrast: none) {
-    .title {
+    div.title {
         display: -ms-grid;
         -ms-grid-columns: 1fr 100px;
         -ms-grid-rows: 1 auto 1 auto;
