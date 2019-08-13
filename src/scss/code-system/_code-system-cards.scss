@@ -198,6 +198,10 @@
             border-collapse: collapse;
             margin: 1rem 0;
 
+            th {
+                text-align: left;
+            }
+
             &.vertical {
                 th {
                     padding-right: 1.5em;
@@ -505,6 +509,10 @@
 
                 > :last-child {
                     margin-bottom: 0;
+                }
+
+                .message {
+                    margin: 1rem 0;
                 }
             }
 

@@ -123,7 +123,7 @@ h1 {
 .download {
     @include button-reset;
     padding-left: 1.5em;
-    background: url($download-blue) left .125em / 1em no-repeat;
+    background: url($download-blue) left .125em / 1em 1em no-repeat;
     color: $blue;
     font-size: inherit;
     transition: .1s color, .1s background-color;

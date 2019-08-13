@@ -215,6 +215,7 @@ body.code-system {
 
         .panel-container {
             flex-flow: unset;
+            -ms-flex-flow: row;
             xtouch-action: none;
         }
 
