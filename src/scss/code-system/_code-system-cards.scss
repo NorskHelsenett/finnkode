@@ -194,58 +194,44 @@
             }
         }
 
-        table {
-            border-collapse: collapse;
-            margin: 1rem 0;
+        .table-instructions {
+            text-align: right;
+        }
 
-            th {
-                text-align: left;
+        .row-expander {
+            background: url($triangle) left center / 1em 1em no-repeat;
+
+            &.changes {
+                background-image: url($diamond);
             }
+        }
 
-            &.vertical {
-                th {
-                    padding-right: 1.5em;
-                }
+        span.row-expander {
+            padding-left: 1.325em;
+            margin-left: 1em;
+            display: inline-block;
+        }
 
-                th, td {
-                    padding-bottom: .5em;
-                    vertical-align: top;
-                }
+        button.row-expander {
+            @include button-reset;
+            display: block;
+            width: 1.25em;
+            height: 0;
+            padding-top: 1.25em;
+            overflow: hidden;
+            border: 1px dashed transparent;
+            background-position: center center;
 
-                tr:last-child {
-                    th, td {
-                        padding-bottom: 0;
-                    }
-                }
+            &:hover, &:focus, &[aria-expanded="true"] {
+                border-color: $purple;
             }
 
         }
 
-        .horizontal {
+        table {
+            border-collapse: collapse;
+            margin: 1rem 0;
 
-            th, td {
-                padding: .5em 1em;
-                vertical-align: top;
-            }
-
-            th {
-                background-color: $light-grey;
-                font-weight: 600;
-            }
-
-            tr {
-                &:nth-child(odd) {
-                    background-color: $lighter-grey;
-                }
-
-                &:nth-child(even) {
-                    background-color: $lightest-grey;
-                }
-
-                &:hover {
-                    background-color: $light-green;
-                }
-            }
 
             a {
                 &:hover {
@@ -253,12 +239,84 @@
                 }
             }
 
-            tr:last-child {
-                td {
-                    padding-bottom: 0;
+            th {
+                text-align: left;
+                font-weight: 600;
+            }
+
+
+            &.vertical {
+                th {
+                    padding-right: 1.5em;
+                    vertical-align: top;
+                }
+
+                th, td {
+                    padding-bottom: .5em;
+
                 }
             }
+
+            &.horizontal {
+                width: 100%;
+
+                .table-instructions {
+                    text-align: right;
+                }
+
+                th {
+                    vertical-align: bottom;
+                }
+
+                td {
+                    vertical-align: top;
+                }
+
+                table {
+                    margin: .25rem 0;
+
+                    caption {
+                        font-weight: 700;
+                        text-align: left;
+                        padding: .25em;
+                    }
+
+                    th, td {
+                        padding: .25em 1.5em .25em .25em;
+                    }
+
+                    tr:hover {
+                        background-color: $light-green;
+                    }
+                }
+
+                > tbody > tr {
+                    &:nth-child(odd) {
+                        background-color: $lighter-grey;
+                    }
+
+                    &:nth-child(even) {
+                        background-color: $lightest-grey;
+                    }
+
+                    &:hover {
+                        background-color: $light-green;
+                    }
+                }
+
+                > thead > tr > th,
+                > tbody > tr > td {
+                    padding: .5em 1em;
+                }
+
+                > thead > tr > th {
+                    background-color: $light-grey;
+                }
+
+            }
         }
+
+
     }
 
 
