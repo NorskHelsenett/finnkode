@@ -2227,6 +2227,10 @@ body.code-system .code-system-content .code-list {
   background-color: #eee;
 }
 
+.code-card .code-details .row-expander[aria-expanded="true"], .code-card .notes .row-expander[aria-expanded="true"] {
+  background-color: #c0c0c0;
+}
+
 .code-card .code-details table, .code-card .notes table {
   border-collapse: collapse;
   margin: 1rem 0;
@@ -2256,54 +2260,56 @@ body.code-system .code-system-content .code-list {
 
 .code-card .code-details table.horizontal th, .code-card .notes table.horizontal th {
   vertical-align: bottom;
+  background-color: #c0c0c0;
 }
 
 .code-card .code-details table.horizontal td, .code-card .notes table.horizontal td {
   vertical-align: top;
 }
 
-.code-card .code-details table.horizontal td:nth-child(4), .code-card .code-details table.horizontal td:nth-child(5), .code-card .notes table.horizontal td:nth-child(4), .code-card .notes table.horizontal td:nth-child(5) {
+.code-card .code-details table.horizontal th, .code-card .code-details table.horizontal td, .code-card .notes table.horizontal th, .code-card .notes table.horizontal td {
+  padding: .5em 1em;
+}
+
+.code-card .code-details table.horizontal > tbody > tr:not(.row-expandable), .code-card .notes table.horizontal > tbody > tr:not(.row-expandable) {
+  border-top: 1px solid #c0c0c0;
+}
+
+.code-card .code-details table.row-expandables > tr > td:nth-child(4), .code-card .code-details table.row-expandables > tr > td:nth-child(5), .code-card .notes table.row-expandables > tr > td:nth-child(4), .code-card .notes table.row-expandables > tr > td:nth-child(5) {
   text-align: center;
 }
 
-.code-card .code-details table.horizontal table, .code-card .notes table.horizontal table {
+.code-card .code-details.simple, .code-card .notes.simple {
   margin: .25rem 0;
 }
 
-.code-card .code-details table.horizontal table caption, .code-card .notes table.horizontal table caption {
+.code-card .code-details.simple caption, .code-card .notes.simple caption {
   font-weight: 700;
   text-align: left;
   padding: .25em;
 }
 
-.code-card .code-details table.horizontal table th, .code-card .code-details table.horizontal table td, .code-card .notes table.horizontal table th, .code-card .notes table.horizontal table td {
+.code-card .code-details.simple th, .code-card .code-details.simple td, .code-card .notes.simple th, .code-card .notes.simple td {
   padding: .25em 1.5em .25em .25em;
 }
 
-.code-card .code-details table.horizontal table tr:hover, .code-card .notes table.horizontal table tr:hover {
-  background-color: rgba(153, 238, 178, 0.1);
+.code-card .code-details tr.row-expandable .simple, .code-card .notes tr.row-expandable .simple {
+  margin-top: 0;
+  width: 100%;
 }
 
-.code-card .code-details table.horizontal > tbody > tr:nth-child(odd), .code-card .notes table.horizontal > tbody > tr:nth-child(odd) {
+.code-card .code-details tr.row-expandable .simple caption, .code-card .notes tr.row-expandable .simple caption {
+  padding-bottom: .75rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.code-card .code-details tr.row-expandable .simple tr:nth-child(odd), .code-card .notes tr.row-expandable .simple tr:nth-child(odd) {
   background-color: #eee;
 }
 
-.code-card .code-details table.horizontal > tbody > tr:nth-child(even), .code-card .notes table.horizontal > tbody > tr:nth-child(even) {
+.code-card .code-details tr.row-expandable .simple tr:nth-child(even), .code-card .notes tr.row-expandable .simple tr:nth-child(even) {
   background-color: #f7f7f7;
-}
-
-.code-card .code-details table.horizontal > tbody > tr:hover, .code-card .notes table.horizontal > tbody > tr:hover {
-  background-color: rgba(153, 238, 178, 0.1);
-}
-
-.code-card .code-details table.horizontal > thead > tr > th,
-.code-card .code-details table.horizontal > tbody > tr > td, .code-card .notes table.horizontal > thead > tr > th,
-.code-card .notes table.horizontal > tbody > tr > td {
-  padding: .5em 1em;
-}
-
-.code-card .code-details table.horizontal > thead > tr > th, .code-card .notes table.horizontal > thead > tr > th {
-  background-color: #c0c0c0;
 }
 
 .code-card .notes {
