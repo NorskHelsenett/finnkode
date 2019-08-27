@@ -384,7 +384,6 @@ $(window).on("layoutchange", function () {
     codeSystemTreeLayout();
 });
 
-
 /***/ }),
 
 /***/ "./src/js/code-system/plugins.js":

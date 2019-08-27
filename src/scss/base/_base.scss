@@ -122,8 +122,8 @@ h1 {
 
 .download {
     @include button-reset;
-    padding-left: 1.5em;
-    background: url($download-blue) left .125em / 1em 1em no-repeat;
+    padding: .25em .25em .25em 1.75em;
+    background: url($download-blue) .25em .325em / 1em 1em no-repeat;
     color: $blue;
     font-size: inherit;
     transition: .1s color, .1s background-color;

@@ -218,8 +218,8 @@ h1 {
   background-color: transparent;
   cursor: pointer;
   text-align: left;
-  padding-left: 1.5em;
-  background: url("/assets/images/download-blue.svg") left 0.125em/1em 1em no-repeat;
+  padding: .25em .25em .25em 1.75em;
+  background: url("/assets/images/download-blue.svg") 0.25em 0.325em/1em 1em no-repeat;
   color: #0f2d5e;
   font-size: inherit;
   transition: .1s color, .1s background-color;
@@ -2194,20 +2194,6 @@ body.code-system .code-system-content .code-list {
 }
 
 .code-card .code-details .row-expander, .code-card .notes .row-expander {
-  background: url("/assets/images/triangle.svg") left center/1em 1em no-repeat;
-}
-
-.code-card .code-details .row-expander.changes, .code-card .notes .row-expander.changes {
-  background-image: url("/assets/images/diamond.svg");
-}
-
-.code-card .code-details span.row-expander, .code-card .notes span.row-expander {
-  padding-left: 1.325em;
-  margin-left: 1em;
-  display: inline-block;
-}
-
-.code-card .code-details button.row-expander, .code-card .notes button.row-expander {
   padding: 0;
   border: none;
   font: inherit;
@@ -2215,21 +2201,30 @@ body.code-system .code-system-content .code-list {
   background-color: transparent;
   cursor: pointer;
   text-align: left;
+  background: url("/assets/images/mappings.svg") center center/1em 1em no-repeat;
   display: block;
-  width: 1.25em;
+  margin: 0 auto;
+  width: 1.5em;
   height: 0;
-  padding-top: 1.25em;
+  padding-top: 1.5em;
   overflow: hidden;
   border: 1px dashed transparent;
-  background-position: center center;
 }
 
-.code-card .code-details button.row-expander:focus, .code-card .notes button.row-expander:focus {
+.code-card .code-details .row-expander:focus, .code-card .notes .row-expander:focus {
   outline: none;
 }
 
-.code-card .code-details button.row-expander:hover, .code-card .code-details button.row-expander:focus, .code-card .code-details button.row-expander[aria-expanded="true"], .code-card .notes button.row-expander:hover, .code-card .notes button.row-expander:focus, .code-card .notes button.row-expander[aria-expanded="true"] {
-  border-color: #642461;
+.code-card .code-details .row-expander.changes, .code-card .notes .row-expander.changes {
+  background-image: url("/assets/images/history.svg");
+}
+
+.code-card .code-details .row-expander:focus, .code-card .notes .row-expander:focus {
+  outline: 2px dashed #642461;
+}
+
+.code-card .code-details .row-expander:hover, .code-card .notes .row-expander:hover {
+  background-color: #eee;
 }
 
 .code-card .code-details table, .code-card .notes table {
@@ -2259,16 +2254,16 @@ body.code-system .code-system-content .code-list {
   width: 100%;
 }
 
-.code-card .code-details table.horizontal .table-instructions, .code-card .notes table.horizontal .table-instructions {
-  text-align: right;
-}
-
 .code-card .code-details table.horizontal th, .code-card .notes table.horizontal th {
   vertical-align: bottom;
 }
 
 .code-card .code-details table.horizontal td, .code-card .notes table.horizontal td {
   vertical-align: top;
+}
+
+.code-card .code-details table.horizontal td:nth-child(4), .code-card .code-details table.horizontal td:nth-child(5), .code-card .notes table.horizontal td:nth-child(4), .code-card .notes table.horizontal td:nth-child(5) {
+  text-align: center;
 }
 
 .code-card .code-details table.horizontal table, .code-card .notes table.horizontal table {
