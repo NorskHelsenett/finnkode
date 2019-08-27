@@ -145,12 +145,16 @@
                 <span>Administrative kodeverk</span>
             </a>
         </h1>
-        <!-- Non-breaking hyphen -->
-
+        <label class="checkbox-and-label expired-codes">
+            <input type="checkbox">
+            <span>Vis utgåtte koder</span>
+        </label>
         <ul>
             <li><a href="">Kodeveiledning</a></li>
             <li><a href="">Filarkiv</a></li>
         </ul>
+
+
 
         <form action="https://url-to-search.finnkode.no/code-system-search" method="get" role="search" class="search-field">
             <input autofocus name="search" aria-label="Søk i ICD-10" type="search" class="search-input" placeholder="f.eks. kreft, bevissthetssilstand, fødsel...">
@@ -1084,8 +1088,8 @@
         <th>Kodeverdi</th>
         <th>Kodetekst</th>
         <th>Forklaring</th>
-        <th>Endringer</th>
         <th>Mappinger</th>
+        <th>Endringer</th>
     </tr>
     </thead>
     <tbody>
@@ -1123,7 +1127,7 @@
         <td>Erstatter referert forskrivning (doseendring)</td>
         <td>Her ser du et eksempel av hvordan design og kode skal se ut når mappinger eller endringer er ekspandert.</td>
         <td>
-            <button title="Vis mappinger" class="row-expander mappings" aria-expanded="true" aria-controls="mappings-L1">Vis mappinger for kodeverdi L1</button>
+            <button title="Vis mappinger" class="row-expander mappings" aria-expanded="true" aria-controls="mappings-L1">Skjul mappinger for kodeverdi L1</button>
         </td>
         <td>
             <button title="Vis endringer" class="row-expander changes">Vis endringer for kodeverdi L1</button>

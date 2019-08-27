@@ -8,6 +8,7 @@
         transition: .3s;
     }
 
+
     .layout-container {
         padding: .5rem 0;
         display: flex;
@@ -28,8 +29,8 @@
     }
 
     ul {
-        margin: .5rem 1rem;
-        padding: 0;
+        margin: .5rem 1rem .5rem auto;
+        padding: 0 0 0 1rem;
         list-style: none;
     }
 
@@ -39,6 +40,11 @@
         &:first-child {
             margin-right: 1rem;
         }
+    }
+
+    .expired-codes {
+        margin: .5rem 1rem;
+        white-space: nowrap;
     }
 
     .search-field {
@@ -55,7 +61,7 @@
     }
 
     h1 {
-        font-size: $font-2xl;
+        font-size: $font-3xl;
     }
 
     ul {
