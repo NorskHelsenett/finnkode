@@ -215,6 +215,7 @@ body.code-system {
 
         .panel-container {
             flex-flow: unset;
+            -ms-flex-flow: row;
             xtouch-action: none;
         }
 
@@ -222,7 +223,7 @@ body.code-system {
             flex: 0 0 auto;
             width: 40%;
             min-height: 200px;
-            min-width: $one-col / 2;
+            min-width: $one-col!important;
             overflow: auto;
         }
 
@@ -230,13 +231,13 @@ body.code-system {
             flex: 1 1 auto;
             min-height: 200px;
 
-            article {
-                padding-top: 1.5rem;
-            }
-
             h2 {
                 font-size: $font-4xl;
             }
+        }
+
+        .code-system-content {
+            padding-right: 0;
         }
 
         .expander-splitter {

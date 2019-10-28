@@ -64,37 +64,7 @@
     }
 
     .expander, a {
-        position: relative;
-        z-index: 2;
-        transition: .1s;
-
-        &:hover, &:focus {
-            background-color: $light-green;
-        }
-
-        // The wider lines above and below the focused element
-        &:focus {
-            outline: 0;
-
-            &::before, &::after {
-                content: "";
-                position: absolute;
-                bottom: 0;
-                height: 2px;
-                left: 0;
-                right: 0;
-                background-color: $grey;
-                z-index: 1;
-            }
-
-            &::before {
-                top: -1px;
-            }
-
-            &::after {
-                bottom: -1px;
-            }
-        }
+        @extend %menu-list-design;
     }
 
     ul {
