@@ -54,7 +54,6 @@ function startAutocomplete() {
         $(ul).find("li:odd").addClass("odd");
     };
     $(".ui-autocomplete").on('blur', function () {
-        console.log('blur from results');
         $("#autocomplete").autocomplete("destroy");
         startAutocomplete();
         $('#autocomplete').attr('aria-expanded', 'false');

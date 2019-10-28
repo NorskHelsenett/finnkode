@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Example code cards - FinnKode</title>
+    <title>Labkodeverk - FinnKode</title>
 
     <script src="/assets/js/jquery/jquery-3.4.1.min.js"></script>
     <script src="/assets/js/jquery/jquery-ui.min.js"></script>
@@ -56,16 +56,16 @@
 <div class="headers js-sticky-header">
     <header id="framework-header">
 
-    <div class="layout-container">
+    <div class="layout-container directorate-banner">
         <a class="directorate-logo" href="/">Direktoratet for e-helse</a>
     </div>
 
     <div class="main-header-content js-expand">
-        <div class="layout-container">
+        <div class="layout-container main-header-top">
 
             <div class="main-choices">
                 <a class="finnkode-logo" href="/site/index.html">FinnKode</a>
-                <nav>
+                <nav aria-label="Hovedmeny">
                     <ul class="main-menu">
                         <li><a class="home" href="/site/index.html">Hjem</a></li>
                         <li>
@@ -75,7 +75,7 @@
                 </nav>
             </div>
 
-            <nav class="code-system-menu js-expandable">
+            <nav class="code-system-menu js-expandable" aria-label="Kodeverk">
 
     <div class="category all">
         <h2>Velg kodeverk</h2>
@@ -142,15 +142,19 @@
 
         <h1>
             <a href="code-system-front-page.html">
-                <span>ICD&#8209;10</span>
+                <span>Labkodeverk</span>
             </a>
         </h1>
-        <!-- Non-breaking hyphen -->
-
+        <label class="checkbox-and-label expired-codes">
+            <input type="checkbox">
+            <span>Vis utgåtte koder</span>
+        </label>
         <ul>
             <li><a href="">Kodeveiledning</a></li>
             <li><a href="">Filarkiv</a></li>
         </ul>
+
+
 
         <form action="https://url-to-search.finnkode.no/code-system-search" method="get" role="search" class="search-field">
             <input autofocus name="search" aria-label="Søk i ICD-10" type="search" class="search-input" placeholder="f.eks. kreft, bevissthetssilstand, fødsel...">
@@ -175,7 +179,7 @@
         </li>
 
         <li role="treeitem" aria-expanded="false">
-            <span><a href="#C00-D48">◎ Kapittel II (C00-D48) Svulster</a></span>
+            <span><a href="#C00-D48">Kapittel II (C00-D48) Svulster</a></span>
             <ul>
                 <li role="none">
                     <a role="treeitem" class="js-scrollto" href=" #C00-C97">
@@ -188,10 +192,10 @@
                     </a>
                 </li>
                 <li role="treeitem" aria-expanded="false">
-                    <span><a href="#C00-C14">◎ (C00-C14) Ondartede svulster på leppe, i munnhule og i svelg</a></span>
+                    <span><a href="#C00-C14">(C00-C14) Ondartede svulster på leppe, i munnhule og i svelg</a></span>
                     <ul role="group">
                         <li role="treeitem" aria-expanded="false">
-                            <span><a href="#C00">◎ C00 Ondartet svulst på leppe (neoplasma malignum labii)</a></span>
+                            <span><a href="#C00">C00 Ondartet svulst på leppe (neoplasma malignum labii)</a></span>
                             <ul role="group">
                                 <li role="none">
                                     <a role="treeitem" class="js-scrollto" href=" #C00_0">
@@ -215,7 +219,7 @@
                                 </li>
                                 <li role="none">
                                     <a role="treeitem" class="js-scrollto" href=" #C00_4">
-                                        ◎ C00.4 Innside av underleppe (facies internus labii inferius oris)
+                                        C00.4 Innside av underleppe (facies internus labii inferius oris)
                                     </a>
                                 </li>
                                 <li role="none">
@@ -403,22 +407,16 @@
     <div class="code-system-content-container js-code-system-content-container">
         <div class="code-system-content">
 
-            <h2>Examples of code statuses</h2>
+            <article id="C00-D48">
+    <div class="codes">
 
-<!--
-<ul>
-    <li><a href="#icd">ICD-10</a></li>
-    <li><a href="#adm">Administrative kodeverk</a></li>
-    <li><a href="#nlk">NLK</a></li>
-</ul>
-<hr>
-<h3 id="icd" style="margin: 2rem 0 0;">ICD-10</h3>
--->
+    <div class="error message">
+    <strong class="title"></strong>
+    <div class="details">Something went wrong.</div>
+</div>
 
-<h3 id="adm" style="margin: 2rem 0 0;">Administrative kodeverk</h3>
-<div class="codes">
     <ul class="code-list">
-        <li class="js-scrollto code-card leaf level-3" id="NPU20200">
+        <li class="code-card leaf level-3" id="NPU20200">
             <div class="title">
                 <div class="number">NPU20200</div>
                 <div class="name">
@@ -426,172 +424,394 @@
                 </div>
             </div>
             <div class="code-details">
-                <div class="validity">
-                    <p class="from"><span>Gyldig fra</span> 02.04.2003</p>
-                    <p class="to"><span>Gyldig til</span> 31.12.2019</p>
-                    <p class="replacement"><span>Erstattet av</span> <a href="">ABD32</a>, <a href="">XYZ63</a></p>
+                <div class="additional-info">
+                    <div><span>Gyldig fra</span> 02.04.2003</div>
+                    <div><span>Gyldig til</span> 31.12.2019</div>
+                    <div><span>Erstattet av</span> <a href="">ABD32</a>, <a href="">XYZ63</a></div>
                 </div>
-
                 <div class="description">
-                    <dl>
-                        <dt>Full definisjon</dt>
-                        <dd>
-                            Ercs(B)—Erythrocyte antigen; arbitrary number (listekode, process)
-                        </dd>
-
-                        <dt>Norsk bruksnavn</dt>
-                        <dd>Erythrocyt(Ag) gruppe, Erc(B)</dd>
-
-                        <dt></dt>
-                        <dd></dd>
-
-                        <dt></dt>
-                        <dd></dd>
-
-                        <dt></dt>
-                        <dd></dd>
-
-                        <dt></dt>
-                        <dd></dd>
-
-                        <dt></dt>
-                        <dd></dd>
-
-                        <dt></dt>
-                        <dd></dd>
-
-                        <dt></dt>
-                        <dd></dd>
-
-                        <dt></dt>
-                        <dd></dd>
-                    </dl>
-
-
+                    <table class="vertical">
+                        <tr>
+                            <th>Full definisjon</th>
+                            <td>Ercs(B)—Erythrocyte antigen; arbitrary number (listekode, process)</td>
+                        </tr>
+                        <tr>
+                            <th>Norsk bruksnavn</th>
+                            <td>Erythrocyt(Ag) gruppe, Erc(B)</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <div class="notes">
-                <div class="js-tabgroup tabgroup" id="group">
+                <div class="js-tabgroup tabgroup" id="NPU20200-group">
 
                     <div class="js-tablist tablist" role="tablist" aria-orientation="horizontal">
                         <div class="js-tabtitle tabtitle selected">
-                            <button class="js-tab tab js-responsive-expander" role="tab" aria-selected="true"
-                                id="apples-tab" aria-controls="apples-content-panel">Apples
+                            <button
+                                class="js-tab tab js-responsive-expander"
+                                role="tab"
+                                aria-selected="true"
+                                id="NPU20200-tab1"
+                                aria-controls="NPU20200-tab1-content-panel">Listekoder
                             </button>
                         </div>
                         <div class="js-tabtitle tabtitle">
-                            <button class="js-tab tab js-responsive-expander" aria-selected="false" id="bananas-tab"
-                                aria-controls="bananas-content-panel">Bananas
+                            <button class="js-tab tab js-responsive-expander"
+                                role="tab"
+                                aria-selected="false"
+                                id="NPU20200-tab2"
+                                aria-controls="NPU20200-tab2-content-panel">Mappinger
                             </button>
                         </div>
                         <div class="js-tabtitle tabtitle">
-                            <button class="js-tab tab js-responsive-expander" role="tab" aria-selected="false"
-                                id="peaches-tab" aria-controls="peaches-content-panel">Peaches
+                            <button
+                                class="js-tab tab js-responsive-expander"
+                                role="tab"
+                                aria-selected="false"
+                                id="NPU20200-tab3"
+                                aria-controls="NPU20200-tab3-content-panel">Endringer
                             </button>
                         </div>
                     </div>
 
-                    <div id="apples-content-panel" class="selected js-tabpanel tabpanel js-responsive-expand" role="tabpanel"
-                        aria-labelledby="apples-tab">
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel selected"
+                        id="NPU20200-tab1-content-panel"
+                        role="tabpanel"
+                        aria-labelledby="NPU20200-tab1">
+
                         <div class="js-responsive-expandable">
                             <div class="note-content">
-                                <h2>Apples</h2>
-                                <p>Apples are amazing!</p>
+                                Tab 1
                             </div>
                         </div>
+
                     </div>
 
-                    <div id="bananas-content-panel" class="js-tabpanel tabpanel js-responsive-expand" role="tabpanel"
-                        aria-labelledby="bananas-tab">
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel"
+                        id="NPU20200-tab2-content-panel"
+                        role="tabpanel"
+                        aria-labelledby="NPU20200-tab2">
+
                         <div class="js-responsive-expandable">
                             <div class="note-content">
-                                <h2>Bananas</h2>
-                                <p>Don't slip on your banana peel! </p>
+                                Tab 2
                             </div>
                         </div>
+
                     </div>
 
-                    <div id="peaches-content-panel" class="js-tabpanel js-responsive-expand tabpanel js-responsive-expand" role="tabpanel" aria-labelledby="peaches-tab">
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel"
+                        id="NPU20200-tab3-content-panel"
+                        role="tabpanel"
+                        aria-labelledby="NPU20200-tab3">
+
                         <div class="js-responsive-expandable">
                             <div class="note-content">
-                                <h2>Peaches</h2>
-                                <p>Peaches keep peaching! </p>
+                                Tab 3
                             </div>
                         </div>
+
                     </div>
 
                 </div>
             </div>
         </li>
-    </ul>
+
+        <li class="code-card leaf level-3 expiring-soon" id="NPU30200">
+            <div class="title">
+                <div class="number">NPU30200</div>
+                <div class="name">
+                    Ercs(B)—Erythrocyt(Ag); arb.num.(list; proc.)
+                </div>
+                <div class="status">Utgår</div>
+            </div>
+            <div class="code-details">
+                <div class="nb">Obs! Denne koden utgår fra 31.12.2019.</div>
+                <div class="additional-info">
+                    <div><span>Gyldig fra</span> 02.04.2003</div>
+                    <div><span>Gyldig til</span> 31.12.2019</div>
+                    <div><span>Erstattet av</span> <a href="">ABD32</a>, <a href="">XYZ63</a></div>
+                </div>
+                <div class="description">
+
+
+                </div>
+            </div>
+            <div class="notes">
+                <div class="js-tabgroup tabgroup" id="NPU30200-group">
+
+                    <div class="js-tablist tablist" role="tablist" aria-orientation="horizontal">
+                        <div class="js-tabtitle tabtitle selected">
+                            <button
+                                class="js-tab tab js-responsive-expander"
+                                role="tab"
+                                aria-selected="true"
+                                id="NPU30200-tab1"
+                                aria-controls="NPU30200-tab1-content-panel">Listekoder
+                            </button>
+                        </div>
+                        <div class="js-tabtitle tabtitle">
+                            <button class="js-tab tab js-responsive-expander"
+                                role="tab"
+                                aria-selected="false"
+                                id="NPU30200-tab2"
+                                aria-controls="NPU30200-tab2-content-panel">Mappinger
+                            </button>
+                        </div>
+                        <div class="js-tabtitle tabtitle">
+                            <button
+                                class="js-tab tab js-responsive-expander"
+                                role="tab"
+                                aria-selected="false"
+                                id="NPU30200-tab3"
+                                aria-controls="NPU30200-tab3-content-panel">Endringer
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel selected"
+                        id="NPU30200-tab1-content-panel"
+                        role="tabpanel"
+                        aria-labelledby="NPU30200-tab1">
+
+                        <div class="js-responsive-expandable">
+                            <div class="note-content">
+                                Tab 1
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel"
+                        id="NPU30200-tab2-content-panel"
+                        role="tabpanel"
+                        aria-labelledby="NPU30200-tab2">
+
+                        <div class="js-responsive-expandable">
+                            <div class="note-content">
+                                Tab 2
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel"
+                        id="NPU30200-tab3-content-panel"
+                        role="tabpanel"
+                        aria-labelledby="NPU30200-tab3">
+
+                        <div class="js-responsive-expandable">
+                            <div class="note-content">
+                                Tab 3
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </li>
+
+        <li class="code-card leaf level-3 expired" id="NPU40200">
+            <div class="title">
+                <div class="number">NPU40200</div>
+                <div class="name">
+                    Ercs(B)—Erythrocyt(Ag); arb.num.(list; proc.)
+                </div>
+                <div class="status">Utgått</div>
+            </div>
+            <div class="code-details">
+                <div class="additional-info">
+                    <div><span>Gyldig fra</span> 02.04.2003</div>
+                    <div><span>Gyldig til</span> 31.12.2019</div>
+                    <div><span>Erstattet av</span> <a href="">ABD32</a>, <a href="">XYZ63</a></div>
+                </div>
+
+                <div class="description">
+
+                </div>
+            </div>
+            <div class="notes">
+                <div class="js-tabgroup tabgroup" id="NPU40200-group">
+
+                    <div class="js-tablist tablist" role="tablist" aria-orientation="horizontal">
+                        <div class="js-tabtitle tabtitle selected">
+                            <button
+                                class="js-tab tab js-responsive-expander"
+                                role="tab"
+                                aria-selected="true"
+                                id="NPU40200-tab1"
+                                aria-controls="NPU40200-tab1-content-panel">Listekoder
+                            </button>
+                        </div>
+                        <div class="js-tabtitle tabtitle">
+                            <button class="js-tab tab js-responsive-expander"
+                                role="tab"
+                                aria-selected="false"
+                                id="NPU40200-tab2"
+                                aria-controls="NPU40200-tab2-content-panel">Mappinger
+                            </button>
+                        </div>
+                        <div class="js-tabtitle tabtitle">
+                            <button
+                                class="js-tab tab js-responsive-expander"
+                                role="tab"
+                                aria-selected="false"
+                                id="NPU40200-tab3"
+                                aria-controls="NPU40200-tab3-content-panel">Endringer
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel selected"
+                        id="NPU40200-tab1-content-panel"
+                        role="tabpanel"
+                        aria-labelledby="NPU40200-tab1">
+
+                        <div class="js-responsive-expandable">
+                            <div class="note-content">
+                                Tab 1
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel"
+                        id="NPU40200-tab2-content-panel"
+                        role="tabpanel"
+                        aria-labelledby="NPU40200-tab2">
+
+                        <div class="js-responsive-expandable">
+                            <div class="note-content">
+                                Tab 2
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel"
+                        id="NPU40200-tab3-content-panel"
+                        role="tabpanel"
+                        aria-labelledby="NPU40200-tab3">
+
+                        <div class="js-responsive-expandable">
+                            <div class="note-content">
+                                Tab 3
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </li>
+
+
+        <li class="code-card leaf level-3" id="NPU20203">
+            <div class="title">
+                <div class="number">NPU20203</div>
+                <div class="name">
+                    Ercs(B)—Erythrocyt(Ag); arb.num.(list; proc.)
+                </div>
+            </div>
+            <div class="code-details">
+                <div class="additional-info">
+                    <div><span>Gyldig fra</span> 02.04.2003</div>
+                    <div><span>Gyldig til</span> 31.12.2019</div>
+                    <div><span>Erstattet av</span> <a href="">ABD32</a>, <a href="">XYZ63</a></div>
+                </div>
+                <div class="description">
+
+                    <div class="warning message">
+    <strong class="title">Here's something you should take into consideration.</strong>
+    <div class="details">Here's what you should do about it.</div>
 </div>
 
-<!--
-                <div class="js-tabgroup tabgroup" id="group1">
-                    <div class="js-tablist tablist">
-
-                        <div class="js-tabtitle tabtitle">
-                            <button class="js-tab tab" aria-selected="true" id="apples-tab1" aria-controls="apples-content-panel1">Apples</button>
-                        </div>
-
-                        <div class="js-tabtitle tabtitle">
-                            <button class="js-tab tab" aria-selected="false" id="bananas-tab1" aria-controls="bananas-content-panel1">Bananas</button>
-                        </div>
-
-                        <div class="js-tabtitle tabtitle">
-                            <button class="js-tab tab" aria-selected="false" id="peaches-tab1" aria-controls="peaches-content-panel1">Peaches</button>
-                        </div>
-
-                    </div>
-                    <div id="apples-content-panel1" class="js-tabpanel tabpanel" aria-labelledby="apples-tab1">
-                        <h2>Apples</h2>
-                        <p>Apples are amazing!</p>
-                    </div>
-                    <div id="bananas-content-panel1" class="js-tabpanel tabpanel" aria-labelledby="bananas-tab1">
-                        <h2>Bananas</h2>
-                        <p>Don't slip on your banana peel! </p>
-                    </div>
-                    <div id="peaches-content-panel1" class="js-tabpanel tabpanel" aria-labelledby="peaches-tab1">
-                        <h2>Peaches</h2>
-                        <p>Peaches keep peaching! </p>
-                    </div>
                 </div>
+            </div>
+            <div class="notes">
+                <div class="js-tabgroup tabgroup" id="NPU20203-group">
 
-                <div class="js-tabgroup tabgroup" id="group2">
-                    <div class="js-tablist tablist">
-
+                    <div class="js-tablist tablist" role="tablist" aria-orientation="horizontal">
+                        <div class="js-tabtitle tabtitle selected">
+                            <button class="js-tab tab js-responsive-expander" role="tab" aria-selected="true"
+                                id="NPU20203-tab1" aria-controls="NPU20203-tab1-content-panel">Tab 1
+                            </button>
+                        </div>
                         <div class="js-tabtitle tabtitle">
-                            <button class="js-tab tab" aria-selected="true" id="apples-tab2" aria-controls="apples-content-panel2">Apples</button>
+                            <button class="js-tab tab js-responsive-expander" role="tab" aria-selected="false" id="NPU20203-tab2"
+                                aria-controls="NPU20203-tab2-content-panel">Tab 2
+                            </button>
+                        </div>
+                        <div class="js-tabtitle tabtitle">
+                            <button class="js-tab tab js-responsive-expander" role="tab" aria-selected="false"
+                                id="NPU20203-tab3" aria-controls="NPU20203-tab3-content-panel">Tab 3
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel selected"
+                        id="NPU20203-tab1-content-panel"
+                        role="tabpanel"
+                        aria-labelledby="NPU20203-tab1">
+
+                        <div class="js-responsive-expandable">
+                            <div class="note-content">
+                                <div class="error message">
+    <strong class="title">Something went wrong.</strong>
+    <div class="details">Here's what you should do about it.</div>
+</div>
+                            </div>
                         </div>
 
-                        <div class="js-tabtitle tabtitle">
-                            <button class="js-tab tab" aria-selected="false" id="bananas-tab2" aria-controls="bananas-content-panel2">Bananas</button>
+                    </div>
+
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel"
+                        id="NPU20203-tab2-content-panel"
+                        role="tabpanel"
+                        aria-labelledby="NPU20203-tab2">
+
+                        <div class="js-responsive-expandable">
+                            <div class="note-content">
+                                Tab 2
+                            </div>
                         </div>
 
-                        <div class="js-tabtitle tabtitle">
-                            <button class="js-tab tab" aria-selected="false" id="peaches-tab2" aria-controls="peaches-content-panel2">Peaches</button>
+                    </div>
+
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel"
+                        id="NPU20203-tab3-content-panel"
+                        role="tabpanel"
+                        aria-labelledby="NPU20203-tab3">
+
+                        <div class="js-responsive-expandable">
+                            <div class="note-content">
+                                Tab 3
+                            </div>
                         </div>
 
                     </div>
-                    <div id="apples-content-panel2" class="js-tabpanel tabpanel" aria-labelledby="apples-tab2">
-                        <h2>Apples</h2>
-                        <p>Apples are amazing!</p>
-                    </div>
-                    <div id="bananas-content-panel2" class="js-tabpanel tabpanel" aria-labelledby="bananas-tab2">
-                        <h2>Bananas</h2>
-                        <p>Don't slip on your banana peel! </p>
-                    </div>
-                    <div id="peaches-content-panel2" class="js-tabpanel tabpanel" aria-labelledby="peaches-tab2">
-                        <h2>Peaches</h2>
-                        <p>Peaches keep peaching! </p>
-                    </div>
+
                 </div>
--->
+            </div>
+        </li>
 
 
-<!--<h3 id="nlk" style="margin: 2rem 0 0;">Administrative kodeverk</h3>-->
-
-
+    </ul>
+</div>
+</article>
 
         </div>
     </div>

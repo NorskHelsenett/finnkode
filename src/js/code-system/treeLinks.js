@@ -7,7 +7,7 @@
 *   Desc:   Tree widget that implements ARIA Authoring Practices
 *           for a tree being used as a file viewer
 */
-import TreeitemLink from './treeitemLinks';
+import TreeitemLink from './treeItemLinks';
 
 /**
  * ARIA Treeview example
