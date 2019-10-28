@@ -4,7 +4,8 @@
 
 {% include framework-header.html %}
 
-<main id="page-content">
+<main id="page-content" tabindex="-1">
+    <h1 class="visuallyhidden">{{page.title}}</h1>
     {{ content }}
 </main>
 

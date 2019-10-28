@@ -36,8 +36,13 @@
     };
 
     $.fn.addExpandability = function () {
+        // console.log("add expandability start");
+
         $(this).each(function () {
             $(this).removeExpandability();
+
+            // console.log("actually adding expandability");
+            // console.log($(this));
 
             var expand = $(this.expand),
                 expander = $(this.expander),
@@ -93,7 +98,13 @@
     };
 
     $.fn.removeExpandability = function () {
+        // console.log("removing expandability start");
+
         $(this).each(function () {
+
+            // console.log("actually removing expandability from");
+            // console.log($(this));
+
             var expand = $(this.expand),
                 expander = $(this.expander),
                 expandable = $(this.expandable);
@@ -113,6 +124,3 @@
     };
 
 })(jQuery);
-
-
-

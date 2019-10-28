@@ -1,0 +1,1265 @@
+<!-- Used for code system pages, both their front page and the page that displays the actual code system content. -->
+<!doctype html>
+<html lang="no">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Example code cards for administrative kodeverk - FinnKode</title>
+
+    <script src="/assets/js/jquery/jquery-3.4.1.min.js"></script>
+    <script src="/assets/js/jquery/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/jquery/jquery-ui.structure.css">
+    <link rel="stylesheet" href="/assets/css/jquery/jquery-ui.theme.css">
+
+    <script src="/assets/js/master.js"></script>
+    <link rel="stylesheet" href="/assets/css/master.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin-ext">
+
+    
+    <!-- Styles to fix the menu jump on page load -->
+    <style class="js-remove-menu-jump">
+        #framework-header .code-system-menu {
+            display: none;
+        }
+
+        #framework-header .code-system-menu.expandable {
+            display: block;
+        }
+
+        @media only screen and (min-width: 39rem) {
+            #framework-header .code-system-menu.expandable {
+                display: flex;
+            }
+        }
+    </style>
+
+    
+
+    
+    <script src="/assets/js/code-system.js"></script>
+    
+
+    
+
+</head>
+
+<body class="code-system ">
+<div id="main-content">
+    <a class="skip-link" href="#page-content">Hopp til innholdet</a>
+
+<!-- ********************************************************************** -->
+
+
+<div class="headers js-sticky-header">
+    <header id="framework-header">
+
+    <div class="layout-container directorate-banner">
+        <a class="directorate-logo" href="/">Direktoratet for e-helse</a>
+    </div>
+
+    <div class="main-header-content js-expand">
+        <div class="layout-container main-header-top">
+
+            <div class="main-choices">
+                <a class="finnkode-logo" href="/site/index.html">FinnKode</a>
+                <nav aria-label="Hovedmeny">
+                    <ul class="main-menu">
+                        <li><a class="home" href="/site/index.html">Hjem</a></li>
+                        <li>
+                            <a role="button" href="#" class="code-systems js-expander">Kodeverk</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <nav class="code-system-menu js-expandable" aria-label="Kodeverk">
+
+    <div class="category all">
+        <h2>Velg kodeverk</h2>
+        <ul>
+            <li><a href="global-search-initial.html">Alle kodeverk</a></li>
+        </ul>
+    </div>
+
+    <div class="category js-responsive-expand">
+        <h2>
+            <span class="js-responsive-expander">
+                Kliniske kodeverk
+            </span>
+        </h2>
+        <div class="js-responsive-expandable">
+            <ul>
+                <li><a href="">ICPC-2</a></li>
+                <li><a href="/site/code-system-front-page.html">ICD-10</a></li>
+                <li><a href="">BUP</a></li>
+                <li><a href="">Prosedyre</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="category js-responsive-expand">
+        <h2>
+            <span class="js-responsive-expander">
+                Lab kodeverk
+            </span>
+        </h2>
+        <div class="js-responsive-expandable">
+            <ul>
+                <li><a href="">Labotatorie</a></li>
+                <li><a href="">NORPAT</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="category js-responsive-expand">
+        <h2>
+            <span class="js-responsive-expander">
+                Andre kodeverk
+            </span>
+        </h2>
+        <div class="js-responsive-expandable">
+            <ul>
+                <li><a href="">SNOMED CT</a></li>
+                <li><a href="">Administrative kodeverk</a></li>
+                <li><a href="">ATC</a></li>
+                <li><a href="">Begrepskatalog</a></li>
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+        </div>
+    </div>
+</header>
+    <header class="code-system-header">
+    <div class="layout-container">
+
+        <h1>
+            <a href="code-system-front-page.html">
+                <span>Administrative kodeverk</span>
+            </a>
+        </h1>
+        <label class="checkbox-and-label expired-codes">
+            <input type="checkbox">
+            <span>Vis utgåtte koder</span>
+        </label>
+        <ul>
+            <li><a href="">Kodeveiledning</a></li>
+            <li><a href="">Filarkiv</a></li>
+        </ul>
+
+
+
+        <form action="https://url-to-search.finnkode.no/code-system-search" method="get" role="search" class="search-field">
+            <input autofocus name="search" aria-label="Søk i ICD-10" type="search" class="search-input" placeholder="f.eks. kreft, bevissthetssilstand, fødsel...">
+            <button class="search-button" type="submit">Søk i ICD-10</button>
+        </form>
+
+    </div>
+</header>
+</div>
+
+<div class="panel-container layout-container js-panel-container">
+
+    <div class="js-tree-expand tree-expand-block">
+
+        <nav class="code-system-tree js-tree-expandable">
+
+    <h2 class="visuallyhidden" id="tree-label">Innholdsfortegnelse</h2>
+
+    <ul role="tree" aria-labelledby="tree-label">
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="#A00-B99">Kapittel I (A00-B99) Visse infeksjonssykdommer og parasittsykdommer</a></span>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="#C00-D48">Kapittel II (C00-D48) Svulster</a></span>
+            <ul>
+                <li role="none">
+                    <a role="treeitem" class="js-scrollto" href=" #C00-C97">
+                        (C00-C97) Ondartede svulster
+                    </a>
+                </li>
+                <li role="none">
+                    <a role="treeitem" class="js-scrollto" href=" #C00-C75">
+                        (C00-C75) Ondartede svulster som er oppgitt eller antatt å være primære på spesifiserte lokalisasjoner, unntatt i lymfoid, hematopoetisk eller beslektet vev
+                    </a>
+                </li>
+                <li role="treeitem" aria-expanded="false">
+                    <span><a href="#C00-C14">(C00-C14) Ondartede svulster på leppe, i munnhule og i svelg</a></span>
+                    <ul role="group">
+                        <li role="treeitem" aria-expanded="false">
+                            <span><a href="#C00">C00 Ondartet svulst på leppe (neoplasma malignum labii)</a></span>
+                            <ul role="group">
+                                <li role="none">
+                                    <a role="treeitem" class="js-scrollto" href=" #C00_0">
+                                        C00.0 Utside av overleppe (facies externus labii superius oris)
+                                    </a>
+                                </li>
+                                <li role="none">
+                                    <a role="treeitem" class="js-scrollto" href=" #C00_1">
+                                        C00.1 Utside av underleppe (facies externus labii inferius oris)
+                                    </a>
+                                </li>
+                                <li role="none">
+                                    <a role="treeitem" class="js-scrollto" href=" #C00_2">
+                                        C00.2 Utside av leppe (facies externus labii), uspesifisert
+                                    </a>
+                                </li>
+                                <li role="none">
+                                    <a role="treeitem" class="js-scrollto" href=" #C00_3">
+                                        C00.3 Innside av overleppe (facies internus labii superius oris)
+                                    </a>
+                                </li>
+                                <li role="none">
+                                    <a role="treeitem" class="js-scrollto" href=" #C00_4">
+                                        C00.4 Innside av underleppe (facies internus labii inferius oris)
+                                    </a>
+                                </li>
+                                <li role="none">
+                                    <a role="treeitem" class="js-scrollto" href=" #C00_5">
+                                        C00.5 Innside av leppe (facies internus labii oris), uspesifisert
+                                    </a>
+                                </li>
+                                <li role="none">
+                                    <a role="treeitem" class="js-scrollto" href=" #C00_6">
+                                        C00.6 Munnvik (commissura labiorum oris)
+                                    </a>
+                                </li>
+                                <li role="none">
+                                    <a role="treeitem" class="js-scrollto" href=" #C00_8">
+                                        C00.8 Overlappende svulst i leppe
+                                    </a>
+                                </li>
+                                <li role="none">
+                                    <a role="treeitem" class="js-scrollto" href=" #C00_9">
+                                        C00.9 Leppe (labium oris), uspesifisert
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li role="none">
+                            <a role="treeitem" class="js-scrollto" href=" #C01">
+                                C01 Ondartet svulst i tungerot (neoplasma malignum radicis linguae)
+                            </a>
+                        </li>
+                        <li role="treeitem" aria-expanded="false">
+                            <span><a href="#C02">C02 Ondartet svulst i andre og uspesifiserte deler av tunge (neoplasma malignum partis alterius et non specificatae linguae)</a></span>
+                            <ul role="group">
+                                <li role="none">
+                                    <a role="treeitem" class="js-scrollto" href=" #C02_0">
+                                        C02.0 Overside av tunge (dorsum linguae)
+                                    </a>
+                                </li>
+                                <li role="none">
+                                    <a role="treeitem" class="js-scrollto" href=" #C02_1">
+                                        C02.1 Tungerand (margo linguae)
+                                    </a>
+                                </li>
+                                <li role="none">
+                                    <a role="treeitem" class="js-scrollto" href=" #C02_2">
+                                        C02.2 Underside av tunge (facies inferius linguae)
+                                    </a>
+                                </li>
+                                <li role="none">
+                                    <a role="treeitem" class="js-scrollto" href=" #C02_3">
+                                        C02.3 Fremre to tredjedeler av tunge, uspesifisert del
+                                    </a>
+                                </li>
+                                <li role="none">
+                                    <a role="treeitem" class="js-scrollto" href=" #C02_4">
+                                        C02.4 Tungemandel (tonsilla linguae)
+                                    </a>
+                                </li>
+                                <li role="none">
+                                    <a role="treeitem" class="js-scrollto" href=" #C02_8">
+                                        C02.8 Overlappende svulst i tunge
+                                    </a>
+                                </li>
+                                <li role="none">
+                                    <a role="treeitem" class="js-scrollto" href=" #C02_9">
+                                        C02.9 Tunge (lingua), uspesifisert
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li role="treeitem" aria-expanded="false">
+                            <span><a href="#C03">C03 Ondartet svulst i tannkjøtt (neoplasma malignum gingivae)</a></span>
+                            <ul role="group">
+                                <li role="none">
+                                    <a role="treeitem" class="js-scrollto" href=" #C03_0">
+                                        C03.0 Tannkjøtt i overkjeve (gingiva superior)
+                                    </a>
+                                </li>
+                                <li role="none">
+                                    <a role="treeitem" class="js-scrollto" href=" #C03_1">
+                                        C03.1 Tannkjøtt i underkjeve (gingiva inferior)
+                                    </a>
+                                </li>
+                                <li role="none">
+                                    <a role="treeitem" class="js-scrollto" href=" #C03_9">
+                                        C03.9 Tannkjøtt (gingiva), uspesifisert
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="#D50-D89">Kapittel III (D50-D89) Sykdommer i blod og bloddannende organer og visse tilstander som angår immunsystemet</a></span>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="#E00-E90">Kapittel IV (E00-E90) Endokrine sykdommer, ernæringssykdommer og metabolske forstyrrelser</a></span>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="#F00-F99">Kapittel V (F00-F99) Psykiske lidelser og atferdsforstyrrelser</a></span>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="">Kapittel VI (G00-G99) Sykdommer i nervesystemet</a></span>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="">Kapittel VII (H00-H59) Sykdommer i øyet og øyets omgivelser</a></span>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="">Kapittel VIII (H60-H95) Sykdommer i øre og ørebensknute (processus mastoideus)</a></span>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="">Kapittel IX (I00-I99) Sykdommer i sirkulasjonssystemet</a></span>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="">Kapittel X (J00-J99) Sykdommer i åndedrettssystemet</a></span>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="">Kapittel XI (K00-K93) Sykdommer i fordøyelsessystemet</a></span>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="">Kapittel XII (L00-L99) Sykdommer i hud og underhud</a></span>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="">Kapittel XIII (M00-M99) Sykdommer i muskel-skjelettsystemet og bindevev</a></span>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="">Kapittel XIV (N00-N99) Sykdommer i urin- og kjønnsorganer</a></span>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="">Kapittel XV (O00-O99) Svangerskap, fødsel og barseltid</a></span>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="">Kapittel XVI (P00-P96) Visse tilstander som oppstår i perinatalperioden</a></span>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="">Kapittel XVII (Q00-Q99) Medfødte misdannelser, deformiteter og kromosomavvik</a></span>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="">Kapittel XVIII (R00-R99) Symptomer, tegn, unormale kliniske funn og laboratoriefunn, ikke klassifisert annet sted</a></span>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="">Kapittel XIX (S00-T98) Skader, forgiftninger og visse andre konsekvenser av ytre årsaker</a></span>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="">Kapittel XX (V0n-Y98) Ytre årsaker til sykdommer, skader og dødsfall</a></span>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="">Kapittel XXI (Z00-Z99) Faktorer som har betydning for helsetilstand og kontakt med helsetjenesten</a></span>
+        </li>
+
+        <li role="treeitem" aria-expanded="false">
+            <span><a href="">Kapittel XXII Koder for spesielle formål (U00-U85)</a></span>
+        </li>
+    </ul>
+
+</nav>
+
+        <div class="expander-splitter js-tree-expander">
+            <div class="splitter-title">Innholdsfortegnelse</div>
+            <div class="splitter-instructions">Trekk for å utvide</div>
+        </div>
+
+    </div>
+
+    <div class="code-system-content-container js-code-system-content-container">
+        <div class="code-system-content">
+
+            <div class="codes">
+    <ul class="code-list administrative">
+
+        <li class="code-card leaf level-3 collection" id="samling1">
+            <div class="title">
+                <div class="number">Samling</div>
+                <div class="name">
+                    EPJ-standard
+                </div>
+            </div>
+            <div class="code-details">
+                <div class="additional-info">
+                    <div><span>Opprettet</span> 01.01.2006</div>
+                    <div><span>Ansvarlig</span> <a href="#">Helsedirektoratet</a></div>
+                    <div class="actions">
+                        <button class="download">Last ned samling</button>
+                    </div>
+                </div>
+                <div class="description">
+                    <p>Kodeverk som benyttes i den generelle EPJ-standarden.</p>
+                </div>
+            </div>
+            <div class="notes">
+                <div class="js-tabgroup tabgroup" id="samling1-group">
+
+                    <div class="js-tablist tablist" role="tablist" aria-orientation="horizontal">
+                        <div class="js-tabtitle tabtitle selected">
+                            <button
+                                class="js-tab tab js-responsive-expander"
+                                role="tab"
+                                aria-selected="true"
+                                id="samling1-tab1"
+                                aria-controls="samling1-tab1-content-panel">Organisasjoner
+                            </button>
+                        </div>
+                        <div class="js-tabtitle tabtitle">
+                            <button
+                                class="js-tab tab js-responsive-expander"
+                                role="tab"
+                                aria-selected="false"
+                                id="samling1-tab2"
+                                aria-controls="samling1-tab2-content-panel">Kodeverk som inngår
+                            </button>
+                        </div>
+                        <div class="js-tabtitle tabtitle">
+                            <button
+                                class="js-tab tab js-responsive-expander"
+                                role="tab"
+                                aria-selected="false"
+                                id="samling1-tab3"
+                                aria-controls="samling1-tab3-content-panel">Historikk
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel selected"
+                        role="tabpanel"
+                        id="samling1-tab1-content-panel"
+                        aria-labelledby="samling1-tab1">
+
+                        <div class="js-responsive-expandable">
+                            <div class="note-content">
+
+                                <table class="vertical">
+                                    <tr>
+                                        <th>Ansvarlig organisasjon</th>
+                                        <td><a href="#">Helsedirektoratet</a></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Registrert av</th>
+                                        <td><a href="#">Helsedirektoratet</a></td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel"
+                        id="samling1-tab2-content-panel"
+                        role="tabpanel"
+                        aria-labelledby="samling1-tab2">
+
+                        <div class="js-responsive-expandable">
+                            <div class="note-content">
+                                <ul class="link-list">
+
+                                    <li><a href="produkt.asp?id=389810&amp;subID=8&amp;catID=3&amp;oid=9001">Status for
+                                        EPJ (OID=9001)</a></li>
+
+                                    <li><a href="produkt.asp?id=389811&amp;subID=8&amp;catID=3&amp;oid=9002">Journalkategorier
+                                        (OID=9002)</a></li>
+
+                                    <li><a href="produkt.asp?id=389812&amp;subID=8&amp;catID=3&amp;oid=9003">EPJ
+                                        revisjonstype (OID=9003)</a></li>
+
+                                    <li><a href="produkt.asp?id=389813&amp;subID=8&amp;catID=3&amp;oid=9004">EPJ
+                                        informasjonsformål (OID=9004)</a></li>
+
+                                    <li><a href="produkt.asp?id=389814&amp;subID=8&amp;catID=3&amp;oid=9005">EPJ
+                                        informasjonskategori (OID=9005)</a></li>
+
+                                    <li><a href="produkt.asp?id=389815&amp;subID=8&amp;catID=3&amp;oid=9006">EPJ
+                                        signalkategori (OID=9006)</a></li>
+
+                                    <li><a href="produkt.asp?id=389816&amp;subID=8&amp;catID=3&amp;oid=9007">EPJ
+                                        varseltype (OID=9007)</a></li>
+
+                                    <li><a href="produkt.asp?id=389817&amp;subID=8&amp;catID=3&amp;oid=9008">Formål med
+                                        ekspedering av EPJ (OID=9008)</a></li>
+
+                                    <li><a href="produkt.asp?id=389818&amp;subID=8&amp;catID=3&amp;oid=9009">Forsendelsesmåte
+                                        EPJ (OID=9009)</a></li>
+
+                                    <li><a href="produkt.asp?id=389819&amp;subID=8&amp;catID=3&amp;oid=9010">Formål med
+                                        referanse til ekstern EPJ-komponent (OID=9010)</a></li>
+
+                                    <li><a href="produkt.asp?id=389820&amp;subID=8&amp;catID=3&amp;oid=9011">EPJ-komponent
+                                        hendelse (OID=9011)</a></li>
+
+                                    <li><a href="produkt.asp?id=389821&amp;subID=8&amp;catID=3&amp;oid=9012">EPJ
+                                        linktype (OID=9012)</a></li>
+
+                                    <li><a href="produkt.asp?id=389822&amp;subID=8&amp;catID=3&amp;oid=9013">EPJ
+                                        sakstype (OID=9013)</a></li>
+
+                                    <li><a href="produkt.asp?id=389823&amp;subID=8&amp;catID=3&amp;oid=9014">Sorteringsprinsipp
+                                        for EPJ saker (OID=9014)</a></li>
+
+                                    <li><a href="produkt.asp?id=389824&amp;subID=8&amp;catID=3&amp;oid=9015">Relasjon
+                                        til importert komponent (OID=9015)</a></li>
+
+                                    <li><a href="produkt.asp?id=389825&amp;subID=8&amp;catID=3&amp;oid=9016">EPJ
+                                        dokumenttype (OID=9016)</a></li>
+
+                                    <li><a href="produkt.asp?id=389826&amp;subID=8&amp;catID=3&amp;oid=9017">Kvalitet av
+                                        opplysninger i EPJ (OID=9017)</a></li>
+
+                                    <li><a href="produkt.asp?id=389827&amp;subID=8&amp;catID=3&amp;oid=9018">Språk
+                                        (OID=9018)</a></li>
+
+                                    <li><a href="produkt.asp?id=389828&amp;subID=8&amp;catID=3&amp;oid=9019">EPJ
+                                        fragmenttype (OID=9019)</a></li>
+
+                                    <li><a href="produkt.asp?id=389829&amp;subID=8&amp;catID=3&amp;oid=9020">Status for
+                                        tjenesteutførelse (OID=9020)</a></li>
+
+                                    <li><a href="produkt.asp?id=389830&amp;subID=8&amp;catID=3&amp;oid=9021">Tilgang til
+                                        pseudonymformål (OID=9021)</a></li>
+
+                                    <li><a href="produkt.asp?id=389831&amp;subID=8&amp;catID=3&amp;oid=9022">Redigeringsrettigheter
+                                        EPJ (OID=9022)</a></li>
+
+                                    <li><a href="produkt.asp?id=389832&amp;subID=8&amp;catID=3&amp;oid=9023">Tilgangsrettighet
+                                        EPJ hjelperegister (OID=9023)</a></li>
+
+                                    <li><a href="produkt.asp?id=389833&amp;subID=8&amp;catID=3&amp;oid=9024">Tilgangsrettighet
+                                        EPJ kodeverk (OID=9024)</a></li>
+
+                                    <li><a href="produkt.asp?id=389834&amp;subID=8&amp;catID=3&amp;oid=9026">Bruksområde
+                                        kodeverk (OID=9026)</a></li>
+
+                                    <li><a href="produkt.asp?id=389835&amp;subID=8&amp;catID=3&amp;oid=9031">Type
+                                        personnavnkomponent (OID=9031)</a></li>
+
+                                    <li><a href="produkt.asp?id=389836&amp;subID=8&amp;catID=3&amp;oid=9032">Type
+                                        personidentifikasjon (OID=9032)</a></li>
+
+                                    <li><a href="produkt.asp?id=389837&amp;subID=8&amp;catID=3&amp;oid=9033">Slektskap
+                                        mv. til pasient (OID=9033)</a></li>
+
+                                    <li><a href="produkt.asp?id=389838&amp;subID=8&amp;catID=3&amp;oid=9034">Helsepersonells
+                                        funksjoner mv. (OID=9034)</a></li>
+
+                                    <li><a href="produkt.asp?id=389839&amp;subID=8&amp;catID=3&amp;oid=9035">Type
+                                        adresse (OID=9035)</a></li>
+
+                                    <li><a href="produkt.asp?id=389840&amp;subID=8&amp;catID=3&amp;oid=9036">Stillingskoder
+                                        (OID=9036)</a></li>
+
+                                    <li><a href="produkt.asp?id=389841&amp;subID=8&amp;catID=3&amp;oid=9037">Standard
+                                        for yrkesklassifisering - STYRK (4-tegnskode) (OID=9037)</a></li>
+
+                                    <li><a href="produkt.asp?id=389842&amp;subID=8&amp;catID=3&amp;oid=9038">Typer
+                                        organisatoriske enheter (OID=9038)</a></li>
+
+                                    <li><a href="produkt.asp?id=389843&amp;subID=8&amp;catID=3&amp;oid=9039">Relasjoner
+                                        mellom organisatoriske enheter (OID=9039)</a></li>
+
+                                    <li><a href="produkt.asp?id=389844&amp;subID=8&amp;catID=3&amp;oid=9044">Type
+                                        adressekomponeneter (OID=9044)</a></li>
+
+                                    <li><a href="produkt.asp?id=389845&amp;subID=8&amp;catID=3&amp;oid=9045">Sivil
+                                        status (OID=9045)</a></li>
+
+                                    <li><a href="produkt.asp?id=389846&amp;subID=8&amp;catID=3&amp;oid=9047">Typer
+                                        programvare (OID=9047)</a></li>
+
+                                    <li><a href="produkt.asp?id=389847&amp;subID=8&amp;catID=3&amp;oid=9048">EPJ
+                                        hendelse (OID=9048)</a></li>
+
+                                    <li><a href="produkt.asp?id=389848&amp;subID=8&amp;catID=3&amp;oid=9049">EPJ
+                                        dataelementtype (OID=9049)</a></li>
+
+                                    <li><a href="produkt.asp?id=389849&amp;subID=8&amp;catID=3&amp;oid=9053">Funksjoner
+                                        og funksjonsområder til bruk ved tildeling av tilgangsrettigheter til
+                                        EPJ-systemer mv. (OID=9053)</a></li>
+
+                                    <li><a href="produkt.asp?id=389850&amp;subID=8&amp;catID=3&amp;oid=9060">Kategori
+                                        helsepersonell (OID=9060)</a></li>
+
+                                    <li><a href="produkt.asp?id=389851&amp;subID=8&amp;catID=3&amp;oid=9062">Type
+                                        EPJ-melding (OID=9062)</a></li>
+
+                                    <li><a href="produkt.asp?id=389852&amp;subID=8&amp;catID=3&amp;oid=9063">Type
+                                        innhold for dokument overført med EPJ-melding (OID=9063)</a></li>
+
+                                    <li><a href="produkt.asp?id=389853&amp;subID=8&amp;catID=3&amp;oid=9064">Status for
+                                        innhenting av pasientens samtykke (OID=9064)</a></li>
+
+                                    <li><a href="produkt.asp?id=389854&amp;subID=8&amp;catID=3&amp;oid=9065">Type
+                                        forespørsel vedr. EPJ-overføring (OID=9065)</a></li>
+
+                                    <li><a href="produkt.asp?id=389855&amp;subID=8&amp;catID=3&amp;oid=9068">Formål med
+                                        forespørsel om informasjon fra EPJ (OID=9068)</a></li>
+
+                                    <li><a href="produkt.asp?id=389856&amp;subID=8&amp;catID=3&amp;oid=9069">Svarkategori,
+                                        overføring av EPJ-informasjon (OID=9069)</a></li>
+
+                                    <li><a href="produkt.asp?id=389857&amp;subID=8&amp;catID=3&amp;oid=9190">Opplysning
+                                        fra pasient om omsorgsansvar for mindreårige barn (OID=9190)</a></li>
+
+                                    <li><a href="produkt.asp?id=389858&amp;subID=8&amp;catID=3&amp;oid=9191">Om
+                                        eventuelle mindreårige barn med behov for oppfølging (OID=9191)</a></li>
+
+                                    <li><a href="produkt.asp?id=389859&amp;subID=8&amp;catID=3&amp;oid=9192">Relasjon
+                                        til mindreårig barn (OID=9192)</a></li>
+
+                                    <li><a href="produkt.asp?id=389860&amp;subID=8&amp;catID=3&amp;oid=9193">Foreldreansvar
+                                        i forhold til mindreårig barn (OID=9193)</a></li>
+
+                                    <li><a href="produkt.asp?id=389861&amp;subID=8&amp;catID=3&amp;oid=9194">Omsorgsansvar
+                                        for mindreårig barn (OID=9194)</a></li>
+
+                                    <li><a href="produkt.asp?id=389862&amp;subID=8&amp;catID=3&amp;oid=9195">Om
+                                        barnevernets omsorg for mindreårig barn (OID=9195)</a></li>
+
+                                    <li><a href="produkt.asp?id=389863&amp;subID=8&amp;catID=3&amp;oid=9196">Samtykkekompetanse
+                                        på vegne av mindreårig barn (OID=9196)</a></li>
+
+                                    <li><a href="produkt.asp?id=389864&amp;subID=8&amp;catID=3&amp;oid=9197">Status
+                                        gjennomføring av tiltak ovenfor en pasients mindreårig barn (OID=9197)</a></li>
+
+                                    <li><a href="produkt.asp?id=389865&amp;subID=8&amp;catID=3&amp;oid=9198">Om forsøk
+                                        på innhenting av samtykke (OID=9198)</a></li>
+
+                                    <li><a href="produkt.asp?id=389866&amp;subID=8&amp;catID=3&amp;oid=9199">Rettigheter
+                                        i forhold til sperrede opplysninger (OID=9199)</a></li>
+
+                                    <li><a href="produkt.asp?id=389867&amp;subID=8&amp;catID=3&amp;oid=9200">Rettigheter
+                                        vedrørende utskrift av søkeresultat (OID=9200)</a></li>
+
+                                    <li><a href="produkt.asp?id=389868&amp;subID=8&amp;catID=3&amp;oid=9201">Regler for
+                                        gjenbruk av komponentinnhold (OID=9201)</a></li>
+
+                                    <li><a href="produkt.asp?id=389869&amp;subID=8&amp;catID=3&amp;oid=9202">Ferdigstillingsstatus
+                                        EPJ komponent (OID=9202)</a></li>
+
+                                    <li><a href="produkt.asp?id=389870&amp;subID=8&amp;catID=3&amp;oid=9203">Redigeringsregler
+                                        EPJ (OID=9203)</a></li>
+
+                                    <li><a href="produkt.asp?id=389871&amp;subID=8&amp;catID=3&amp;oid=9205">Linktype
+                                        EPJ (OID=9205)</a></li>
+
+                                    <li><a href="produkt.asp?id=389872&amp;subID=8&amp;catID=3&amp;oid=9206">Linkstyrke
+                                        (OID=9206)</a></li>
+
+                                    <li><a href="produkt.asp?id=389873&amp;subID=8&amp;catID=3&amp;oid=9207">Inneholder
+                                        personidentifiserbar informasjon (OID=9207)</a></li>
+
+                                    <li><a href="produkt.asp?id=389874&amp;subID=8&amp;catID=3&amp;oid=9208">Bruk av
+                                        ferdigstillingsstatus for EPJ komponent (OID=9208)</a></li>
+
+                                    <li><a href="produkt.asp?id=389875&amp;subID=8&amp;catID=3&amp;oid=9209">Tilknytning
+                                        av mappeinnhold (OID=9209)</a></li>
+
+                                    <li><a href="produkt.asp?id=389876&amp;subID=8&amp;catID=3&amp;oid=9210">Automatisk
+                                        inkludering av komponenter (OID=9210)</a></li>
+
+                                    <li><a href="produkt.asp?id=389877&amp;subID=8&amp;catID=3&amp;oid=9211">Oppnevnelse
+                                        av pasientrepresentant (OID=9211)</a></li>
+
+                                    <li><a href="produkt.asp?id=389878&amp;subID=8&amp;catID=3&amp;oid=9212">Regler for
+                                        tomt dataelement (OID=9212)</a></li>
+
+                                    <li><a href="produkt.asp?id=389879&amp;subID=8&amp;catID=3&amp;oid=9213">Språkregel
+                                        dokumentasjon i EPJ (OID=9213)</a></li>
+
+                                    <li><a href="produkt.asp?id=389880&amp;subID=8&amp;catID=3&amp;oid=9214">Regel for
+                                        angivelse av informasjonskvalitet i EPJ (OID=9214)</a></li>
+
+                                    <li><a href="produkt.asp?id=389881&amp;subID=8&amp;catID=3&amp;oid=9215">Regel
+                                        personidentifiserbar informasjon i EPJ (OID=9215)</a></li>
+
+                                    <li><a href="produkt.asp?id=389882&amp;subID=8&amp;catID=3&amp;oid=9216">EPJ
+                                        datatyper (OID=9216)</a></li>
+
+                                    <li><a href="produkt.asp?id=389883&amp;subID=8&amp;catID=3&amp;oid=9217">Standardverdibehandling
+                                        (OID=9217)</a></li>
+
+                                    <li><a href="produkt.asp?id=389884&amp;subID=8&amp;catID=3&amp;oid=9218">Regel for
+                                        lovlige verdier ved registrering av tidspunkt (OID=9218)</a></li>
+
+                                    <li><a href="produkt.asp?id=389885&amp;subID=8&amp;catID=3&amp;oid=9219">Kilde til
+                                        standardverdi for person (OID=9219)</a></li>
+
+                                    <li><a href="produkt.asp?id=389886&amp;subID=8&amp;catID=3&amp;oid=9220">Kilde til
+                                        standardverdi for Tjenesteyter (OID=9220)</a></li>
+
+                                    <li><a href="produkt.asp?id=389887&amp;subID=8&amp;catID=3&amp;oid=9221">Kilde til
+                                        standardverdi for Organisatorisk enhet (OID=9221)</a></li>
+
+                                    <li><a href="produkt.asp?id=389888&amp;subID=8&amp;catID=3&amp;oid=9222">Kilde til
+                                        standardverdi for Adresse (OID=9222)</a></li>
+
+                                    <li><a href="produkt.asp?id=389889&amp;subID=8&amp;catID=3&amp;oid=9223">Kilde til
+                                        standardverdi for telekomadresse (OID=9223)</a></li>
+
+                                    <li><a href="produkt.asp?id=389890&amp;subID=8&amp;catID=3&amp;oid=9224">Kilde til
+                                        standardverdi for Rolle (OID=9224)</a></li>
+
+                                    <li><a href="produkt.asp?id=389891&amp;subID=8&amp;catID=3&amp;oid=9225">Elementtyper
+                                        for kodeverk (OID=9225)</a></li>
+
+                                    <li><a href="produkt.asp?id=389892&amp;subID=8&amp;catID=3&amp;oid=9226">Identifikatortyper
+                                        (OID=9226)</a></li>
+
+                                    <li><a href="produkt.asp?id=389893&amp;subID=8&amp;catID=3&amp;oid=9227">Gyldighetsområde
+                                        for identifikatorer (OID=9227)</a></li>
+
+                                    <li><a href="produkt.asp?id=389894&amp;subID=8&amp;catID=3&amp;oid=9228">Prinsipp
+                                        for identifikatorgenerering (OID=9228)</a></li>
+
+                                    <li><a href="produkt.asp?id=389895&amp;subID=8&amp;catID=3&amp;oid=9229">Identifikator
+                                        kan utstedes av (OID=9229)</a></li>
+
+                                    <li><a href="produkt.asp?id=389896&amp;subID=8&amp;catID=3&amp;oid=9230">Samtykke
+                                        til tilgang til, eller utlevering av helseopplysninger (OID=9230)</a></li>
+
+                                    <li><a href="produkt.asp?id=389897&amp;subID=8&amp;catID=3&amp;oid=9231">Gyldighet
+                                        for samtykke (OID=9231)</a></li>
+
+                                    <li><a href="produkt.asp?id=389898&amp;subID=8&amp;catID=3&amp;oid=9232">Sperrede
+                                        journalopplysningers relevans for behandlingsalansvarlig (OID=9232)</a></li>
+
+                                    <li><a href="produkt.asp?id=389899&amp;subID=8&amp;catID=3&amp;oid=9233">Varsel ved
+                                        tjenesteutførelse (OID=9233)</a></li>
+
+                                    <li><a href="produkt.asp?id=389900&amp;subID=8&amp;catID=3&amp;oid=9234">Regler for
+                                        redigering (fjerning) og sletting av opplysninger relatert til gjennomføring av
+                                        besluttet tiltak (OID=9234)</a></li>
+
+                                    <li><a href="produkt.asp?id=389901&amp;subID=8&amp;catID=3&amp;oid=9235">Tjenesteutførelse
+                                        ved involvert enhet (OID=9235)</a></li>
+
+                                    <li><a href="produkt.asp?id=389902&amp;subID=8&amp;catID=3&amp;oid=9236">Type
+                                        tiltaksrelasjon (OID=9236)</a></li>
+
+                                    <li><a href="produkt.asp?id=389903&amp;subID=8&amp;catID=3&amp;oid=9237">Kilde til
+                                        krav om retting eller sletting av opplysninger i EPJ (OID=9237)</a></li>
+
+                                    <li><a href="produkt.asp?id=389904&amp;subID=8&amp;catID=3&amp;oid=9238">Status for
+                                        gjennomføring av besluttet tiltak (OID=9238)</a></li>
+
+                                    <li><a href="produkt.asp?id=389905&amp;subID=8&amp;catID=3&amp;oid=9239">Tilgang til
+                                        eller blokkering av opplysninger i EPJ (OID=9239)</a></li>
+
+                                    <li><a href="produkt.asp?id=389906&amp;subID=8&amp;catID=3&amp;oid=9240">Type
+                                        pasientgruppe (OID=9240)</a></li>
+
+                                    <li><a href="produkt.asp?id=389907&amp;subID=8&amp;catID=3&amp;oid=9241">Regel for
+                                        overføring av opplysninger fra gruppejournal til medlemmers EPJ (OID=9241)</a>
+                                    </li>
+
+                                    <li><a href="produkt.asp?id=389908&amp;subID=8&amp;catID=3&amp;oid=9242">Rolle i
+                                        pasientrelatert gruppe (OID=9242)</a></li>
+
+                                    <li><a href="produkt.asp?id=389909&amp;subID=8&amp;catID=3&amp;oid=9243">Status
+                                        hjemstavn ved registrering i EPJ-system (OID=9243)</a></li>
+
+                                    <li><a href="produkt.asp?id=389910&amp;subID=8&amp;catID=3&amp;oid=9244">Innsynsrett
+                                        i journal (OID=9244)</a></li>
+
+                                    <li><a href="produkt.asp?id=389911&amp;subID=8&amp;catID=3&amp;oid=9245">Pasientrepresentants
+                                        samtykkekompetanse (OID=9245)</a></li>
+
+                                    <li><a href="produkt.asp?id=389912&amp;subID=8&amp;catID=3&amp;oid=9246">Helsepersonells
+                                        rolle i forhold til pasient (OID=9246)</a></li>
+
+                                    <li><a href="produkt.asp?id=389913&amp;subID=8&amp;catID=3&amp;oid=9247">Postnummerregel
+                                        (OID=9247)</a></li>
+
+                                    <li><a href="produkt.asp?id=389914&amp;subID=8&amp;catID=3&amp;oid=9251">Komponent
+                                        hendelse (EPJ) (OID=9251)</a></li>
+
+                                    <li><a href="produkt.asp?id=389915&amp;subID=8&amp;catID=3&amp;oid=9252">Revisjonstype
+                                        (EPJ) (OID=9252)</a></li>
+
+                                    <li><a href="produkt.asp?id=389916&amp;subID=8&amp;catID=3&amp;oid=9253">Type
+                                        basiskomponent (EPJ) (OID=9253)</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel"
+                        id="samling1-tab3-content-panel"
+                        role="tabpanel"
+                        aria-labelledby="samling1-tab3">
+
+                        <div class="js-responsive-expandable">
+                            <div class="note-content">
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </li>
+
+        <li class="code-card leaf level-3 owner" id="eier1">
+            <div class="title">
+                <div class="number">Eier</div>
+                <div class="name">
+                    Direktoratet for e-helse
+                </div>
+            </div>
+            <div class="code-details">
+                <div class="additional-info">
+                    <div><span>Hjemmeside</span> <a href="http://ehelse.no">http://ehelse.no</a></div>
+
+                    <div class="actions">
+                        <button class="download">Last ned tilhørende kodeverk</button>
+                    </div>
+
+                </div>
+                <div class="description">
+                    <p>Beskrivelse med riktekst. Sånn ser det ut med mye tekst: I betraktning av en helhetlig
+                        implementering initieres helseinformasjonsflyten koordinert med helsereformene. Etter en
+                        totalvurdering av en proaktiv implementering overstyres brukerrepresentasjonen koordinert med
+                        helsereformene. I lys av en tverrfaglig problematikk balanseres forsvarlighetskravene gjennom
+                        sykehussammenslåingen.</p>
+                </div>
+            </div>
+            <div class="notes">
+                <div class="js-tabgroup tabgroup" id="eier1-group">
+
+                    <div class="js-tablist tablist" role="tablist" aria-orientation="horizontal">
+                        <div class="js-tabtitle tabtitle selected">
+                            <button
+                                class="js-tab tab js-responsive-expander"
+                                role="tab"
+                                aria-selected="true"
+                                id="eier1-tab1"
+                                aria-controls="eier1-tab1-content-panel">Kodeverk som inngår
+                            </button>
+                        </div>
+                        <div class="js-tabtitle tabtitle">
+                            <button
+                                class="js-tab tab js-responsive-expander"
+                                role="tab"
+                                aria-selected="false"
+                                id="eier1-tab2"
+                                aria-controls="eier1-tab2-content-panel">Historikk
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel selected"
+                        id="eier1-tab1-content-panel"
+                        role="tabpanel"
+                        aria-labelledby="eier1-tab1">
+
+                        <div class="js-responsive-expandable">
+                            <div class="note-content">
+                                <ul class="link-list">
+                                    <li><a href="#">1101 - Ja, nei</a></li>
+                                    <li><a href="#">9552 - Varighet</a></li>
+                                    <li><a href="#">9554 - Preparat</a></li>
+                                    <li><a href="#">9555 - Vaksinasjonsdikumentasjon</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel"
+                        id="eier1-tab2-content-panel"
+                        role="tabpanel"
+                        aria-labelledby="eier1-tab2">
+
+                        <div class="js-responsive-expandable">
+                            <div class="note-content">
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </li>
+
+        <li class="code-card leaf level-3 category" id="kategori1">
+            <div class="title">
+                <div class="number">Kategori</div>
+                <div class="name">
+                    Vaksine
+                </div>
+            </div>
+            <div class="code-details">
+                <div class="additional-info">
+                    <div><span>Opprettet</span> 01.01.2006</div>
+                    <div class="actions">
+                        <button class="download">Last ned tilhørende kodeverk</button>
+                    </div>
+                </div>
+                <div class="description">
+                    <p>Beskrivelse med riktekst. Sånn ser det ut med mye tekst: I betraktning av en helhetlig
+                        implementering initieres helseinformasjonsflyten koordinert med helsereformene. Etter en
+                        totalvurdering av en proaktiv implementering overstyres brukerrepresentasjonen koordinert med
+                        helsereformene. I lys av en tverrfaglig problematikk balanseres forsvarlighetskravene gjennom
+                        sykehussammenslåingen.</p>
+                </div>
+            </div>
+            <div class="notes">
+                <div class="js-tabgroup tabgroup" id="kategori1-group">
+
+                    <div class="js-tablist tablist" role="tablist" aria-orientation="horizontal">
+                        <div class="js-tabtitle tabtitle selected">
+                            <button
+                                class="js-tab tab js-responsive-expander"
+                                role="tab"
+                                aria-selected="true"
+                                id="kategori1-tab1"
+                                aria-controls="kategori1-tab1-content-panel">Kodeverk som inngår
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel selected"
+                        id="kategori1-tab1-content-panel"
+                        role="tabpanel"
+                        aria-labelledby="kategori1-tab1">
+
+                        <div class="js-responsive-expandable">
+                            <div class="note-content">
+                                <ul class="link-list">
+                                    <li><a href="#">1101 - Ja, nei</a></li>
+                                    <li><a href="#">9552 - Varighet</a></li>
+                                    <li><a href="#">9554 - Preparat</a></li>
+                                    <li><a href="#">9555 - Vaksinasjonsdikumentasjon</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </li>
+
+        <li class="code-card leaf level-3 system expired" id="system1">
+            <div class="title">
+                <div class="number">9205</div>
+                <div class="name">
+                    Linktype
+                </div>
+                <div class="status">Utgått</div>
+            </div>
+            <div class="code-details">
+                <div class="additional-info">
+                    <div><span>Gyldig fra</span> 01.01.2006</div>
+                    <div><span>Gyldig til</span> 31.12.2016</div>
+                    <div><span>Ansvarlig</span> <a href="#">Helsedirektoratet</a></div>
+                    <div class="actions">
+                        <button class="download">Last ned kodeverk</button>
+                    </div>
+                </div>
+                <div class="description">
+                    <p>Beskrivelse med riktekst.</p>
+                    <table class="vertical">
+                        <tr>
+                            <th>OID</th>
+                            <td>2.16.578.1.12.4.1.9205</td>
+                        </tr>
+                        <tr>
+                            <th>Referanse</th>
+                            <td>Om det er noe referanse til noe som kan være av interesse.</td>
+                        </tr>
+                        <tr>
+                            <th>Kategorier</th>
+                            <td><a href="#">Journal</a></td>
+                        </tr>
+                        <tr>
+                            <th>Inngår i samlinger</th>
+                            <td><a href="#">EPJ-løftet</a>, <a href="#">Legemiddel</a></td>
+                        </tr>
+                        <tr>
+                            <th>Relaterte kodeverk</th>
+                            <td><a href="#">9523</a>, <a href="#">9553</a></td>
+                        </tr>
+                        <tr>
+                            <th>Referansegrad</th>
+                            <td>Identisk med original</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="notes">
+                <div class="js-tabgroup tabgroup" id="system1-group">
+
+                    <div class="js-tablist tablist" role="tablist" aria-orientation="horizontal">
+                        <div class="js-tabtitle tabtitle selected">
+                            <button
+                                class="js-tab tab js-responsive-expander"
+                                role="tab"
+                                aria-selected="true"
+                                id="system1-tab1"
+                                aria-controls="system1-tab1-content-panel">Kodeverdier
+                            </button>
+                        </div>
+                        <div class="js-tabtitle tabtitle">
+                            <button
+                                class="js-tab tab js-responsive-expander"
+                                role="tab"
+                                aria-selected="false"
+                                id="system1-tab2"
+                                aria-controls="system1-tab2-content-panel">Mappinger
+                            </button>
+                        </div>
+
+                        <div class="js-tabtitle tabtitle">
+                            <button
+                                class="js-tab tab js-responsive-expander"
+                                role="tab"
+                                aria-selected="false"
+                                id="system1-tab3"
+                                aria-controls="system1-tab3-content-panel">Endringer
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel selected"
+                        id="system1-tab1-content-panel"
+                        role="tabpanel"
+                        aria-labelledby="system1-tab1">
+
+                        <div class="js-responsive-expandable">
+                            <div class="note-content">
+                                <table class="horizontal row-expandables">
+    <caption class="visuallyhidden">Kodeverdier for 9205 Linktype</caption>
+    <thead>
+    <tr>
+        <th>Kodeverdi</th>
+        <th>Kodetekst</th>
+        <th>Forklaring</th>
+        <th>Mappinger</th>
+        <th>Endringer</th>
+    </tr>
+    </thead>
+    <tbody>
+
+
+    <tr>
+        <td>01</td>
+        <td>Erstatter tidligere versjon</td>
+        <td></td>
+        <td>
+            <button title="Vis mappinger" class="row-expander mappings" aria-expanded="false" aria-controls="mappings-01">Vis mappinger for kodeverdi 01</button>
+        </td>
+        <td>
+            <button title="Vis endringer" class="row-expander changes" aria-expanded="false" aria-controls="changes-01">Vis endringer for kodeverdi 01</button>
+        </td>
+    </tr>
+
+    <tr>
+        <td>11</td>
+        <td>Se også</td>
+        <td>Generell referanse</td>
+        <td>
+            <button title="Vis mappinger" class="row-expander mappings">Vis mappinger for kodeverdi 11</button>
+        </td>
+        <td>
+            <button title="Vis endringer" class="row-expander changes">Vis endringer for kodeverdi 11</button>
+        </td>
+    </tr>
+
+
+
+
+    <tr class="row-expand">
+        <td>L1</td>
+        <td>Erstatter referert forskrivning (doseendring)</td>
+        <td>Her ser du et eksempel av hvordan design og kode skal se ut når mappinger eller endringer er ekspandert.</td>
+        <td>
+            <button title="Vis mappinger" class="row-expander mappings" aria-expanded="true" aria-controls="mappings-L1">Skjul mappinger for kodeverdi L1</button>
+        </td>
+        <td>
+            <button title="Vis endringer" class="row-expander changes">Vis endringer for kodeverdi L1</button>
+        </td>
+    </tr>
+
+    <tr id="mappings-L1" class="row-expandable expanded">
+        <td colspan="5">
+            <table class="simple">
+                <caption>Mappinger for kodeverdi L1</caption>
+                <tr>
+                    <th>Kodeverk</th>
+                    <th>Mappet til kode</th>
+                    <th>Kommentar</th>
+                    <th>Gyldighet</th>
+                </tr>
+
+                <tr>
+                    <td>ICD-10</td>
+                    <td><strike><a href="">F-78 Annen Sykdom</a></strike></td>
+                    <td></td>
+                    <td>2006</td>
+                </tr>
+
+                <tr>
+                    <td>ICD-10</td>
+                    <td><a href="">G-42 Annen Sykdom</a></td>
+                    <td>Kun i tilfelle psykisk sykdom</td>
+                    <td>2006</td>
+                </tr>
+
+                <tr>
+                    <td>SNOMED CT</td>
+                    <td><a href="">234236234657245 Sykdom ikke annet sted definert</a></td>
+                    <td></td>
+                    <td>2018</td>
+                </tr>
+
+                <tr>
+                    <td>ICD-10</td>
+                    <td><a href="">F46 Annen sykdom</a></td>
+                    <td></td>
+                    <td>2006 - 2012</td>
+                </tr>
+
+                <tr>
+                    <td>NORPAT</td>
+                    <td>Unmappable</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td>L2</td>
+        <td>Erstatter referert forskrivning (annet legemiddel)</td>
+        <td></td>
+        <td>
+            <button title="Vis mappinger" class="row-expander mappings">Vis mappinger for kodeverdi L2</button>
+        </td>
+        <td>
+            <button title="Vis endringer" class="row-expander changes">Vis endringer for kodeverdi L2</button>
+        </td>
+    </tr>
+    <tr>
+        <td>L3</td>
+        <td>Referert forskrivning seponeres</td>
+        <td>
+        </td>
+        <td>
+            <button title="Vis mappinger" class="row-expander mappings">Vis mappinger for kodeverdi L3</button>
+        </td>
+        <td>
+            <button title="Vis endringer" class="row-expander changes">Vis endringer for kodeverdi L3</button>
+        </td>
+    </tr>
+
+
+    </tbody>
+</table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel"
+                        id="system1-tab2-content-panel"
+                        role="tabpanel"
+                        aria-labelledby="system1-tab2">
+
+                        <div class="js-responsive-expandable">
+                            <div class="note-content">
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="js-responsive-expand js-tabpanel tabpanel"
+                        id="system1-tab3-content-panel"
+                        role="tabpanel"
+                        aria-labelledby="system1-tab3">
+
+                        <div class="js-responsive-expandable">
+                            <div class="note-content">
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </li>
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<!-- ********************************************************************** -->
+</div>
+</body>
+</html>

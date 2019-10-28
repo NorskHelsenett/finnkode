@@ -55,16 +55,16 @@
 
 <header id="framework-header">
 
-    <div class="layout-container">
+    <div class="layout-container directorate-banner">
         <a class="directorate-logo" href="/">Direktoratet for e-helse</a>
     </div>
 
     <div class="main-header-content js-expand">
-        <div class="layout-container">
+        <div class="layout-container main-header-top">
 
             <div class="main-choices">
                 <a class="finnkode-logo" href="/site/index.html">FinnKode</a>
-                <nav>
+                <nav aria-label="Hovedmeny">
                     <ul class="main-menu">
                         <li><a class="home" href="/site/index.html">Hjem</a></li>
                         <li>
@@ -74,7 +74,7 @@
                 </nav>
             </div>
 
-            <nav class="code-system-menu js-expandable">
+            <nav class="code-system-menu js-expandable" aria-label="Kodeverk">
 
     <div class="category all">
         <h2>Velg kodeverk</h2>
@@ -137,7 +137,9 @@
     </div>
 </header>
 
-<main id="page-content">
+<main id="page-content" tabindex="-1">
+    <h1 class="visuallyhidden">Alle kodeverk: Søk</h1>
+
     <div class="global-search-banner">
     <div class="layout-container">
         <form class="search-field" role="search">

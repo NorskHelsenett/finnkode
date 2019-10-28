@@ -219,15 +219,9 @@ window.makeLayoutQ = makeLayoutQ;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿//console.log("start - main.js");
-
-// "ready" triggers as soon as the dom is in place.  Use this for things
-// that are not affected by a change in layout or window size.
-$(window).on("ready", function () {
-    //console.log('ready - main.js');
+﻿$(function () {
     layoutQ();
 });
-
 
 // "load" triggers when all the content on the page has finished loading.
 // Use this for things that need to have their content fully loaded in
@@ -235,12 +229,10 @@ $(window).on("ready", function () {
 $(window).on("load", function () {
     //console.log('load - master/master.js');
     unhideMenu();
-    responsiveExpandableBlocks();
     expandableBlocks();
     textSizeExpander();
     startAutocomplete();
 });
-
 
 // "layoutchange" triggers only when the layout changes, as opposed to
 // triggering on every resize.  Since the layout also changes on document
@@ -250,14 +242,6 @@ $(window).on("layoutchange", function () {
     //console.log("layoutchange - master/master.js");
     responsiveExpandableBlocks();
 });
-
-// "conditionalresize" does stuff does stuff on debounced resize when the layout is 1-col.
-$(window).on(
-    'conditionalresize',
-    debounce(function () {
-        //console.log("conditionalresize - master/master.js");
-    }, 25)
-);
 
 // "resize orientationchange" triggers every time the browser window resizes
 // or the device's orientation changes. You almost certainly want to put your
@@ -317,8 +301,13 @@ $(window).on(
     };
 
     $.fn.addExpandability = function () {
+        // console.log("add expandability start");
+
         $(this).each(function () {
             $(this).removeExpandability();
+
+            // console.log("actually adding expandability");
+            // console.log($(this));
 
             var expand = $(this.expand),
                 expander = $(this.expander),
@@ -374,7 +363,13 @@ $(window).on(
     };
 
     $.fn.removeExpandability = function () {
+        // console.log("removing expandability start");
+
         $(this).each(function () {
+
+            // console.log("actually removing expandability from");
+            // console.log($(this));
+
             var expand = $(this.expand),
                 expander = $(this.expander),
                 expandable = $(this.expandable);
@@ -394,10 +389,6 @@ $(window).on(
     };
 
 })(jQuery);
-
-
-
-
 
 /***/ }),
 
@@ -487,7 +478,6 @@ function startAutocomplete() {
         $(ul).find("li:odd").addClass("odd");
     };
     $(".ui-autocomplete").on('blur', function () {
-        console.log('blur from results');
         $("#autocomplete").autocomplete("destroy");
         startAutocomplete();
         $('#autocomplete').attr('aria-expanded', 'false');
@@ -524,14 +514,24 @@ window.startAutocomplete = startAutocomplete;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Used to fix issues with expand/collapse on text size button when using keyboard
+﻿// Keyboard functionality for the text size expander in the footer
 function textSizeExpander() {
     let isActive = false;
+
     $('.text-size button').on('click', function() {
         isActive = !isActive;
     });
+
+    // Close the expander when tabbing out
     $('.text-size button').focusout(function(e) {
         if(isActive) {
+            $(this).trigger('click');
+        }
+    });
+
+    // Close the expander when Esc is pressed
+    $('.text-size button').on('keyup', function(e) {
+        if (e.keyCode == 27 && isActive) {
             $(this).trigger('click');
         }
     });

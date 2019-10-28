@@ -190,38 +190,177 @@ window.codeSystemTreeLayout = codeSystemTreeLayout;
 // https://www.deque.com/blog/a11y-support-series-part-1-aria-tab-panel-accessibility/
 
 function codeTabs() {
-    var tabgroups = $(".js-tabgroup");
-
-    if (tabgroups.length !== 0) {
+    if ($(".js-tabgroup").length !== 0) {
 
         if (layoutQ().number[1] === 0) {
-            console.log("first load");
+            //console.log("First load. Default, existing markup is tabs.");
 
             if (layoutQ().number[0] == 1) {
-                console.log("1 col. Removing tab groups, make responsive expanders since it's first load but the HTML has changed.");
-                tabgroups.resetTabgroups();
-                responsiveExpandableBlocks();
+                //console.log("1 col. Removing tab groups, make responsive expanders since it's first load but the HTML has changed.");
+                tabsToExpandableBlocks();
+
             } else {
-                console.log("2+ col. Make tab groups.");
-                tabgroups.makeTabgroups();
+                //console.log("2+ col. Markup exists. Add functionality to tab groups.");
+                addTabFunctionality();
             }
 
         } else {
-            console.log("not first load--layout changed");
+            //console.log("not first load--layout changed");
 
             if (layoutQ().number[0] == 1) {
-                console.log("Layout changed to one col. Removing tab groups, make responsive expanders since the HTML changes.");
-                tabgroups.resetTabgroups();
+                //console.log("Layout changed to one col. Removing tab groups, make responsive expanders since the HTML changes.");
+                tabsToExpandableBlocks();
+
             } else if (layoutQ().number[1] == 1) {
-                console.log("Layout changed, moving from 1-col to 2+ col. Making tab groups, removing responsive expanders.");
-                tabgroups.makeTabgroups();
+                //console.log("Layout changed, moving from 1-col to 2+ col. Making tab groups, removing responsive expanders.");
+                expandableBlocksToTabs();
             }
-
-            responsiveExpandableBlocks();
         }
-
     }
 }
+
+function removeTabFunctionality() {
+
+    var tablists = $(".js-tablist"),
+        tabtitles = $(".js-tabtitle"),
+        tabs = $(".js-tab"),
+        tabpanels = $(".js-tabpanel");
+
+    // Remove events, attributes and classes
+    tablists.removeAttr("role aria-orientation");
+    tablists.off(".makeTabgroupFunctionality");
+
+    tabtitles.removeClass("selected");
+
+    tabs.removeAttr("role aria-selected");
+    tabs.off(".makeTabgroupFunctionality");
+
+    tabpanels.removeClass("selected");
+    tabpanels.removeAttr("role");
+}
+
+function addTabFunctionality() {
+
+    // Add events, attributes and classes for tabs
+    // Assumes markup for tabs exists
+
+    var tabgroups = $(".js-tabgroup"),
+        tablists = $(".js-tablist"),
+        tabtitles = $(".js-tabtitle"),
+        tabs = $(".js-tab"),
+        tabpanels = $(".js-tabpanel");
+
+    tablists.attr("role", "tablist");
+    tablists.attr("aria-orientation", "horizontal");
+
+    tabs.attr("role", "tab");
+
+    tabpanels.attr("role", "tabpanel");
+
+    // Set up click functionality
+    $(".js-tab").on("click.makeTabgroupFunctionality", function () {
+        var clickedTab = $(this),
+            clickedTabpanel = $("#" + clickedTab.attr("aria-controls")),
+
+            tabgroup = clickedTab.closest(".js-tabgroup"),
+            tabs = tabgroup.find(".js-tab"),
+            tabpanels = tabgroup.find(".js-tabpanel"),
+
+            otherTabs = tabs.not(clickedTab),
+            otherTabpanels = tabpanels.not(clickedTabpanel);
+
+        clickedTab.attr("aria-selected", "true");
+        clickedTab.closest(".js-tabtitle").addClass("selected");
+
+        otherTabs.attr("aria-selected", "false");
+        otherTabs.closest(".js-tabtitle").removeClass("selected");
+
+        clickedTabpanel.addClass("selected");
+        otherTabpanels.removeClass("selected");
+    });
+
+    // Set up the keyboard nav
+    $(".js-tablist").on("keydown.makeTabgroupFunctionality", function (e) {
+
+        // Left arrow and up arrow select the previous tab
+        if (e.keyCode == 37 || e.keyCode == 38) {
+            $(".js-tab:focus").closest(".js-tabtitle").prev().find(".js-tab").click().focus();
+            e.preventDefault();
+        }
+
+        // Right arrow and down arrow select the next tab
+        if (e.keyCode == 39 || e.keyCode == 40) {
+            $(".js-tab:focus").closest(".js-tabtitle").next().find(".js-tab").click().focus();
+            e.preventDefault();
+        }
+
+    });
+};
+
+function tabsToExpandableBlocks() {
+    removeTabFunctionality();
+
+    $(".js-tabgroup").each(function () {
+
+        var tabgroup = $(this),
+            tabpanels = tabgroup.find(".js-tabpanel"),
+            tablist = tabgroup.find(".js-tablist");
+
+        tabpanels.each(function () {
+            var tabpanel = $(this),
+                tabtitle = $("#" + tabpanel.attr("aria-labelledby")).closest(".js-tabtitle");
+
+            // Move the expander/tabtitle first inside the expand block
+            tabpanel.prepend(tabtitle);
+        });
+
+        // Delete the tablist element
+        tablist.remove();
+    });
+
+    responsiveExpandableBlocks();
+};
+
+function expandableBlocksToTabs() {
+    responsiveExpandableBlocks();
+
+    $(".js-tabgroup").each(function () {
+
+        var tabgroup = $(this),
+            tabpanels = tabgroup.find($(".js-tabpanel"));
+
+        // Create the tablist element first inside the tabgroup
+        tabgroup.prepend($("<div>", {
+            "class": "js-tablist",
+            "role": "tablist",
+            "aria-orientation": "horizontal"
+        }));
+
+        // Grab the tablist
+        var tablist = tabgroup.find(".js-tablist");
+
+        // Move the tabtitles into the tablist
+        tabpanels.each(function () {
+            var tabtitle = $(this).find(".js-tabtitle");
+
+            // Move the expander/tabtitle into the tablist
+            tablist.append(tabtitle);
+        });
+
+        // Select the first tab in each group
+        var tablist = tabgroup.find(".js-tablist"),
+            firstTabtitle = tablist.find(".js-tabtitle").filter(":first-child"),
+            firstTab = firstTabtitle.find(".js-tab"),
+            firstTabpanelContainer = $("#" + firstTab.attr("aria-controls"));
+
+        firstTabtitle.addClass("selected");
+        firstTab.attr("aria-selected", "true");
+        firstTabpanelContainer.addClass("selected");
+    });
+
+    addTabFunctionality();
+};
+
 
 window.codeTabs = codeTabs;
 
@@ -234,24 +373,7 @@ window.codeTabs = codeTabs;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿//console.log("start - code-system.js");
-
-// "ready" triggers as soon as the dom is in place.  Use this for things
-// that are not affected by a change in layout or window size.
-$(window).on("ready", function () {
-    //console.log('ready - code-system.js');
-});
-
-
-// "load" triggers when all the content on the page has finished loading.
-// Use this for things that need to have their content fully loaded in
-// order to work correctly, e.g. stuff affected by height.
-$(window).on("load", function () {
-    //console.log('load - code-system.js');
-});
-
-
-// "layoutchange" triggers only when the layout changes, as opposed to
+﻿// "layoutchange" triggers only when the layout changes, as opposed to
 // triggering on every resize.  Since the layout also changes on document
 // ready--we're going from no layout to one layout--you don't have to call
 // the function on document ready when you call it here.
@@ -261,25 +383,6 @@ $(window).on("layoutchange", function () {
     codeTabs();
     codeSystemTreeLayout();
 });
-
-// "conditionalresize" does stuff does stuff on debounced resize when the layout is 1-col.
-$(window).on(
-    'conditionalresize',
-    debounce(function () {
-        //console.log("conditionalresize - code-system.js");
-    }, 25)
-);
-
-// "resize orientationchange" triggers every time the browser window resizes
-// or the device's orientation changes. You almost certainly want to put your
-// function call in "layoutchange" or "conditionalresize" and not here.
-$(window).on(
-    "resize orientationchange",
-    debounce(function () {
-        //console.log("resize orientationchange - code-system.js");
-    }, 25)
-);
-
 
 /***/ }),
 
@@ -300,7 +403,7 @@ $(window).on(
     };
 
     $.fn.resizable = function fnResizable(options) {
-        // jquery-resizable
+        // Adapted from jquery-resizable
         // Version 0.32 - 5/5/2018
         // © 2015-2018 Rick Strahl, West Wind Technologies
         // www.west-wind.com
@@ -476,174 +579,6 @@ $(window).on(
         });
     };
 
-    // $.fn.resetTabs = function () {
-    //     console.log("resetting tabs");
-    //
-    //     var tabgroups = $(this);
-    //
-    //     var tablists = $(".js-tablist"),
-    //         tabtitles = $(".js-tabtitle"),
-    //         tabs = $(".js-tab"),
-    //         tabpanels = $(".js-tabpanel");
-    //
-    //     tablists.removeAttr("role");
-    //     tablists.removeAttr("aria-orientation");
-    //     tablists.off("keydown.makeTabs");
-    //
-    //     tabtitles.removeClass("selected");
-    //
-    //     tabs.removeAttr("role aria-selected");
-    //     tabs.off("click.makeTabs");
-    //
-    //     tabpanels.removeClass("selected");
-    //     tabpanels.removeAttr("role");
-    //
-    //     return this;
-    // };
-
-    $.fn.resetTabgroups = function () {
-        // Starting from a series of tabgroups, make expandable blocks
-
-        var tabgroups = $(this);
-
-        var tablists = $(".js-tablist"),
-            tabtitles = $(".js-tabtitle"),
-            tabs = $(".js-tab"),
-            tabpanels = $(".js-tabpanel");
-
-        tablists.removeAttr("role");
-        tablists.removeAttr("aria-orientation");
-        tablists.off("keydown.makeTabgroups");
-
-        tabtitles.removeClass("selected");
-
-        tabs.removeAttr("role aria-selected");
-        tabs.off("click.makeTabgroups");
-
-        tabpanels.removeClass("selected");
-        tabpanels.removeAttr("role");
-
-        tabgroups = $(".js-tabgroup");
-        tabgroups.each(function () {
-
-            var tabgroup = $(this),
-                tabpanels = tabgroup.find(".js-tabpanel"),
-                tablist = tabgroup.find(".js-tablist");
-
-            // For each expand block
-            tabpanels.each(function () {
-                var tabpanel = $(this),
-                    tabtitle = $("#" + tabpanel.attr("aria-labelledby")).closest(".js-tabtitle");
-
-                // Move the expander/tabtitle first inside the expand block
-                tabpanel.prepend(tabtitle);
-            });
-
-
-            // Delete the tablist element
-            tablist.remove();
-
-        });
-
-        return this;
-    };
-
-    $.fn.makeTabgroups = function () {
-        var tabgroups = $(this);
-
-        tabgroups.resetTabgroups();
-
-        var tabgroups = $(".js-tabgroup"),
-            tablists = $(".js-tablist"),
-            tabtitles = $(".js-tabtitle"),
-            tabs = $(".js-tab"),
-            tabpanels = $(".js-tabpanel");
-
-        tablists.attr("role", "tablist");
-        tablists.attr("aria-orientation", "horizontal");
-        tabs.attr("role", "tab");
-        tabpanels.attr("role", "tabpanel");
-
-        // Make the clicking functionality
-        tabs.on("click.makeTabgroups", function () {
-            var clickedTab = $(this),
-                clickedTabpanel = $("#" + clickedTab.attr("aria-controls")),
-
-                tabgroup = clickedTab.closest(".js-tabgroup"),
-                tabs = tabgroup.find(".js-tab"),
-                tabpanels = tabgroup.find(".js-tabpanel"),
-
-                otherTabs = tabs.not(clickedTab),
-                otherTabpanels = tabpanels.not(clickedTabpanel);
-
-            clickedTab.attr("aria-selected", "true");
-            clickedTab.closest(".js-tabtitle").addClass("selected");
-
-            otherTabs.attr("aria-selected", "false");
-            otherTabs.closest(".js-tabtitle").removeClass("selected");
-
-            clickedTabpanel.addClass("selected");
-            otherTabpanels.removeClass("selected");
-        });
-
-        // Set up the keyboard nav
-        tablists.on("keydown.makeTabgroups", function (e) {
-
-            // Left arrow and up arrow select the previous tab
-            if (e.keyCode == 37 || e.keyCode == 38) {
-                $(".js-tab:focus").closest(".js-tabtitle").prev().find(".js-tab").click().focus();
-                e.preventDefault();
-            }
-
-            // Right arrow and down arrow select the next tab
-            if (e.keyCode == 39 || e.keyCode == 40) {
-                $(".js-tab:focus").closest(".js-tabtitle").next().find(".js-tab").click().focus();
-                e.preventDefault();
-            }
-
-        });
-
-        tabgroups = $(".js-tabgroup");
-
-        tabgroups.each(function () {
-            // Create the tablist element first inside the tabgroup
-            $(this).prepend($("<div>", {
-                "class": "js-tablist",
-                "role": "tablist",
-                "aria-orientation": "horizontal"
-            }));
-
-            var tabgroup = $(this),
-                expandBlocks = tabgroup.find(".js-responsive-expand"),
-                tablist = tabgroup.find(".js-tablist"),
-                tabpanels = tabgroup.find(".js-tabpanel");
-
-            // For each expand block/tab
-            expandBlocks.each(function () {
-                var expandBlock = $(this),
-                    tabpanelExpandable = expandBlock.find(".js-tabpanel"),
-                    tabtitleExpander = expandBlock.find(".js-tabtitle"),
-                    tab = expandBlock.find(".js-tab");
-
-                tab.attr("aria-selected", "false");
-
-                // Move the expander/tabtitle into the tablist
-                tablist.append(tabtitleExpander);
-            });
-
-            // Select the first tab in each group
-            var tablist = tabgroup.find(".js-tablist"),
-                firstTabtitle = tablist.find(".js-tabtitle").filter(":first-child"),
-                firstTab = firstTabtitle.find(".js-tab"),
-                firstTabpanelContainer = $("#" + firstTab.attr("aria-controls"));
-
-            firstTabtitle.addClass("selected");
-            firstTab.attr("aria-selected", "true");
-            firstTabpanelContainer.addClass("selected");
-        });
-
-        return this;
-    };
 
     /*!============================================================
      * Based on
@@ -682,9 +617,6 @@ $(window).on(
             if ($(targetEl).length) {
 
                 selectNavItem(this);
-
-                console.log($(targetEl));
-
                 $(targetEl).fadeOut(0).fadeIn(400);
             }
         }
@@ -792,11 +724,61 @@ function stickyHeader() {
     var header = $(".js-sticky-header");
 
     if (header.length > 0) {
-        if (layoutQ().number[0] <= 3) {
-            header.addClass("sticky");
+        header.removeClass("minimal");
+        $(".js-code-system-content-container").off("scroll.stickyHeader");
 
-        } else {
-            header.removeClass("sticky");
+        if (layoutQ().number[0] <= 2) {
+
+            var headerHeight = header.height(),
+                scrollQ = {direction: ["down", "down"], changed: false},
+                previousScrollTop = 0,
+                minScroll = 10,
+                currentDirection = "down",
+                previousDirection = "down";
+
+            $(".js-code-system-content-container").on("scroll.stickyHeader", debounce(function () {
+
+                        scrollQ.changed = false;
+
+                        try {
+                            var currentScrollTop = $(this).scrollTop();
+
+                            if (Math.abs(previousScrollTop - currentScrollTop) <= minScroll)
+                                return;
+
+                            if (currentScrollTop > previousScrollTop) {
+                                currentDirection = "down";
+                                header.addClass("minimal");
+                            } else if (currentScrollTop <= previousScrollTop) {
+                                currentDirection = "up";
+                            }
+
+                            previousScrollTop = currentScrollTop;
+                            previousDirection = currentDirection;
+
+                        } catch (e) {
+                            console.log(e);
+                        }
+
+                        if (scrollQ.direction[0] !== currentDirection) {
+                            scrollQ.direction.unshift(currentDirection);
+                        }
+
+                        if (scrollQ.direction.length > 2) {
+                            scrollQ.changed = true;
+                            scrollQ.direction.pop();
+                        }
+
+                        if (scrollQ.changed) {
+                            if (currentDirection == "down") {
+                                header.addClass("minimal");
+                            } else {
+                                header.removeClass("minimal");
+                            }
+                        }
+                    }, 25)
+            );
+
         }
     }
 }
@@ -1096,7 +1078,7 @@ TreeitemLink.prototype.handleMouseOut = function (event) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _treeitemLinks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./treeitemLinks */ "./src/js/code-system/treeitemLinks.js");
+/* harmony import */ var _treeItemLinks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./treeItemLinks */ "./src/js/code-system/treeItemLinks.js");
 /*
 *   This content is licensed according to the W3C Software License at
 *   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
@@ -1161,7 +1143,7 @@ TreeLinks.prototype.init = function () {
     while (elem) {
 
       if ((elem.tagName.toLowerCase() === 'li' && elem.firstElementChild.tagName.toLowerCase() === 'span') || elem.tagName.toLowerCase() === 'a') {
-        ti = new _treeitemLinks__WEBPACK_IMPORTED_MODULE_0__["default"](elem, tree, group);
+        ti = new _treeItemLinks__WEBPACK_IMPORTED_MODULE_0__["default"](elem, tree, group);
         ti.init();
         tree.treeitems.push(ti);
         tree.firstChars.push(ti.label.substring(0, 1).toLowerCase());
@@ -1355,288 +1337,6 @@ TreeLinks.prototype.getIndexFirstChars = function (startIndex, char) {
   }
   return -1;
 };
-
-
-/***/ }),
-
-/***/ "./src/js/code-system/treeitemLinks.js":
-/*!*********************************************!*\
-  !*** ./src/js/code-system/treeitemLinks.js ***!
-  \*********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/*
-*   This content is licensed according to the W3C Software License at
-*   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
-*
-*   File:   TreeitemLink.js
-*
-*   Desc:   Treeitem widget that implements ARIA Authoring Practices
-*           for a tree being used as a file viewer
-*/
-
-/*
-*   @constructor
-*
-*   @desc
-*       Treeitem object for representing the state and user interactions for a
-*       treeItem widget
-*
-*   @param node
-*       An element with the role=tree attribute
-*/
-
-var TreeitemLink = function (node, treeObj, group) {
-
-  // Check whether node is a DOM element
-  if (typeof node !== 'object') {
-    return;
-  }
-
-  node.tabIndex = -1;
-  this.tree = treeObj;
-  this.groupTreeitem = group;
-  this.domNode = node;
-  this.label = node.textContent.trim();
-  this.stopDefaultClick = false;
-
-  if (node.getAttribute('aria-label')) {
-    this.label = node.getAttribute('aria-label').trim();
-  }
-
-  this.isExpandable = false;
-  this.isVisible = false;
-  this.inGroup = false;
-
-  if (group) {
-    this.inGroup = true;
-  }
-
-  var elem = node.firstElementChild;
-
-  while (elem) {
-
-    if (elem.tagName.toLowerCase() == 'ul') {
-      elem.setAttribute('role', 'group');
-      this.isExpandable = true;
-      break;
-    }
-
-    elem = elem.nextElementSibling;
-  }
-
-  this.keyCode = Object.freeze({
-    RETURN: 13,
-    SPACE: 32,
-    PAGEUP: 33,
-    PAGEDOWN: 34,
-    END: 35,
-    HOME: 36,
-    LEFT: 37,
-    UP: 38,
-    RIGHT: 39,
-    DOWN: 40
-  });
-};
-
-TreeitemLink.prototype.init = function () {
-  this.domNode.tabIndex = -1;
-
-  if (!this.domNode.getAttribute('role')) {
-    this.domNode.setAttribute('role', 'treeitem');
-  }
-
-  this.domNode.addEventListener('keydown', this.handleKeydown.bind(this));
-  this.domNode.addEventListener('click', this.handleClick.bind(this));
-  this.domNode.addEventListener('focus', this.handleFocus.bind(this));
-  this.domNode.addEventListener('blur', this.handleBlur.bind(this));
-
-  if (this.isExpandable) {
-    this.domNode.firstElementChild.addEventListener('mouseover', this.handleMouseOver.bind(this));
-    this.domNode.firstElementChild.addEventListener('mouseout', this.handleMouseOut.bind(this));
-  }
-  else {
-    this.domNode.addEventListener('mouseover', this.handleMouseOver.bind(this));
-    this.domNode.addEventListener('mouseout', this.handleMouseOut.bind(this));
-  }
-};
-
-TreeitemLink.prototype.isExpanded = function () {
-
-  if (this.isExpandable) {
-    return this.domNode.getAttribute('aria-expanded') === 'true';
-  }
-
-  return false;
-
-};
-
-/* EVENT HANDLERS */
-
-TreeitemLink.prototype.handleKeydown = function (event) {
-  var tgt = event.currentTarget,
-    flag = false,
-    char = event.key,
-    clickEvent;
-
-  function isPrintableCharacter (str) {
-    return str.length === 1 && str.match(/\S/);
-  }
-
-  function printableCharacter (item) {
-    if (char == '*') {
-      item.tree.expandAllSiblingItems(item);
-      flag = true;
-    }
-    else {
-      if (isPrintableCharacter(char)) {
-        item.tree.setFocusByFirstCharacter(item, char);
-        flag = true;
-      }
-    }
-  }
-
-  this.stopDefaultClick = false;
-
-  if (event.altKey || event.ctrlKey || event.metaKey) {
-    return;
-  }
-
-  if (event.shift) {
-    if (event.keyCode == this.keyCode.SPACE || event.keyCode == this.keyCode.RETURN) {
-      event.stopPropagation();
-      this.stopDefaultClick = true;
-    }
-    else {
-      if (isPrintableCharacter(char)) {
-        printableCharacter(this);
-      }
-    }
-  }
-  else {
-    switch (event.keyCode) {
-      case this.keyCode.SPACE:
-      case this.keyCode.RETURN:
-        if (this.isExpandable) {
-          if (this.isExpanded()) {
-            this.tree.collapseTreeitem(this);
-          }
-          else {
-            this.tree.expandTreeitem(this);
-          }
-          flag = true;
-        }
-        else {
-          event.stopPropagation();
-          this.stopDefaultClick = true;
-        }
-        break;
-
-      case this.keyCode.UP:
-        this.tree.setFocusToPreviousItem(this);
-        flag = true;
-        break;
-
-      case this.keyCode.DOWN:
-        this.tree.setFocusToNextItem(this);
-        flag = true;
-        break;
-
-      case this.keyCode.RIGHT:
-        if (this.isExpandable) {
-          if (this.isExpanded()) {
-            this.tree.setFocusToNextItem(this);
-          }
-          else {
-            this.tree.expandTreeitem(this);
-          }
-        }
-        flag = true;
-        break;
-
-      case this.keyCode.LEFT:
-        if (this.isExpandable && this.isExpanded()) {
-          this.tree.collapseTreeitem(this);
-          flag = true;
-        }
-        else {
-          if (this.inGroup) {
-            this.tree.setFocusToParentItem(this);
-            flag = true;
-          }
-        }
-        break;
-
-      case this.keyCode.HOME:
-        this.tree.setFocusToFirstItem();
-        flag = true;
-        break;
-
-      case this.keyCode.END:
-        this.tree.setFocusToLastItem();
-        flag = true;
-        break;
-
-      default:
-        if (isPrintableCharacter(char)) {
-          printableCharacter(this);
-        }
-        break;
-    }
-  }
-
-  if (flag) {
-    event.stopPropagation();
-    event.preventDefault();
-  }
-};
-
-TreeitemLink.prototype.handleClick = function (event) {
-
-  // only process click events that directly happened on this treeitem
-  if (event.target !== this.domNode && event.target !== this.domNode.firstElementChild) {
-    return;
-  }
-
-  if (this.isExpandable) {
-    if (this.isExpanded()) {
-      this.tree.collapseTreeitem(this);
-    }
-    else {
-      this.tree.expandTreeitem(this);
-    }
-    event.stopPropagation();
-  }
-};
-
-TreeitemLink.prototype.handleFocus = function (event) {
-  var node = this.domNode;
-  if (this.isExpandable) {
-    node = node.firstElementChild;
-  }
-  node.classList.add('focus');
-};
-
-TreeitemLink.prototype.handleBlur = function (event) {
-  var node = this.domNode;
-  if (this.isExpandable) {
-    node = node.firstElementChild;
-  }
-  node.classList.remove('focus');
-};
-
-TreeitemLink.prototype.handleMouseOver = function (event) {
-  event.currentTarget.classList.add('hover');
-};
-
-TreeitemLink.prototype.handleMouseOut = function (event) {
-  event.currentTarget.classList.remove('hover');
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (TreeitemLink);
 
 
 /***/ })

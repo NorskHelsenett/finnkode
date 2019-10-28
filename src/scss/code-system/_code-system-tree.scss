@@ -1,6 +1,8 @@
 .code-system-tree {
 
     & > ul[role="tree"] { // Chapter titles
+        padding-top: 1rem;
+        padding-bottom: 1rem;
 
         & > li > span > a[role="treeitem"] {
             font-weight: 600;
@@ -28,8 +30,10 @@
     .focus, a:hover, a:focus, span:hover, span:focus, a.active {
         background-color: $blue;
         color: $green;
+
         a {
             color: $green;
+
             &:hover {
                 background-color: $blue;
             }
